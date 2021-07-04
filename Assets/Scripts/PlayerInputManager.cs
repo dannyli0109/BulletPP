@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public Vector3 mousePos;
-    public Vector3 mouseWorldPos;
-    public Vector3 playerPos;
-    public Camera camera;
-    public GameObject model;
+    public Vector2 positionOnScreen;
+    public Vector2 mouseOnScreen;
     public Animator playerAnimator;
 
     LineRenderer lineRenderer;
@@ -22,43 +19,35 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = Input.mousePosition;
-        // mousePos.y = mousePos.y;
-        mousePos.z = camera.nearClipPlane;
+        positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        float angle = AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
+        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
 
+        Vector3 lookDir = transform.transform.forward * 1000;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position + lookDir);
 
-        mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
+        Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        dir.Normalize();
 
-        playerPos = transform.position;
-        
-        //playerPos.z = camera.nearClipPlane;
-        //playerPos.y = mouseWorldPos.y;
+        // rotate x and y so that it matches the forward axis
+        float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(angle * Mathf.Deg2Rad);
+        float tx = dir.x;
+        float ty = dir.y;
+        dir.x = (cos * tx) - (sin * ty);
+        dir.y = (sin * tx) + (cos * ty);
 
-        Vector3 lookDir = mousePos - playerPos;
-        lineRenderer.SetPosition(0, playerPos);
-        lineRenderer.SetPosition(1, mouseWorldPos);
+        Debug.Log(dir);
 
+        playerAnimator.SetFloat("x", dir.x);
+        playerAnimator.SetFloat("y", dir.y);
 
-        float yRotation = Quaternion.LookRotation(lookDir, Vector3.up).eulerAngles.y;
+    }
 
-        //atan2(v.y, v.x) * 180.0f / M_PI;
-
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x);
-        float deg = Mathf.Rad2Deg * angle;
-        //Debug.Log(deg);
-
-        Vector3 eulerAngle = transform.rotation.eulerAngles;
-        eulerAngle.y = deg;
-        model.transform.rotation = Quaternion.Euler(eulerAngle);
-
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-
-        playerAnimator.SetFloat("x", x);
-        playerAnimator.SetFloat("y", y);
-
-        // string str = "x: " + x + "y: " + y;
-        // Debug.Log(str);
-
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(-(a.y - b.y), a.x - b.x) * Mathf.Rad2Deg;
     }
 }
