@@ -7,13 +7,11 @@ public class PlayerInputManager : MonoBehaviour
     public Vector2 positionOnScreen;
     public Vector2 mouseOnScreen;
     public Animator playerAnimator;
-
-    LineRenderer lineRenderer;
+    public LineRenderer lineRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -21,10 +19,19 @@ public class PlayerInputManager : MonoBehaviour
     {
         positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
         mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+        positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
+        positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
+
+        mouseOnScreen.x = mouseOnScreen.x * Screen.width - Screen.width / 2.0f;
+        mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
+
+        float distance = Vector2.Distance(positionOnScreen, mouseOnScreen);
         float angle = AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
+
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
 
-        Vector3 lookDir = transform.transform.forward * 1000;
+        Vector3 lookDir = transform.transform.forward * distance;
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.position + lookDir);
 
@@ -39,7 +46,7 @@ public class PlayerInputManager : MonoBehaviour
         dir.x = (cos * tx) - (sin * ty);
         dir.y = (sin * tx) + (cos * ty);
 
-        Debug.Log(dir);
+        //Debug.Log(dir);
 
         playerAnimator.SetFloat("x", dir.x);
         playerAnimator.SetFloat("y", dir.y);
