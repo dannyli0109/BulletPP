@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEditor;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -21,6 +22,17 @@ public class MapGenerator : MonoBehaviour
     {
         1, 2, 4, 8, 16, 32, 64, 128
     };
+
+    int[] directionMask2 =
+{
+        16, 1, 32, 8, 2, 128, 4, 64
+    };
+
+    int[] map =
+    {
+        5, 0, 6, 3, 4, 1, 8, 2, 7
+    };
+
 
     int[] indices = {
           0,   1,   2,   3,  4, 5,  6, 7,   8,  9, 10, 11, 12, 13, 14, 15,
@@ -44,9 +56,47 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Tilemap tilemap = GetComponent<Tilemap>();
-        //tilemap.SetTile(new Vector3Int(0, 0, 0), tileBase);
+    }
 
+    public void GenerateMap()
+    {
+        Tilemap tilemap = GetComponent<Tilemap>();
+        tilemap.CompressBounds();
+        //{
+        //    for (int k = 0; k < 256; k++)
+        //    {
+        //        int num = k;
+        //        bool[] flags = new bool[] { false, false, false, false, false, false, false, false, false };
+        //        int index = 0;
+        //        while (num > 0)
+        //        {
+        //            if (index == 4)
+        //            {
+        //                index++;
+        //                continue;
+        //            }
+        //            if ((num & 1) == 1)
+        //            {
+        //                flags[index] = true;
+        //            }
+        //            index++;
+        //            num = num >> 1;
+        //        }
+
+        //        for (int i = 0; i < 3; i++)
+        //        {
+        //            for (int j = 0; j < 3; j++)
+        //            {
+        //                int flagIndex = j * 3 + i;
+
+        //                if (!flags[map[flagIndex]])
+        //                {
+        //                    tilemap.SetTile(new Vector3Int(i + k * 4, j, 0), tileBase);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         BoundsInt bounds = tilemap.cellBounds;
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
@@ -78,18 +128,25 @@ public class MapGenerator : MonoBehaviour
                             mask |= directionMask[i];
                         }
                     }
-                    GameObject tileObject = Instantiate(
-                        tilesPrefab[indices[mask]],
-                        new Vector3(
+
+                    GameObject tileObject = PrefabUtility.InstantiatePrefab(tilesPrefab[indices[mask]]) as GameObject;
+                    tileObject.transform.position = new Vector3(
                             x * tileWidth + offsetX + bounds.min.x * tileWidth,
                             offsetY,
-                            -y * tileHeight + offsetZ - bounds.min.y * tileHeight),
-                        Quaternion.identity);
+                            -y * tileHeight + offsetZ - bounds.min.y * tileHeight);
                     tileObject.transform.SetParent(level.transform);
                 }
 
             }
         }
+
+        //ClearTileMap();
+    }
+
+    public void ClearTileMap()
+    {
+        Tilemap tilemap = GetComponent<Tilemap>();
+        tilemap.ClearAllTiles();
     }
 
     // Update is called once per frame

@@ -31,11 +31,12 @@ public class PlayerInputManager : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
 
-        Vector3 lookDir = transform.transform.forward * distance;
+
+        Vector3 lookDir = transform.forward * distance;
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, transform.position + lookDir);
 
-        Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         dir.Normalize();
 
         // rotate x and y so that it matches the forward axis
