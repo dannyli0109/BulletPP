@@ -8,6 +8,7 @@ public class PlayerInputManager : MonoBehaviour
     public Vector2 mouseOnScreen;
     public Animator playerAnimator;
     public LineRenderer lineRenderer;
+    public Transform gunPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +33,9 @@ public class PlayerInputManager : MonoBehaviour
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
 
 
-        Vector3 lookDir = transform.forward * distance;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, transform.position + lookDir);
+        Vector3 lookDir = gunPoint.forward * distance;
+        lineRenderer.SetPosition(0, gunPoint.position);
+        lineRenderer.SetPosition(1, gunPoint.position + lookDir);
 
         Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         dir.Normalize();
