@@ -18,6 +18,7 @@ public class Enemy : Character
     public override void Update()
     {
         base.Update();
+        if (!target) return;
         Vector2 current = new Vector2(transform.position.x, transform.position.z);
         Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.z);
         angle = Util.AngleBetweenTwoPoints(targetPos, current) + 90;

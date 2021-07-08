@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
     public virtual void Start()
     {
         hp = maxHp.value;
-        timeSinceFired = float.MaxValue;
+        timeSinceFired = 0;
     }
 
     public virtual void Update()
