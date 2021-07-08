@@ -48,8 +48,6 @@ public class PlayerInputManager : MonoBehaviour
         dir.x = (cos * tx) - (sin * ty);
         dir.y = (sin * tx) + (cos * ty);
 
-        //Debug.Log(dir);
-
         playerAnimator.SetFloat("x", dir.x);
         playerAnimator.SetFloat("y", dir.y);
 
