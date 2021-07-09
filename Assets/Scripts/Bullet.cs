@@ -45,9 +45,18 @@ public class Bullet : Ammo
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
         {
-            EventManager.current.OnAmmoHit(this);
+            // make sure the bullet is not hitting itself
+            if (owner.gameObject != other.gameObject)
+            {
+                EventManager.current.OnAmmoHit(this);
+                EventManager.current.OnAmmoDestroy(gameObject);
+            }
         }
-        EventManager.current.OnAmmoDestroy(gameObject);
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            EventManager.current.OnAmmoDestroy(gameObject);
+        }
     }
 
     private void OnDestroy()

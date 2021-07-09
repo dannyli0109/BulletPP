@@ -55,6 +55,7 @@ public class Character : MonoBehaviour
         if (ammo.owner != this)
         {
             hp -= ammo.owner.bulletStats.damage.value;
+            EventManager.current.OnAmmoDestroy(ammo.gameObject);
         }
     }
 
