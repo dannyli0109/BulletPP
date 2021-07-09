@@ -39,6 +39,7 @@ public class Character : MonoBehaviour
     {
         hp = maxHp.value;
         timeSinceFired = 0;
+        EventManager.current.onAmmoHit += OnAmmoHit;
     }
 
     public virtual void Update()
@@ -46,6 +47,14 @@ public class Character : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    protected void OnAmmoHit(Ammo ammo)
+    {
+        if (ammo.owner != this)
+        {
+            hp -= ammo.owner.bulletStats.damage.value;
         }
     }
 
@@ -58,5 +67,10 @@ public class Character : MonoBehaviour
         bullet.transform.localScale = scale * bulletStats.size.value;
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         bulletComponent.owner = this;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.current.onAmmoHit -= OnAmmoHit;
     }
 }

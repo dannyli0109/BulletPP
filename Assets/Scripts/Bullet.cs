@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Bullet : Ammo
 {
-    public Character owner;
+    public GameObject bulletHitParticlePrefab;
     float bornTime = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventManager.current.onAmmoDestroy += OnBulletDestroy;
     }
 
     // Update is called once per frame
@@ -27,23 +29,29 @@ public class Bullet : Ammo
         transform.position += transform.forward * owner.bulletStats.speed.value * Time.fixedDeltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+    private void OnBulletDestroy(GameObject gameObject)
+    {
+        if (this.gameObject == gameObject)
         {
+            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, transform);
+            bulletParticle.transform.SetParent(null);
+            bulletParticle.transform.localScale = new Vector3(owner.bulletStats.size.value, owner.bulletStats.size.value, owner.bulletStats.size.value);
             Destroy(gameObject);
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
         {
-            Character character = other.gameObject.GetComponent<Character>();
-
-            if (character && character != owner)
-            {
-                character.hp -= owner.bulletStats.damage.value;
-                Destroy(gameObject);
-            }
+            EventManager.current.OnAmmoHit(this);
         }
+        EventManager.current.OnAmmoDestroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.current.onAmmoDestroy -= OnBulletDestroy;
     }
 }
