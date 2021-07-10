@@ -50,12 +50,15 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void OnAmmoHit(Ammo ammo)
+    protected void OnAmmoHit(Ammo ammo, GameObject gameObject)
     {
-        if (ammo.owner != this)
+        if (this.gameObject == gameObject)
         {
-            hp -= ammo.owner.bulletStats.damage.value;
-            EventManager.current.OnAmmoDestroy(ammo.gameObject);
+            if (ammo.owner != this)
+            {
+                hp -= ammo.owner.bulletStats.damage.value;
+                EventManager.current.OnAmmoDestroy(ammo.gameObject);
+            }
         }
     }
 

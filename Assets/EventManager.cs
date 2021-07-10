@@ -12,10 +12,10 @@ public class EventManager : MonoBehaviour
         current = this;
     }
 
-    public event Action<Ammo> onAmmoHit;
-    public void OnAmmoHit(Ammo ammo)
+    public event Action<Ammo, GameObject> onAmmoHit;
+    public void OnAmmoHit(Ammo ammo, GameObject obj)
     {
-        onAmmoHit?.Invoke(ammo);
+        onAmmoHit?.Invoke(ammo, obj);
     }
 
     public event Action<GameObject> onAmmoDestroy;

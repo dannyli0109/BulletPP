@@ -46,16 +46,10 @@ public class Bullet : Ammo
     {
         if (owner)
         {
-            if (other.gameObject.layer != owner.gameObject.layer && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
                 // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this);
-            }
-
-            if (other.gameObject.layer != owner.gameObject.layer && other.gameObject.layer == LayerMask.NameToLayer("Player"))
-            {
-                // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this);
+                EventManager.current.OnAmmoHit(this, other.gameObject);
             }
         }
 
