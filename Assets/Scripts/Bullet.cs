@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class Bullet : Ammo
 {
     public GameObject bulletHitParticlePrefab;
+    public Transform bulletTip;
     float bornTime = 0;
     
     // Start is called before the first frame update
@@ -34,24 +35,30 @@ public class Bullet : Ammo
     {
         if (this.gameObject == gameObject)
         {
-            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, transform);
+            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
             bulletParticle.transform.SetParent(null);
-            bulletParticle.transform.localScale = new Vector3(owner.bulletStats.size.value, owner.bulletStats.size.value, owner.bulletStats.size.value);
+            bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+        if (owner)
         {
-            // make sure the bullet is not hitting itself
-            if (owner.gameObject != other.gameObject)
+            if (other.gameObject.layer != owner.gameObject.layer && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
+                // make sure the bullet is not hitting itself
                 EventManager.current.OnAmmoHit(this);
-                EventManager.current.OnAmmoDestroy(gameObject);
+            }
+
+            if (other.gameObject.layer != owner.gameObject.layer && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                // make sure the bullet is not hitting itself
+                EventManager.current.OnAmmoHit(this);
             }
         }
+
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {

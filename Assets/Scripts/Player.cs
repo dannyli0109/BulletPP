@@ -87,4 +87,9 @@ public class Player : Character
         characterController.Move(new Vector3(movement.x * moveSpeed.value * Time.fixedDeltaTime, 0, movement.y * moveSpeed.value * Time.fixedDeltaTime));
     }
 
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
+
 }

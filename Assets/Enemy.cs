@@ -32,4 +32,9 @@ public class Enemy : Character
             timeSinceFired = 0;
         }
     }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
 }

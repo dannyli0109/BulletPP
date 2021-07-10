@@ -70,7 +70,7 @@ public class Character : MonoBehaviour
         bulletComponent.owner = this;
     }
 
-    private void OnDestroy()
+    public virtual void OnDestroy()
     {
         EventManager.current.onAmmoHit -= OnAmmoHit;
     }
