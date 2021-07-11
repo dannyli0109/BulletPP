@@ -42,7 +42,6 @@ public class Bullet : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
         if (TimesBounced < owner.bulletStats.amountOfBounces.value)
         {
             gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
@@ -51,18 +50,12 @@ public class Bullet : Ammo
         }
         else
         {
-            if (this.gameObject == gameObject)
-            {
-                GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
-                bulletParticle.transform.SetParent(null);
-                bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
-            }
 
             if (owner)
             {
                 if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
                 {
-                    // make sure the bullet is not hitting itself
+                // make sure the bullet is not hitting itself
                     EventManager.current.OnAmmoHit(this, other.gameObject);
                 }
             }
@@ -73,11 +66,6 @@ public class Bullet : Ammo
                 EventManager.current.OnAmmoDestroy(gameObject);
             }
         }
-
-
-            // do contact damage
-
-
     }
 
 

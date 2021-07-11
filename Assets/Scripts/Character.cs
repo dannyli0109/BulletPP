@@ -67,6 +67,7 @@ public class Character : MonoBehaviour
 
     protected void OnAmmoHit(Ammo ammo, GameObject gameObject)
     {
+        //Debug.Log(ammo);
         if (this.gameObject == gameObject)
         {
             if (ammo.owner != this)

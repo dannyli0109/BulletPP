@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4017013871196866315}
   - component: {fileID: 5606954125939262168}
   - component: {fileID: 6508945892842470030}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,11 +78,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  TimesBounced: 0
   bulletHitParticlePrefab: {fileID: 1504079761642245970, guid: 4b953c9d8a6754a43a6adb40e06917bd, type: 3}
   bulletTip: {fileID: 8275000578206843829}
-  TimesBounced: 0
-  CurrentTimeTillRemoval: 10
-  owner: {fileID: 0}
 --- !u!65 &5606954125939262168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,7 +121,7 @@ GameObject:
   - component: {fileID: 5825747754901197801}
   - component: {fileID: 5825747754900394955}
   - component: {fileID: 5825747754899427595}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Mesh1_Group2_Group1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5825747754901197803}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: ammo_uzi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +235,7 @@ GameObject:
   - component: {fileID: 5825747754901197807}
   - component: {fileID: 5825747754900394953}
   - component: {fileID: 5825747754899427593}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Mesh2_Group3_Group1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
