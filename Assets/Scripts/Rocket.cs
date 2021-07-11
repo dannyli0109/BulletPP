@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Rocket : Ammo
 {
+    public GameObject bulletHitParticlePrefab;
+    public Transform bulletTip;
+    float bornTime = 0;
 
     private void FixedUpdate()
     {
@@ -15,7 +18,7 @@ public class Rocket : Ammo
         // do contact damage
         if (TimesBounced < owner.rocketStats.amountOfBounces.value)
         {
-            gameObject.transform.Rotate(new Vector3(0, Random.RandomRange(155, 205), 0));
+            gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
             TimesBounced++;
 
         }

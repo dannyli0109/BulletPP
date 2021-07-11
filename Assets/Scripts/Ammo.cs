@@ -8,7 +8,6 @@ public class Ammo : MonoBehaviour
 
     #region stats
     public int TimesBounced = 0;
-    public float CurrentTimeTillRemoval = 10;
     #endregion stats
 
     void Start()

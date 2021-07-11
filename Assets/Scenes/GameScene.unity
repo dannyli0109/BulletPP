@@ -2251,7 +2251,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5025062916324146594, guid: 5a013fe726515984193a7b943f834c75, type: 3}
   grenadePrefab: {fileID: 0}
   rocketPrefab: {fileID: 0}
-  bulletContainer: {fileID: 605145524}
+  bulletContainer: {fileID: 0}
   target: {fileID: 1716768432}
 --- !u!65 &1261565836
 BoxCollider:
@@ -4050,23 +4050,31 @@ MonoBehaviour:
       baseValue: 2
   rocketStats:
     damage:
-      baseValue: 0
+      baseValue: 2
     speed:
-      baseValue: 0
+      baseValue: 9
     size:
-      baseValue: 0
+      baseValue: 1
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 0
+      baseValue: 4
     fireRate:
-      baseValue: 0
+      baseValue: 0.4
     amountOfBounces:
       baseValue: 0
   hp: 4.56
   timeSinceFired: 0
   bulletPrefab: {fileID: 5025062916324146594, guid: 5a013fe726515984193a7b943f834c75, type: 3}
-  bulletContainer: {fileID: 942608669}
+  grenadePrefab: {fileID: 3518761386705644005, guid: eb8674fd09b9e9a4fbbd1c0e2a1106eb, type: 3}
+  rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
+  bulletContainer: {fileID: 1716768433}
+  currentBulletClip: 0
+  currentGrenadeClip: 0
+  currentRocketClip: 0
+  maxBulletClip: 1
+  maxGrenadeClip: 1
+  maxRocketClip: 1
   animator: {fileID: 865880523421542525}
   characterController: {fileID: 1716768436}
 --- !u!1 &1718092792

@@ -9,7 +9,6 @@ public class Bullet : Ammo
     public Transform bulletTip;
     float bornTime = 0;
     
-    // Start is called before the first frame update
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
@@ -29,17 +28,9 @@ public class Bullet : Ammo
         transform.position += transform.forward * owner.bulletStats.speed.value * Time.fixedDeltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnBulletDestroy(GameObject gameObject)
     {
         if (this.gameObject == gameObject)
-        // do contact damage
-        if (TimesBounced < owner.bulletStats.amountOfBounces.value)
-        {
-            gameObject.transform.Rotate(new Vector3(0, Random.RandomRange(155, 205), 0));
-            TimesBounced++;
-
-        }
-        else
         {
             GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
             bulletParticle.transform.SetParent(null);
@@ -48,23 +39,47 @@ public class Bullet : Ammo
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (owner)
+        Debug.Log(other.gameObject);
+        if (TimesBounced < owner.bulletStats.amountOfBounces.value)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+            gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
+            TimesBounced++;
+
+        }
+        else
+        {
+            if (this.gameObject == gameObject)
             {
-                // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this, other.gameObject);
+                GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
+                bulletParticle.transform.SetParent(null);
+                bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
+            }
+
+            if (owner)
+            {
+                if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+                {
+                    // make sure the bullet is not hitting itself
+                    EventManager.current.OnAmmoHit(this, other.gameObject);
+                }
+            }
+
+
+            if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            {
+                EventManager.current.OnAmmoDestroy(gameObject);
             }
         }
 
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        {
-            EventManager.current.OnAmmoDestroy(gameObject);
-        }
+            // do contact damage
+
+
     }
+
 
     private void OnDestroy()
     {
