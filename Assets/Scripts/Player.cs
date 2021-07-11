@@ -5,18 +5,30 @@ using UnityEngine;
 public class Player : Character
 {
 
+    #region clipSize
+    public int currentBulletClip;
+    public int currentGrenadeClip;
+    public int currentRocketClip;
+
+    public int maxBulletClip = 1;
+    public int maxGrenadeClip = 1;
+    public int maxRocketClip = 1;
+    #endregion 
+
     public Animator animator;
     public CharacterController characterController;
 
     float angle;
     Vector2 movement;
-    // Start is called before the first frame update
+
     public override void Start()
     {
+        currentBulletClip = maxBulletClip;
+        currentGrenadeClip = maxGrenadeClip;
+        currentRocketClip = maxRocketClip;
         base.Start();
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         base.Update();
@@ -55,15 +67,66 @@ public class Player : Character
 
     void HandleShooting()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            timeSinceFired += Time.deltaTime;
 
-            if (timeSinceFired >= bulletStats.fireRate.value || Input.GetMouseButtonDown(0))
+            if (currentBulletClip > 0)
             {
-                Shoot();
-                timeSinceFired = 0;
+
+                GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
+                bullet.transform.SetParent(null);
+                Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                bulletComponent.owner = this;
             }
+
+            if (currentGrenadeClip > 0)
+            {
+
+                GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
+                grenade.transform.SetParent(null);
+                Grenade grenadeComponent = grenade.GetComponent<Grenade>();
+                grenadeComponent.owner = this;
+            }
+
+            if (currentRocketClip > 0)
+            {
+
+                GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
+                rocket.transform.SetParent(null);
+                Rocket rocketComponent = rocket.GetComponent<Rocket>();
+                rocketComponent.owner = this;
+            }
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            /*
+            if (currentBulletClip > 0)
+            {
+
+                GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
+                bullet.transform.SetParent(null);
+                Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                bulletComponent.owner = this;
+            }
+
+            if (currentGrenadeClip > 0)
+            {
+
+                GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
+              grenade.transform.SetParent(null);
+                Grenade grenadeComponent = grenade.GetComponent<Grenade>();
+                grenadeComponent.owner = this;
+            }
+
+            if (currentRocketClip > 0)
+            {
+
+                GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
+              rocket.transform.SetParent(null);
+                Rocket rocketComponent = rocket.GetComponent<Rocket>();
+                rocketComponent.owner = this;
+            }
+            */
         }
     }
 

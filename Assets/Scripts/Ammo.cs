@@ -5,13 +5,17 @@ using UnityEngine;
 public class Ammo : MonoBehaviour
 {
     public Character owner;
-    // Start is called before the first frame update
+
+    #region stats
+    public int TimesBounced = 0;
+    public float CurrentTimeTillRemoval = 10;
+    #endregion stats
+
     void Start()
     {
-        
+        //grab defaults
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -15,7 +15,6 @@ public class Bullet : Ammo
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
     }
 
-    // Update is called once per frame
     void Update()
     {
         bornTime += Time.deltaTime;
@@ -30,10 +29,17 @@ public class Bullet : Ammo
         transform.position += transform.forward * owner.bulletStats.speed.value * Time.fixedDeltaTime;
     }
 
-
-    private void OnBulletDestroy(GameObject gameObject)
+    private void OnTriggerEnter(Collider other)
     {
         if (this.gameObject == gameObject)
+        // do contact damage
+        if (TimesBounced < owner.bulletStats.amountOfBounces.value)
+        {
+            gameObject.transform.Rotate(new Vector3(0, Random.RandomRange(155, 205), 0));
+            TimesBounced++;
+
+        }
+        else
         {
             GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
             bulletParticle.transform.SetParent(null);

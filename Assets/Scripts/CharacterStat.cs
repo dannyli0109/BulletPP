@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 public class CharacterStat
 {
     public float baseValue;
-    public virtual float value
+    public virtual float value // Proper value
     {
         get
         {

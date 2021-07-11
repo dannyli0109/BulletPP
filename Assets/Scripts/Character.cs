@@ -13,6 +13,7 @@ public class AmmoStats
     public CharacterStat critChance;
     public CharacterStat travelTime;
     public CharacterStat fireRate;
+    public CharacterStat amountOfBounces;
 }
 
 [Serializable]
@@ -20,7 +21,16 @@ public class BulletStats : AmmoStats
 {
 
 }
+[Serializable]
+public class GrenadeStats : AmmoStats
+{
 
+}
+[Serializable]
+public class RocketStats : AmmoStats
+{
+
+}
 
 
 public class Character : MonoBehaviour
@@ -28,11 +38,16 @@ public class Character : MonoBehaviour
     public CharacterStat maxHp;
     public CharacterStat moveSpeed;
     public BulletStats bulletStats;
-    
+    public GrenadeStats grenadeStats;
+    public RocketStats rocketStats;
     
     public float hp;
     public float timeSinceFired;
+
     public GameObject bulletPrefab;
+    public GameObject grenadePrefab;
+    public GameObject rocketPrefab;
+
     public Transform bulletContainer;
 
     public virtual void Start()
