@@ -5,15 +5,32 @@ using UnityEngine;
 public class Player : Character
 {
 
+    #region movementStats
+    public CharacterStat DashAmount;
+    public CharacterStat timeBetweenDashs;
+    public Vector2 lastMovementDirection;
+    public float currentTimeBetweenDashes;
+
+    #endregion
+
+    #region Gun Stats
+    public float currentReloadTime;
+
+    #endregion
+
     #region clipSize
     public int currentBulletClip;
     public int currentGrenadeClip;
     public int currentRocketClip;
 
-    public int maxBulletClip = 1;
-    public int maxGrenadeClip = 1;
-    public int maxRocketClip = 1;
+    public CharacterStat maxBulletClip;
+    public CharacterStat maxGrenadeClip;
+    public CharacterStat maxRocketClip;
     #endregion 
+
+    public CharacterStat ImmunityFromDashing;
+    public CharacterStat ImmunityFromDamage;
+    public float CurrentImmunityFrame;
 
     public Animator animator;
     public CharacterController characterController;
@@ -23,9 +40,9 @@ public class Player : Character
 
     public override void Start()
     {
-        currentBulletClip = maxBulletClip;
-        currentGrenadeClip = maxGrenadeClip;
-        currentRocketClip = maxRocketClip;
+        currentBulletClip = (int)maxBulletClip.value;
+        currentGrenadeClip = (int)maxGrenadeClip.value;
+        currentRocketClip = (int)maxRocketClip.value;
         base.Start();
     }
 
@@ -36,6 +53,11 @@ public class Player : Character
         HandleMovement();
         HandleShooting();
         UpdateAnimation();
+        HandleDashing();
+
+        HandleReload();
+        CurrentImmunityFrame -= Time.deltaTime;
+
     }
 
     private void FixedUpdate()
@@ -56,20 +78,41 @@ public class Player : Character
 
         angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
-    }
+    } 
 
     void HandleMovement()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
+
+        if(movement.x!=0|| movement.y != 0)
+        {
+            lastMovementDirection = movement;
+
+        }
+
+    }
+
+    void HandleDashing()
+    {
+        currentTimeBetweenDashes -= Time.deltaTime;
+        if (Input.GetKey(KeyCode.Space) && currentTimeBetweenDashes<=0)
+        {
+            currentTimeBetweenDashes = timeBetweenDashs.value;
+            CurrentImmunityFrame = ImmunityFromDashing.value;
+            Debug.Log("Dashing");
+            characterController.Move(new Vector3(lastMovementDirection.x * DashAmount.value,0,lastMovementDirection.y * DashAmount.value));
+        }
     }
 
     void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0))
+        timeSinceFired += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0) || (timeSinceFired > TimeBetweenShots.value && Input.GetMouseButton(0)))
         {
-
+            timeSinceFired = 0;
+            Reloading = false;
             if (currentBulletClip > 0)
             {
 
@@ -77,6 +120,7 @@ public class Player : Character
                 bullet.transform.SetParent(null);
                 Bullet bulletComponent = bullet.GetComponent<Bullet>();
                 bulletComponent.owner = this;
+                currentBulletClip--;
             }
 
             if (currentGrenadeClip > 0)
@@ -86,6 +130,7 @@ public class Player : Character
                 grenade.transform.SetParent(null);
                 Grenade grenadeComponent = grenade.GetComponent<Grenade>();
                 grenadeComponent.owner = this;
+                currentGrenadeClip--;
             }
 
             if (currentRocketClip > 0)
@@ -95,38 +140,40 @@ public class Player : Character
                 rocket.transform.SetParent(null);
                 Rocket rocketComponent = rocket.GetComponent<Rocket>();
                 rocketComponent.owner = this;
+                currentRocketClip--;
             }
         }
-        else if (Input.GetMouseButton(0))
+    }
+
+    void HandleReload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            /*
-            if (currentBulletClip > 0)
+            Reloading = !Reloading; // swap status
+            currentReloadTime = 0;
+        }
+        if (Reloading)
+        {
+            currentReloadTime += Time.deltaTime;   
+            if(currentReloadTime> ReloadTime.value)
             {
+                currentReloadTime -= ReloadTime.value;
+                // check if you actually get
 
-                GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
-                bullet.transform.SetParent(null);
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
-                bulletComponent.owner = this;
+                if(currentBulletClip< maxBulletClip.value)
+                {
+                    currentBulletClip++;
+                }
+                if (currentGrenadeClip < maxGrenadeClip.value)
+                {
+                    currentGrenadeClip++;
+                }
+                if (currentRocketClip < maxRocketClip.value)
+                {
+                    currentRocketClip++;
+                }
+
             }
-
-            if (currentGrenadeClip > 0)
-            {
-
-                GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
-              grenade.transform.SetParent(null);
-                Grenade grenadeComponent = grenade.GetComponent<Grenade>();
-                grenadeComponent.owner = this;
-            }
-
-            if (currentRocketClip > 0)
-            {
-
-                GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
-              rocket.transform.SetParent(null);
-                Rocket rocketComponent = rocket.GetComponent<Rocket>();
-                rocketComponent.owner = this;
-            }
-            */
         }
     }
 

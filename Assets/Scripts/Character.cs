@@ -40,9 +40,14 @@ public class Character : MonoBehaviour
     public BulletStats bulletStats;
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
-    
+
+    public CharacterStat ReloadTime;
+    public CharacterStat TimeBetweenShots;
+
     public float hp;
     public float timeSinceFired;
+
+    public bool Reloading;
 
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
