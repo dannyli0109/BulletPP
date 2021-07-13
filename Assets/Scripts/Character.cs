@@ -4,6 +4,13 @@ using System.Collections.ObjectModel;
 using System;
 using UnityEngine;
 
+public enum StatType
+{
+    Bullet,
+    Grenade,
+    Rocket
+}
+
 [Serializable]
 public class AmmoStats
 {
@@ -14,6 +21,7 @@ public class AmmoStats
     public CharacterStat travelTime;
     public CharacterStat fireRate;
     public CharacterStat amountOfBounces;
+    public CharacterStat maxClip;
 }
 
 [Serializable]
@@ -92,6 +100,34 @@ public class Character : MonoBehaviour
         bullet.transform.localScale = scale * bulletStats.size.value;
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         bulletComponent.owner = this;
+    }
+
+    public void AddModifier(StatType type, string stat, StatModifier modifier)
+    {
+        CharacterStat result;
+        switch (type)
+        {
+            case StatType.Bullet:
+                {
+                    result = (CharacterStat)bulletStats.GetType().GetField(stat).GetValue(bulletStats);
+                    break;
+                }
+            case StatType.Grenade:
+                {
+                    result = (CharacterStat)grenadeStats.GetType().GetField(stat).GetValue(bulletStats);
+                    break;
+                }
+            case StatType.Rocket:
+                {
+                    result = (CharacterStat)rocketStats.GetType().GetField(stat).GetValue(bulletStats);
+                    break;
+                }
+            default:
+                result = null;
+                break;
+        }
+
+        result.AddModifier(modifier);
     }
 
     public virtual void OnDestroy()

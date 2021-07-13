@@ -23,9 +23,6 @@ public class Player : Character
     public int currentGrenadeClip;
     public int currentRocketClip;
 
-    public CharacterStat maxBulletClip;
-    public CharacterStat maxGrenadeClip;
-    public CharacterStat maxRocketClip;
     #endregion 
 
     public CharacterStat ImmunityFromDashing;
@@ -40,10 +37,12 @@ public class Player : Character
 
     public override void Start()
     {
-        currentBulletClip = (int)maxBulletClip.value;
-        currentGrenadeClip = (int)maxGrenadeClip.value;
-        currentRocketClip = (int)maxRocketClip.value;
+        currentBulletClip = (int)bulletStats.maxClip.value;
+        currentGrenadeClip = (int)grenadeStats.maxClip.value;
+        currentRocketClip = (int)rocketStats.maxClip.value;
         base.Start();
+        //StatModifier modifier = new StatModifier(10, StatModType.Flat);
+        //AddModifier(StatType.Bullet, "size", modifier);
     }
 
     public override void Update()
@@ -118,6 +117,7 @@ public class Player : Character
 
                 GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
                 bullet.transform.SetParent(null);
+                bullet.transform.localScale = new Vector3(bulletStats.size.value, bulletStats.size.value, bulletStats.size.value);
                 Bullet bulletComponent = bullet.GetComponent<Bullet>();
                 bulletComponent.owner = this;
                 currentBulletClip--;
@@ -160,15 +160,15 @@ public class Player : Character
                 currentReloadTime -= ReloadTime.value;
                 // check if you actually get
 
-                if(currentBulletClip< maxBulletClip.value)
+                if(currentBulletClip < bulletStats.maxClip.value)
                 {
                     currentBulletClip++;
                 }
-                if (currentGrenadeClip < maxGrenadeClip.value)
+                if (currentGrenadeClip < grenadeStats.maxClip.value)
                 {
                     currentGrenadeClip++;
                 }
-                if (currentRocketClip < maxRocketClip.value)
+                if (currentRocketClip < rocketStats.maxClip.value)
                 {
                     currentRocketClip++;
                 }

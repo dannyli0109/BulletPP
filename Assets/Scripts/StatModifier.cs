@@ -1,10 +1,13 @@
-﻿public enum StatModType
+﻿using System;
+
+public enum StatModType
 {
     Flat = 100,
     PercentAdd = 200,
     PercentMult = 300
 }
 
+[Serializable]
 public class StatModifier
 {
     public readonly float value;
