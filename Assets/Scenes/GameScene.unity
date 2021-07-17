@@ -2708,6 +2708,19 @@ MonoBehaviour:
   grenadePrefab: {fileID: 0}
   rocketPrefab: {fileID: 0}
   bulletContainer: {fileID: 652903628}
+  FinalDestination: {x: 0, y: 0, z: 0}
+  NextDestination: {x: 0, y: 0, z: 0}
+  smoothingRange: 0.1
+  speed: 2
+  DesiredFurthestRange: 7
+  FavouredRange: 5
+  ClosestRange: 2
+  minWaitingTime: 0.1
+  maxWaitingTime: 0.4
+  currentWaitingTime: 0
+  NextDistSegmentLength: 1
+  WalkingOffsetRadius: 1
+  WanderingOffsetRadius: 3
   target: {fileID: 1716768432}
 --- !u!65 &1261565836
 BoxCollider:
