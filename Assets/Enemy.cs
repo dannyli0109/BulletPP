@@ -22,7 +22,15 @@ public class Enemy : Character
     public float NextDistSegmentLength;
     public float WalkingOffsetRadius;
     public float WanderingOffsetRadius;
-       
+
+    public float wallAvoidAmount;
+    public bool touchingWall;
+    public float enemAvoidAmount;
+
+
+    public float FullStopMovingTime;
+    public float currentStopMovingTime;
+
     #endregion
 
     public GameObject target;
@@ -41,16 +49,28 @@ public class Enemy : Character
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
         float distFromFinal = Vector3.Distance(this.transform.position, FinalDestination);
 
-        if (distFromTarget< DesiredFurthestRange && distFromTarget > ClosestRange)
-        {if (smoothingRange > distFromFinal)
+        if (distFromTarget < DesiredFurthestRange && distFromTarget > ClosestRange)
+        {
+            if (smoothingRange > distFromFinal)
             {
                 FinalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * WanderingOffsetRadius;
             }
-       
+
         }
         else
         {
-            FinalDestination = target.transform.position - directionTowardstarget * FavouredRange;
+           if(distFromTarget < ClosestRange)
+            {
+                FinalDestination = target.transform.position - directionTowardstarget * FavouredRange;
+                // FinalDestination = target.transform.position - new Vector3(directionTowardstarget.x, 0, directionTowardstarget.y) * FavouredRange;
+                Debug.Log(directionTowardstarget);
+            }
+            else
+            {
+            FinalDestination = target.transform.position - directionTowardstarget * FavouredRange; 
+
+            }
+
         }
        
         NextDestination = Vector3.MoveTowards(this.transform.position, FinalDestination, NextDistSegmentLength);
@@ -94,9 +114,11 @@ public class Enemy : Character
         float distFromNext = Vector3.Distance(this.transform.position, NextDestination);
         Vector3 directionTowardstarget = Vector3.Normalize(new Vector3( target.transform.position.x- this.transform.position.x , 0, target.transform.position.z - this.transform.position.z));
 
-        Debug.Log(distFromNext);
         if (currentWaitingTime <= 0)
         {
+            if (currentStopMovingTime<=0)
+            {
+
         Debug.DrawLine(this.transform.position, this.transform.position + directionTowardstarget, Color.cyan);
 
         // if we're too close, make a new place to go
@@ -114,13 +136,20 @@ public class Enemy : Character
               GetNewDestination(false);
         }
         // are we at the right place , get a new place
-
-        //move towards it
         this.transform.position = Vector3.MoveTowards(this.transform.position, NextDestination, speed * Time.deltaTime);
 
         Debug.DrawLine(this.transform.position, FinalDestination, Color.green);
         Debug.DrawLine(this.transform.position, NextDestination,Color.blue);
 
+            }
+            else
+            {
+                currentStopMovingTime -= Time.deltaTime;
+                if (currentStopMovingTime <= 0)
+                {
+                    GetNewDestination(false);
+                }
+            }
         }
         else
         {
@@ -132,6 +161,50 @@ public class Enemy : Character
     public void HandleDecidingToShoot()
     {
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // enem
+        if (other.gameObject.layer == 12)
+        {
+            Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
+            Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
+            NextDestination += directionAwayFromWall *enemAvoidAmount*Time.deltaTime;
+            currentWaitingTime = 0;
+
+        }
+        // walls
+        if (other.gameObject.layer == 10)
+        {
+            Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
+            Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
+            NextDestination += directionAwayFromWall * wallAvoidAmount * Time.deltaTime; ;
+            currentWaitingTime = 0;
+            touchingWall = true;
+            float dist = Vector3.Distance(this.transform.position, target.transform.position);
+            if(dist< ClosestRange)
+            {
+                currentStopMovingTime = FullStopMovingTime;
+                Debug.Log(dist + " touching walls");
+            }
+
+         
+        }
+        else
+        {
+            touchingWall = false;   
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+            touchingWall = false;
     }
 
     public override void OnDestroy()
