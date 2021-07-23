@@ -18,13 +18,15 @@ public class Grenade : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != 12)
+        // wall, character, enemy
+        if (other.gameObject.layer == 10|| other.gameObject.layer == 11 || other.gameObject.layer == 12)
         {
             // do contact damage
             if (TimesBounced < owner.grenadeStats.amountOfBounces.value)
             {
                 gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
                 TimesBounced++;
+                Debug.Log("bounce off  " + other);
             }
             else
             {

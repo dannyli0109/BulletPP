@@ -100,7 +100,7 @@ public class Player : Character
         {
             currentTimeBetweenDashes = timeBetweenDashs.value;
             CurrentImmunityFrame = ImmunityFromDashing.value;
-            Debug.Log("Dashing");
+        //    Debug.Log("Dashing");
             characterController.Move(new Vector3(lastMovementDirection.x * DashAmount.value,0,lastMovementDirection.y * DashAmount.value));
         }
     }

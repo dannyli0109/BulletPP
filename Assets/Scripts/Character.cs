@@ -86,12 +86,12 @@ public class Character : MonoBehaviour
             if (ammo.owner != this)
             {
                 hp -= ammo.owner.bulletStats.damage.value;
-                EventManager.current.OnAmmoDestroy(ammo.gameObject);
+               // EventManager.current.OnAmmoDestroy(ammo.gameObject);
             }
         }
     }
 
-    protected void Shoot()
+   public virtual void Shoot()
     {
 
         GameObject bullet = Instantiate(bulletPrefab, bulletContainer);

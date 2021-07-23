@@ -39,7 +39,6 @@ public class Bullet : Ammo
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (TimesBounced < owner.bulletStats.amountOfBounces.value)
@@ -50,22 +49,28 @@ public class Bullet : Ammo
         }
         else
         {
+            EventManager.current.OnAmmoDestroy(this.gameObject);
+        }
 
-            if (owner)
+        if (owner)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
-                if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
-                {
                 // make sure the bullet is not hitting itself
-                    EventManager.current.OnAmmoHit(this, other.gameObject);
-                }
+                EventManager.current.OnAmmoHit(this, other.gameObject);
             }
-
-
-            if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                EventManager.current.OnAmmoDestroy(gameObject);
+                EventManager.current.OnAmmoHit(this, other.gameObject);
             }
         }
+
+
+         //   if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+         //   {
+         //       EventManager.current.OnAmmoDestroy(gameObject);
+         //   }
+        
     }
 
 

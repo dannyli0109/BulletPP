@@ -33,6 +33,30 @@ public class Enemy : Character
 
     #endregion
 
+    #region Shooting Decisions
+    public float currentShootingWaitTime;
+    public int currentVolleySize;
+    public bool reloading;
+    public float currentReloadTime;
+    public float currentTimeBetweenVolley;
+
+    public int ClipSizeForForcedShot;
+
+    public float UpperShootingRange; //dist from the target where they will stop shooting
+    public float lowerShootingRange; // dist from target closer where they will stop shooting
+
+    public int MaxVolleySize = 1; // how many bullets should be shot at once
+    public int MinVolleySize = 1;
+
+    public float TimeBetweenVolley;
+    public float bulletReloadTime;
+
+    public int currentBulletClipSize;
+
+    public bool DEBUG;
+
+    #endregion
+
     public GameObject target;
 
     float angle;
@@ -40,6 +64,7 @@ public class Enemy : Character
     {
         base.Start();
         GetNewDestination(false);
+        currentBulletClipSize = (int)bulletStats.maxClip.value;
     }
 
     void GetNewDestination(bool Direct)
@@ -63,7 +88,7 @@ public class Enemy : Character
             {
                 FinalDestination = target.transform.position - directionTowardstarget * FavouredRange;
                 // FinalDestination = target.transform.position - new Vector3(directionTowardstarget.x, 0, directionTowardstarget.y) * FavouredRange;
-                Debug.Log(directionTowardstarget);
+               // Debug.Log(directionTowardstarget);
             }
             else
             {
@@ -94,11 +119,8 @@ public class Enemy : Character
 
         timeSinceFired += Time.deltaTime;
 
-        if (timeSinceFired >= bulletStats.fireRate.value)
-        {
-         //   Shoot();
-            timeSinceFired = 0;
-        }
+        HandleDecidingToShoot();
+
     }
 
     public void HandleMove()
@@ -158,8 +180,92 @@ public class Enemy : Character
 
     }
 
+    public override void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
+        bullet.transform.SetParent(null);
+        Vector3 scale = bullet.transform.localScale;
+        bullet.transform.localScale = scale * bulletStats.size.value;
+        Bullet bulletComponent = bullet.GetComponent<Bullet>();
+        bulletComponent.owner = this;
+    }
+
     public void HandleDecidingToShoot()
     {
+        currentTimeBetweenVolley -= Time.deltaTime;
+        float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
+        // if time is left, reduce it from  next
+
+        if (reloading)
+        {
+            if (currentReloadTime <= 0)
+            {
+               // Debug.Log("reload");
+                currentBulletClipSize = Mathf.Clamp(currentBulletClipSize + 1, 0, (int)bulletStats.maxClip.value);
+
+                reloading = false;
+                currentReloadTime = ReloadTime.value;
+            }
+            else
+            {
+                currentReloadTime -= Time.deltaTime;
+            }
+        }
+        else if (currentShootingWaitTime <= 0)
+        {
+            if (currentVolleySize > 0&&currentBulletClipSize>0)
+            {
+                // while you can still fire keep doing it 
+                Shoot();
+                currentVolleySize--;
+                currentBulletClipSize--;
+                timeSinceFired = 0;
+             //   Debug.Log("Shoot");
+                currentShootingWaitTime = TimeBetweenShots.value;
+                if (currentVolleySize == 0)
+                {
+                    currentShootingWaitTime = TimeBetweenVolley;
+                }
+            }
+            else
+            {
+                if (currentBulletClipSize >= ClipSizeForForcedShot)
+                {
+                    if (currentTimeBetweenVolley <= 0)
+                    {
+                        if (currentVolleySize == 0)
+                        {
+                            currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1),0,(int)bulletStats.maxClip.value);
+                            Debug.Log("shooting");
+                            currentShootingWaitTime = TimeBetweenShots.value;
+                        }
+                    }
+                }
+                // if have  too many bullets fire or in right range
+                if (currentBulletClipSize>0 && distFromTarget > lowerShootingRange && distFromTarget < UpperShootingRange)
+                {
+                    if (currentTimeBetweenVolley <= 0)
+                    {
+                        if (currentVolleySize == 0)
+                        {
+                            // set how many bullets to fire, 
+                            currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1), 0, (int)bulletStats.maxClip.value);
+                           // Debug.Log("shooting");
+                            currentShootingWaitTime = TimeBetweenShots.value;
+                        }
+                    }
+                }
+                else
+                {
+                    reloading = true;
+                    currentReloadTime = ReloadTime.value;
+                }
+            }
+        }
+        else
+        {
+            currentShootingWaitTime -= Time.deltaTime;
+        }
 
     }
 
