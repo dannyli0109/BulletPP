@@ -18,20 +18,29 @@ public class Grenade : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        // wall, character, enemy
-        if (other.gameObject.layer == 10|| other.gameObject.layer == 11 || other.gameObject.layer == 12)
+        if (owner)
         {
-            // do contact damage
-            if (TimesBounced < owner.grenadeStats.amountOfBounces.value)
+            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
-                gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
-                TimesBounced++;
-                Debug.Log("bounce off  " + other);
+                // make sure the bullet is not hitting itself
+                EventManager.current.OnAmmoHit(this, other.gameObject);
+
             }
-            else
+            else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                Destroy(gameObject);
+                EventManager.current.OnAmmoHit(this, other.gameObject);
             }
+        }
+
+        if (TimesBounced < owner.grenadeStats.amountOfBounces.value)
+        {
+            gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
+            TimesBounced++;
+
+        }
+        else
+        {
+            EventManager.current.OnAmmoDestroy(this.gameObject);
         }
     }
 }

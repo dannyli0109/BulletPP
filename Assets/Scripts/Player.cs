@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : Character
 {
-
     #region movementStats
     public CharacterStat DashAmount;
     public CharacterStat timeBetweenDashs;
     public Vector2 lastMovementDirection;
     public float currentTimeBetweenDashes;
 
+    public CharacterStat ImmunityFromDashing;
+    public CharacterStat ImmunityFromDamage;
+  
     #endregion
 
     #region Gun Stats
@@ -23,11 +26,19 @@ public class Player : Character
     public int currentGrenadeClip;
     public int currentRocketClip;
 
-    #endregion 
+    #endregion
 
-    public CharacterStat ImmunityFromDashing;
-    public CharacterStat ImmunityFromDamage;
-    public float CurrentImmunityFrame;
+    #region AmmoUI
+    public GameObject bulletsUI;
+    public TextMeshProUGUI bulletAmmoText;
+    public GameObject grenadesUI;
+    public TextMeshProUGUI grenadeAmmoText;
+    public GameObject rocketsUI;
+    public TextMeshProUGUI rocketAmmoText;
+
+    public Color32 FilledClipColor;
+    public Color32 EmptyClipColor;
+    #endregion
 
     public Animator animator;
     public CharacterController characterController;
@@ -41,6 +52,7 @@ public class Player : Character
         currentGrenadeClip = (int)grenadeStats.maxClip.value;
         currentRocketClip = (int)rocketStats.maxClip.value;
         base.Start();
+        UpdatePlayerUI();
         //StatModifier modifier = new StatModifier(10, StatModType.Flat);
         //AddModifier(StatType.Bullet, "size", modifier);
     }
@@ -142,6 +154,7 @@ public class Player : Character
                 rocketComponent.owner = this;
                 currentRocketClip--;
             }
+            UpdatePlayerUI();
         }
     }
 
@@ -172,8 +185,8 @@ public class Player : Character
                 {
                     currentRocketClip++;
                 }
-
-            }
+                UpdatePlayerUI();
+}
         }
     }
 
@@ -195,6 +208,65 @@ public class Player : Character
     void MoveCharacter()
     {
         characterController.Move(new Vector3(movement.x * moveSpeed.value * Time.fixedDeltaTime, 0, movement.y * moveSpeed.value * Time.fixedDeltaTime));
+    }
+
+    void UpdatePlayerUI()
+    {
+        if (bulletStats.maxClip.value > 0)
+        {
+            bulletsUI.SetActive(true);
+            bulletAmmoText.text = currentBulletClip.ToString();
+            if (currentBulletClip == 0)
+            {
+                bulletAmmoText.color = EmptyClipColor;
+            }
+            else
+            {
+                bulletAmmoText.color = FilledClipColor;
+            }
+        }
+        else
+        {
+            bulletsUI.SetActive(false);
+        }
+
+        if (grenadeStats.maxClip.value > 0)
+        {
+           grenadesUI.SetActive(true);
+            grenadeAmmoText.text = currentGrenadeClip.ToString();
+            if (currentGrenadeClip == 0)
+            {
+               grenadeAmmoText.color = EmptyClipColor;
+            }
+            else
+            {
+                grenadeAmmoText.color = FilledClipColor;
+            }
+        }
+        else
+        {
+            grenadesUI.SetActive(false);
+        }
+
+        if (rocketStats.maxClip.value > 0)
+        {
+            rocketsUI.SetActive(true);
+            rocketAmmoText.text = currentRocketClip.ToString();
+            if (currentRocketClip == 0)
+            {
+               rocketAmmoText.color = EmptyClipColor;
+            }
+            else
+            {
+                rocketAmmoText.color = FilledClipColor;
+            }
+        }
+        else
+        {
+            rocketsUI.SetActive(false);
+        }
+
+
     }
 
     public override void OnDestroy()

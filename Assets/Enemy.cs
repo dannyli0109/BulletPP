@@ -236,7 +236,7 @@ public class Enemy : Character
                         if (currentVolleySize == 0)
                         {
                             currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1),0,(int)bulletStats.maxClip.value);
-                            Debug.Log("shooting");
+                           // Debug.Log("shooting");
                             currentShootingWaitTime = TimeBetweenShots.value;
                         }
                     }
