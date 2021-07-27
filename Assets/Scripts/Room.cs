@@ -1,38 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public enum RoomType
+[Serializable]
+public class RoomPrefabInformation
 {
-    defaultRoom,
-    eventRoom,
-    bossRoom
+    public Vector2 upperRoomDoorSpawnOffet;
+    public Vector2 lowerRoomDoorSpawnOffet;
+    public Vector2 leftRoomDoorSpawnOffet;
+    public Vector2 rightRoomDoorSpawnOffet;
 }
 
-public class Room
+[Serializable]
+public class Room : MonoBehaviour
 {
-
     public Vector2 offsetPos;
-    public RoomType roomType;
-    public bool hasUpperRoom;
-    public bool hasLowerRoom;
-    public bool hasLeftRoom;
-    public bool hasRightRoom;
 
-    public Room(Vector2 posInput, bool upInput, bool downInput, bool leftInput, bool rightInput)
+    public RoomPrefabInformation thisPrefabInfo;
+
+    public int upperRoomRef =-1;
+    public int lowerRoomRef =-1;
+    public int leftRoomRef  =-1;
+    public int rightRoomRef = -1;
+
+    public Room(Vector2 posInput, int upInput, int downInput, int leftInput, int rightInput)
     {
         offsetPos = posInput;
 
-        hasUpperRoom = upInput;
-        hasLowerRoom = downInput;
-        hasLeftRoom = leftInput;
-        hasRightRoom = rightInput;
+        upperRoomRef = upInput;
+        lowerRoomRef = downInput;
+        leftRoomRef = leftInput;
+        rightRoomRef = rightInput;
     }
 
     public void DebugSpitInformation()
     {
         
     }
+
     void Update()
     {
 

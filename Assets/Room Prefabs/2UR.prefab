@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5238821218669874898}
   - component: {fileID: 938063496392168976}
   - component: {fileID: 5740576572702078595}
+  - component: {fileID: 8032128479267571445}
+  - component: {fileID: 6853466730324078034}
   m_Layer: 0
   m_Name: UP
   m_TagString: Untagged
@@ -532,6 +534,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &8032128479267571445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545077923485566867}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 5, z: 0.95}
+  m_Center: {x: 2, y: 2.5, z: -0.475}
+--- !u!114 &6853466730324078034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545077923485566867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac17572fdf4c2b4f8db53a82ffa0809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerationScipt: {fileID: 0}
+  thisDirection: 0
 --- !u!1 &4186079546959086284
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +574,8 @@ GameObject:
   - component: {fileID: 4768003042824939824}
   - component: {fileID: 2202121071492304629}
   - component: {fileID: 7083097283064140899}
+  - component: {fileID: 7932142053561684133}
+  - component: {fileID: 2403014004566035101}
   m_Layer: 0
   m_Name: R
   m_TagString: Untagged
@@ -1064,6 +1095,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &7932142053561684133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186079546959086284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac17572fdf4c2b4f8db53a82ffa0809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerationScipt: {fileID: 0}
+  thisDirection: 3
+--- !u!65 &2403014004566035101
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186079546959086284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.000001, y: 5, z: 0.9500002}
+  m_Center: {x: 2.0000005, y: 2.5, z: -0.4750001}
 --- !u!1 &4925678104672815191
 GameObject:
   m_ObjectHideFlags: 0
