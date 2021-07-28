@@ -16,6 +16,7 @@ public class RoomPrefabInformation
 public class Room : MonoBehaviour
 {
     public Vector2 offsetPos;
+    public int Length = 0;
 
     public RoomPrefabInformation thisPrefabInfo;
 
@@ -24,7 +25,7 @@ public class Room : MonoBehaviour
     public int leftRoomRef  =-1;
     public int rightRoomRef = -1;
 
-    public Room(Vector2 posInput, int upInput, int downInput, int leftInput, int rightInput)
+    public Room(Vector2 posInput,int lengthInput, int upInput, int downInput, int leftInput, int rightInput)
     {
         offsetPos = posInput;
 

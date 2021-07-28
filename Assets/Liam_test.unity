@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19246
+  m_Name: pb_Mesh19250
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -940,7 +940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211367352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1, y: 1, z: -5.03}
+  m_LocalPosition: {x: 7.5, y: 1, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1562154835}
@@ -1874,7 +1874,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19262
+  m_Name: pb_Mesh19266
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2570,7 +2570,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19340
+  m_Name: pb_Mesh19344
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2760,10 +2760,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc182e4640323644841d09a3eea901a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   AllRooms: []
-  roomSpawnChanceOfHundred: 30
-  WallReConnectChanceOfHundred: 0
-  roomMultiplyValue: {x: 20, y: 20}
+  WallReConnectChanceOfHundred: 25
+  roomMultiplyValue: {x: 30, y: 20}
+  ChanceOfHundredToSpawnNewRoom:
+  - 90
+  - 30
+  - 20
+  - 10
+  - 5
+  - 0
+  atHowManyCurrentRooms: 03000000090000000c00000018000000240000002a000000
+  RoomSpawnChanceModifierBasedOnLength:
+  - 0
+  - 0
+  - -5
+  - -10
+  - 0
+  - 5
+  - 10
+  startingRoomID: 0
+  StartingRoomDoorLayouts:
+  - needUpperRoom: 1
+    needLowerRoom: 1
+    needLeftRoom: 1
+    needRightRoom: 1
+  StartingRooms:
+  - {fileID: 2396148979670090629, guid: 7e3d6e5c183b53542b4314d6df149769, type: 3}
+  StartingRoomPrefabInfo:
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   AllDoorRoom:
   - {fileID: 2396148979670090629, guid: 7e3d6e5c183b53542b4314d6df149769, type: 3}
   upRoom:
@@ -2797,88 +2826,88 @@ MonoBehaviour:
   DLRRoom:
   - {fileID: 6638670246453050325, guid: 877b60bcd31711544827352313506e16, type: 3}
   AllDoorRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   upRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   downRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   leftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   rightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   upDownRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   upLeftRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   upRightRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   downLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   downRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   leftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   UDLRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
   UDRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   ULRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   DLRRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: -5}
   currentRoomInside: 0
   playerTarget: {fileID: 211367352}
   needToSetPos: 0
@@ -2973,13 +3002,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904671076}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 41.01, z: -0.92}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 9.72, z: -8.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 211367359}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1 &1007638711
 GameObject:
   m_ObjectHideFlags: 0
@@ -4844,7 +4873,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19232
+  m_Name: pb_Mesh19236
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
