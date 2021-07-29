@@ -63,6 +63,8 @@ public class Character : MonoBehaviour
 
     public Transform bulletContainer;
 
+    public float CurrentImmunityFrame;
+
     public virtual void Start()
     {
         hp = maxHp.value;
@@ -85,13 +87,21 @@ public class Character : MonoBehaviour
         {
             if (ammo.owner != this)
             {
+                if (CurrentImmunityFrame <= 0)
+                {
                 hp -= ammo.owner.bulletStats.damage.value;
-                EventManager.current.OnAmmoDestroy(ammo.gameObject);
+
+                }
+                else
+                {
+                    Debug.Log("near miss");
+                }
+               // EventManager.current.OnAmmoDestroy(ammo.gameObject);
             }
         }
     }
 
-    protected void Shoot()
+   public virtual void Shoot()
     {
 
         GameObject bullet = Instantiate(bulletPrefab, bulletContainer);

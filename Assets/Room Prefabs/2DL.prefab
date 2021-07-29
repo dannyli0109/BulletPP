@@ -326,6 +326,8 @@ GameObject:
   - component: {fileID: 3535618831363944531}
   - component: {fileID: 3787415847228869652}
   - component: {fileID: 5133976714588528514}
+  - component: {fileID: 3971206337596491034}
+  - component: {fileID: 293263630291982012}
   m_Layer: 0
   m_Name: D
   m_TagString: Untagged
@@ -845,6 +847,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &3971206337596491034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3381753706098735963}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 5, z: 0.95}
+  m_Center: {x: 2, y: 2.5, z: -0.475}
+--- !u!114 &293263630291982012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3381753706098735963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac17572fdf4c2b4f8db53a82ffa0809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerationScipt: {fileID: 0}
+  thisDirection: 1
 --- !u!1 &4485560287331283247
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,6 +887,8 @@ GameObject:
   - component: {fileID: 458327478505934305}
   - component: {fileID: 7428115075792647024}
   - component: {fileID: 6886880639772445154}
+  - component: {fileID: 7972083074546269794}
+  - component: {fileID: 4946768743219191261}
   m_Layer: 0
   m_Name: L
   m_TagString: Untagged
@@ -1377,6 +1408,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &7972083074546269794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485560287331283247}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.000001, y: 5, z: 0.9500002}
+  m_Center: {x: 2.0000005, y: 2.5, z: -0.4750001}
+--- !u!114 &4946768743219191261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485560287331283247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac17572fdf4c2b4f8db53a82ffa0809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerationScipt: {fileID: 0}
+  thisDirection: 2
 --- !u!1 &4940775890764260546
 GameObject:
   m_ObjectHideFlags: 0

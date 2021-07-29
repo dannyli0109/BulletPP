@@ -48,8 +48,7 @@ public class PlayerController : MonoBehaviour
             float boost = Mathf.Clamp(Time.deltaTime, 0, currentBoostTime);
             currentBoostTime = Mathf.Clamp(currentBoostTime - Time.deltaTime, 0, MaxBoostTime);
             ourCharacterController.Move(InputDirection * (currentSpeed + currentBoostTime * initBoost) * Time.deltaTime);
-
-
+            
         }
         else
         {

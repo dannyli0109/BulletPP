@@ -39,9 +39,22 @@ public class Bullet : Ammo
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
+        if (owner)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+            {
+                // make sure the bullet is not hitting itself
+                EventManager.current.OnAmmoHit(this, other.gameObject);
+
+            }
+            else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                EventManager.current.OnAmmoHit(this, other.gameObject);
+            }
+        }
+
         if (TimesBounced < owner.bulletStats.amountOfBounces.value)
         {
             gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
@@ -50,24 +63,9 @@ public class Bullet : Ammo
         }
         else
         {
-
-            if (owner)
-            {
-                if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
-                {
-                // make sure the bullet is not hitting itself
-                    EventManager.current.OnAmmoHit(this, other.gameObject);
-                }
-            }
-
-
-            if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-            {
-                EventManager.current.OnAmmoDestroy(gameObject);
-            }
-        }
+            EventManager.current.OnAmmoDestroy(this.gameObject);
+        }      
     }
-
 
     private void OnDestroy()
     {
