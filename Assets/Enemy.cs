@@ -34,6 +34,8 @@ public class Enemy : Character
     #endregion
 
     #region Shooting Decisions
+    public float MaxCreationShootingWaitTime;
+    public float MinCreationShootingWaitTime;
     public float currentShootingWaitTime;
     public int currentVolleySize;
     public bool reloading;
@@ -65,6 +67,7 @@ public class Enemy : Character
         base.Start();
         GetNewDestination(false);
         currentBulletClipSize = (int)bulletStats.maxClip.value;
+        currentShootingWaitTime = UnityEngine.Random.Range(MinCreationShootingWaitTime,MaxCreationShootingWaitTime);
     }
 
     void GetNewDestination(bool Direct)

@@ -10,6 +10,8 @@ public class RoomPrefabInformation
     public Vector2 lowerRoomDoorSpawnOffet;
     public Vector2 leftRoomDoorSpawnOffet;
     public Vector2 rightRoomDoorSpawnOffet;
+
+    public Vector2 middleOffset;
 }
 
 [Serializable]
@@ -24,6 +26,8 @@ public class Room : MonoBehaviour
     public int lowerRoomRef =-1;
     public int leftRoomRef  =-1;
     public int rightRoomRef = -1;
+
+  public  bool Completed;
 
     public Room(Vector2 posInput,int lengthInput, int upInput, int downInput, int leftInput, int rightInput)
     {

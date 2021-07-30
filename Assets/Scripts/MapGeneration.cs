@@ -90,15 +90,30 @@ public class MapGeneration : MonoBehaviour
     public int currentRoomInside = 0;
 
     public GameObject playerTarget;
+    public Transform camTarget;
 
     public bool needToSetPos;
     public Vector3 desiredSetPos; // used in late update because character controllers have a problem with 
 
     #endregion
 
+    #region Encounter
+    public GameObject Enemy;
+    public float yEnemyHeight;
+
+   public bool InCombat;
+
+    public List< Enemy> EnemiesInEncounter;
+    #endregion
+
     void Start()
     {
         GenerateMap();
+    }
+
+    private void Update()
+    {
+        UpdateEncounter();
     }
 
     public void GenerateMap()
@@ -179,7 +194,7 @@ public class MapGeneration : MonoBehaviour
             roomsBeingProcessed++;
         }
         reconnectWalls();
-        Debug.Log(AllRooms.Count);
+       // Debug.Log(AllRooms.Count);
         for (int i = 0; i < AllRooms.Count; i++)
         {
             if (i == 0)
@@ -379,16 +394,62 @@ public class MapGeneration : MonoBehaviour
         }
     }
 
+    public void CheckToStartEncounter()
+    {
+        if (!AllRooms[currentRoomInside].Completed&&currentRoomInside !=0)
+        {
+            // lock doors
+            Debug.Log("encounter start");
+            Vector3 placement = new Vector3(AllRooms[currentRoomInside].offsetPos.x *roomMultiplyValue.x+ AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
+            InCombat = true;
+
+            int holdingRand = UnityEngine.Random.Range(1, 4);
+            for(int i=0; i< holdingRand; i++)
+            {
+            GameObject holdingGameObject= Instantiate(Enemy,placement, Enemy.transform.rotation);
+            holdingGameObject.GetComponent<Enemy>().target = playerTarget;
+            holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
+            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+
+            }
+        }
+    }
+
+    public void UpdateEncounter()
+    {
+        if (EnemiesInEncounter.Count <= 0)
+        {
+            InCombat = false;
+            AllRooms[currentRoomInside].Completed = true;
+        }
+        else
+        {
+            for (int i = 0; i < EnemiesInEncounter.Count; i++)
+            {
+                if (EnemiesInEncounter[i].hp <= 0)
+                {
+                    Debug.Log(i + " Dead" + EnemiesInEncounter[i].hp);
+                    EnemiesInEncounter.RemoveAt(i);
+                }
+                else
+                {
+                    //  Debug.Log(i + " Alive " + EnemiesInEncounter[i].hp);
+                }
+            }
+        }
+    }
+
     public void ReceiveDoorInput(Direction directionInput)
     {
-        //playerTarget.transform.position = new Vector3(100, playerTarget.transform.position.y,100);
-
+        if (!InCombat)
+        {
         switch (directionInput)
         {
             case Direction.Upper:
                 currentRoomInside = AllRooms[currentRoomInside].upperRoomRef;
                 needToSetPos = true;
                 desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.y);
+                playerTarget.transform.position = desiredSetPos;
                 if (debug)
                 {
                     Debug.Log("Moving up " + desiredSetPos + "  " + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet);
@@ -399,31 +460,23 @@ public class MapGeneration : MonoBehaviour
                 currentRoomInside = AllRooms[currentRoomInside].lowerRoomRef;
                 needToSetPos = true;
                 desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.y);
+                playerTarget.transform.position = desiredSetPos;
                 break;
             case Direction.Left:
                 currentRoomInside = AllRooms[currentRoomInside].leftRoomRef;
                 needToSetPos = true;
                 desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.y);
+                playerTarget.transform.position = desiredSetPos;
                 break;
             case Direction.Right:
                 currentRoomInside = AllRooms[currentRoomInside].rightRoomRef;
                 needToSetPos = true;
                 desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.y);
+                playerTarget.transform.position = desiredSetPos;
                 break;
         }
+        CheckToStartEncounter();
         Debug.Log(directionInput);
-    }
-
-    private void LateUpdate()
-    {
-        if (needToSetPos)
-        {
-            if (playerTarget.transform.position == desiredSetPos)
-            {
-                needToSetPos = false;
-            }
-          //  Debug.Log(desiredSetPos);
-            playerTarget.transform.position = desiredSetPos;
         }
     }
 

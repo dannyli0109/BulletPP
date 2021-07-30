@@ -7,9 +7,6 @@ public class Grenade : Ammo
     public GameObject bulletHitParticlePrefab;
     public Transform bulletTip;
     float bornTime = 0;
-    void Update()
-    {
-    }
 
     private void FixedUpdate()
     {
@@ -41,6 +38,15 @@ public class Grenade : Ammo
         else
         {
             EventManager.current.OnAmmoDestroy(this.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        bornTime += Time.deltaTime;
+        if (bornTime >= owner.bulletStats.travelTime.value)
+        {
+            Destroy(gameObject);
         }
     }
 }

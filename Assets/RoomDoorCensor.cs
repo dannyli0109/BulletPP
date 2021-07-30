@@ -19,7 +19,11 @@ public class RoomDoorCensor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+      if(  other.gameObject.layer == LayerMask.NameToLayer("Character"))
+        {
         Debug.Log(thisDirection);
         mapGenerationScipt.ReceiveDoorInput(thisDirection);
+
+        }
     }
 }

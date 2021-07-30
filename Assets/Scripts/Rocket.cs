@@ -40,4 +40,13 @@ public class Rocket : Ammo
             EventManager.current.OnAmmoDestroy(this.gameObject);
         }
     }
+
+    void Update()
+    {
+        bornTime += Time.deltaTime;
+        if (bornTime >= owner.bulletStats.travelTime.value)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

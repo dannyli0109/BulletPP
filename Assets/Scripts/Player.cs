@@ -13,10 +13,12 @@ public class Player : Character
 
     public CharacterStat ImmunityFromDashing;
     public CharacterStat ImmunityFromDamage;
-  
+
     #endregion
 
     #region Gun Stats
+    public CharacterStat outOfCombatReloadTime;
+
     public float currentReloadTime;
 
     #endregion
@@ -46,6 +48,8 @@ public class Player : Character
     float angle;
     Vector2 movement;
 
+    public MapGeneration mapGenerationScript;
+
     public override void Start()
     {
         currentBulletClip = (int)bulletStats.maxClip.value;
@@ -68,7 +72,6 @@ public class Player : Character
 
         HandleReload();
         CurrentImmunityFrame -= Time.deltaTime;
-
     }
 
     private void FixedUpdate()
@@ -160,33 +163,51 @@ public class Player : Character
 
     void HandleReload()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (currentBulletClip == bulletStats.maxClip.value && currentGrenadeClip == grenadeStats.maxClip.value && currentRocketClip == rocketStats.maxClip.value)
         {
-            Reloading = !Reloading; // swap status
-            currentReloadTime = 0;
+            // we have max clips
+            Reloading = false;
         }
-        if (Reloading)
+        else
         {
-            currentReloadTime += Time.deltaTime;   
-            if(currentReloadTime> ReloadTime.value)
+            if( !mapGenerationScript.InCombat)
             {
-                currentReloadTime -= ReloadTime.value;
-                // check if you actually get
+                Reloading = true;
+            }
+            if (Input.GetKeyDown(KeyCode.R) )
+            {
+                Reloading = !Reloading; // swap status
+                currentReloadTime = 0;
+            }
+            if (Reloading)
+            {
+                currentReloadTime += Time.deltaTime;
+                float holdingTime = ReloadTime.value;
+                if (!mapGenerationScript.InCombat)
+                {
+                    holdingTime = outOfCombatReloadTime.value;
+                }
 
-                if(currentBulletClip < bulletStats.maxClip.value)
+                if (currentReloadTime > ReloadTime.value)
                 {
-                    currentBulletClip++;
+                    currentReloadTime = 0;
+                    // check if you actually get
+
+                    if (currentBulletClip < bulletStats.maxClip.value)
+                    {
+                        currentBulletClip++;
+                    }
+                    if (currentGrenadeClip < grenadeStats.maxClip.value)
+                    {
+                        currentGrenadeClip++;
+                    }
+                    if (currentRocketClip < rocketStats.maxClip.value)
+                    {
+                        currentRocketClip++;
+                    }
+                    UpdatePlayerUI();
                 }
-                if (currentGrenadeClip < grenadeStats.maxClip.value)
-                {
-                    currentGrenadeClip++;
-                }
-                if (currentRocketClip < rocketStats.maxClip.value)
-                {
-                    currentRocketClip++;
-                }
-                UpdatePlayerUI();
-}
+            }
         }
     }
 
@@ -207,6 +228,7 @@ public class Player : Character
 
     void MoveCharacter()
     {
+        Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
         characterController.Move(new Vector3(movement.x * moveSpeed.value * Time.fixedDeltaTime, 0, movement.y * moveSpeed.value * Time.fixedDeltaTime));
     }
 
