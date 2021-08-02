@@ -14,5 +14,7 @@ public class Shop : MonoBehaviour
         {
             augmentUIs[i].Populate(augmentManager.augmentDatas[i]);
         }
+
+        //Time.timeScale = 0;
     }
 }

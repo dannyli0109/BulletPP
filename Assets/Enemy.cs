@@ -112,6 +112,7 @@ public class Enemy : Character
 
     public override void Update()
     {
+        if (GameManager.current.gameState != GameState.Game) return;
         HandleMove();
         base.Update();
         if (!target) return;

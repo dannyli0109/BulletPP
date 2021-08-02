@@ -24,6 +24,17 @@ public class StatModifier
     }
 
     public StatModifier(float value, StatModType type) : this(value, type, (int)type, null) { }
+
+    public StatModifier(float value, string type)  {
+        this.value = value;
+        StatModType modifierType;
+        if (Enum.TryParse(type, out modifierType))
+        {
+            this.type = modifierType;
+        }
+        order = (int)modifierType;
+        source = null;
+    }
     public StatModifier(float value, StatModType type, int order) : this(value, type, order, null) { }
     public StatModifier(float value, StatModType type, object source) : this(value, type, (int)type, source) { }
 

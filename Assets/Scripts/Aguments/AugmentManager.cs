@@ -6,6 +6,8 @@ using CsvHelper;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System;
+
 
 public class AugmentData
 {
@@ -15,6 +17,8 @@ public class AugmentData
     public string Descriptions { get; set; }
 
     public int Rarity { get; set; }
+
+    public string Code { get; set; }
 }
 
 public class AugmentManager : MonoBehaviour
@@ -29,9 +33,27 @@ public class AugmentManager : MonoBehaviour
         new Color(0.64f, 0.21f, 0.93f),
         new Color(1.0f, 0.5f, 0)
     };
+    public Character character;
+    public Transform gunPoint;
+    public LineRenderer laserSightLineRenderer;
+    Parser parser;
+    Eva eva;
+
     private void Awake()
     {
         current = this;
+
+        parser = new Parser();
+        Dictionary<string, Value> records = new Dictionary<string, Value>()
+        {
+            { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
+            { "OnAttached", new Value(ToImportFunction(()=>{  })) },
+            { "LaserSight", new Value(ToImportFunction(LaserSight))},
+            { "AddModifier", new Value(ToImportFunction(AddModifier))}
+        };
+        Env env = new Env(records);
+        eva = new Eva(env);
+
         augmentDatas = new List<AugmentData>();
 
         using (var reader = new StreamReader("./Assets/Resources/AugmentList.csv"))
@@ -39,5 +61,57 @@ public class AugmentManager : MonoBehaviour
         {
             augmentDatas = Enumerable.ToList(csv.GetRecords<AugmentData>());
         }
+        //Debug.Log(augmentDatas);
+
+        OnAttached(augmentDatas[0].Code);
+    }
+
+    public Func<List<Value>, Expression> ToImportFunction(Action func)
+    {
+        return (_) =>
+        {
+            func();
+            return null;
+        }; 
+    }
+
+    public Func<List<Value>, Expression> ToImportFunction(Action<string, string, string, double> func)
+    {
+        return (list) =>
+        {
+            func(list[0].stringValue, list[1].stringValue, list[2].stringValue, list[3].doubleValue);
+            return null;
+        };
+    }
+    private void OnAttached(string code)
+    {
+        code += @"OnAttached();";
+        eva.eval(parser.Parse(code));
+    }
+
+    private void OnUpdate(string code)
+    {
+        code += @"OnUpdate();";
+        eva.eval(parser.Parse(code));
+    }
+
+
+    void AddModifier(string statType, string stat, string modifierType, double amount)
+    {
+        StatModifier modifier = new StatModifier((float)amount, modifierType);
+        character.AddModifier(statType, stat, modifier);
+    }
+
+    public void LaserSight()
+    {
+        Vector3 lookDir = gunPoint.forward * 100;
+        laserSightLineRenderer.SetPosition(0, gunPoint.position);
+        laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
+    }
+
+    public void Update()
+    {
+        if (GameManager.current.gameState != GameState.Game) return;
+        OnUpdate(augmentDatas[0].Code);
     }
 }

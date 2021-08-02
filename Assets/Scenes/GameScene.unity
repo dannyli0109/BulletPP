@@ -4698,6 +4698,8 @@ MonoBehaviour:
     baseValue: 0.3
   ImmunityFromDamage:
     baseValue: 0.2
+  outOfCombatReloadTime:
+    baseValue: 0
   currentReloadTime: 0
   currentBulletClip: 0
   currentGrenadeClip: 0
@@ -4716,6 +4718,7 @@ MonoBehaviour:
     rgba: 4287203721
   animator: {fileID: 865880523421542525}
   characterController: {fileID: 1716768436}
+  mapGenerationScript: {fileID: 0}
 --- !u!1 &1718092792
 GameObject:
   m_ObjectHideFlags: 0

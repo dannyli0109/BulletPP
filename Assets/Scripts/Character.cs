@@ -112,6 +112,15 @@ public class Character : MonoBehaviour
         bulletComponent.owner = this;
     }
 
+    public void AddModifier(string type, string stat, StatModifier modifier)
+    {
+        StatType statType;
+        if (Enum.TryParse(type, out statType))
+        {
+            AddModifier(statType, stat, modifier);
+        }
+    }
+
     public void AddModifier(StatType type, string stat, StatModifier modifier)
     {
         CharacterStat result;

@@ -63,6 +63,7 @@ public class Player : Character
 
     public override void Update()
     {
+        if (GameManager.current.gameState != GameState.Game) return;
         base.Update();
         HandleRotation();
         HandleMovement();
@@ -76,6 +77,7 @@ public class Player : Character
 
     private void FixedUpdate()
     {
+        if (GameManager.current.gameState != GameState.Game) return;
         MoveCharacter();
     }
 
@@ -170,10 +172,10 @@ public class Player : Character
         }
         else
         {
-            if( !mapGenerationScript.InCombat)
-            {
-                Reloading = true;
-            }
+            //if( !mapGenerationScript.InCombat)
+            //{
+            //    Reloading = true;
+            //}
             if (Input.GetKeyDown(KeyCode.R) )
             {
                 Reloading = !Reloading; // swap status
@@ -183,10 +185,10 @@ public class Player : Character
             {
                 currentReloadTime += Time.deltaTime;
                 float holdingTime = ReloadTime.value;
-                if (!mapGenerationScript.InCombat)
-                {
-                    holdingTime = outOfCombatReloadTime.value;
-                }
+                //if (!mapGenerationScript.InCombat)
+                //{
+                //    holdingTime = outOfCombatReloadTime.value;
+                //}
 
                 if (currentReloadTime > ReloadTime.value)
                 {
