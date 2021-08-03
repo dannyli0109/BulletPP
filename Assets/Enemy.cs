@@ -27,7 +27,6 @@ public class Enemy : Character
     public bool touchingWall;
     public float enemAvoidAmount;
 
-
     public float FullStopMovingTime;
     public float currentStopMovingTime;
 
@@ -56,7 +55,6 @@ public class Enemy : Character
     public int currentBulletClipSize;
 
     public bool DEBUG;
-
     #endregion
 
     public GameObject target;

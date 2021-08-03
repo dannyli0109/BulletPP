@@ -18,7 +18,6 @@ public class Player : Character
 
     #region Gun Stats
     public CharacterStat outOfCombatReloadTime;
-
     public float currentReloadTime;
 
     #endregion
@@ -40,6 +39,22 @@ public class Player : Character
 
     public Color32 FilledClipColor;
     public Color32 EmptyClipColor;
+    #endregion
+
+    #region Lazer
+    public float currentLazerLength;
+    public float maxLazerLength;
+    public float lazerGrowthSpeed;
+    public float lazerRecoilSpeed;
+
+    public float currentLazerWidth;
+    public float maxLazerWidth;
+    public float lazerWidthGrowth;
+
+    public GameObject LazerCollider;
+
+    public LineRenderer thisLineRenderer;
+    public Transform gunTip;
     #endregion
 
     public Animator animator;
@@ -159,7 +174,37 @@ public class Player : Character
                 rocketComponent.owner = this;
                 currentRocketClip--;
             }
+
+
             UpdatePlayerUI();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            currentLazerLength  = Mathf.Clamp(currentLazerLength + lazerGrowthSpeed * Time.deltaTime,0,maxLazerLength);
+            currentLazerWidth = Mathf.Clamp(currentLazerWidth + lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth);
+
+            Vector3 lookDir = gunTip.forward * currentLazerLength;
+            thisLineRenderer.SetPosition(0, gunTip.position);
+            thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
+            thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
+
+            LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
+            LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
+  
+        }
+        else
+        {
+            
+           currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed  * Time.deltaTime, 0, maxLazerLength);
+           currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth);
+
+            Vector3 lookDir = gunTip.forward * currentLazerLength;
+            thisLineRenderer.SetPosition(0, gunTip.position);
+            thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
+           
+            LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 0, currentLazerLength / 2);
+            LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
         }
     }
 

@@ -40,7 +40,6 @@ public class RocketStats : AmmoStats
 
 }
 
-
 public class Character : MonoBehaviour
 {
     public CharacterStat maxHp;
@@ -70,6 +69,7 @@ public class Character : MonoBehaviour
         hp = maxHp.value;
         timeSinceFired = 0;
         EventManager.current.onAmmoHit += OnAmmoHit;
+        EventManager.current.onLaserHit += OnLaserHit;
     }
 
     public virtual void Update()
@@ -89,7 +89,7 @@ public class Character : MonoBehaviour
             {
                 if (CurrentImmunityFrame <= 0)
                 {
-                hp -= ammo.owner.bulletStats.damage.value;
+                    hp -= ammo.owner.bulletStats.damage.value;
 
                 }
                 else
@@ -101,7 +101,30 @@ public class Character : MonoBehaviour
         }
     }
 
-   public virtual void Shoot()
+    protected void OnLaserHit(float damage,Character owner, GameObject obj)
+    {
+        //Debug.Log(ammo);
+        if (this.gameObject == gameObject)
+        {
+            if (CurrentImmunityFrame <= 0)
+            {
+                if (owner != this)
+                {
+                    Debug.Log(owner);
+                    hp -= damage;
+                    Debug.Log("Laser " + obj);
+
+                }
+            }
+            else
+            {
+                Debug.Log("near miss");
+            }
+            // EventManager.current.OnAmmoDestroy(ammo.gameObject);
+        }
+    }
+
+    public virtual void Shoot()
     {
 
         GameObject bullet = Instantiate(bulletPrefab, bulletContainer);

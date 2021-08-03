@@ -4716,6 +4716,14 @@ MonoBehaviour:
   EmptyClipColor:
     serializedVersion: 2
     rgba: 4287203721
+  currentLazerLength: 0
+  maxLazerLength: 0
+  lazerGrowthSpeed: 0
+  lazerRecoilSpeed: 0
+  timeHeldDown: 0
+  maxHoldingTime: 0
+  thisLineRenderer: {fileID: 1716768437}
+  gunTip: {fileID: 154879512}
   animator: {fileID: 865880523421542525}
   characterController: {fileID: 1716768436}
   mapGenerationScript: {fileID: 0}
@@ -5762,6 +5770,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1109022956268930713, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1109022956268930724, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
       propertyPath: target
       value: 
@@ -5812,11 +5824,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1109022956804701803, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1109022956804701803, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1109022957267005131, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
       propertyPath: cam
@@ -7089,7 +7101,11 @@ PrefabInstance:
     - target: {fileID: 5884405946559621820, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
       propertyPath: character
       value: 
-      objectReference: {fileID: 4203847702312296470, guid: eccb51ec3798edc45b80f79450e19b22, type: 3}
+      objectReference: {fileID: 1716768439}
+    - target: {fileID: 5884405946559621820, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5884405947390826543, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
       propertyPath: m_Layer
       value: 5
