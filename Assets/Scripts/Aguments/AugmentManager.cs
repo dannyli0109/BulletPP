@@ -19,6 +19,10 @@ public class AugmentData
     public int Rarity { get; set; }
 
     public string Code { get; set; }
+
+    public Expression UpdateExpression;
+    public Expression AttachExpression;
+
 }
 
 public class AugmentManager : MonoBehaviour
@@ -60,10 +64,15 @@ public class AugmentManager : MonoBehaviour
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
             augmentDatas = Enumerable.ToList(csv.GetRecords<AugmentData>());
-        }
-        //Debug.Log(augmentDatas);
 
-        OnAttached(augmentDatas[0].Code);
+            for (int i = 0; i < augmentDatas.Count; i++)
+            {
+                string code = augmentDatas[i].Code;
+
+                augmentDatas[i].AttachExpression = parser.Parse(code + @"OnAttached();");
+                augmentDatas[i].UpdateExpression = parser.Parse(code + @"OnUpdate();");
+            }
+        }
     }
 
     public Func<List<Value>, Expression> ToImportFunction(Action func)
@@ -83,35 +92,38 @@ public class AugmentManager : MonoBehaviour
             return null;
         };
     }
-    private void OnAttached(string code)
+    public void OnAttached(int id)
     {
-        code += @"OnAttached();";
-        eva.eval(parser.Parse(code));
+        eva.eval(augmentDatas[id].AttachExpression);
     }
 
-    private void OnUpdate(string code)
+    private void OnUpdate(int id)
     {
-        code += @"OnUpdate();";
-        eva.eval(parser.Parse(code));
+        eva.eval(augmentDatas[id].UpdateExpression);
     }
 
 
+    #region Augment Functions
     void AddModifier(string statType, string stat, string modifierType, double amount)
     {
         StatModifier modifier = new StatModifier((float)amount, modifierType);
         character.AddModifier(statType, stat, modifier);
     }
-
     public void LaserSight()
     {
         Vector3 lookDir = gunPoint.forward * 100;
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
     }
+    #endregion
 
     public void Update()
     {
         if (GameManager.current.gameState != GameState.Game) return;
-        OnUpdate(augmentDatas[0].Code);
+        //OnUpdate(augmentDatas[0].Code);
+        for (int i = 0; i < character.augs.Count; i++)
+        {
+            OnUpdate(character.augs[i].id);
+        }
     }
 }

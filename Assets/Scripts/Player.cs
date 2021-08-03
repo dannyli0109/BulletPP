@@ -30,6 +30,7 @@ public class Player : Character
 
     #endregion
 
+
     #region AmmoUI
     public GameObject bulletsUI;
     public TextMeshProUGUI bulletAmmoText;
@@ -57,8 +58,6 @@ public class Player : Character
         currentRocketClip = (int)rocketStats.maxClip.value;
         base.Start();
         UpdatePlayerUI();
-        //StatModifier modifier = new StatModifier(10, StatModType.Flat);
-        //AddModifier(StatType.Bullet, "size", modifier);
     }
 
     public override void Update()

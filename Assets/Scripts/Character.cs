@@ -53,6 +53,8 @@ public class Character : MonoBehaviour
     public CharacterStat TimeBetweenShots;
 
     public float hp;
+    public float gold = 0;
+    public List<Aug> augs = new List<Aug>();
     public float timeSinceFired;
 
     public bool Reloading;
@@ -110,6 +112,38 @@ public class Character : MonoBehaviour
         bullet.transform.localScale = scale * bulletStats.size.value;
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         bulletComponent.owner = this;
+    }
+
+    public int BuyAugment(int id)
+    {
+        AugmentManager augmentManager = AugmentManager.current;
+        AugmentData augment = augmentManager.augmentDatas[id];
+        float cost = augmentManager.costs[augment.Rarity];
+
+        if (gold < cost)
+        {
+            Debug.Log(-1);
+            return -1;
+        }
+        for (int i = 0; i < augs.Count; i++)
+        {
+            if (augs[i].id == id)
+            {
+                if (augs[i].count >= 9)
+                {
+                    Debug.Log(-1);
+                    return -1;
+                }
+                augs[i].count += 1;
+                gold -= cost;
+                Debug.Log(1);
+                return 1;
+            }
+        }
+        augs.Add(new Aug() { id = id, count = 1 });
+        gold -= cost;
+        Debug.Log(2);
+        return 2;
     }
 
     public void AddModifier(string type, string stat, StatModifier modifier)

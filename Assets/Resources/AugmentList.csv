@@ -1,5 +1,10 @@
 Id,Name,Descriptions,Rarity,Code
-0,Laser sight,10% Damage You get a red laser sight to improve your aim,0,"def OnAttached() { AddModifier(""Bullet"", ""damage"", ""PercentAdd"", 0.1);} 
+0,Laser sight,"+2 Bullets
++10% Damage For Bullets
+You get a red laser sight to improve your aim",0,"def OnAttached() { 
+AddModifier(""Bullet"", ""maxClip"", ""Flat"", 2);
+AddModifier(""Bullet"", ""damage"", ""PercentAdd"", 0.1);
+} 
 def OnUpdate() { LaserSight(); }"
 1,Auto loader,You particularly reload every couple seconds,1,
 2,Fat laser,Get a short but wide laser using right click,1,

@@ -5,16 +5,37 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     public List<AugmentUI> augmentUIs;
+    public Character player;
     // Start is called before the first frame update
     void Start()
     {
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         AugmentManager augmentManager = AugmentManager.current;
-        
+
         for (int i = 0; i < augmentUIs.Count; i++)
         {
-            augmentUIs[i].Populate(augmentManager.augmentDatas[i]);
+            int index = Random.Range(0, augmentManager.augmentDatas.Count);
+            augmentUIs[i].gameObject.SetActive(true);
+            augmentUIs[i].Populate(augmentManager.augmentDatas[index]);
         }
+    }
 
-        //Time.timeScale = 0;
+    public void ReRoll()
+    {
+        if (player.gold >=2)
+        {
+            player.gold -= 2;
+            Refresh();
+        }
+    }
+
+    public void Continue()
+    {
+        GameManager.current.gameState = GameState.Game;
+        gameObject.SetActive(false);
     }
 }
