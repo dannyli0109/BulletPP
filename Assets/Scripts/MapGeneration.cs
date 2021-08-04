@@ -421,6 +421,10 @@ public class MapGeneration : MonoBehaviour
         {
             InCombat = false;
             AllRooms[currentRoomInside].Completed = true;
+            if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
+            {
+                GameManager.current.gameState = GameState.Shop;
+            }
         }
         else
         {

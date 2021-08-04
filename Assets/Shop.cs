@@ -35,7 +35,7 @@ public class Shop : MonoBehaviour
 
     public void Continue()
     {
-        GameManager.current.gameState = GameState.Game;
+        GameManager.current.gameState = GameState.Casual;
         // gameObject.SetActive(false);
     }
 }

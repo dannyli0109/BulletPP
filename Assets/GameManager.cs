@@ -5,14 +5,15 @@ using UnityEngine;
 public enum GameState
 {
     Game,
-    Shop
+    Shop,
+    Casual
 }
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager current;
-    public GameState gameState = GameState.Shop;
+    public GameState gameState = GameState.Game;
     public GameObject shop;
 
     void Awake()

@@ -62,7 +62,7 @@ public class Player : Character
 
     public override void Update()
     {
-        if (GameManager.current.gameState != GameState.Game) return;
+        if (GameManager.current.gameState == GameState.Shop) return;
         base.Update();
         HandleRotation();
         HandleMovement();
@@ -78,7 +78,7 @@ public class Player : Character
 
     private void FixedUpdate()
     {
-        if (GameManager.current.gameState != GameState.Game) return;
+        if (GameManager.current.gameState == GameState.Shop) return;
         MoveCharacter();
     }
 
