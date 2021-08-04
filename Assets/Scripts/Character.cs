@@ -77,12 +77,12 @@ public class Character : MonoBehaviour
    protected bool laserSustained;
 
     public float currentLazerLength;
-    public float maxLazerLength;
+    public CharacterStat maxLazerLength;
+    public float currentLazerWidth;
+    public CharacterStat maxLazerWidth;
+
     public float lazerGrowthSpeed;
     public float lazerRecoilSpeed;
-
-    public float currentLazerWidth;
-    public float maxLazerWidth;
     public float lazerWidthGrowth;
 
     public GameObject LazerCollider;
@@ -90,7 +90,6 @@ public class Character : MonoBehaviour
     public LineRenderer thisLineRenderer;
     public Transform gunTip;
     #endregion
-
 
     public virtual void Start()
     {
