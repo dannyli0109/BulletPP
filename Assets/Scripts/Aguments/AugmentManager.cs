@@ -115,6 +115,9 @@ public class AugmentManager : MonoBehaviour
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
     }
+
+   
+
     #endregion
 
     public void Update()
