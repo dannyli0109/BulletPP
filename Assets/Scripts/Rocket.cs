@@ -8,6 +8,20 @@ public class Rocket : Ammo
     public Transform bulletTip;
     float bornTime = 0;
 
+    void Start()
+    {
+        EventManager.current.onAmmoDestroy += OnRocketDestroy;
+    }
+    private void OnRocketDestroy(GameObject gameObject)
+    {
+        if (this.gameObject == gameObject)
+        {
+            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
+            bulletParticle.transform.SetParent(null);
+            bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
+            Destroy(gameObject);
+        }
+    }
     private void FixedUpdate()
     {
         transform.position += transform.forward * owner.rocketStats.speed.value * Time.fixedDeltaTime;
@@ -17,6 +31,7 @@ public class Rocket : Ammo
     {
         if (owner)
         {
+            Debug.Log("Rocket hit");
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
                 // make sure the bullet is not hitting itself
@@ -37,6 +52,7 @@ public class Rocket : Ammo
         }
         else
         {
+            Debug.Log(gameObject);
             EventManager.current.OnAmmoDestroy(this.gameObject);
         }
     }
@@ -48,5 +64,10 @@ public class Rocket : Ammo
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.current.onAmmoDestroy -= OnRocketDestroy;
     }
 }

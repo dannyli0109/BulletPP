@@ -8,6 +8,10 @@ public class Grenade : Ammo
     public Transform bulletTip;
     float bornTime = 0;
 
+    void Start()
+    {
+        EventManager.current.onAmmoDestroy += OnGrenadeDestroy;
+    }
     private void FixedUpdate()
     {
         transform.position += transform.forward * owner.grenadeStats.speed.value * Time.fixedDeltaTime;
@@ -33,6 +37,9 @@ public class Grenade : Ammo
         {
             gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
             TimesBounced++;
+            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
+            bulletParticle.transform.SetParent(null);
+            bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
 
         }
         else
@@ -48,5 +55,21 @@ public class Grenade : Ammo
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnGrenadeDestroy(GameObject gameObject)
+    {
+        if (this.gameObject == gameObject)
+        {
+            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
+            bulletParticle.transform.SetParent(null);
+            bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.current.onAmmoDestroy -= OnGrenadeDestroy;
     }
 }

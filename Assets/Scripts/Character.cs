@@ -40,7 +40,6 @@ public class RocketStats : AmmoStats
 
 }
 
-
 public class Character : MonoBehaviour
 {
     public CharacterStat maxHp;
@@ -67,11 +66,38 @@ public class Character : MonoBehaviour
 
     public float CurrentImmunityFrame;
 
+    #region Lazer
+
+    public CharacterStat laserDamage;
+    public CharacterStat laserCritical;
+
+    public CharacterStat maxLaserFuel;
+    public float currentLaserFuel;
+
+   protected bool laserSustained;
+
+    public float currentLazerLength;
+    public float maxLazerLength;
+    public float lazerGrowthSpeed;
+    public float lazerRecoilSpeed;
+
+    public float currentLazerWidth;
+    public float maxLazerWidth;
+    public float lazerWidthGrowth;
+
+    public GameObject LazerCollider;
+
+    public LineRenderer thisLineRenderer;
+    public Transform gunTip;
+    #endregion
+
+
     public virtual void Start()
     {
         hp = maxHp.value;
         timeSinceFired = 0;
         EventManager.current.onAmmoHit += OnAmmoHit;
+        EventManager.current.onLaserHit += OnLaserHit;
     }
 
     public virtual void Update()
@@ -91,7 +117,7 @@ public class Character : MonoBehaviour
             {
                 if (CurrentImmunityFrame <= 0)
                 {
-                hp -= ammo.owner.bulletStats.damage.value;
+                    hp -= ammo.owner.bulletStats.damage.value;
 
                 }
                 else
@@ -103,7 +129,28 @@ public class Character : MonoBehaviour
         }
     }
 
-   public virtual void Shoot()
+    protected void OnLaserHit(float damage,Character owner, GameObject gameObjectInput)
+    {
+        Debug.Log("Input " +gameObjectInput);
+        if (this.gameObject == gameObjectInput)
+        {
+            if (CurrentImmunityFrame <= 0)
+            {
+                if (owner != this)
+                {
+                    hp -= damage;
+                    Debug.Log("deal damage to " + gameObjectInput);
+                }
+            }
+            else
+            {
+                Debug.Log("near miss");
+            }
+            // EventManager.current.OnAmmoDestroy(ammo.gameObject);
+        }
+    }
+
+    public virtual void Shoot()
     {
 
         GameObject bullet = Instantiate(bulletPrefab, bulletContainer);

@@ -18,7 +18,6 @@ public class Player : Character
 
     #region Gun Stats
     public CharacterStat outOfCombatReloadTime;
-
     public float currentReloadTime;
 
     #endregion
@@ -56,6 +55,7 @@ public class Player : Character
         currentBulletClip = (int)bulletStats.maxClip.value;
         currentGrenadeClip = (int)grenadeStats.maxClip.value;
         currentRocketClip = (int)rocketStats.maxClip.value;
+        currentLaserFuel = maxLaserFuel.value;
         base.Start();
         UpdatePlayerUI();
     }
@@ -72,6 +72,8 @@ public class Player : Character
 
         HandleReload();
         CurrentImmunityFrame -= Time.deltaTime;
+        UpdateAllLasers();
+
     }
 
     private void FixedUpdate()
@@ -158,13 +160,59 @@ public class Player : Character
                 rocketComponent.owner = this;
                 currentRocketClip--;
             }
+
+
             UpdatePlayerUI();
         }
+
+        if (Input.GetMouseButton(0))
+        {
+            ShootLaser(-1, true);
+        }
+
+    }
+
+    void ShootLaser(int id, bool UsesFuel)
+    {
+        //Debug.Log("Shooting laser");
+        if (currentLaserFuel >0)
+        {
+
+        laserSustained = true;
+        currentLazerLength = Mathf.Clamp(currentLazerLength + lazerGrowthSpeed * Time.deltaTime, 0, maxLazerLength);
+        currentLazerWidth = Mathf.Clamp(currentLazerWidth + lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth);
+
+        Vector3 lookDir = gunTip.forward * currentLazerLength;
+        thisLineRenderer.SetPosition(0, gunTip.position);
+        thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
+        thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
+
+        LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
+        LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
+        currentLaserFuel = Mathf.Clamp(currentLaserFuel - Time.deltaTime, 0, maxLaserFuel.value);
+        }
+    }
+
+    void UpdateAllLasers()
+    {
+        if (!laserSustained)
+        {
+        currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed * Time.deltaTime, 0, maxLazerLength);
+        currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth);
+
+        Vector3 lookDir = gunTip.forward * currentLazerLength;
+        thisLineRenderer.SetPosition(0, gunTip.position);
+        thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
+
+        LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
+        LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
+        }
+        laserSustained = false;
     }
 
     void HandleReload()
     {
-        if (currentBulletClip == bulletStats.maxClip.value && currentGrenadeClip == grenadeStats.maxClip.value && currentRocketClip == rocketStats.maxClip.value)
+        if (currentBulletClip == bulletStats.maxClip.value && currentGrenadeClip == grenadeStats.maxClip.value && currentRocketClip == rocketStats.maxClip.value && currentLaserFuel== maxLaserFuel.value)
         {
             // we have max clips
             Reloading = false;
@@ -188,7 +236,7 @@ public class Player : Character
                 //{
                 //    holdingTime = outOfCombatReloadTime.value;
                 //}
-
+              currentLaserFuel = Mathf.Clamp(currentLaserFuel += Time.deltaTime, 0, maxLaserFuel.value);
                 if (currentReloadTime > ReloadTime.value)
                 {
                     currentReloadTime = 0;
