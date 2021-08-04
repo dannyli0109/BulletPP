@@ -14,11 +14,13 @@ public class LazerTrigger : MonoBehaviour
     {
         if (other.gameObject.layer == 12 )
         {
-            Debug.Log("Laser 2" + other);
+            if(other.GetType() == typeof(BoxCollider)){
 
+            Debug.Log("laser trigger " + other);
+
+                other.gameObject.GetComponent<Character>().hp -= Owner.laserDamage.value*Time.deltaTime;
             // for lazers
-            EventManager.current.OnLaserHit(0.1f,Owner, other.gameObject);
-
+            }
         }
     }
 

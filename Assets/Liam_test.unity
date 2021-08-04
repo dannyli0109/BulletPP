@@ -7089,6 +7089,23 @@ MonoBehaviour:
   rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
   bulletContainer: {fileID: 1601036675}
   CurrentImmunityFrame: 0
+  laserDamage:
+    baseValue: 2
+  laserCritical:
+    baseValue: 0
+  maxLaserFuel:
+    baseValue: 5
+  currentLaserFuel: 0
+  currentLazerLength: 0
+  maxLazerLength: 10
+  lazerGrowthSpeed: 18
+  lazerRecoilSpeed: 24
+  currentLazerWidth: 0
+  maxLazerWidth: 0.09
+  lazerWidthGrowth: 0.2
+  LazerCollider: {fileID: 214499829}
+  thisLineRenderer: {fileID: 1525249427}
+  gunTip: {fileID: 1601036675}
   DashAmount:
     baseValue: 2
   timeBetweenDashs:
@@ -7117,16 +7134,6 @@ MonoBehaviour:
   EmptyClipColor:
     serializedVersion: 2
     rgba: 4287203721
-  currentLazerLength: 0
-  maxLazerLength: 10
-  lazerGrowthSpeed: 18
-  lazerRecoilSpeed: 24
-  currentLazerWidth: 0
-  maxLazerWidth: 0.09
-  lazerWidthGrowth: 0.2
-  LazerCollider: {fileID: 214499829}
-  thisLineRenderer: {fileID: 1525249427}
-  gunTip: {fileID: 1601036675}
   animator: {fileID: 1039437461}
   characterController: {fileID: 1525249426}
   mapGenerationScript: {fileID: 904671077}

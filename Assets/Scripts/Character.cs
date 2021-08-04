@@ -64,6 +64,32 @@ public class Character : MonoBehaviour
 
     public float CurrentImmunityFrame;
 
+    #region Lazer
+
+    public CharacterStat laserDamage;
+    public CharacterStat laserCritical;
+
+    public CharacterStat maxLaserFuel;
+    public float currentLaserFuel;
+
+   protected bool laserSustained;
+
+    public float currentLazerLength;
+    public float maxLazerLength;
+    public float lazerGrowthSpeed;
+    public float lazerRecoilSpeed;
+
+    public float currentLazerWidth;
+    public float maxLazerWidth;
+    public float lazerWidthGrowth;
+
+    public GameObject LazerCollider;
+
+    public LineRenderer thisLineRenderer;
+    public Transform gunTip;
+    #endregion
+
+
     public virtual void Start()
     {
         hp = maxHp.value;
@@ -101,19 +127,17 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void OnLaserHit(float damage,Character owner, GameObject obj)
+    protected void OnLaserHit(float damage,Character owner, GameObject gameObjectInput)
     {
-        //Debug.Log(ammo);
-        if (this.gameObject == gameObject)
+        Debug.Log("Input " +gameObjectInput);
+        if (this.gameObject == gameObjectInput)
         {
             if (CurrentImmunityFrame <= 0)
             {
                 if (owner != this)
                 {
-                    Debug.Log(owner);
                     hp -= damage;
-                    Debug.Log("Laser " + obj);
-
+                    Debug.Log("deal damage to " + gameObjectInput);
                 }
             }
             else
