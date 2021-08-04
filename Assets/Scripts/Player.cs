@@ -179,8 +179,8 @@ public class Player : Character
         {
 
         laserSustained = true;
-        currentLazerLength = Mathf.Clamp(currentLazerLength + lazerGrowthSpeed * Time.deltaTime, 0, maxLazerLength);
-        currentLazerWidth = Mathf.Clamp(currentLazerWidth + lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth);
+        currentLazerLength = Mathf.Clamp(currentLazerLength + lazerGrowthSpeed * Time.deltaTime, 0, maxLazerLength.value);
+        currentLazerWidth = Mathf.Clamp(currentLazerWidth + lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth.value);
 
         Vector3 lookDir = gunTip.forward * currentLazerLength;
         thisLineRenderer.SetPosition(0, gunTip.position);
@@ -197,8 +197,8 @@ public class Player : Character
     {
         if (!laserSustained)
         {
-        currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed * Time.deltaTime, 0, maxLazerLength);
-        currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth);
+        currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed * Time.deltaTime, 0, maxLazerLength.value);
+        currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth.value);
 
         Vector3 lookDir = gunTip.forward * currentLazerLength;
         thisLineRenderer.SetPosition(0, gunTip.position);
