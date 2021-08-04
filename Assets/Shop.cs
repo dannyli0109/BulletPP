@@ -36,6 +36,6 @@ public class Shop : MonoBehaviour
     public void Continue()
     {
         GameManager.current.gameState = GameState.Game;
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
     }
 }
