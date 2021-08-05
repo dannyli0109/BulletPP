@@ -128,11 +128,10 @@ public class Player : Character
     void HandleDashing()
     {
         currentTimeBetweenDashes -= Time.deltaTime;
-        if (Input.GetKey(KeyCode.Space) && currentTimeBetweenDashes<=0)
+        if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes<=0)
         {
             currentTimeBetweenDashes = timeBetweenDashs.value;
             currentImmunityFrame = immunityFromDashing.value;
-        //    Debug.Log("Dashing");
             characterController.Move(new Vector3(lastMovementDirection.x * dashAmount.value,0,lastMovementDirection.y * dashAmount.value));
         }
     }
@@ -146,7 +145,6 @@ public class Player : Character
             timeSinceFired = 0;
             if (currentBulletClip > 0)
             {
-
                 GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
                 bullet.transform.SetParent(null);
                 bullet.transform.localScale = new Vector3(bulletStats.size.value, bulletStats.size.value, bulletStats.size.value);
@@ -157,7 +155,6 @@ public class Player : Character
 
             if (currentGrenadeClip > 0)
             {
-
                 GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
                 grenade.transform.SetParent(null);
                 Grenade grenadeComponent = grenade.GetComponent<Grenade>();
@@ -167,14 +164,12 @@ public class Player : Character
 
             if (currentRocketClip > 0)
             {
-
                 GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
                 rocket.transform.SetParent(null);
                 Rocket rocketComponent = rocket.GetComponent<Rocket>();
                 rocketComponent.owner = this;
                 currentRocketClip--;
             }
-
 
             UpdatePlayerUI();
         }
@@ -183,7 +178,6 @@ public class Player : Character
         {
             ShootLaser(-1, true);
         }
-
     }
 
     void ShootLaser(int id, bool UsesFuel)
