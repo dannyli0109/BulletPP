@@ -8,7 +8,8 @@ public enum StatType
 {
     Bullet,
     Grenade,
-    Rocket
+    Rocket,
+    Laser
 }
 
 [Serializable]
@@ -37,6 +38,14 @@ public class GrenadeStats : AmmoStats
 [Serializable]
 public class RocketStats : AmmoStats
 {
+
+}
+
+[Serializable]
+public class LaserStats : AmmoStats
+{
+    public CharacterStat maxLaserLength;
+    public CharacterStat maxLaserWidth;
 
 }
 
@@ -70,18 +79,12 @@ public class Character : MonoBehaviour
 
     #region Lazer
 
-    public CharacterStat laserDamage;
-    public CharacterStat laserCritical;
+    public LaserStats laserStats;
 
-    public CharacterStat maxLaserFuel;
     public float currentLaserFuel;
-
    protected bool laserSustained;
-
     public float currentLazerLength;
-    public CharacterStat maxLazerLength;
     public float currentLazerWidth;
-    public CharacterStat maxLazerWidth;
 
     public float lazerGrowthSpeed;
     public float lazerRecoilSpeed;
@@ -92,7 +95,6 @@ public class Character : MonoBehaviour
     public LineRenderer thisLineRenderer;
     public Transform gunTip;
     #endregion
-
     public virtual void Start()
     {
         hp = maxHp.value;
@@ -224,6 +226,11 @@ public class Character : MonoBehaviour
                     result = (CharacterStat)rocketStats.GetType().GetField(stat).GetValue(rocketStats);
                     break;
                 }
+            case StatType.Laser:
+            {
+                    result = (CharacterStat)laserStats.GetType().GetField(stat).GetValue(laserStats);
+                    break;
+            }
             default:
                 result = null;
                 break;

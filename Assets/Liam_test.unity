@@ -737,7 +737,7 @@ MonoBehaviour:
   timeBetweenShots:
     baseValue: 0.5
   hp: 4.56
-  gold: 0
+  gold: 50
   timeSinceFired: 0
   reloading: 0
   bulletPrefab: {fileID: 5025062916324146594, guid: 5a013fe726515984193a7b943f834c75, type: 3}
@@ -745,19 +745,30 @@ MonoBehaviour:
   rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
   bulletContainer: {fileID: 1094544659}
   currentImmunityFrame: 0
-  laserDamage:
-    baseValue: 8
-  laserCritical:
-    baseValue: 0
-  maxLaserFuel:
-    baseValue: 0
+  laserStats:
+    damage:
+      baseValue: 5
+    speed:
+      baseValue: 0
+    size:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    travelTime:
+      baseValue: 0
+    fireRate:
+      baseValue: 0
+    amountOfBounces:
+      baseValue: 0
+    maxClip:
+      baseValue: 0
+    maxLaserLength:
+      baseValue: 12
+    maxLaserWidth:
+      baseValue: 0.075
   currentLaserFuel: 0
   currentLazerLength: 0
-  maxLazerLength:
-    baseValue: 12
   currentLazerWidth: 0
-  maxLazerWidth:
-    baseValue: 0.075
   lazerGrowthSpeed: 18
   lazerRecoilSpeed: 24
   lazerWidthGrowth: 0.2

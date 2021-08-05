@@ -25,3 +25,6 @@ AddModifier(""Rocket"", ""maxClip"", ""Flat"", 2);
 13,Pocket Grenade,+1 Grenade,0,"def OnAttached() { 
 AddModifier(""Grenade"", ""maxClip"", ""Flat"", 1);
 } "
+14,Laser,+5 laser fuel,0,"def OnAttached() { 
+AddModifier(""Laser"", ""maxClip"", ""Flat"", 5);
+} "
