@@ -48,15 +48,15 @@ public class Character : MonoBehaviour
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
 
-    public CharacterStat ReloadTime;
-    public CharacterStat TimeBetweenShots;
+    public CharacterStat reloadTime;
+    public CharacterStat timeBetweenShots;
 
     public float hp;
     public float gold = 0;
     public List<Aug> augs = new List<Aug>();
     public float timeSinceFired;
 
-    public bool Reloading;
+    public bool reloading;
 
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
@@ -64,7 +64,7 @@ public class Character : MonoBehaviour
 
     public Transform bulletContainer;
 
-    public float CurrentImmunityFrame;
+    public float currentImmunityFrame;
 
     #region Lazer
 
@@ -114,7 +114,7 @@ public class Character : MonoBehaviour
         {
             if (ammo.owner != this)
             {
-                if (CurrentImmunityFrame <= 0)
+                if (currentImmunityFrame <= 0)
                 {
                     hp -= ammo.owner.bulletStats.damage.value;
 
@@ -133,7 +133,7 @@ public class Character : MonoBehaviour
         Debug.Log("Input " +gameObjectInput);
         if (this.gameObject == gameObjectInput)
         {
-            if (CurrentImmunityFrame <= 0)
+            if (currentImmunityFrame <= 0)
             {
                 if (owner != this)
                 {

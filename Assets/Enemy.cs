@@ -206,7 +206,7 @@ public class Enemy : Character
                 currentBulletClipSize = Mathf.Clamp(currentBulletClipSize + 1, 0, (int)bulletStats.maxClip.value);
 
                 reloading = false;
-                currentReloadTime = ReloadTime.value;
+                currentReloadTime = reloadTime.value;
             }
             else
             {
@@ -223,7 +223,7 @@ public class Enemy : Character
                 currentBulletClipSize--;
                 timeSinceFired = 0;
              //   Debug.Log("Shoot");
-                currentShootingWaitTime = TimeBetweenShots.value;
+                currentShootingWaitTime = timeBetweenShots.value;
                 if (currentVolleySize == 0)
                 {
                     currentShootingWaitTime = TimeBetweenVolley;
@@ -239,7 +239,7 @@ public class Enemy : Character
                         {
                             currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1),0,(int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
-                            currentShootingWaitTime = TimeBetweenShots.value;
+                            currentShootingWaitTime = timeBetweenShots.value;
                         }
                     }
                 }
@@ -253,14 +253,14 @@ public class Enemy : Character
                             // set how many bullets to fire, 
                             currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1), 0, (int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
-                            currentShootingWaitTime = TimeBetweenShots.value;
+                            currentShootingWaitTime = timeBetweenShots.value;
                         }
                     }
                 }
                 else
                 {
                     reloading = true;
-                    currentReloadTime = ReloadTime.value;
+                    currentReloadTime = reloadTime.value;
                 }
             }
         }

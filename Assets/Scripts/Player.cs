@@ -6,13 +6,13 @@ using TMPro;
 public class Player : Character
 {
     #region movementStats
-    public CharacterStat DashAmount;
+    public CharacterStat dashAmount;
     public CharacterStat timeBetweenDashs;
     public Vector2 lastMovementDirection;
     public float currentTimeBetweenDashes;
 
-    public CharacterStat ImmunityFromDashing;
-    public CharacterStat ImmunityFromDamage;
+    public CharacterStat immunityFromDashing;
+    public CharacterStat immunityFromDamage;
 
     #endregion
 
@@ -38,8 +38,8 @@ public class Player : Character
     public GameObject rocketsUI;
     public TextMeshProUGUI rocketAmmoText;
 
-    public Color32 FilledClipColor;
-    public Color32 EmptyClipColor;
+    public Color32 filledClipColor;
+    public Color32 emptyClipColor;
     #endregion
 
     public Animator animator;
@@ -71,7 +71,7 @@ public class Player : Character
         HandleDashing();
 
         HandleReload();
-        CurrentImmunityFrame -= Time.deltaTime;
+        currentImmunityFrame -= Time.deltaTime;
         UpdateAllLasers();
 
     }
@@ -117,19 +117,19 @@ public class Player : Character
         if (Input.GetKey(KeyCode.Space) && currentTimeBetweenDashes<=0)
         {
             currentTimeBetweenDashes = timeBetweenDashs.value;
-            CurrentImmunityFrame = ImmunityFromDashing.value;
+            currentImmunityFrame = immunityFromDashing.value;
         //    Debug.Log("Dashing");
-            characterController.Move(new Vector3(lastMovementDirection.x * DashAmount.value,0,lastMovementDirection.y * DashAmount.value));
+            characterController.Move(new Vector3(lastMovementDirection.x * dashAmount.value,0,lastMovementDirection.y * dashAmount.value));
         }
     }
 
     void HandleShooting()
     {
         timeSinceFired += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) || (timeSinceFired > TimeBetweenShots.value && Input.GetMouseButton(0)))
+        if (Input.GetMouseButtonDown(0) || (timeSinceFired > timeBetweenShots.value && Input.GetMouseButton(0)))
         {
             timeSinceFired = 0;
-            Reloading = false;
+            reloading = false;
             if (currentBulletClip > 0)
             {
 
@@ -212,10 +212,16 @@ public class Player : Character
 
     void HandleReload()
     {
-        if (currentBulletClip == bulletStats.maxClip.value && currentGrenadeClip == grenadeStats.maxClip.value && currentRocketClip == rocketStats.maxClip.value && currentLaserFuel== maxLaserFuel.value)
+        /*
+        if (
+            currentBulletClip == bulletStats.maxClip.value && 
+            currentGrenadeClip == grenadeStats.maxClip.value && 
+            currentRocketClip == rocketStats.maxClip.value && 
+            currentLaserFuel == maxLaserFuel.value
+            )
         {
             // we have max clips
-            Reloading = false;
+            reloading = false;
         }
         else
         {
@@ -223,25 +229,26 @@ public class Player : Character
             //{
             //    Reloading = true;
             //}
-            if (Input.GetKeyDown(KeyCode.R) )
+            if (Input.GetKeyDown(KeyCode.R) && !reloading)
             {
-                Reloading = !Reloading; // swap status
+                reloading = !reloading; // swap status
                 currentReloadTime = 0;
             }
-            if (Reloading)
+            if (reloading)
             {
                 currentReloadTime += Time.deltaTime;
-                float holdingTime = ReloadTime.value;
+                // float holdingTime = reloadTime.value;
                 //if (!mapGenerationScript.InCombat)
                 //{
                 //    holdingTime = outOfCombatReloadTime.value;
                 //}
-              currentLaserFuel = Mathf.Clamp(currentLaserFuel += Time.deltaTime, 0, maxLaserFuel.value);
-                if (currentReloadTime > ReloadTime.value)
+                // currentLaserFuel = Mathf.Clamp(currentLaserFuel += Time.deltaTime, 0, maxLaserFuel.value);
+                if (currentReloadTime >= reloadTime.value)
                 {
-                    currentReloadTime = 0;
+                    // currentReloadTime = 0;
                     // check if you actually get
 
+                    
                     if (currentBulletClip < bulletStats.maxClip.value)
                     {
                         currentBulletClip++;
@@ -254,10 +261,56 @@ public class Player : Character
                     {
                         currentRocketClip++;
                     }
+                    
+
+                    currentReloadTime = 0;
+                    currentBulletClip = (int)bulletStats.maxClip.value;
+                    currentGrenadeClip = (int)grenadeStats.maxClip.value;
+                    currentRocketClip = (int)rocketStats.maxClip.value;
+                    currentLaserFuel = maxLaserFuel.value;
+                    reloading = false;
                     UpdatePlayerUI();
                 }
             }
         }
+        */
+
+        if (
+                currentBulletClip == 0 &&
+                currentGrenadeClip == 0 &&
+                currentRocketClip == 0 &&
+                currentLaserFuel <= 0
+            )
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                reloading = !reloading; // swap status
+                currentReloadTime = 0;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && !reloading)
+        {
+            reloading = !reloading; // swap status
+            currentReloadTime = 0;
+        }
+
+        if (reloading)
+        {
+            currentReloadTime += Time.deltaTime;
+            if (currentReloadTime >= reloadTime.value)
+            {
+                currentReloadTime = 0;
+                currentBulletClip = (int)bulletStats.maxClip.value;
+                currentGrenadeClip = (int)grenadeStats.maxClip.value;
+                currentRocketClip = (int)rocketStats.maxClip.value;
+                currentLaserFuel = maxLaserFuel.value;
+                reloading = false;
+                UpdatePlayerUI();
+            }
+        }
+
+
     }
 
     void UpdateAnimation()
@@ -289,11 +342,11 @@ public class Player : Character
             bulletAmmoText.text = currentBulletClip.ToString();
             if (currentBulletClip == 0)
             {
-                bulletAmmoText.color = EmptyClipColor;
+                bulletAmmoText.color = emptyClipColor;
             }
             else
             {
-                bulletAmmoText.color = FilledClipColor;
+                bulletAmmoText.color = filledClipColor;
             }
         }
         else
@@ -307,11 +360,11 @@ public class Player : Character
             grenadeAmmoText.text = currentGrenadeClip.ToString();
             if (currentGrenadeClip == 0)
             {
-               grenadeAmmoText.color = EmptyClipColor;
+               grenadeAmmoText.color = emptyClipColor;
             }
             else
             {
-                grenadeAmmoText.color = FilledClipColor;
+                grenadeAmmoText.color = filledClipColor;
             }
         }
         else
@@ -325,11 +378,11 @@ public class Player : Character
             rocketAmmoText.text = currentRocketClip.ToString();
             if (currentRocketClip == 0)
             {
-               rocketAmmoText.color = EmptyClipColor;
+               rocketAmmoText.color = emptyClipColor;
             }
             else
             {
-                rocketAmmoText.color = FilledClipColor;
+                rocketAmmoText.color = filledClipColor;
             }
         }
         else
