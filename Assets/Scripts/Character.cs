@@ -48,15 +48,17 @@ public class Character : MonoBehaviour
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
 
-    public CharacterStat ReloadTime;
-    public CharacterStat TimeBetweenShots;
+    public Animator animator;
+
+    public CharacterStat reloadTime;
+    public CharacterStat timeBetweenShots;
 
     public float hp;
     public float gold = 0;
     public List<Aug> augs = new List<Aug>();
     public float timeSinceFired;
 
-    public bool Reloading;
+    public bool reloading;
 
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
@@ -64,7 +66,7 @@ public class Character : MonoBehaviour
 
     public Transform bulletContainer;
 
-    public float CurrentImmunityFrame;
+    public float currentImmunityFrame;
 
     #region Lazer
 
@@ -115,7 +117,7 @@ public class Character : MonoBehaviour
         {
             if (ammo.owner != this)
             {
-                if (CurrentImmunityFrame <= 0)
+                if (currentImmunityFrame <= 0)
                 {
                     hp -= ammo.owner.bulletStats.damage.value;
 
@@ -134,7 +136,7 @@ public class Character : MonoBehaviour
         Debug.Log("Input " +gameObjectInput);
         if (this.gameObject == gameObjectInput)
         {
-            if (CurrentImmunityFrame <= 0)
+            if (currentImmunityFrame <= 0)
             {
                 if (owner != this)
                 {
@@ -178,18 +180,18 @@ public class Character : MonoBehaviour
             {
                 if (augs[i].count >= 9)
                 {
-                    Debug.Log(-1);
+                    // Debug.Log(-1);
                     return -1;
                 }
                 augs[i].count += 1;
                 gold -= cost;
-                Debug.Log(1);
+                // Debug.Log(1);
                 return 1;
             }
         }
         augs.Add(new Aug() { id = id, count = 1 });
         gold -= cost;
-        Debug.Log(2);
+        // Debug.Log(2);
         return 2;
     }
 

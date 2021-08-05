@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enemy : Character
 {
     #region Movement
-    public Vector3 FinalDestination;
-    public Vector3 NextDestination;
+    public Vector3 finalDestination;
+    public Vector3 nextDestination;
 
     public float smoothingRange;
 
@@ -73,13 +73,13 @@ public class Enemy : Character
         // if in the normal range
         Vector3 directionTowardstarget = Vector3.Normalize(new Vector3(target.transform.position.x - this.transform.position.x, 0, target.transform.position.z - this.transform.position.z));
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
-        float distFromFinal = Vector3.Distance(this.transform.position, FinalDestination);
+        float distFromFinal = Vector3.Distance(this.transform.position, finalDestination);
 
         if (distFromTarget < DesiredFurthestRange && distFromTarget > ClosestRange)
         {
             if (smoothingRange > distFromFinal)
             {
-                FinalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * WanderingOffsetRadius;
+                finalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * WanderingOffsetRadius;
             }
 
         }
@@ -87,31 +87,50 @@ public class Enemy : Character
         {
            if(distFromTarget < ClosestRange)
             {
-                FinalDestination = target.transform.position - directionTowardstarget * FavouredRange;
+                finalDestination = target.transform.position - directionTowardstarget * FavouredRange;
                 // FinalDestination = target.transform.position - new Vector3(directionTowardstarget.x, 0, directionTowardstarget.y) * FavouredRange;
                // Debug.Log(directionTowardstarget);
             }
             else
             {
-            FinalDestination = target.transform.position - directionTowardstarget * FavouredRange; 
+            finalDestination = target.transform.position - directionTowardstarget * FavouredRange; 
 
             }
 
         }
        
-        NextDestination = Vector3.MoveTowards(this.transform.position, FinalDestination, NextDistSegmentLength);
+        nextDestination = Vector3.MoveTowards(this.transform.position, finalDestination, NextDistSegmentLength);
 
         if (!Direct)
         {
             Vector3 wanderingOffset = Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)));
-            NextDestination += wanderingOffset * WalkingOffsetRadius;
+            nextDestination += wanderingOffset * WalkingOffsetRadius;
         }
     }
+
+    
+    void UpdateAnimation()
+    {
+        float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(angle * Mathf.Deg2Rad);
+
+        float tx = nextDestination.x;
+        float ty = nextDestination.z;
+
+        Vector2 movemntRotated;
+        movemntRotated.x = (cos * tx) - (sin * ty);
+        movemntRotated.y = (sin * tx) + (cos * ty);
+
+        animator.SetFloat("x", movemntRotated.x);
+        animator.SetFloat("y", movemntRotated.y);
+    }
+    
 
     public override void Update()
     {
         if (GameManager.current.gameState == GameState.Shop) return;
         HandleMove();
+        UpdateAnimation();
         base.Update();
         if (!target) return;
         Vector2 current = new Vector2(transform.position.x, transform.position.z);
@@ -135,7 +154,7 @@ public class Enemy : Character
           
         }
 
-        float distFromNext = Vector3.Distance(this.transform.position, NextDestination);
+        float distFromNext = Vector3.Distance(this.transform.position, nextDestination);
         Vector3 directionTowardstarget = Vector3.Normalize(new Vector3( target.transform.position.x- this.transform.position.x , 0, target.transform.position.z - this.transform.position.z));
 
         if (currentWaitingTime <= 0)
@@ -160,10 +179,10 @@ public class Enemy : Character
               GetNewDestination(false);
         }
         // are we at the right place , get a new place
-        this.transform.position = Vector3.MoveTowards(this.transform.position, NextDestination, speed * Time.deltaTime);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
 
-        Debug.DrawLine(this.transform.position, FinalDestination, Color.green);
-        Debug.DrawLine(this.transform.position, NextDestination,Color.blue);
+        Debug.DrawLine(this.transform.position, finalDestination, Color.green);
+        Debug.DrawLine(this.transform.position, nextDestination,Color.blue);
 
             }
             else
@@ -206,7 +225,7 @@ public class Enemy : Character
                 currentBulletClipSize = Mathf.Clamp(currentBulletClipSize + 1, 0, (int)bulletStats.maxClip.value);
 
                 reloading = false;
-                currentReloadTime = ReloadTime.value;
+                currentReloadTime = reloadTime.value;
             }
             else
             {
@@ -223,7 +242,7 @@ public class Enemy : Character
                 currentBulletClipSize--;
                 timeSinceFired = 0;
              //   Debug.Log("Shoot");
-                currentShootingWaitTime = TimeBetweenShots.value;
+                currentShootingWaitTime = timeBetweenShots.value;
                 if (currentVolleySize == 0)
                 {
                     currentShootingWaitTime = TimeBetweenVolley;
@@ -239,7 +258,7 @@ public class Enemy : Character
                         {
                             currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1),0,(int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
-                            currentShootingWaitTime = TimeBetweenShots.value;
+                            currentShootingWaitTime = timeBetweenShots.value;
                         }
                     }
                 }
@@ -253,14 +272,14 @@ public class Enemy : Character
                             // set how many bullets to fire, 
                             currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1), 0, (int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
-                            currentShootingWaitTime = TimeBetweenShots.value;
+                            currentShootingWaitTime = timeBetweenShots.value;
                         }
                     }
                 }
                 else
                 {
                     reloading = true;
-                    currentReloadTime = ReloadTime.value;
+                    currentReloadTime = reloadTime.value;
                 }
             }
         }
@@ -283,7 +302,7 @@ public class Enemy : Character
         {
             Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
             Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
-            NextDestination += directionAwayFromWall *enemAvoidAmount*Time.deltaTime;
+            nextDestination += directionAwayFromWall *enemAvoidAmount*Time.deltaTime;
             currentWaitingTime = 0;
 
         }
@@ -292,7 +311,7 @@ public class Enemy : Character
         {
             Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
             Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
-            NextDestination += directionAwayFromWall * wallAvoidAmount * Time.deltaTime; ;
+            nextDestination += directionAwayFromWall * wallAvoidAmount * Time.deltaTime; ;
             currentWaitingTime = 0;
             touchingWall = true;
             float dist = Vector3.Distance(this.transform.position, target.transform.position);
