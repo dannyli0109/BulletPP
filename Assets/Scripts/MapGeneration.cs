@@ -106,6 +106,8 @@ public class MapGeneration : MonoBehaviour
     public List< Enemy> EnemiesInEncounter;
     #endregion
 
+   public BTSManager thisBTSManager;
+
     void Start()
     {
         GenerateMap();
@@ -113,7 +115,11 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
+        if (InCombat)
+        {
         UpdateEncounter();
+
+        }
     }
 
     public void GenerateMap()
@@ -322,6 +328,7 @@ public class MapGeneration : MonoBehaviour
         // if first room do all
         // else have chance to add more rooms
         // process each room until they don't add more 
+        AllRooms[0].Completed = true;
     }
 
     public bool AddRoomOrWall(Room ToAdd)
@@ -410,6 +417,7 @@ public class MapGeneration : MonoBehaviour
             holdingGameObject.GetComponent<Enemy>().target = playerTarget;
             holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
             EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+                GameManager.current.gameState = GameState.Game;
 
             }
         }
@@ -421,9 +429,11 @@ public class MapGeneration : MonoBehaviour
         {
             InCombat = false;
             AllRooms[currentRoomInside].Completed = true;
+            CheckIfMapCompleted();
             if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
             {
                 GameManager.current.gameState = GameState.Shop;
+                GameManager.current.shop.Refresh();
             }
         }
         else
@@ -441,6 +451,21 @@ public class MapGeneration : MonoBehaviour
                 }
             }
         }
+    }
+
+    void CheckIfMapCompleted()
+    {
+        for(int i =0; i < AllRooms.Count; i++)
+        {
+            if (!AllRooms[i].Completed)
+            {
+                Debug.Log(i + " room");
+                return;
+            }
+
+        }
+        Debug.Log("all done");
+        thisBTSManager.LoadWinGameScene();
     }
 
     public void ReceiveDoorInput(Direction directionInput)
@@ -479,6 +504,7 @@ public class MapGeneration : MonoBehaviour
                 playerTarget.transform.position = desiredSetPos;
                 break;
         }
+
         CheckToStartEncounter();
         Debug.Log(directionInput);
         }

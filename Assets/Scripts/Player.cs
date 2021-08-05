@@ -29,7 +29,6 @@ public class Player : Character
 
     #endregion
 
-
     #region AmmoUI
     public GameObject bulletsUI;
     public TextMeshProUGUI bulletAmmoText;
@@ -42,6 +41,8 @@ public class Player : Character
     public Color32 emptyClipColor;
     #endregion
 
+    public BTSManager thisBTSManager;
+
     public Animator animator;
     public CharacterController characterController;
 
@@ -52,6 +53,8 @@ public class Player : Character
 
     public override void Start()
     {
+        EventManager.current.receiveGold += ReceiveGold;
+
         currentBulletClip = (int)bulletStats.maxClip.value;
         currentGrenadeClip = (int)grenadeStats.maxClip.value;
         currentRocketClip = (int)rocketStats.maxClip.value;
@@ -62,6 +65,11 @@ public class Player : Character
 
     public override void Update()
     {
+        if (hp <= 0)
+        {
+            Debug.Log("Player Load lose");
+            thisBTSManager.LoadLoseGameScene();
+        }
         if (GameManager.current.gameState == GameState.Shop) return;
         base.Update();
         HandleRotation();
@@ -73,13 +81,20 @@ public class Player : Character
         HandleReload();
         currentImmunityFrame -= Time.deltaTime;
         UpdateAllLasers();
-
     }
 
     private void FixedUpdate()
     {
         if (GameManager.current.gameState == GameState.Shop) return;
         MoveCharacter();
+    }
+
+    protected void ReceiveGold(float amount)
+    {
+        Debug.Log(amount + " gold");
+        gold += amount;
+        Debug.Log("total " + gold);
+           
     }
 
     void HandleRotation()
@@ -185,7 +200,7 @@ public class Player : Character
         Vector3 lookDir = gunTip.forward * currentLazerLength;
         thisLineRenderer.SetPosition(0, gunTip.position);
         thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
-        thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
+        thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth*2);
 
         LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
         LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
@@ -197,15 +212,16 @@ public class Player : Character
     {
         if (!laserSustained)
         {
-        currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed * Time.deltaTime, 0, maxLazerLength.value);
-        currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth.value);
+            currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed * Time.deltaTime, 0, maxLazerLength.value);
+            currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, maxLazerWidth.value);
 
-        Vector3 lookDir = gunTip.forward * currentLazerLength;
-        thisLineRenderer.SetPosition(0, gunTip.position);
-        thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
+            Vector3 lookDir = gunTip.forward * currentLazerLength;
+            thisLineRenderer.SetPosition(0, gunTip.position);
+            thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
+            thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth * 2);
 
-        LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
-        LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
+            LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
+            LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
         }
         laserSustained = false;
     }

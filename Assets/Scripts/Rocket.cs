@@ -31,7 +31,7 @@ public class Rocket : Ammo
     {
         if (owner)
         {
-            Debug.Log("Rocket hit");
+          //  Debug.Log("Rocket hit");
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
                 // make sure the bullet is not hitting itself
@@ -52,7 +52,6 @@ public class Rocket : Ammo
         }
         else
         {
-            Debug.Log(gameObject);
             EventManager.current.OnAmmoDestroy(this.gameObject);
         }
     }

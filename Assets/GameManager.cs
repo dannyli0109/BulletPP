@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager current;
     public GameState gameState = GameState.Game;
-    public GameObject shop;
+    public Shop shop;
 
     void Awake()
     {
@@ -25,11 +25,12 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.Shop)
         {
-            shop.SetActive(true);
+            shop.gameObject.SetActive(true);
+          
         }
         else
         {
-            shop.SetActive(false);
+            shop.gameObject.SetActive(false);
         }
     }
 }
