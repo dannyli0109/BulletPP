@@ -1140,7 +1140,7 @@ Transform:
   m_Children:
   - {fileID: 1562154835}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &211367360
 MonoBehaviour:
@@ -2549,7 +2549,7 @@ Transform:
   - {fileID: 697264513}
   - {fileID: 1187554968}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &396993669
 GameObject:
@@ -2611,7 +2611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &401761399
 MonoBehaviour:
@@ -3918,7 +3918,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &731277486
 GameObject:
@@ -4465,6 +4465,98 @@ Transform:
   m_Father: {fileID: 1844279418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &854209530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854209532}
+  - component: {fileID: 854209531}
+  m_Layer: 0
+  m_Name: Directional Light (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &854209531
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854209530}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3137255}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &854209532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854209530}
+  m_LocalRotation: {x: 0.29883623, y: 0.64085644, z: -0.29883623, w: 0.64085644}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 50, y: 90, z: 0}
 --- !u!1 &860557710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4645,145 +4737,169 @@ MonoBehaviour:
     needLeftRoom: 1
     needRightRoom: 1
   StartingRooms:
-  - {fileID: 2396148979670090629, guid: 7e3d6e5c183b53542b4314d6df149769, type: 3}
+  - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
   StartingRoomPrefabInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
   AllDoorRoom:
-  - {fileID: 2396148979670090629, guid: 7e3d6e5c183b53542b4314d6df149769, type: 3}
+  - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
+  - {fileID: 4624463924144925947, guid: 7565c01c511424c47a6c66f8be31987a, type: 3}
+  - {fileID: 4984691470946668257, guid: 5255ced0caae55645a907c6a373c00d7, type: 3}
   upRoom:
-  - {fileID: 3860085601721245131, guid: 0d52f22a749180548a9ff29ca1b2c6ed, type: 3}
+  - {fileID: 3481950231860664795, guid: b86268729921b114482461b6de762d0b, type: 3}
   downRoom:
-  - {fileID: 471930255658801486, guid: 093511839ebe5c04193d62bec66444aa, type: 3}
+  - {fileID: 6534745952657641080, guid: 7d469fa8f40413546915bfd549bb95ae, type: 3}
   leftRoom:
-  - {fileID: 5845952639549472067, guid: da81b249ff9b38d4f900ca9864276843, type: 3}
+  - {fileID: 1824836827662024726, guid: 916f7bdbc2c2b414e876759114180d9d, type: 3}
   rightRoom:
-  - {fileID: 5825083670294569951, guid: 5a01f48fd339a5446b839d79578884f8, type: 3}
+  - {fileID: 6194592526552580840, guid: c51f60528fcee334fa951ac803dd238f, type: 3}
   upDownRoom:
-  - {fileID: 4824743152823531399, guid: 85ae09a7659b6894bbeb7075094820be, type: 3}
+  - {fileID: 4318382585243863633, guid: 5544b35d1b1452448af64bfa2d748f2f, type: 3}
   upLeftRoom:
-  - {fileID: 826670293689860918, guid: 5ee77e2c88d9ab64ca485b44c829466d, type: 3}
+  - {fileID: 4621502232478974580, guid: 558efdb370e70864eba550488d663e67, type: 3}
+  - {fileID: 4013477804267822307, guid: 73ee3792feeb2a244a0a6d3e76e797b8, type: 3}
   upRightRoom:
-  - {fileID: 6465973431307492045, guid: 774d42e6002afef488477edd3b776524, type: 3}
+  - {fileID: 1249736385051667748, guid: 8a4c990403ccffa47ac295a98a85aaff, type: 3}
   downLeftRoom:
-  - {fileID: 4940775890764260546, guid: e84af1604211f1d4fb9fc80ed62f9cc2, type: 3}
+  - {fileID: 7533526137600042590, guid: 720ed3c9b625772489594c0596897d3b, type: 3}
   downRightRoom:
-  - {fileID: 4367863402861534981, guid: deef18860dd006e478d073f7e9c49a2f, type: 3}
+  - {fileID: 1326487844555705191, guid: 0aa74dbe9e2dbdf44963f593c5879833, type: 3}
+  - {fileID: 176287628393437971, guid: b4bd9a3a5d75ed042a730a22aeeb7894, type: 3}
   leftRightRoom:
-  - {fileID: 8844893239596829802, guid: 734840f7a1549d446b48091ae1393160, type: 3}
-  - {fileID: 22336996812981837, guid: a8c8afaceda14e84abb2fda74901ff11, type: 3}
-  - {fileID: 6663609607316724270, guid: a612a87146e7088498095e7680689be2, type: 3}
+  - {fileID: 7166273750155598376, guid: 3b8d7c0b33cdd1e45ba21a872f531b63, type: 3}
+  - {fileID: 2748386830261423592, guid: ed3a2ac8fd86b5445a3c09ebd84642a7, type: 3}
   UDLRoom:
-  - {fileID: 3719688652869597087, guid: efa6a1c6de6da6743a9f5ffe17b3bcbc, type: 3}
+  - {fileID: 7819917018087883527, guid: f86bf1993b10d5248b5fe27b2b134227, type: 3}
   UDRRoom:
-  - {fileID: 1058906055915840870, guid: d2a99afd45e995346ac5884d0fe2edc4, type: 3}
+  - {fileID: 1972704425016464564, guid: ab0a470c07229a240a5c2c407ee96665, type: 3}
   ULRRoom:
-  - {fileID: 5211266310298346581, guid: 6a53cf897c3453847bd6ac6019cf5555, type: 3}
+  - {fileID: 5706285079197972649, guid: bd76d31cab2ad60448e82501d015c174, type: 3}
   DLRRoom:
-  - {fileID: 6638670246453050325, guid: 877b60bcd31711544827352313506e16, type: 3}
+  - {fileID: 6879949707812021247, guid: 6cbaabcfe44021b42ac8fcf1cfd19464, type: 3}
+  - {fileID: 1391686635697823944, guid: 57c2ad63e9714544294c5212ea5906b5, type: 3}
   AllDoorRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   upRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
   downRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
   leftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
   rightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   upDownRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
   upLeftRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
   upRightRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   downLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 2, y: -5}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
   downRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   leftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   UDLRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
-    middleOffset: {x: 8, y: -5}
+    middleOffset: {x: 0, y: 0}
   UDRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   ULRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 7.5, y: -2}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   DLRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 7.5, y: -8}
-    leftRoomDoorSpawnOffet: {x: 2, y: -5}
-    rightRoomDoorSpawnOffet: {x: 13, y: -5}
-    middleOffset: {x: 8, y: -5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
   currentRoomInside: 0
   playerTarget: {fileID: 1525249422}
   camTarget: {fileID: 1857718138}
@@ -4806,7 +4922,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1 &913546915
 GameObject:
@@ -5494,7 +5610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1187554967
 GameObject:
@@ -6100,7 +6216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1337051501429413005, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1337051501429413005, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6161,6 +6277,10 @@ PrefabInstance:
     - target: {fileID: 1337051501429413009, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337051501429413009, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
@@ -6318,7 +6438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1306182737 stripped
 MonoBehaviour:
@@ -6995,7 +7115,7 @@ Transform:
   m_Children:
   - {fileID: 1857718138}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1434147265
 PrefabInstance:
@@ -7034,7 +7154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279977, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279977, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7159,7 +7279,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1525249422
 GameObject:
@@ -7508,14 +7628,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525249422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 1.12, z: -4.94}
+  m_LocalPosition: {x: 0, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1039437458}
   - {fileID: 1967891529}
   - {fileID: 214499830}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1551090146
 GameObject:
@@ -8102,7 +8222,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1578311368
 GameObject:
@@ -8733,6 +8853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop
       objectReference: {fileID: 0}
+    - target: {fileID: 1891872735620922656, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1891872735620922682, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: cam
       value: 
@@ -8915,59 +9039,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102903998375977239, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2102903998375977239, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2102903998375977239, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 628.7467
       objectReference: {fileID: 0}
     - target: {fileID: 2102903998375977239, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -531.7066
       objectReference: {fileID: 0}
     - target: {fileID: 2137775339312694894, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2137775339312694894, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2137775339312694894, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1160
       objectReference: {fileID: 0}
     - target: {fileID: 2137775339312694894, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 24.93747
       objectReference: {fileID: 0}
     - target: {fileID: 2137775339312694894, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2137775340304362343, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2137775340304362343, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2137775340304362343, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 760
       objectReference: {fileID: 0}
     - target: {fileID: 2137775340304362343, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 24.93747
       objectReference: {fileID: 0}
     - target: {fileID: 2137775340304362343, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3950835130937418462, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
@@ -9019,19 +9143,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132013171656, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132013171656, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132013171656, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 909.99994
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132013171656, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -531.7066
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132065979731, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
@@ -9083,19 +9207,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132527969132, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132527969132, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132527969132, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1191.2532
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132527969132, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -531.7066
       objectReference: {fileID: 0}
     - target: {fileID: 3950835132610170359, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
@@ -10601,5 +10725,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

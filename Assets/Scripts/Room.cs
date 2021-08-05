@@ -11,6 +11,7 @@ public class RoomPrefabInformation
     public Vector2 leftRoomDoorSpawnOffet;
     public Vector2 rightRoomDoorSpawnOffet;
 
+    // where you enter from in the new room.
     public Vector2 middleOffset;
 }
 

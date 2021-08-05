@@ -214,12 +214,12 @@ public class Character : MonoBehaviour
                 }
             case StatType.Grenade:
                 {
-                    result = (CharacterStat)grenadeStats.GetType().GetField(stat).GetValue(bulletStats);
+                    result = (CharacterStat)grenadeStats.GetType().GetField(stat).GetValue(grenadeStats);
                     break;
                 }
             case StatType.Rocket:
                 {
-                    result = (CharacterStat)rocketStats.GetType().GetField(stat).GetValue(bulletStats);
+                    result = (CharacterStat)rocketStats.GetType().GetField(stat).GetValue(rocketStats);
                     break;
                 }
             default:
