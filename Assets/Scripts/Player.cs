@@ -43,7 +43,6 @@ public class Player : Character
 
     public BTSManager thisBTSManager;
 
-    public Animator animator;
     public CharacterController characterController;
 
     float angle;
@@ -141,10 +140,10 @@ public class Player : Character
     void HandleShooting()
     {
         timeSinceFired += Time.deltaTime;
+        if (reloading) return;
         if (Input.GetMouseButtonDown(0) || (timeSinceFired > timeBetweenShots.value && Input.GetMouseButton(0)))
         {
             timeSinceFired = 0;
-            reloading = false;
             if (currentBulletClip > 0)
             {
 

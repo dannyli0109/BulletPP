@@ -48,6 +48,8 @@ public class Character : MonoBehaviour
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
 
+    public Animator animator;
+
     public CharacterStat reloadTime;
     public CharacterStat timeBetweenShots;
 
@@ -178,18 +180,18 @@ public class Character : MonoBehaviour
             {
                 if (augs[i].count >= 9)
                 {
-                    Debug.Log(-1);
+                    // Debug.Log(-1);
                     return -1;
                 }
                 augs[i].count += 1;
                 gold -= cost;
-                Debug.Log(1);
+                // Debug.Log(1);
                 return 1;
             }
         }
         augs.Add(new Aug() { id = id, count = 1 });
         gold -= cost;
-        Debug.Log(2);
+        // Debug.Log(2);
         return 2;
     }
 
