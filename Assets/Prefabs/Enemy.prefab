@@ -1636,6 +1636,7 @@ MonoBehaviour:
   TimeBetweenShots:
     baseValue: 0.3
   hp: 0
+  gold: 1
   timeSinceFired: 0
   Reloading: 0
   bulletPrefab: {fileID: 2943491641176895762, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
@@ -1643,6 +1644,25 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bulletContainer: {fileID: 1109022956828929431}
   CurrentImmunityFrame: 0
+  laserDamage:
+    baseValue: 0
+  laserCritical:
+    baseValue: 0
+  maxLaserFuel:
+    baseValue: 0
+  currentLaserFuel: 0
+  currentLazerLength: 0
+  maxLazerLength:
+    baseValue: 0
+  currentLazerWidth: 0
+  maxLazerWidth:
+    baseValue: 0
+  lazerGrowthSpeed: 0
+  lazerRecoilSpeed: 0
+  lazerWidthGrowth: 0
+  LazerCollider: {fileID: 0}
+  thisLineRenderer: {fileID: 0}
+  gunTip: {fileID: 0}
   FinalDestination: {x: 0, y: 0, z: 0}
   NextDestination: {x: 0, y: 0, z: 0}
   smoothingRange: 0.1

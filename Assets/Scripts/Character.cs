@@ -103,6 +103,7 @@ public class Character : MonoBehaviour
     {
         if (hp <= 0)
         {
+            EventManager.current.ReceiveGold(this.gold);
             Destroy(gameObject);
         }
     }
