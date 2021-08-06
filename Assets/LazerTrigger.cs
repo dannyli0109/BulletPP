@@ -16,7 +16,7 @@ public class LazerTrigger : MonoBehaviour
         {
             if(other.GetType() == typeof(BoxCollider)){
 
-                other.gameObject.GetComponent<Character>().hp -= Owner.laserDamage.value*Time.deltaTime;
+                other.gameObject.GetComponent<Character>().hp -= Owner.laserStats.damage.value*Time.deltaTime;
             // for lazers
             }
         }
