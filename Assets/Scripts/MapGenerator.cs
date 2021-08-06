@@ -129,7 +129,9 @@ public class MapGenerator : MonoBehaviour
                         }
                     }
 
-                    GameObject tileObject = PrefabUtility.InstantiatePrefab(tilesPrefab[indices[mask]]) as GameObject;
+
+                    //GameObject tileObject = PrefabUtility.InstantiatePrefab(tilesPrefab[indices[mask]]) as GameObject;
+                    GameObject tileObject = Instantiate(tilesPrefab[indices[mask]]);
                     tileObject.transform.position = new Vector3(
                             x * tileWidth + offsetX + bounds.min.x * tileWidth,
                             offsetY,

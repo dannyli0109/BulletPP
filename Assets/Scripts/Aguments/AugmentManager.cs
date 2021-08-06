@@ -60,7 +60,7 @@ public class AugmentManager : MonoBehaviour
 
         augmentDatas = new List<AugmentData>();
 
-        using (var reader = new StreamReader("./Assets/Resources/AugmentList.csv"))
+        using (var reader = new StreamReader(Application.streamingAssetsPath + "/AugmentList.csv"))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
             augmentDatas = Enumerable.ToList(csv.GetRecords<AugmentData>());
@@ -73,6 +73,8 @@ public class AugmentManager : MonoBehaviour
                 augmentDatas[i].UpdateExpression = parser.Parse(code + @"OnUpdate();");
             }
         }
+
+        //Debug.Log(Application.streamingAssetsPath);
     }
 
     public Func<List<Value>, Expression> ToImportFunction(Action func)
