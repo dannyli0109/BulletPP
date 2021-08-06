@@ -32,11 +32,13 @@ public class AugmentUI : MonoBehaviour
         if (state == 1)
         {
             gameObject.SetActive(false);
+            shop.PopulateAugmentListUI();
         }
         else if (state == 2)
         {
             augmentManager.OnAttached(id);
             gameObject.SetActive(false);
+            shop.PopulateAugmentListUI();
         }
     }
 

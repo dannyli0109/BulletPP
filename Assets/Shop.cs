@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     public List<AugmentUI> augmentUIs;
     public Character player;
+    public GameObject augmentListUIContainer;
+    public GameObject augmentUIPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,5 +40,22 @@ public class Shop : MonoBehaviour
     {
         GameManager.current.gameState = GameState.Casual;
         // gameObject.SetActive(false);
+    }
+
+    public void PopulateAugmentListUI()
+    {
+        foreach (Transform child in augmentListUIContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        AugmentManager augmentManager = AugmentManager.current;
+        for (int i = 0; i < player.augs.Count; i++)
+        {
+            GameObject augmentUI = Instantiate(augmentUIPrefab);
+            augmentUI.GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augs[i].id].Name + ": " +  player.augs[i].count;
+            augmentUI.transform.SetParent(augmentListUIContainer.transform);
+            augmentUI.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }

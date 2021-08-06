@@ -401,7 +401,7 @@ public class Player : Character
         if (laserStats.maxClip.value > 0)
         {
             laserUI.SetActive(true);
-            laserFuelText.text = currentLaserFuel.ToString();
+            laserFuelText.text = currentLaserFuel.ToString("F");
             if (currentLaserFuel == 0)
             {
                laserFuelText.color = emptyClipColor;
