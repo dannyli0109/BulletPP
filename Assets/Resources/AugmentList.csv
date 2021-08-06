@@ -1,30 +1,41 @@
 Id,Name,Descriptions,Rarity,Code
 0,Laser sight,"+2 Bullets
 +10% Damage For Bullets
-You get a red laser sight to improve your aim",0,"def OnAttached() { 
+You get a red laser sight to improve your aim",1,"def OnAttached() { 
 AddModifier(""Bullet"", ""maxClip"", ""Flat"", 2);
 AddModifier(""Bullet"", ""damage"", ""PercentAdd"", 0.1);
 } 
 def OnUpdate() { LaserSight(); }"
-1,Auto loader,You particularly reload every couple seconds,1,
-2,Fat laser,Get a short but wide laser using right click,1,
-3,Organic brand bullets,Gain a bullet each time you crit; get more crit the closer they are,0,
-4,Extra strength gun powder,Crits make an explosive on hit,1,
-5,Under barrel rocket launcher,You shoot rockets which explode on hit,0,
-6,Phantom bullets,Dashing reloads a bullet,0,
-7,Laser boots,You shoot a small laser with right click; When you dash shoot a laser behind you,1,
-8,Mida's touch,Killing enemies have a chance to give gold,2,
-9,Golden bullet,Your first bullet after a reold is fat and does damage based on your gold,0,
-10,Bouncing blade,Shoot a blade that bounces up to 5 times; Return when toucching you or degrading,1,
-11,Extra Grenades,+2 Grenades,1,"def OnAttached() { 
-AddModifier(""Grenade"", ""maxClip"", ""Flat"", 2);
-} "
-12,Extra Rockets,+2 Rockets,1,"def OnAttached() { 
+1,Under barrel rocket launcher,You shoot rockets which explode on hit,0,"def OnAttached() { 
 AddModifier(""Rocket"", ""maxClip"", ""Flat"", 2);
 } "
-13,Pocket Grenade,+1 Grenade,0,"def OnAttached() { 
+2,Extra Grenades,+2 Grenades,0,"def OnAttached() { 
+AddModifier(""Grenade"", ""maxClip"", ""Flat"", 2);
+} "
+3,Extra Rockets,+3 Rockets,3,"def OnAttached() { 
+AddModifier(""Rocket"", ""maxClip"", ""Flat"", 3);
+} "
+4,Pocket Grenade,+1 Grenade,0,"def OnAttached() { 
 AddModifier(""Grenade"", ""maxClip"", ""Flat"", 1);
 } "
-14,Laser,+5 laser fuel,0,"def OnAttached() { 
-AddModifier(""Laser"", ""maxClip"", ""Flat"", 5);
+5,Laser,+5 laser fuel,0,"def OnAttached() { 
+AddModifier(""Laser"", ""maxClip"", ""Flat"", 3);
+AddModifier(""Laser"", ""maxLaserLength"", ""Flat"", 5);
+} "
+6,Thick Laser,"+2 Laser fuel
+'+ Laser width
+'+Laser Damage",2,"def OnAttached() { 
+AddModifier(""Laser"", ""maxClip"", ""Flat"", 2);
+AddModifier(""Laser"", ""maxLaserWidth"", ""Flat"", 0.03);
+AddModifier(""Laser"", ""damage"", ""Flat"", 3);
+} "
+7,Bigger Bullets,"+ Bullet
+Increased Bullet Size
+Increased Bullet Damage",1,"def OnAttached() { 
+AddModifier(""Bullet"", ""maxClip"", ""Flat"", 1);
+AddModifier(""Bullet"", ""size"", ""PercentAdd"", 0.5);
+AddModifier(""Bullet"", ""damage"", ""Flat"", 1);
+} "
+8,Extra Bullets,+3 Bullets,1,"def OnAttached() { 
+AddModifier(""Bullet"", ""maxClip"", ""Flat"", 3);
 } "

@@ -36,6 +36,8 @@ public class Player : Character
     public TextMeshProUGUI grenadeAmmoText;
     public GameObject rocketsUI;
     public TextMeshProUGUI rocketAmmoText;
+    public GameObject laserUI;
+    public TextMeshProUGUI laserFuelText;
 
     public Color32 filledClipColor;
     public Color32 emptyClipColor;
@@ -190,7 +192,7 @@ public class Player : Character
         Vector3 lookDir = gunTip.forward * currentLazerLength;
         thisLineRenderer.SetPosition(0, gunTip.position);
         thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
-        thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth*2);
+        thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
 
         LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
         LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
@@ -208,7 +210,7 @@ public class Player : Character
             Vector3 lookDir = gunTip.forward * currentLazerLength;
             thisLineRenderer.SetPosition(0, gunTip.position);
             thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
-            thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth * 2);
+            thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
 
             LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
             LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
@@ -394,6 +396,24 @@ public class Player : Character
         else
         {
             rocketsUI.SetActive(false);
+        }
+
+        if (laserStats.maxClip.value > 0)
+        {
+            laserUI.SetActive(true);
+            laserFuelText.text = currentLaserFuel.ToString();
+            if (currentLaserFuel == 0)
+            {
+               laserFuelText.color = emptyClipColor;
+            }
+            else
+            {
+                laserFuelText.color = filledClipColor;
+            }
+        }
+        else
+        {
+            laserUI.SetActive(false);
         }
 
 
