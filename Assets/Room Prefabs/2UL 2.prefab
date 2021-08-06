@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 4013477802574587237}
   - component: {fileID: 8794106771232005622}
   - component: {fileID: 3978773299615930754}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477802574587242
 Transform:
@@ -574,12 +574,12 @@ GameObject:
   - component: {fileID: 4013477802608916753}
   - component: {fileID: 4013477802608916758}
   - component: {fileID: 4013477802608916759}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477802608916756
 Transform:
@@ -871,7 +871,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477802608920561
@@ -889,12 +889,12 @@ GameObject:
   - component: {fileID: 4013477802608920563}
   - component: {fileID: 7793487112915277098}
   - component: {fileID: 2621982917289504901}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477802608920560
 Transform:
@@ -1448,12 +1448,12 @@ GameObject:
   - component: {fileID: 4013477802706441226}
   - component: {fileID: 4013477802706441227}
   - component: {fileID: 4013477802706441224}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477802706441225
 Transform:
@@ -1745,7 +1745,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477802995365136
@@ -1761,12 +1761,12 @@ GameObject:
   - component: {fileID: 4013477802995365132}
   - component: {fileID: 4013477802995365133}
   - component: {fileID: 4013477802995365138}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477802995365139
 Transform:
@@ -2058,7 +2058,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477803301527307
@@ -2074,12 +2074,12 @@ GameObject:
   - component: {fileID: 4013477803301527303}
   - component: {fileID: 4013477803301527300}
   - component: {fileID: 4013477803301527301}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477803301527306
 Transform:
@@ -2371,7 +2371,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477803609077613
@@ -2387,12 +2387,12 @@ GameObject:
   - component: {fileID: 4013477803609077609}
   - component: {fileID: 4013477803609077614}
   - component: {fileID: 4013477803609077615}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477803609077612
 Transform:
@@ -2684,7 +2684,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477803671919389
@@ -2700,12 +2700,12 @@ GameObject:
   - component: {fileID: 4013477803671919385}
   - component: {fileID: 4013477803671919390}
   - component: {fileID: 4013477803671919391}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477803671919388
 Transform:
@@ -2997,7 +2997,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477804023296295
@@ -3013,12 +3013,12 @@ GameObject:
   - component: {fileID: 4013477804023296291}
   - component: {fileID: 4013477804023296288}
   - component: {fileID: 4013477804023296289}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477804023296294
 Transform:
@@ -3310,7 +3310,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477804267822307
@@ -3322,12 +3322,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4013477804267822306}
-  m_Layer: 0
-  m_Name: Room 2 Doors DR 2
+  m_Layer: 10
+  m_Name: 2UL 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477804267822306
 Transform:
@@ -3367,12 +3367,12 @@ GameObject:
   - component: {fileID: 4013477804353371647}
   - component: {fileID: 4013477804353371644}
   - component: {fileID: 4013477804353371645}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477804353371586
 Transform:
@@ -3664,7 +3664,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4013477804420678350
@@ -3680,12 +3680,12 @@ GameObject:
   - component: {fileID: 4013477804420678346}
   - component: {fileID: 4013477804420678347}
   - component: {fileID: 4013477804420678344}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4013477804420678345
 Transform:
@@ -3977,6 +3977,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}

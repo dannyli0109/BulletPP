@@ -111,6 +111,7 @@ public class AugmentManager : MonoBehaviour
     }
     public void LaserSight()
     {
+        Physics.SyncTransforms();
         Vector3 lookDir = gunPoint.forward * 100;
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
