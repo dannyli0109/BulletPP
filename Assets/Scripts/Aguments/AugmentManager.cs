@@ -123,7 +123,7 @@ public class AugmentManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameManager.current.gameState != GameState.Game) return;
+        if (GameManager.current.gameState == GameState.Shop) return;
         //OnUpdate(augmentDatas[0].Code);
         for (int i = 0; i < character.augs.Count; i++)
         {
