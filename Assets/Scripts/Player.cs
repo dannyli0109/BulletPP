@@ -290,7 +290,7 @@ public class Player : Character
                 currentLaserFuel <= 0
             )
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !reloading)
             {
                 reloading = !reloading; // swap status
                 currentReloadTime = 0;
