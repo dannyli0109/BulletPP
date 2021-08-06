@@ -100,6 +100,7 @@ public class MapGeneration : MonoBehaviour
     #region Encounter
     public GameObject Enemy;
     public float yEnemyHeight;
+    public Vector2 enemyRandOffset;
 
    public bool InCombat;
 
@@ -118,7 +119,6 @@ public class MapGeneration : MonoBehaviour
         if (InCombat)
         {
         UpdateEncounter();
-
         }
     }
 
@@ -346,8 +346,6 @@ public class MapGeneration : MonoBehaviour
         if (holdingID < 0)
         {
             // no hit
-
-
             AllRooms.Add(ToAdd);
             return true;
         }
@@ -396,30 +394,33 @@ public class MapGeneration : MonoBehaviour
                         AllRooms[k].upperRoomRef = i;
                     }
                 }
-
             }
         }
     }
 
     public void CheckToStartEncounter()
     {
-        if (!AllRooms[currentRoomInside].Completed&&currentRoomInside !=0)
+        if (!AllRooms[currentRoomInside].Completed && currentRoomInside != 0)
         {
+            int holdingRand = UnityEngine.Random.Range(1, 4);
+            if (currentRoomInside <= 4)
+            {
+                holdingRand = 1;
+            }
             // lock doors
             Debug.Log("encounter start");
-            Vector3 placement = new Vector3(AllRooms[currentRoomInside].offsetPos.x *roomMultiplyValue.x+ AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
+            Vector3 placement = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
             InCombat = true;
 
-            int holdingRand = UnityEngine.Random.Range(1, 4);
-            for(int i=0; i< holdingRand; i++)
+            for (int i = 0; i < holdingRand; i++)
             {
-            GameObject holdingGameObject= Instantiate(Enemy,placement, Enemy.transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().target = playerTarget;
-            holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
-            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+                GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
+                holdingGameObject.GetComponent<Enemy>().target = playerTarget;
+                holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
+                EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                 GameManager.current.gameState = GameState.Game;
-
             }
+
         }
     }
 

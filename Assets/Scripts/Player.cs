@@ -119,9 +119,7 @@ public class Player : Character
         if(movement.x!=0|| movement.y != 0)
         {
             lastMovementDirection = movement;
-
         }
-
     }
 
     void HandleDashing()
