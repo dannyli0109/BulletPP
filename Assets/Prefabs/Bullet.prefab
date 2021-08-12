@@ -78,9 +78,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  TimesBounced: 0
-  bulletHitParticlePrefab: {fileID: 1504079761642245970, guid: 4b953c9d8a6754a43a6adb40e06917bd, type: 3}
-  bulletTip: {fileID: 8275000578206843829}
+  hitParticlePrefab: {fileID: 1504079761642245970, guid: 4b953c9d8a6754a43a6adb40e06917bd, type: 3}
+  ammoTip: {fileID: 8275000578206843829}
+  timesBounced: 0
 --- !u!65 &5606954125939262168
 BoxCollider:
   m_ObjectHideFlags: 0

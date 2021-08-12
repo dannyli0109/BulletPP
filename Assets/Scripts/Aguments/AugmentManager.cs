@@ -129,9 +129,9 @@ public class AugmentManager : MonoBehaviour
     {
         if (GameManager.current.gameState == GameState.Shop) return;
         //OnUpdate(augmentDatas[0].Code);
-        for (int i = 0; i < character.augs.Count; i++)
+        for (int i = 0; i < character.augments.Count; i++)
         {
-            OnUpdate(character.augs[i].id);
+            OnUpdate(character.augments[i].id);
         }
     }
 }

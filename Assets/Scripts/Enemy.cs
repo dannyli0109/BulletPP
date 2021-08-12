@@ -11,45 +11,44 @@ public class Enemy : Character
     public float smoothingRange;
 
     public float speed;
-    public float DesiredFurthestRange;
-    public float FavouredRange;
-    public float ClosestRange;
+    public float desiredFurthestRange;
+    public float favouredRange;
+    public float closestRange;
 
     public float minWaitingTime;
     public float maxWaitingTime;
     public float currentWaitingTime;
 
-    public float NextDistSegmentLength;
-    public float WalkingOffsetRadius;
-    public float WanderingOffsetRadius;
+    public float nextDistSegmentLength;
+    public float walkingOffsetRadius;
+    public float wanderingOffsetRadius;
 
     public float wallAvoidAmount;
     public bool touchingWall;
-    public float enemAvoidAmount;
+    public float enemyAvoidAmount;
 
-    public float FullStopMovingTime;
+    public float fullStopMovingTime;
     public float currentStopMovingTime;
 
     #endregion
 
     #region Shooting Decisions
-    public float MaxCreationShootingWaitTime;
-    public float MinCreationShootingWaitTime;
+    public float maxCreationShootingWaitTime;
+    public float minCreationShootingWaitTime;
     public float currentShootingWaitTime;
     public int currentVolleySize;
-    public bool reloading;
     public float currentReloadTime;
     public float currentTimeBetweenVolley;
 
-    public int ClipSizeForForcedShot;
+    public int clipSizeForForcedShot;
 
-    public float UpperShootingRange; //dist from the target where they will stop shooting
+    public float upperShootingRange; //dist from the target where they will stop shooting
     public float lowerShootingRange; // dist from target closer where they will stop shooting
 
-    public int MaxVolleySize = 1; // how many bullets should be shot at once
-    public int MinVolleySize = 1;
+    public int maxVolleySize = 1; // how many bullets should be shot at once
+    public int minVolleySize = 1;
 
-    public float TimeBetweenVolley;
+    public float timeBetweenVolley;
     public float bulletReloadTime;
 
     public int currentBulletClipSize;
@@ -65,7 +64,7 @@ public class Enemy : Character
         base.Start();
         GetNewDestination(false);
         currentBulletClipSize = (int)bulletStats.maxClip.value;
-        currentShootingWaitTime = UnityEngine.Random.Range(MinCreationShootingWaitTime,MaxCreationShootingWaitTime);
+        currentShootingWaitTime = UnityEngine.Random.Range(minCreationShootingWaitTime,maxCreationShootingWaitTime);
     }
 
     void GetNewDestination(bool Direct)
@@ -75,36 +74,36 @@ public class Enemy : Character
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
         float distFromFinal = Vector3.Distance(this.transform.position, finalDestination);
 
-        if (distFromTarget < DesiredFurthestRange && distFromTarget > ClosestRange)
+        if (distFromTarget < desiredFurthestRange && distFromTarget > closestRange)
         {
             if (smoothingRange > distFromFinal)
             {
-                finalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * WanderingOffsetRadius;
+                finalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * wanderingOffsetRadius;
             }
 
         }
         else
         {
-           if(distFromTarget < ClosestRange)
+           if(distFromTarget < closestRange)
             {
-                finalDestination = target.transform.position - directionTowardstarget * FavouredRange;
+                finalDestination = target.transform.position - directionTowardstarget * favouredRange;
                 // FinalDestination = target.transform.position - new Vector3(directionTowardstarget.x, 0, directionTowardstarget.y) * FavouredRange;
                // Debug.Log(directionTowardstarget);
             }
             else
             {
-            finalDestination = target.transform.position - directionTowardstarget * FavouredRange; 
+            finalDestination = target.transform.position - directionTowardstarget * favouredRange; 
 
             }
 
         }
        
-        nextDestination = Vector3.MoveTowards(this.transform.position, finalDestination, NextDistSegmentLength);
+        nextDestination = Vector3.MoveTowards(this.transform.position, finalDestination, nextDistSegmentLength);
 
         if (!Direct)
         {
             Vector3 wanderingOffset = Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)));
-            nextDestination += wanderingOffset * WalkingOffsetRadius;
+            nextDestination += wanderingOffset * walkingOffsetRadius;
         }
     }
 
@@ -137,7 +136,7 @@ public class Enemy : Character
     public override void Update()
     {
         if (GameManager.current.gameState == GameState.Shop) return;
-        HandleMove();
+        HandleMovement();
         base.Update();
         if (!target) return;
       
@@ -149,11 +148,11 @@ public class Enemy : Character
 
     }
 
-    public void HandleMove()
+    public void HandleMovement()
     {
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
 
-        if (distFromTarget < ClosestRange|| distFromTarget> DesiredFurthestRange)
+        if (distFromTarget < closestRange|| distFromTarget> desiredFurthestRange)
         {
             GetNewDestination(true);
           
@@ -172,7 +171,7 @@ public class Enemy : Character
                 // if we're too close, make a new place to go
                 if(distFromNext< smoothingRange)
                 {
-                    if(distFromTarget < DesiredFurthestRange)
+                    if(distFromTarget < desiredFurthestRange)
                     {
                         // if close enough
                         currentWaitingTime =Random.Range(minWaitingTime, maxWaitingTime);
@@ -250,32 +249,32 @@ public class Enemy : Character
                 currentShootingWaitTime = timeBetweenShots.value;
                 if (currentVolleySize == 0)
                 {
-                    currentShootingWaitTime = TimeBetweenVolley;
+                    currentShootingWaitTime = timeBetweenVolley;
                 }
             }
             else
             {
-                if (currentBulletClipSize >= ClipSizeForForcedShot)
+                if (currentBulletClipSize >= clipSizeForForcedShot)
                 {
                     if (currentTimeBetweenVolley <= 0)
                     {
                         if (currentVolleySize == 0)
                         {
-                            currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1),0,(int)bulletStats.maxClip.value);
+                            currentVolleySize = Mathf.Clamp(Random.Range(minVolleySize, maxVolleySize+1),0,(int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
                             currentShootingWaitTime = timeBetweenShots.value;
                         }
                     }
                 }
                 // if have too many bullets fire or in right range
-                if (currentBulletClipSize>0 && distFromTarget > lowerShootingRange && distFromTarget < UpperShootingRange)
+                if (currentBulletClipSize>0 && distFromTarget > lowerShootingRange && distFromTarget < upperShootingRange)
                 {
                     if (currentTimeBetweenVolley <= 0)
                     {
                         if (currentVolleySize == 0)
                         {
                             // set how many bullets to fire, 
-                            currentVolleySize = Mathf.Clamp(Random.Range(MinVolleySize, MaxVolleySize+1), 0, (int)bulletStats.maxClip.value);
+                            currentVolleySize = Mathf.Clamp(Random.Range(minVolleySize, maxVolleySize+1), 0, (int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
                             currentShootingWaitTime = timeBetweenShots.value;
                         }
@@ -307,7 +306,7 @@ public class Enemy : Character
         {
             Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
             Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
-            nextDestination += directionAwayFromWall *enemAvoidAmount*Time.deltaTime;
+            nextDestination += directionAwayFromWall *enemyAvoidAmount*Time.deltaTime;
             currentWaitingTime = 0;
 
         }
@@ -320,9 +319,9 @@ public class Enemy : Character
             currentWaitingTime = 0;
             touchingWall = true;
             float dist = Vector3.Distance(this.transform.position, target.transform.position);
-            if (dist < ClosestRange)
+            if (dist < closestRange)
             {
-                currentStopMovingTime = FullStopMovingTime;
+                currentStopMovingTime = fullStopMovingTime;
                 Debug.Log(dist + " touching walls");
             }
         }

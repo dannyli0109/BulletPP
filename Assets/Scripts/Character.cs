@@ -56,33 +56,32 @@ public class Character : MonoBehaviour
     public BulletStats bulletStats;
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
-
-    public Animator animator;
-
     public CharacterStat reloadTime;
     public CharacterStat timeBetweenShots;
 
-    public float hp;
-    public float gold = 0;
-    public List<Aug> augs = new List<Aug>();
-    public float timeSinceFired;
-
-    public bool reloading;
-
+    public Animator animator;
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
     public GameObject rocketPrefab;
-
     public Transform bulletContainer;
+    public Transform gunTip;
 
+
+    public float hp;
+    public float gold = 0;
+    public List<Augment> augments = new List<Augment>();
+    public float timeSinceFired;
+
+    public bool reloading;
     public float currentImmunityFrame;
 
+    // TODO: Move this else where
     #region Lazer
 
     public LaserStats laserStats;
 
     public float currentLaserFuel;
-   protected bool laserSustained;
+    protected bool laserSustained;
     public float currentLazerLength;
     public float currentLazerWidth;
 
@@ -90,10 +89,9 @@ public class Character : MonoBehaviour
     public float lazerRecoilSpeed;
     public float lazerWidthGrowth;
 
-    public GameObject LazerCollider;
+    public GameObject laserCollider;
 
     public LineRenderer thisLineRenderer;
-    public Transform gunTip;
     #endregion
     public virtual void Start()
     {
@@ -173,27 +171,23 @@ public class Character : MonoBehaviour
 
         if (gold < cost)
         {
-            Debug.Log(-1);
             return -1;
         }
-        for (int i = 0; i < augs.Count; i++)
+        for (int i = 0; i < augments.Count; i++)
         {
-            if (augs[i].id == id)
+            if (augments[i].id == id)
             {
-                if (augs[i].count >= 9)
+                if (augments[i].count >= 9)
                 {
-                    // Debug.Log(-1);
                     return -1;
                 }
-                augs[i].count += 1;
+                augments[i].count += 1;
                 gold -= cost;
-                // Debug.Log(1);
                 return 1;
             }
         }
-        augs.Add(new Aug() { id = id, count = 1 });
+        augments.Add(new Augment() { id = id, count = 1 });
         gold -= cost;
-        // Debug.Log(2);
         return 2;
     }
 

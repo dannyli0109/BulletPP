@@ -13,7 +13,7 @@ public enum Direction
 }
 
 [Serializable]
-public class startingRoom
+public class StartingRoom
 {
     public bool needUpperRoom;
     public bool needLowerRoom;
@@ -26,27 +26,27 @@ public class MapGeneration : MonoBehaviour
 {
     public bool debug;
 
-    public List<Room> AllRooms;
+    public List<Room> rooms;
 
     int roomsBeingProcessed = 0;
-    public float WallReConnectChanceOfHundred;
+    public float wallReConnectChanceOfHundred;
 
     public Vector2 roomMultiplyValue;
 
     #region map generate
-    public List<float> ChanceOfHundredToSpawnNewRoom;
+    public List<float> chanceOfHundredToSpawnNewRoom;
     public List<int> atHowManyCurrentRooms;
-    public List<float> RoomSpawnChanceModifierBasedOnLength;
+    public List<float> roomSpawnChanceModifierBasedOnLength;
 
     #endregion
 
     #region roomPrefab
     public int startingRoomID;
-    public List<startingRoom> StartingRoomDoorLayouts;
-    public List<GameObject> StartingRooms;
-    public List<RoomPrefabInformation> StartingRoomPrefabInfo;
+    public List<StartingRoom> startingRoomDoorLayouts;
+    public List<GameObject> startingRooms;
+    public List<RoomPrefabInformation> startingRoomPrefabInfo;
 
-    public List<GameObject> AllDoorRoom;
+    public List<GameObject> allDoorRoom;
 
     public List<GameObject> upRoom;
     public List<GameObject> downRoom;
@@ -60,13 +60,13 @@ public class MapGeneration : MonoBehaviour
     public List<GameObject> downRightRoom;
     public List<GameObject> leftRightRoom;
 
-    public List<GameObject> UDLRoom;
-    public List<GameObject> UDRRoom;
-    public List<GameObject> ULRRoom;
-    public List<GameObject> DLRRoom;
+    public List<GameObject> upDownLeftRoom;
+    public List<GameObject> upDownRightRoom;
+    public List<GameObject> upLeftRightRoom;
+    public List<GameObject> downLeftRightRoom;
 
 
-    public List<RoomPrefabInformation> AllDoorRoomInfo;
+    public List<RoomPrefabInformation> allDoorRoomInfo;
 
     public List<RoomPrefabInformation> upRoomInfo;
     public List<RoomPrefabInformation> downRoomInfo;
@@ -80,10 +80,10 @@ public class MapGeneration : MonoBehaviour
     public List<RoomPrefabInformation> downRightRoomInfo;
     public List<RoomPrefabInformation> leftRightRoomInfo;
 
-    public List<RoomPrefabInformation> UDLRoomInfo;
-    public List<RoomPrefabInformation> UDRRoomInfo;
-    public List<RoomPrefabInformation> ULRRoomInfo;
-    public List<RoomPrefabInformation> DLRRoomInfo;
+    public List<RoomPrefabInformation> upDownLeftRoomInfo;
+    public List<RoomPrefabInformation> upDownRightRoomInfo;
+    public List<RoomPrefabInformation> upLeftRightRoomInfo;
+    public List<RoomPrefabInformation> downLeftRightRoomInfo;
 
     #endregion
 
@@ -103,7 +103,7 @@ public class MapGeneration : MonoBehaviour
     public float yEnemyHeight;
     public Vector2 enemyRandOffset;
 
-   public bool InCombat;
+    public bool inCombat;
 
     public List< Enemy> EnemiesInEncounter;
     #endregion
@@ -129,7 +129,7 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
-        if (InCombat)
+        if (inCombat)
         {
         UpdateEncounter();
         }
@@ -137,75 +137,75 @@ public class MapGeneration : MonoBehaviour
 
     public void GenerateMap()
     {
-        startingRoomID = UnityEngine.Random.Range(0, StartingRooms.Count);
-        AllRooms = new List<Room>();
-        AllRooms.Add(new Room(new Vector2(0, 0),0, -1, -1, -1, -1));
+        startingRoomID = UnityEngine.Random.Range(0, startingRooms.Count);
+        rooms = new List<Room>();
+        rooms.Add(new Room(new Vector2(0, 0),0, -1, -1, -1, -1));
 
-        while (roomsBeingProcessed < AllRooms.Count)
+        while (roomsBeingProcessed < rooms.Count)
         {
             //   Debug.Log(roomsBeingProcessed);
             if (roomsBeingProcessed == 0)
             {
-                if (StartingRoomDoorLayouts[startingRoomID].needUpperRoom )
+                if (startingRoomDoorLayouts[startingRoomID].needUpperRoom )
                 {
-                    AllRooms.Add(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(0, 1),AllRooms[roomsBeingProcessed].Length+1, -1, roomsBeingProcessed, -1, -1));
-                    AllRooms[roomsBeingProcessed].upperRoomRef = AllRooms.Count - 1;
+                    rooms.Add(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(0, 1),rooms[roomsBeingProcessed].length+1, -1, roomsBeingProcessed, -1, -1));
+                    rooms[roomsBeingProcessed].upperRoomRef = rooms.Count - 1;
                 }
-                if (StartingRoomDoorLayouts[startingRoomID].needLowerRoom)
+                if (startingRoomDoorLayouts[startingRoomID].needLowerRoom)
                 {
-                    AllRooms.Add(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(0, -1), AllRooms[roomsBeingProcessed].Length + 1, roomsBeingProcessed, -1, -1, -1));
-                    AllRooms[roomsBeingProcessed].lowerRoomRef = AllRooms.Count - 1;
+                    rooms.Add(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(0, -1), rooms[roomsBeingProcessed].length + 1, roomsBeingProcessed, -1, -1, -1));
+                    rooms[roomsBeingProcessed].lowerRoomRef = rooms.Count - 1;
                 }
-                if (StartingRoomDoorLayouts[startingRoomID].needLeftRoom)
+                if (startingRoomDoorLayouts[startingRoomID].needLeftRoom)
                 {
-                    AllRooms.Add(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(-1, 0), AllRooms[roomsBeingProcessed].Length + 1, -1, -1, -1, roomsBeingProcessed));
-                    AllRooms[roomsBeingProcessed].leftRoomRef = AllRooms.Count - 1;
+                    rooms.Add(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(-1, 0), rooms[roomsBeingProcessed].length + 1, -1, -1, -1, roomsBeingProcessed));
+                    rooms[roomsBeingProcessed].leftRoomRef = rooms.Count - 1;
                 }
-                if (StartingRoomDoorLayouts[startingRoomID].needRightRoom)
+                if (startingRoomDoorLayouts[startingRoomID].needRightRoom)
                 {
-                    AllRooms.Add(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(1, 0), AllRooms[roomsBeingProcessed].Length + 1, -1, -1, roomsBeingProcessed, -1));
-                    AllRooms[roomsBeingProcessed].rightRoomRef = AllRooms.Count - 1;
+                    rooms.Add(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(1, 0), rooms[roomsBeingProcessed].length + 1, -1, -1, roomsBeingProcessed, -1));
+                    rooms[roomsBeingProcessed].rightRoomRef = rooms.Count - 1;
                 }
             }
             else
             {
-                if (AllRooms[roomsBeingProcessed].upperRoomRef == -1)
+                if (rooms[roomsBeingProcessed].upperRoomRef == -1)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(AllRooms[roomsBeingProcessed].Length))
+                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(rooms[roomsBeingProcessed].length))
                     {
-                        if (AddRoomOrWall(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(0, 1), AllRooms[roomsBeingProcessed].Length + 1, -1, roomsBeingProcessed, -1, -1)))
+                        if (AddRoomOrWall(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(0, 1), rooms[roomsBeingProcessed].length + 1, -1, roomsBeingProcessed, -1, -1)))
                         {
-                            AllRooms[roomsBeingProcessed].upperRoomRef = AllRooms.Count - 1;
+                            rooms[roomsBeingProcessed].upperRoomRef = rooms.Count - 1;
                         }
                     }
                 }
-                if (AllRooms[roomsBeingProcessed].lowerRoomRef == -1)
+                if (rooms[roomsBeingProcessed].lowerRoomRef == -1)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(AllRooms[roomsBeingProcessed].Length))
+                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(rooms[roomsBeingProcessed].length))
                     {
-                        if (AddRoomOrWall(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(0, -1), AllRooms[roomsBeingProcessed].Length + 1, roomsBeingProcessed, -1, -1, -1)))
+                        if (AddRoomOrWall(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(0, -1), rooms[roomsBeingProcessed].length + 1, roomsBeingProcessed, -1, -1, -1)))
                         {
-                            AllRooms[roomsBeingProcessed].lowerRoomRef = AllRooms.Count - 1;
+                            rooms[roomsBeingProcessed].lowerRoomRef = rooms.Count - 1;
                         }
                     }
                 }
-                if (AllRooms[roomsBeingProcessed].leftRoomRef == -1)
+                if (rooms[roomsBeingProcessed].leftRoomRef == -1)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(AllRooms[roomsBeingProcessed].Length))
+                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(rooms[roomsBeingProcessed].length))
                     {
-                        if (AddRoomOrWall(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(-1, 0), AllRooms[roomsBeingProcessed].Length + 1, -1, -1, -1, roomsBeingProcessed)))
+                        if (AddRoomOrWall(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(-1, 0), rooms[roomsBeingProcessed].length + 1, -1, -1, -1, roomsBeingProcessed)))
                         {
-                            AllRooms[roomsBeingProcessed].leftRoomRef = AllRooms.Count - 1;
+                            rooms[roomsBeingProcessed].leftRoomRef = rooms.Count - 1;
                         }
                     }
                 }
-                if (AllRooms[roomsBeingProcessed].rightRoomRef == -1)
+                if (rooms[roomsBeingProcessed].rightRoomRef == -1)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(AllRooms[roomsBeingProcessed].Length))
+                    if (UnityEngine.Random.Range(0, 100) < getRoomSpawnChance(rooms[roomsBeingProcessed].length))
                     {
-                        if (AddRoomOrWall(new Room(AllRooms[roomsBeingProcessed].offsetPos + new Vector2(1, 0), AllRooms[roomsBeingProcessed].Length + 1, -1, -1, roomsBeingProcessed, -1)))
+                        if (AddRoomOrWall(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(1, 0), rooms[roomsBeingProcessed].length + 1, -1, -1, roomsBeingProcessed, -1)))
                         {
-                            AllRooms[roomsBeingProcessed].rightRoomRef = AllRooms.Count - 1;
+                            rooms[roomsBeingProcessed].rightRoomRef = rooms.Count - 1;
                         }
                     }
                 }
@@ -214,126 +214,126 @@ public class MapGeneration : MonoBehaviour
         }
         reconnectWalls();
        // Debug.Log(AllRooms.Count);
-        for (int i = 0; i < AllRooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
             if (i == 0)
             {
-                Instantiate(StartingRooms[startingRoomID], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), StartingRooms[startingRoomID].transform.rotation);
-                AllRooms[i].thisPrefabInfo = StartingRoomPrefabInfo[startingRoomID];
+                Instantiate(startingRooms[startingRoomID], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), startingRooms[startingRoomID].transform.rotation);
+                rooms[i].thisPrefabInfo = startingRoomPrefabInfo[startingRoomID];
             }
             else
             {
                // Debug.Log(i + "  |  " + AllRooms[i].offsetPos + " | " + AllRooms[i].Length + " | " + AllRooms[i].upperRoomRef + " | " + AllRooms[i].lowerRoomRef + " | " + AllRooms[i].leftRoomRef + " | " + AllRooms[i].rightRoomRef);
-                if (AllRooms[i].upperRoomRef != -1)
+                if (rooms[i].upperRoomRef != -1)
                 {
-                    if (AllRooms[i].lowerRoomRef != -1)
+                    if (rooms[i].lowerRoomRef != -1)
                     {
-                        if (AllRooms[i].leftRoomRef != -1)
+                        if (rooms[i].leftRoomRef != -1)
                         {
-                            if (AllRooms[i].rightRoomRef != -1)
+                            if (rooms[i].rightRoomRef != -1)
                             {
-                                int holding = UnityEngine.Random.Range(0, AllDoorRoom.Count);
-                                Instantiate(AllDoorRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), AllDoorRoom[holding].transform.rotation);
-                                AllRooms[i].thisPrefabInfo = AllDoorRoomInfo[holding];
+                                int holding = UnityEngine.Random.Range(0, allDoorRoom.Count);
+                                Instantiate(allDoorRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), allDoorRoom[holding].transform.rotation);
+                                rooms[i].thisPrefabInfo = allDoorRoomInfo[holding];
                             }
                             else
                             {
-                                int holding = UnityEngine.Random.Range(0, UDLRoom.Count);
-                                Instantiate(UDLRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), UDLRoom[holding].transform.rotation); ;
-                                AllRooms[i].thisPrefabInfo = UDLRoomInfo[holding];
+                                int holding = UnityEngine.Random.Range(0, upDownLeftRoom.Count);
+                                Instantiate(upDownLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownLeftRoom[holding].transform.rotation); ;
+                                rooms[i].thisPrefabInfo = upDownLeftRoomInfo[holding];
                             }
                         }
-                        else if (AllRooms[i].rightRoomRef != -1)
+                        else if (rooms[i].rightRoomRef != -1)
                         {
-                            int holding = UnityEngine.Random.Range(0, UDRRoom.Count);
-                            Instantiate(UDRRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), UDRRoom[holding].transform.rotation);
-                            AllRooms[i].thisPrefabInfo = UDRRoomInfo[holding];
+                            int holding = UnityEngine.Random.Range(0, upDownRightRoom.Count);
+                            Instantiate(upDownRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownRightRoom[holding].transform.rotation);
+                            rooms[i].thisPrefabInfo = upDownRightRoomInfo[holding];
                         }
                         else
                         {
                             int holding = UnityEngine.Random.Range(0, upDownRoom.Count);
-                            Instantiate(upDownRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), upDownRoom[holding].transform.rotation);
-                            AllRooms[i].thisPrefabInfo = upDownRoomInfo[holding];
+                            Instantiate(upDownRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownRoom[holding].transform.rotation);
+                            rooms[i].thisPrefabInfo = upDownRoomInfo[holding];
                         }
                     }
-                    else if (AllRooms[i].leftRoomRef != -1)
+                    else if (rooms[i].leftRoomRef != -1)
                     {
-                        if (AllRooms[i].rightRoomRef != -1)
+                        if (rooms[i].rightRoomRef != -1)
                         {
-                            int holding = UnityEngine.Random.Range(0, ULRRoom.Count);
-                            Instantiate(ULRRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), ULRRoom[holding].transform.rotation);
-                            AllRooms[i].thisPrefabInfo = ULRRoomInfo[holding];
+                            int holding = UnityEngine.Random.Range(0, upLeftRightRoom.Count);
+                            Instantiate(upLeftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upLeftRightRoom[holding].transform.rotation);
+                            rooms[i].thisPrefabInfo = upLeftRightRoomInfo[holding];
                         }
                         else
                         {
                             int holding = UnityEngine.Random.Range(0, upLeftRoom.Count);
-                            Instantiate(upLeftRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), upLeftRoom[holding].transform.rotation);
-                            AllRooms[i].thisPrefabInfo = upLeftRoomInfo[holding];
+                            Instantiate(upLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upLeftRoom[holding].transform.rotation);
+                            rooms[i].thisPrefabInfo = upLeftRoomInfo[holding];
                         }
                     }
-                    else if (AllRooms[i].rightRoomRef != -1)
+                    else if (rooms[i].rightRoomRef != -1)
                     {
                         int holding = UnityEngine.Random.Range(0, upRightRoom.Count);
-                        Instantiate(upRightRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), upRightRoom[holding].transform.rotation);
-                        AllRooms[i].thisPrefabInfo = upRightRoomInfo[holding];
+                        Instantiate(upRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upRightRoom[holding].transform.rotation);
+                        rooms[i].thisPrefabInfo = upRightRoomInfo[holding];
                     }
                     else
                     {
                         int holding = UnityEngine.Random.Range(0, upRoom.Count);
-                        Instantiate(upRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), upRoom[holding].transform.rotation);
-                        AllRooms[i].thisPrefabInfo = upRoomInfo[holding];
+                        Instantiate(upRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upRoom[holding].transform.rotation);
+                        rooms[i].thisPrefabInfo = upRoomInfo[holding];
                     }
                 }
-                else if (AllRooms[i].lowerRoomRef != -1)
+                else if (rooms[i].lowerRoomRef != -1)
                 {
-                    if (AllRooms[i].leftRoomRef != -1)
+                    if (rooms[i].leftRoomRef != -1)
                     {
-                        if (AllRooms[i].rightRoomRef != -1)
+                        if (rooms[i].rightRoomRef != -1)
                         {
-                            int holding = UnityEngine.Random.Range(0, DLRRoom.Count);
-                            Instantiate(DLRRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), DLRRoom[holding].transform.rotation);
-                            AllRooms[i].thisPrefabInfo = DLRRoomInfo[holding];
+                            int holding = UnityEngine.Random.Range(0, downLeftRightRoom.Count);
+                            Instantiate(downLeftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downLeftRightRoom[holding].transform.rotation);
+                            rooms[i].thisPrefabInfo = downLeftRightRoomInfo[holding];
                         }
                         else
                         {
                             int holding = UnityEngine.Random.Range(0, downLeftRoom.Count);
-                            Instantiate(downLeftRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), downLeftRoom[holding].transform.rotation);
-                            AllRooms[i].thisPrefabInfo = downLeftRoomInfo[holding];
+                            Instantiate(downLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downLeftRoom[holding].transform.rotation);
+                            rooms[i].thisPrefabInfo = downLeftRoomInfo[holding];
                         }
                     }
-                    else if (AllRooms[i].rightRoomRef != -1)
+                    else if (rooms[i].rightRoomRef != -1)
                     {
                         int holding = UnityEngine.Random.Range(0, downRightRoom.Count);
-                        Instantiate(downRightRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), downRightRoom[holding].transform.rotation);
-                        AllRooms[i].thisPrefabInfo = downRightRoomInfo[holding];
+                        Instantiate(downRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downRightRoom[holding].transform.rotation);
+                        rooms[i].thisPrefabInfo = downRightRoomInfo[holding];
                     }
                     else
                     {
                         int holding = UnityEngine.Random.Range(0, downRoom.Count);
-                        Instantiate(downRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), downRoom[holding].transform.rotation);
-                        AllRooms[i].thisPrefabInfo = downRoomInfo[holding];
+                        Instantiate(downRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downRoom[holding].transform.rotation);
+                        rooms[i].thisPrefabInfo = downRoomInfo[holding];
                     }
                 }
-                else if (AllRooms[i].leftRoomRef != -1)
+                else if (rooms[i].leftRoomRef != -1)
                 {
-                    if (AllRooms[i].rightRoomRef != -1)
+                    if (rooms[i].rightRoomRef != -1)
                     {
                         int holding = UnityEngine.Random.Range(0, leftRightRoom.Count);
-                        Instantiate(leftRightRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), leftRightRoom[holding].transform.rotation);
-                        AllRooms[i].thisPrefabInfo = leftRightRoomInfo[holding];
+                        Instantiate(leftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), leftRightRoom[holding].transform.rotation);
+                        rooms[i].thisPrefabInfo = leftRightRoomInfo[holding];
                     }
                     else
                     {
                         int holding = UnityEngine.Random.Range(0, leftRoom.Count);
-                        Instantiate(leftRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), leftRoom[holding].transform.rotation);
-                        AllRooms[i].thisPrefabInfo = leftRoomInfo[holding];
+                        Instantiate(leftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), leftRoom[holding].transform.rotation);
+                        rooms[i].thisPrefabInfo = leftRoomInfo[holding];
                     }
                 }
                 else
                 {
                     int holding = UnityEngine.Random.Range(0, rightRoom.Count);
-                    Instantiate(rightRoom[holding], new Vector3(roomMultiplyValue.x * AllRooms[i].offsetPos.x, 0, roomMultiplyValue.y * AllRooms[i].offsetPos.y), rightRoom[holding].transform.rotation);
-                    AllRooms[i].thisPrefabInfo = rightRoomInfo[holding];
+                    Instantiate(rightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), rightRoom[holding].transform.rotation);
+                    rooms[i].thisPrefabInfo = rightRoomInfo[holding];
                 }
             }
         }
@@ -341,16 +341,16 @@ public class MapGeneration : MonoBehaviour
         // if first room do all
         // else have chance to add more rooms
         // process each room until they don't add more 
-        AllRooms[0].Completed = true;
+        rooms[0].completed = true;
     }
 
     public bool AddRoomOrWall(Room ToAdd)
     {
         // check if empty, if no have a chance to make a wall between them
         int holdingID = -1;
-        for (int i = 0; i < AllRooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            if (AllRooms[i].offsetPos == ToAdd.offsetPos)
+            if (rooms[i].offsetPos == ToAdd.offsetPos)
             {
                 holdingID = i;
             }
@@ -359,7 +359,7 @@ public class MapGeneration : MonoBehaviour
         if (holdingID < 0)
         {
             // no hit
-            AllRooms.Add(ToAdd);
+            rooms.Add(ToAdd);
             return true;
         }
 
@@ -368,43 +368,43 @@ public class MapGeneration : MonoBehaviour
 
     public void reconnectWalls()
     {
-        for (int i = 0; i < AllRooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            for (int k = 0; k < AllRooms.Count; k++)
+            for (int k = 0; k < rooms.Count; k++)
             {
-                if (new Vector2(-1, 0) + AllRooms[i].offsetPos == AllRooms[k].offsetPos)
+                if (new Vector2(-1, 0) + rooms[i].offsetPos == rooms[k].offsetPos)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < WallReConnectChanceOfHundred)
+                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
                     {
-                        AllRooms[i].leftRoomRef = k;
-                        AllRooms[k].rightRoomRef = i;
+                        rooms[i].leftRoomRef = k;
+                        rooms[k].rightRoomRef = i;
                     }
                 }
 
-                if (new Vector2(1, 0) + AllRooms[i].offsetPos == AllRooms[k].offsetPos)
+                if (new Vector2(1, 0) + rooms[i].offsetPos == rooms[k].offsetPos)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < WallReConnectChanceOfHundred)
+                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
                     {
-                        AllRooms[i].rightRoomRef = k;
-                        AllRooms[k].leftRoomRef = i;
+                        rooms[i].rightRoomRef = k;
+                        rooms[k].leftRoomRef = i;
                     }
                 }
 
-                if (new Vector2(0, 1) + AllRooms[i].offsetPos == AllRooms[k].offsetPos)
+                if (new Vector2(0, 1) + rooms[i].offsetPos == rooms[k].offsetPos)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < WallReConnectChanceOfHundred)
+                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
                     {
-                        AllRooms[i].upperRoomRef = k;
-                        AllRooms[k].lowerRoomRef = i;
+                        rooms[i].upperRoomRef = k;
+                        rooms[k].lowerRoomRef = i;
                     }
                 }
 
-                if (new Vector2(0, -1) + AllRooms[i].offsetPos == AllRooms[k].offsetPos)
+                if (new Vector2(0, -1) + rooms[i].offsetPos == rooms[k].offsetPos)
                 {
-                    if (UnityEngine.Random.Range(0, 100) < WallReConnectChanceOfHundred)
+                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
                     {
-                        AllRooms[i].lowerRoomRef = k;
-                        AllRooms[k].upperRoomRef = i;
+                        rooms[i].lowerRoomRef = k;
+                        rooms[k].upperRoomRef = i;
                     }
                 }
             }
@@ -413,7 +413,7 @@ public class MapGeneration : MonoBehaviour
 
     public void CheckToStartEncounter()
     {
-        if (!AllRooms[currentRoomInside].Completed && currentRoomInside != 0)
+        if (!rooms[currentRoomInside].completed && currentRoomInside != 0)
         {
             int holdingRand = UnityEngine.Random.Range(1, 4);
             if (currentRoomInside <= 4)
@@ -422,8 +422,8 @@ public class MapGeneration : MonoBehaviour
             }
             // lock doors
             Debug.Log("encounter start");
-            Vector3 placement = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
-            InCombat = true;
+            Vector3 placement = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
+            inCombat = true;
 
             for (int i = 0; i < holdingRand; i++)
             {
@@ -441,8 +441,8 @@ public class MapGeneration : MonoBehaviour
     {
         if (EnemiesInEncounter.Count <= 0)
         {
-            InCombat = false;
-            AllRooms[currentRoomInside].Completed = true;
+            inCombat = false;
+            rooms[currentRoomInside].completed = true;
             CheckIfMapCompleted();
             refreshMiniMapUI();
             if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
@@ -470,9 +470,9 @@ public class MapGeneration : MonoBehaviour
 
     void CheckIfMapCompleted()
     {
-        for(int i =0; i < AllRooms.Count; i++)
+        for(int i =0; i < rooms.Count; i++)
         {
-            if (!AllRooms[i].Completed)
+            if (!rooms[i].completed)
             {
                 Debug.Log(i + " room");
                 return;
@@ -485,36 +485,36 @@ public class MapGeneration : MonoBehaviour
 
     public void ReceiveDoorInput(Direction directionInput)
     {
-        if (!InCombat)
+        if (!inCombat)
         {
         switch (directionInput)
         {
             case Direction.Upper:
-                currentRoomInside = AllRooms[currentRoomInside].upperRoomRef;
+                currentRoomInside = rooms[currentRoomInside].upperRoomRef;
                 needToSetPos = true;
-                desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.y);
+                desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.y);
                 playerTarget.transform.position = desiredSetPos;
                 if (debug)
                 {
-                    Debug.Log("Moving up " + desiredSetPos + "  " + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet);
+                    Debug.Log("Moving up " + desiredSetPos + "  " + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet);
                 }
                 break;
             case Direction.Lower:
-                currentRoomInside = AllRooms[currentRoomInside].lowerRoomRef;
+                currentRoomInside = rooms[currentRoomInside].lowerRoomRef;
                 needToSetPos = true;
-                desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.y);
+                desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.y);
                 playerTarget.transform.position = desiredSetPos;
                 break;
             case Direction.Left:
-                currentRoomInside = AllRooms[currentRoomInside].leftRoomRef;
+                currentRoomInside = rooms[currentRoomInside].leftRoomRef;
                 needToSetPos = true;
-                desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.y);
+                desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.y);
                 playerTarget.transform.position = desiredSetPos;
                 break;
             case Direction.Right:
-                currentRoomInside = AllRooms[currentRoomInside].rightRoomRef;
+                currentRoomInside = rooms[currentRoomInside].rightRoomRef;
                 needToSetPos = true;
-                desiredSetPos = new Vector3(AllRooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + AllRooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.x, playerTarget.transform.position.y, AllRooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + AllRooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.y);
+                desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.y);
                 playerTarget.transform.position = desiredSetPos;
                 break;
         }
@@ -530,10 +530,10 @@ public class MapGeneration : MonoBehaviour
         float holdingVal = 0;
         for (int i = 0; i < atHowManyCurrentRooms.Count; i++)
         {
-            if (AllRooms.Count <= atHowManyCurrentRooms[i])
+            if (rooms.Count <= atHowManyCurrentRooms[i])
             {
               //  Debug.Log(ChanceOfHundredToSpawnNewRoom[i]);
-                holdingVal += ChanceOfHundredToSpawnNewRoom[i];
+                holdingVal += chanceOfHundredToSpawnNewRoom[i];
             }
         }
         return holdingVal;
@@ -549,7 +549,7 @@ public class MapGeneration : MonoBehaviour
         int holdingPos = 1;
         miniMapRooms[0].SetActive(true);
         miniMapRooms[0].transform.position = miniMapStartingPos;
-        if (AllRooms[currentRoomInside].Completed)
+        if (rooms[currentRoomInside].completed)
         {
             miniMapRooms[0].GetComponent<Image>().color = CurrentMiniMapRoomColour;
         }
@@ -558,11 +558,11 @@ public class MapGeneration : MonoBehaviour
             miniMapRooms[0].GetComponent<Image>().color = DefaultMiniMapRoomColour;
         }
 
-        if (AllRooms[currentRoomInside].upperRoomRef > -1)
+        if (rooms[currentRoomInside].upperRoomRef > -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
             miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, 1) * miniMapRoomMultiplier;
-            if (AllRooms[AllRooms[currentRoomInside].upperRoomRef].Completed)
+            if (rooms[rooms[currentRoomInside].upperRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
             }
@@ -573,11 +573,11 @@ public class MapGeneration : MonoBehaviour
             holdingPos++;
         }
 
-        if (AllRooms[currentRoomInside].lowerRoomRef> -1)
+        if (rooms[currentRoomInside].lowerRoomRef> -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
             miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, -1) * miniMapRoomMultiplier;
-            if (AllRooms[AllRooms[currentRoomInside].lowerRoomRef].Completed)
+            if (rooms[rooms[currentRoomInside].lowerRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
             }
@@ -588,11 +588,11 @@ public class MapGeneration : MonoBehaviour
             holdingPos++;
         }
 
-        if (AllRooms[currentRoomInside].leftRoomRef > -1)
+        if (rooms[currentRoomInside].leftRoomRef > -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
             miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(-1, 0) * miniMapRoomMultiplier;
-            if (AllRooms[AllRooms[currentRoomInside].leftRoomRef].Completed)
+            if (rooms[rooms[currentRoomInside].leftRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
             }
@@ -603,11 +603,11 @@ public class MapGeneration : MonoBehaviour
             holdingPos++;
         }
 
-        if (AllRooms[currentRoomInside].rightRoomRef > -1)
+        if (rooms[currentRoomInside].rightRoomRef > -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
             miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(1, 0) * miniMapRoomMultiplier;
-            if (AllRooms[AllRooms[currentRoomInside].rightRoomRef].Completed)
+            if (rooms[rooms[currentRoomInside].rightRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
             }

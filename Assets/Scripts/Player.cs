@@ -5,6 +5,10 @@ using TMPro;
 
 public class Player : Character
 {
+    // TODO: this will need to be a singleton reference
+    public BTSManager thisBTSManager;
+    public CharacterController characterController;
+
     #region movementStats
     public CharacterStat dashAmount;
     public CharacterStat timeBetweenDashs;
@@ -28,14 +32,10 @@ public class Player : Character
     public int currentRocketClip;
     #endregion
 
-    public BTSManager thisBTSManager;
-
-    public CharacterController characterController;
-
     float angle;
     Vector2 movement;
 
-    public MapGeneration mapGenerationScript;
+
 
     public override void Start()
     {
@@ -176,8 +176,8 @@ public class Player : Character
         thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
         thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
 
-        LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
-        LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
+        laserCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
+        laserCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
         currentLaserFuel = Mathf.Clamp(currentLaserFuel - Time.deltaTime, 0, laserStats.maxClip.value);
         }
     }
@@ -194,8 +194,8 @@ public class Player : Character
             thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
             thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
 
-            LazerCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
-            LazerCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
+            laserCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
+            laserCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
         }
         laserSustained = false;
     }
@@ -255,7 +255,14 @@ public class Player : Character
     void MoveCharacter()
     {
         Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
-        characterController.Move(new Vector3(movement.x * moveSpeed.value * Time.fixedDeltaTime, 0, movement.y * moveSpeed.value * Time.fixedDeltaTime));
+        characterController.Move(
+            new Vector3(
+                movement.x * moveSpeed.value * Time.fixedDeltaTime, 
+                0, 
+                movement.y * moveSpeed.value * Time.fixedDeltaTime
+                )
+            );
+
     }
 
 

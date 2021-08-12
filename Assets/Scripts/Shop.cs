@@ -50,10 +50,10 @@ public class Shop : MonoBehaviour
         }
 
         AugmentManager augmentManager = AugmentManager.current;
-        for (int i = 0; i < player.augs.Count; i++)
+        for (int i = 0; i < player.augments.Count; i++)
         {
             GameObject augmentUI = Instantiate(augmentUIPrefab);
-            augmentUI.GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augs[i].id].Name + ": " +  player.augs[i].count;
+            augmentUI.GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augments[i].id].Name + ": " +  player.augments[i].count;
             augmentUI.transform.SetParent(augmentListUIContainer.transform);
             augmentUI.transform.localScale = new Vector3(1, 1, 1);
         }

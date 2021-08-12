@@ -184,7 +184,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613939196}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -456,7 +456,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613939196}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1016,19 +1016,20 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 0
-  animator: {fileID: 1041841364}
   reloadTime:
     baseValue: 1
   timeBetweenShots:
     baseValue: 0.5
-  hp: 0
-  gold: 5
-  timeSinceFired: 0
-  reloading: 0
+  animator: {fileID: 1041841364}
   bulletPrefab: {fileID: 5025062916324146594, guid: 5a013fe726515984193a7b943f834c75, type: 3}
   grenadePrefab: {fileID: 3518761386705644005, guid: eb8674fd09b9e9a4fbbd1c0e2a1106eb, type: 3}
   rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
   bulletContainer: {fileID: 1094544659}
+  gunTip: {fileID: 1094544659}
+  hp: 0
+  gold: 5
+  timeSinceFired: 0
+  reloading: 0
   currentImmunityFrame: 0
   laserStats:
     damage:
@@ -1057,9 +1058,10 @@ MonoBehaviour:
   lazerGrowthSpeed: 18
   lazerRecoilSpeed: 24
   lazerWidthGrowth: 0.2
-  LazerCollider: {fileID: 744940899}
+  laserCollider: {fileID: 744940899}
   thisLineRenderer: {fileID: 284050211}
-  gunTip: {fileID: 1094544659}
+  thisBTSManager: {fileID: 716847307}
+  characterController: {fileID: 284050210}
   dashAmount:
     baseValue: 4
   timeBetweenDashs:
@@ -1076,9 +1078,6 @@ MonoBehaviour:
   currentBulletClip: 0
   currentGrenadeClip: 0
   currentRocketClip: 0
-  thisBTSManager: {fileID: 716847307}
-  characterController: {fileID: 284050210}
-  mapGenerationScript: {fileID: 904671077}
 --- !u!143 &284050210
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2650,9 +2649,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789508845}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 609742403}
   - {fileID: 1339963897}
@@ -2663,9 +2662,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 448, y: 252}
-  m_SizeDelta: {x: 896, y: 504}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &789508847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3001,10 +3000,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  AllRooms: []
-  WallReConnectChanceOfHundred: 25
+  rooms: []
+  wallReConnectChanceOfHundred: 25
   roomMultiplyValue: {x: 45, y: 30}
-  ChanceOfHundredToSpawnNewRoom:
+  chanceOfHundredToSpawnNewRoom:
   - 90
   - 30
   - 20
@@ -3012,7 +3011,7 @@ MonoBehaviour:
   - 5
   - 0
   atHowManyCurrentRooms: 03000000090000000c00000018000000240000002a000000
-  RoomSpawnChanceModifierBasedOnLength:
+  roomSpawnChanceModifierBasedOnLength:
   - 0
   - 0
   - -5
@@ -3021,20 +3020,20 @@ MonoBehaviour:
   - 5
   - 10
   startingRoomID: 0
-  StartingRoomDoorLayouts:
+  startingRoomDoorLayouts:
   - needUpperRoom: 1
     needLowerRoom: 1
     needLeftRoom: 1
     needRightRoom: 1
-  StartingRooms:
+  startingRooms:
   - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
-  StartingRoomPrefabInfo:
+  startingRoomPrefabInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
-  AllDoorRoom:
+  allDoorRoom:
   - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
   - {fileID: 4624463924144925947, guid: 7565c01c511424c47a6c66f8be31987a, type: 3}
   - {fileID: 4984691470946668257, guid: 5255ced0caae55645a907c6a373c00d7, type: 3}
@@ -3061,30 +3060,31 @@ MonoBehaviour:
   leftRightRoom:
   - {fileID: 7166273750155598376, guid: 3b8d7c0b33cdd1e45ba21a872f531b63, type: 3}
   - {fileID: 2748386830261423592, guid: ed3a2ac8fd86b5445a3c09ebd84642a7, type: 3}
-  UDLRoom:
+  upDownLeftRoom:
   - {fileID: 7819917018087883527, guid: f86bf1993b10d5248b5fe27b2b134227, type: 3}
-  UDRRoom:
+  upDownRightRoom:
   - {fileID: 1972704425016464564, guid: ab0a470c07229a240a5c2c407ee96665, type: 3}
-  ULRRoom:
+  upLeftRightRoom:
   - {fileID: 5706285079197972649, guid: bd76d31cab2ad60448e82501d015c174, type: 3}
-  DLRRoom:
+  - {fileID: 2311721395412768925, guid: 29df3e47f04d2d5499c7dd3d1481a2b2, type: 3}
+  downLeftRightRoom:
   - {fileID: 6879949707812021247, guid: 6cbaabcfe44021b42ac8fcf1cfd19464, type: 3}
   - {fileID: 1391686635697823944, guid: 57c2ad63e9714544294c5212ea5906b5, type: 3}
-  AllDoorRoomInfo:
+  allDoorRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
     middleOffset: {x: 0, y: 0}
   upRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
@@ -3161,32 +3161,37 @@ MonoBehaviour:
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
-  UDLRoomInfo:
+  upDownLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
     middleOffset: {x: 0, y: 0}
-  UDRRoomInfo:
+  upDownRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    middleOffset: {x: 0, y: 0}
+  upLeftRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
-  ULRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  downLeftRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
-  DLRRoomInfo:
-  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
-    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
-    leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
-    middleOffset: {x: 0, y: 0}
-  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
-    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
@@ -3198,7 +3203,7 @@ MonoBehaviour:
   Enemy: {fileID: 1109022956268930713, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
   yEnemyHeight: 1
   enemyRandOffset: {x: 9, y: 6}
-  InCombat: 0
+  inCombat: 0
   EnemiesInEncounter: []
   miniMapRooms:
   - {fileID: 2098676175}
@@ -3930,7 +3935,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613939196}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4977,7 +4982,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613939196}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5793,7 +5798,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 789508846}
   - {fileID: 2098676176}
   - {fileID: 133433974}
   - {fileID: 1351356580}
@@ -7144,6 +7148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 336213760}
+  - {fileID: 1613939196}
   m_Father: {fileID: 1427138146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
@@ -7646,7 +7651,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1613939196}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

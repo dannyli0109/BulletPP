@@ -107,9 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  TimesBounced: 0
-  bulletHitParticlePrefab: {fileID: 1504079761642245970, guid: 4b953c9d8a6754a43a6adb40e06917bd, type: 3}
-  bulletTip: {fileID: 1883262296385068284}
+  hitParticlePrefab: {fileID: 1504079761642245970, guid: 4b953c9d8a6754a43a6adb40e06917bd, type: 3}
+  ammoTip: {fileID: 1883262296385068284}
+  timesBounced: 0
 --- !u!1 &3643442512730389957
 GameObject:
   m_ObjectHideFlags: 0

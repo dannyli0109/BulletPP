@@ -5,9 +5,6 @@ using UnityEngine.VFX;
 
 public class Bullet : Ammo
 {
-    public GameObject bulletHitParticlePrefab;
-    public Transform bulletTip;
-    float bornTime = 0;
     
     void Start()
     {
@@ -32,34 +29,19 @@ public class Bullet : Ammo
     {
         if (this.gameObject == gameObject)
         {
-            GameObject bulletParticle = Instantiate(bulletHitParticlePrefab, bulletTip);
-            bulletParticle.transform.SetParent(null);
-            bulletParticle.transform.localScale = new Vector3(1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)), 1 + (0.1f * (owner.bulletStats.size.value - 1)));
+            SpawnHitParticle(owner.bulletStats.size.value);
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (owner)
+        HandleAmmoHit(other);
+
+        if (timesBounced < owner.bulletStats.amountOfBounces.value)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
-            {
-                // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this, other.gameObject);
-
-            }
-            else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            {
-                EventManager.current.OnAmmoHit(this, other.gameObject);
-            }
-        }
-
-        if (TimesBounced < owner.bulletStats.amountOfBounces.value)
-        {
-            gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
-            TimesBounced++;
-
+            SpawnHitParticle(owner.bulletStats.size.value);
+            BounceOffAmmo();
         }
         else
         {
