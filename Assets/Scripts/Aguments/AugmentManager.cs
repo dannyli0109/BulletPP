@@ -46,7 +46,11 @@ public class AugmentManager : MonoBehaviour
     private void Awake()
     {
         current = this;
+        Init();
+    }
 
+    public void Init()
+    {
         parser = new Parser();
         Dictionary<string, Value> records = new Dictionary<string, Value>()
         {
@@ -73,8 +77,6 @@ public class AugmentManager : MonoBehaviour
                 augmentDatas[i].UpdateExpression = parser.Parse(code + @"OnUpdate();");
             }
         }
-
-        //Debug.Log(Application.streamingAssetsPath);
     }
 
     public Func<List<Value>, Expression> ToImportFunction(Action func)

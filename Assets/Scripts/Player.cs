@@ -26,21 +26,6 @@ public class Player : Character
     public int currentBulletClip;
     public int currentGrenadeClip;
     public int currentRocketClip;
-
-    #endregion
-
-    #region AmmoUI
-    public GameObject bulletsUI;
-    public TextMeshProUGUI bulletAmmoText;
-    public GameObject grenadesUI;
-    public TextMeshProUGUI grenadeAmmoText;
-    public GameObject rocketsUI;
-    public TextMeshProUGUI rocketAmmoText;
-    public GameObject laserUI;
-    public TextMeshProUGUI laserFuelText;
-
-    public Color32 filledClipColor;
-    public Color32 emptyClipColor;
     #endregion
 
     public BTSManager thisBTSManager;
@@ -61,18 +46,17 @@ public class Player : Character
         currentRocketClip = (int)rocketStats.maxClip.value;
         currentLaserFuel = laserStats.maxClip.value;
         base.Start();
-        UpdatePlayerUI();
     }
 
     public override void Update()
     {
+        base.Update();
         if (hp <= 0)
         {
             Debug.Log("Player Load lose");
             thisBTSManager.LoadLoseGameScene();
         }
         if (GameManager.current.gameState == GameState.Shop) return;
-        base.Update();
         HandleRotation();
         HandleMovement();
         HandleShooting();
@@ -169,8 +153,6 @@ public class Player : Character
                 rocketComponent.owner = this;
                 currentRocketClip--;
             }
-
-            UpdatePlayerUI();
         }
 
         if (Input.GetMouseButton(0))
@@ -220,69 +202,6 @@ public class Player : Character
 
     void HandleReload()
     {
-        /*
-        if (
-            currentBulletClip == bulletStats.maxClip.value && 
-            currentGrenadeClip == grenadeStats.maxClip.value && 
-            currentRocketClip == rocketStats.maxClip.value && 
-            currentLaserFuel == maxLaserFuel.value
-            )
-        {
-            // we have max clips
-            reloading = false;
-        }
-        else
-        {
-            //if( !mapGenerationScript.InCombat)
-            //{
-            //    Reloading = true;
-            //}
-            if (Input.GetKeyDown(KeyCode.R) && !reloading)
-            {
-                reloading = !reloading; // swap status
-                currentReloadTime = 0;
-            }
-            if (reloading)
-            {
-                currentReloadTime += Time.deltaTime;
-                // float holdingTime = reloadTime.value;
-                //if (!mapGenerationScript.InCombat)
-                //{
-                //    holdingTime = outOfCombatReloadTime.value;
-                //}
-                // currentLaserFuel = Mathf.Clamp(currentLaserFuel += Time.deltaTime, 0, maxLaserFuel.value);
-                if (currentReloadTime >= reloadTime.value)
-                {
-                    // currentReloadTime = 0;
-                    // check if you actually get
-
-                    
-                    if (currentBulletClip < bulletStats.maxClip.value)
-                    {
-                        currentBulletClip++;
-                    }
-                    if (currentGrenadeClip < grenadeStats.maxClip.value)
-                    {
-                        currentGrenadeClip++;
-                    }
-                    if (currentRocketClip < rocketStats.maxClip.value)
-                    {
-                        currentRocketClip++;
-                    }
-                    
-
-                    currentReloadTime = 0;
-                    currentBulletClip = (int)bulletStats.maxClip.value;
-                    currentGrenadeClip = (int)grenadeStats.maxClip.value;
-                    currentRocketClip = (int)rocketStats.maxClip.value;
-                    currentLaserFuel = maxLaserFuel.value;
-                    reloading = false;
-                    UpdatePlayerUI();
-                }
-            }
-        }
-        */
-
         if (
                 currentBulletClip == 0 &&
                 currentGrenadeClip == 0 &&
@@ -314,11 +233,8 @@ public class Player : Character
                 currentRocketClip = (int)rocketStats.maxClip.value;
                 currentLaserFuel = laserStats.maxClip.value;
                 reloading = false;
-                UpdatePlayerUI();
             }
         }
-
-
     }
 
     void UpdateAnimation()
@@ -342,82 +258,6 @@ public class Player : Character
         characterController.Move(new Vector3(movement.x * moveSpeed.value * Time.fixedDeltaTime, 0, movement.y * moveSpeed.value * Time.fixedDeltaTime));
     }
 
-    void UpdatePlayerUI()
-    {
-        if (bulletStats.maxClip.value > 0)
-        {
-            bulletsUI.SetActive(true);
-            bulletAmmoText.text = currentBulletClip.ToString();
-            if (currentBulletClip == 0)
-            {
-                bulletAmmoText.color = emptyClipColor;
-            }
-            else
-            {
-                bulletAmmoText.color = filledClipColor;
-            }
-        }
-        else
-        {
-            bulletsUI.SetActive(false);
-        }
-
-        if (grenadeStats.maxClip.value > 0)
-        {
-           grenadesUI.SetActive(true);
-            grenadeAmmoText.text = currentGrenadeClip.ToString();
-            if (currentGrenadeClip == 0)
-            {
-               grenadeAmmoText.color = emptyClipColor;
-            }
-            else
-            {
-                grenadeAmmoText.color = filledClipColor;
-            }
-        }
-        else
-        {
-            grenadesUI.SetActive(false);
-        }
-
-        if (rocketStats.maxClip.value > 0)
-        {
-            rocketsUI.SetActive(true);
-            rocketAmmoText.text = currentRocketClip.ToString();
-            if (currentRocketClip == 0)
-            {
-               rocketAmmoText.color = emptyClipColor;
-            }
-            else
-            {
-                rocketAmmoText.color = filledClipColor;
-            }
-        }
-        else
-        {
-            rocketsUI.SetActive(false);
-        }
-
-        if (laserStats.maxClip.value > 0)
-        {
-            laserUI.SetActive(true);
-            laserFuelText.text = currentLaserFuel.ToString("F");
-            if (currentLaserFuel == 0)
-            {
-               laserFuelText.color = emptyClipColor;
-            }
-            else
-            {
-                laserFuelText.color = filledClipColor;
-            }
-        }
-        else
-        {
-            laserUI.SetActive(false);
-        }
-
-
-    }
 
     public override void OnDestroy()
     {

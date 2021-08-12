@@ -6,7 +6,7 @@ AddModifier(""Bullet"", ""maxClip"", ""Flat"", 2);
 AddModifier(""Bullet"", ""damage"", ""PercentAdd"", 0.1);
 } 
 def OnUpdate() { LaserSight(); }"
-1,Under barrel rocket launcher,You shoot rockets which explode on hit,0,"def OnAttached() { 
+1,Under barrel rocket launcher,+2 Rockets,0,"def OnAttached() { 
 AddModifier(""Rocket"", ""maxClip"", ""Flat"", 2);
 } "
 2,Extra Grenades,+2 Grenades,0,"def OnAttached() { 
