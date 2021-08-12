@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public enum Direction
 {
@@ -107,11 +108,23 @@ public class MapGeneration : MonoBehaviour
     public List< Enemy> EnemiesInEncounter;
     #endregion
 
-   public BTSManager thisBTSManager;
+    #region MiniMap
+    public List<GameObject> miniMapRooms;
+
+    public Vector2 miniMapStartingPos;
+    public Vector2 miniMapRoomMultiplier;
+
+    public Color completedMiniMapRoomColour;
+    public Color CurrentMiniMapRoomColour;
+    public Color DefaultMiniMapRoomColour;
+    #endregion
+
+    public BTSManager thisBTSManager;
 
     void Start()
     {
         GenerateMap();
+        refreshMiniMapUI();
     }
 
     private void Update()
@@ -431,6 +444,7 @@ public class MapGeneration : MonoBehaviour
             InCombat = false;
             AllRooms[currentRoomInside].Completed = true;
             CheckIfMapCompleted();
+            refreshMiniMapUI();
             if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
             {
                 GameManager.current.gameState = GameState.Shop;
@@ -483,7 +497,6 @@ public class MapGeneration : MonoBehaviour
                 if (debug)
                 {
                     Debug.Log("Moving up " + desiredSetPos + "  " + AllRooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet);
-
                 }
                 break;
             case Direction.Lower:
@@ -507,6 +520,7 @@ public class MapGeneration : MonoBehaviour
         }
 
         CheckToStartEncounter();
+            refreshMiniMapUI();
         Debug.Log(directionInput);
         }
     }
@@ -523,5 +537,86 @@ public class MapGeneration : MonoBehaviour
             }
         }
         return holdingVal;
+    }
+
+    public void refreshMiniMapUI()
+    {
+        for(int i=1; i < 5;i++)
+        {
+            miniMapRooms[i].SetActive(false);
+
+        }
+        int holdingPos = 1;
+        miniMapRooms[0].SetActive(true);
+        miniMapRooms[0].transform.position = miniMapStartingPos;
+        if (AllRooms[currentRoomInside].Completed)
+        {
+            miniMapRooms[0].GetComponent<Image>().color = CurrentMiniMapRoomColour;
+        }
+        else
+        {
+            miniMapRooms[0].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+        }
+
+        if (AllRooms[currentRoomInside].upperRoomRef > -1)
+        {
+            miniMapRooms[holdingPos].SetActive(true);
+            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, 1) * miniMapRoomMultiplier;
+            if (AllRooms[AllRooms[currentRoomInside].upperRoomRef].Completed)
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+            }
+            else
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+            }
+            holdingPos++;
+        }
+
+        if (AllRooms[currentRoomInside].lowerRoomRef> -1)
+        {
+            miniMapRooms[holdingPos].SetActive(true);
+            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, -1) * miniMapRoomMultiplier;
+            if (AllRooms[AllRooms[currentRoomInside].lowerRoomRef].Completed)
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+            }
+            else
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+            }
+            holdingPos++;
+        }
+
+        if (AllRooms[currentRoomInside].leftRoomRef > -1)
+        {
+            miniMapRooms[holdingPos].SetActive(true);
+            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(-1, 0) * miniMapRoomMultiplier;
+            if (AllRooms[AllRooms[currentRoomInside].leftRoomRef].Completed)
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+            }
+            else
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+            }
+            holdingPos++;
+        }
+
+        if (AllRooms[currentRoomInside].rightRoomRef > -1)
+        {
+            miniMapRooms[holdingPos].SetActive(true);
+            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(1, 0) * miniMapRoomMultiplier;
+            if (AllRooms[AllRooms[currentRoomInside].rightRoomRef].Completed)
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+            }
+            else
+            {
+                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+            }
+            holdingPos++;
+        }
+
     }
 }
