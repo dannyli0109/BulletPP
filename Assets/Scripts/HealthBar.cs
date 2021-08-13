@@ -12,16 +12,17 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        SetMaxValue(character.maxHp.value);
+        SetMaxValue(character.stats.maxHp.value);
         SetValue(character.hp);
-        fill.color = gradient.Evaluate(character.hp / character.maxHp.value);
+        fill.color = gradient.Evaluate(character.hp / character.stats.maxHp.value);
     }
 
     private void Update()
     {
-        SetMaxValue(character.maxHp.value);
+        SetMaxValue(character.stats.maxHp.value);
         SetValue(character.hp);
-        fill.color = gradient.Evaluate(character.hp / character.maxHp.value);
+        Debug.Log(character.stats.maxHp.value);
+        fill.color = gradient.Evaluate(character.hp / character.stats.maxHp.value);
     }
 
     public void SetMaxValue(float value)

@@ -33,12 +33,12 @@ public class BulletStats : AmmoStats
 [Serializable]
 public class GrenadeStats : AmmoStats
 {
-
+    public CharacterStat BounceAdditionSpeed;
 }
 [Serializable]
 public class RocketStats : AmmoStats
 {
-
+    public CharacterStat acceleration;
 }
 
 [Serializable]
@@ -46,26 +46,38 @@ public class LaserStats : AmmoStats
 {
     public CharacterStat maxLaserLength;
     public CharacterStat maxLaserWidth;
-
 }
 
-public class Character : MonoBehaviour
+[Serializable]
+public class CharacterStats
 {
     public CharacterStat maxHp;
     public CharacterStat moveSpeed;
+    public CharacterStat reloadTime;
+    public CharacterStat timeBetweenShots;
+    public CharacterStat damageMultiplier;
+    public CharacterStat dashAmount;
+    public CharacterStat timeBetweenDashs;
+    public CharacterStat immunityFromDashing;
+    public CharacterStat immunityFromDamage;
+    public CharacterStat outOfCombatReloadTime;
+}
+
+
+public abstract class Character : MonoBehaviour
+{
+    public CharacterStats stats;
     public BulletStats bulletStats;
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
-    public CharacterStat reloadTime;
-    public CharacterStat timeBetweenShots;
+    public LaserStats laserStats;
 
     public Animator animator;
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
     public GameObject rocketPrefab;
+    public GameObject laserPrefab;
     public Transform bulletContainer;
-    public Transform gunTip;
-
 
     public float hp;
     public float gold = 0;
@@ -77,25 +89,11 @@ public class Character : MonoBehaviour
 
     // TODO: Move this else where
     #region Lazer
-
-    public LaserStats laserStats;
-
-    public float currentLaserFuel;
-    protected bool laserSustained;
-    public float currentLazerLength;
-    public float currentLazerWidth;
-
-    public float lazerGrowthSpeed;
-    public float lazerRecoilSpeed;
-    public float lazerWidthGrowth;
-
-    public GameObject laserCollider;
-
     public LineRenderer thisLineRenderer;
     #endregion
     public virtual void Start()
     {
-        hp = maxHp.value;
+        hp = stats.maxHp.value;
         timeSinceFired = 0;
         EventManager.current.onAmmoHit += OnAmmoHit;
         EventManager.current.onLaserHit += OnLaserHit;
@@ -119,8 +117,7 @@ public class Character : MonoBehaviour
             {
                 if (currentImmunityFrame <= 0)
                 {
-                    hp -= ammo.owner.bulletStats.damage.value;
-
+                    hp -= ammo.GetDamage();
                 }
                 else
                 {
@@ -131,7 +128,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void OnLaserHit(float damage,Character owner, GameObject gameObjectInput)
+    protected void OnLaserHit(float damage, Character owner, GameObject gameObjectInput)
     {
         Debug.Log("Input " +gameObjectInput);
         if (this.gameObject == gameObjectInput)
@@ -167,7 +164,7 @@ public class Character : MonoBehaviour
     {
         AugmentManager augmentManager = AugmentManager.current;
         AugmentData augment = augmentManager.augmentDatas[id];
-        float cost = augmentManager.costs[augment.Rarity];
+        float cost = augmentManager.costs[augment.rarity];
 
         if (gold < cost)
         {
@@ -232,6 +229,7 @@ public class Character : MonoBehaviour
 
         result.AddModifier(modifier);
     }
+
 
     public virtual void OnDestroy()
     {

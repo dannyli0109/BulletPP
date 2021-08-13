@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class SynergyData
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Descriptions { get; set; }
-    public string Code { get; set; }
-    public Expression UpdateExpression;
-    public Expression AttachExpression;
+    public int id { get; set; }
+    public string name { get; set; }
+    public string descriptions { get; set; }
+    public string code { get; set; }
+    public Expression updateExpression;
+    public Expression attachExpression;
 }
 public class SynergyManager : MonoBehaviour
 {

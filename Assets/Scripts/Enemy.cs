@@ -229,7 +229,7 @@ public class Enemy : Character
                 currentBulletClipSize = Mathf.Clamp(currentBulletClipSize + 1, 0, (int)bulletStats.maxClip.value);
 
                 reloading = false;
-                currentReloadTime = reloadTime.value;
+                currentReloadTime = stats.reloadTime.value;
             }
             else
             {
@@ -246,7 +246,7 @@ public class Enemy : Character
                 currentBulletClipSize--;
                 timeSinceFired = 0;
              //   Debug.Log("Shoot");
-                currentShootingWaitTime = timeBetweenShots.value;
+                currentShootingWaitTime = stats.timeBetweenShots.value;
                 if (currentVolleySize == 0)
                 {
                     currentShootingWaitTime = timeBetweenVolley;
@@ -262,7 +262,7 @@ public class Enemy : Character
                         {
                             currentVolleySize = Mathf.Clamp(Random.Range(minVolleySize, maxVolleySize+1),0,(int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
-                            currentShootingWaitTime = timeBetweenShots.value;
+                            currentShootingWaitTime = stats.timeBetweenShots.value;
                         }
                     }
                 }
@@ -276,14 +276,14 @@ public class Enemy : Character
                             // set how many bullets to fire, 
                             currentVolleySize = Mathf.Clamp(Random.Range(minVolleySize, maxVolleySize+1), 0, (int)bulletStats.maxClip.value);
                            // Debug.Log("shooting");
-                            currentShootingWaitTime = timeBetweenShots.value;
+                            currentShootingWaitTime = stats.timeBetweenShots.value;
                         }
                     }
                 }
                 else
                 {
                     reloading = true;
-                    currentReloadTime = reloadTime.value;
+                    currentReloadTime = stats.reloadTime.value;
                 }
             }
         }

@@ -43,7 +43,7 @@ public class ReloadBar : MonoBehaviour
     private void UpdateValues()
     {
         float currentReloadTime = character.currentReloadTime;
-        float maxReloadTime = character.reloadTime.value;
+        float maxReloadTime = character.stats.reloadTime.value;
 
         SetMaxValue(maxReloadTime);
         SetValue(currentReloadTime);

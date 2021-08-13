@@ -10,18 +10,13 @@ public class Player : Character
     public CharacterController characterController;
 
     #region movementStats
-    public CharacterStat dashAmount;
-    public CharacterStat timeBetweenDashs;
     public Vector2 lastMovementDirection;
     public float currentTimeBetweenDashes;
 
-    public CharacterStat immunityFromDashing;
-    public CharacterStat immunityFromDamage;
 
     #endregion
 
     #region Gun Stats
-    public CharacterStat outOfCombatReloadTime;
     public float currentReloadTime;
 
     #endregion
@@ -30,6 +25,7 @@ public class Player : Character
     public int currentBulletClip;
     public int currentGrenadeClip;
     public int currentRocketClip;
+    public int currentLaserClip;
     #endregion
 
     float angle;
@@ -44,7 +40,7 @@ public class Player : Character
         currentBulletClip = (int)bulletStats.maxClip.value;
         currentGrenadeClip = (int)grenadeStats.maxClip.value;
         currentRocketClip = (int)rocketStats.maxClip.value;
-        currentLaserFuel = laserStats.maxClip.value;
+        currentLaserClip = (int)laserStats.maxClip.value;
         base.Start();
     }
 
@@ -65,7 +61,7 @@ public class Player : Character
 
         HandleReload();
         currentImmunityFrame -= Time.deltaTime;
-        UpdateAllLasers();
+        //UpdateAllLasers();
     }
 
     private void FixedUpdate()
@@ -76,15 +72,13 @@ public class Player : Character
 
     protected void ReceiveGold(float amount)
     {
-        Debug.Log(amount + " gold");
         gold += amount;
-        Debug.Log("total " + gold);         
     }
 
     void HandleRotation()
     {
         Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-        Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
         positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
         positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
@@ -113,9 +107,9 @@ public class Player : Character
         currentTimeBetweenDashes -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes<=0)
         {
-            currentTimeBetweenDashes = timeBetweenDashs.value;
-            currentImmunityFrame = immunityFromDashing.value;
-            characterController.Move(new Vector3(lastMovementDirection.x * dashAmount.value,0,lastMovementDirection.y * dashAmount.value));
+            currentTimeBetweenDashes = stats.timeBetweenDashs.value;
+            currentImmunityFrame = stats.immunityFromDashing.value;
+            characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value,0,lastMovementDirection.y * stats.dashAmount.value));
         }
     }
 
@@ -123,7 +117,7 @@ public class Player : Character
     {
         timeSinceFired += Time.deltaTime;
         if (reloading) return;
-        if (Input.GetMouseButtonDown(0) || (timeSinceFired > timeBetweenShots.value && Input.GetMouseButton(0)))
+        if (Input.GetMouseButtonDown(0) || (timeSinceFired > stats.timeBetweenShots.value && Input.GetMouseButton(0)))
         {
             timeSinceFired = 0;
             if (currentBulletClip > 0)
@@ -153,51 +147,16 @@ public class Player : Character
                 rocketComponent.owner = this;
                 currentRocketClip--;
             }
+
+            if (currentLaserClip > 0)
+            {
+                GameObject laser = Instantiate(laserPrefab, bulletContainer);
+                laser.transform.SetParent(null);
+                Laser laserComponent = laser.GetComponent<Laser>();
+                laserComponent.owner = this;
+                currentLaserClip--;
+            }
         }
-
-        if (Input.GetMouseButton(0))
-        {
-            ShootLaser(-1, true);
-        }
-    }
-
-    void ShootLaser(int id, bool UsesFuel)
-    {
-        //Debug.Log("Shooting laser");
-        if (currentLaserFuel >0)
-        {
-
-        laserSustained = true;
-        currentLazerLength = Mathf.Clamp(currentLazerLength + lazerGrowthSpeed * Time.deltaTime, 0, laserStats.maxLaserLength.value);
-        currentLazerWidth = Mathf.Clamp(currentLazerWidth + lazerWidthGrowth * Time.deltaTime, 0, laserStats.maxLaserWidth.value);
-
-        Vector3 lookDir = gunTip.forward * currentLazerLength;
-        thisLineRenderer.SetPosition(0, gunTip.position);
-        thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
-        thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
-
-        laserCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
-        laserCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
-        currentLaserFuel = Mathf.Clamp(currentLaserFuel - Time.deltaTime, 0, laserStats.maxClip.value);
-        }
-    }
-
-    void UpdateAllLasers()
-    {
-        if (!laserSustained)
-        {
-            currentLazerLength = Mathf.Clamp(currentLazerLength - lazerRecoilSpeed * Time.deltaTime, 0, laserStats.maxLaserLength.value);
-            currentLazerWidth = Mathf.Clamp(currentLazerWidth - lazerWidthGrowth * Time.deltaTime, 0, laserStats.maxLaserWidth.value);
-
-            Vector3 lookDir = gunTip.forward * currentLazerLength;
-            thisLineRenderer.SetPosition(0, gunTip.position);
-            thisLineRenderer.SetPosition(1, gunTip.position + lookDir);
-            thisLineRenderer.SetWidth(currentLazerWidth, currentLazerWidth);
-
-            laserCollider.GetComponent<BoxCollider>().center = new Vector3(0, 1.3f, currentLazerLength / 2);
-            laserCollider.GetComponent<BoxCollider>().size = new Vector3(currentLazerWidth, 1, currentLazerLength);
-        }
-        laserSustained = false;
     }
 
     void HandleReload()
@@ -206,7 +165,7 @@ public class Player : Character
                 currentBulletClip == 0 &&
                 currentGrenadeClip == 0 &&
                 currentRocketClip == 0 &&
-                currentLaserFuel <= 0
+                currentLaserClip == 0
             )
         {
             if (Input.GetMouseButtonDown(0) && !reloading)
@@ -225,13 +184,13 @@ public class Player : Character
         if (reloading)
         {
             currentReloadTime += Time.deltaTime;
-            if (currentReloadTime >= reloadTime.value)
+            if (currentReloadTime >= stats.reloadTime.value)
             {
                 currentReloadTime = 0;
                 currentBulletClip = (int)bulletStats.maxClip.value;
                 currentGrenadeClip = (int)grenadeStats.maxClip.value;
                 currentRocketClip = (int)rocketStats.maxClip.value;
-                currentLaserFuel = laserStats.maxClip.value;
+                currentLaserClip = (int)laserStats.maxClip.value;
                 reloading = false;
             }
         }
@@ -257,9 +216,9 @@ public class Player : Character
         Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
         characterController.Move(
             new Vector3(
-                movement.x * moveSpeed.value * Time.fixedDeltaTime, 
+                movement.x * stats.moveSpeed.value * Time.fixedDeltaTime, 
                 0, 
-                movement.y * moveSpeed.value * Time.fixedDeltaTime
+                movement.y * stats.moveSpeed.value * Time.fixedDeltaTime
                 )
             );
 

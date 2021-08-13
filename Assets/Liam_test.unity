@@ -851,8 +851,6 @@ GameObject:
   - component: {fileID: 284050211}
   - component: {fileID: 284050210}
   - component: {fileID: 284050209}
-  - component: {fileID: 284050208}
-  - component: {fileID: 284050207}
   m_Layer: 11
   m_Name: PLAYER
   m_TagString: Untagged
@@ -860,95 +858,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &284050207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284050206}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfd00cdd804298e48b3282e9ffdf3ce3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  character: {fileID: 0}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  fill: {fileID: 0}
-  reloadBar: {fileID: 0}
---- !u!114 &284050208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284050206}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c33e2e8b23a6f48a89dc9e3f4d363c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 716625912}
-  character: {fileID: 284050209}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 1, b: 0, a: 1}
-    key2: {r: 0.6997919, g: 1, b: 0, a: 1}
-    key3: {r: 0, g: 1, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 16384
-    ctime1: 32768
-    ctime2: 49151
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 65535
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_NumColorKeys: 4
-    m_NumAlphaKeys: 2
-  fill: {fileID: 716625910}
 --- !u!114 &284050209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,10 +870,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4890625cdfad4d48b8cfda39e1cb555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp:
-    baseValue: 30
-  moveSpeed:
-    baseValue: 5
+  stats:
+    maxHp:
+      baseValue: 30
+    moveSpeed:
+      baseValue: 5
+    reloadTime:
+      baseValue: 1
+    timeBetweenShots:
+      baseValue: 0.5
+    damageMultiplier:
+      baseValue: 1
+    dashAmount:
+      baseValue: 4
+    timeBetweenDashs:
+      baseValue: 1
+    immunityFromDashing:
+      baseValue: 0
+    immunityFromDamage:
+      baseValue: 0
+    outOfCombatReloadTime:
+      baseValue: 0.6
   bulletStats:
     damage:
       baseValue: 5
@@ -999,41 +925,30 @@ MonoBehaviour:
       baseValue: 2
     maxClip:
       baseValue: 0
+    BounceAdditionSpeed:
+      baseValue: 6
   rocketStats:
     damage:
       baseValue: 6
     speed:
-      baseValue: 9
-    size:
       baseValue: 0
+    size:
+      baseValue: 1
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 4
+      baseValue: 6
     fireRate:
       baseValue: 0.4
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 0
-  reloadTime:
-    baseValue: 1
-  timeBetweenShots:
-    baseValue: 0.5
-  animator: {fileID: 1041841364}
-  bulletPrefab: {fileID: 5025062916324146594, guid: 5a013fe726515984193a7b943f834c75, type: 3}
-  grenadePrefab: {fileID: 3518761386705644005, guid: eb8674fd09b9e9a4fbbd1c0e2a1106eb, type: 3}
-  rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
-  bulletContainer: {fileID: 1094544659}
-  gunTip: {fileID: 1094544659}
-  hp: 0
-  gold: 5
-  timeSinceFired: 0
-  reloading: 0
-  currentImmunityFrame: 0
+      baseValue: 5
+    acceleration:
+      baseValue: 15
   laserStats:
     damage:
-      baseValue: 4
+      baseValue: 0.5
     speed:
       baseValue: 0
     size:
@@ -1041,43 +956,38 @@ MonoBehaviour:
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 0
+      baseValue: 0.3
     fireRate:
       baseValue: 0
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 0
+      baseValue: 7
     maxLaserLength:
-      baseValue: 4
+      baseValue: 5
     maxLaserWidth:
-      baseValue: 0.05
-  currentLaserFuel: 0
-  currentLazerLength: 0
-  currentLazerWidth: 0
-  lazerGrowthSpeed: 18
-  lazerRecoilSpeed: 24
-  lazerWidthGrowth: 0.2
-  laserCollider: {fileID: 744940899}
+      baseValue: 0.08
+  animator: {fileID: 1041841364}
+  bulletPrefab: {fileID: 5025062916324146594, guid: 5a013fe726515984193a7b943f834c75, type: 3}
+  grenadePrefab: {fileID: 3518761386705644005, guid: eb8674fd09b9e9a4fbbd1c0e2a1106eb, type: 3}
+  rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
+  laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
+  bulletContainer: {fileID: 1094544659}
+  hp: 0
+  gold: 5
+  timeSinceFired: 0
+  reloading: 0
+  currentImmunityFrame: 0
   thisLineRenderer: {fileID: 284050211}
   thisBTSManager: {fileID: 716847307}
   characterController: {fileID: 284050210}
-  dashAmount:
-    baseValue: 4
-  timeBetweenDashs:
-    baseValue: 1
   lastMovementDirection: {x: 0, y: 0}
   currentTimeBetweenDashes: 0
-  immunityFromDashing:
-    baseValue: 0
-  immunityFromDamage:
-    baseValue: 0
-  outOfCombatReloadTime:
-    baseValue: 0.6
   currentReloadTime: 0
   currentBulletClip: 0
   currentGrenadeClip: 0
   currentRocketClip: 0
+  currentLaserClip: 0
 --- !u!143 &284050210
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2460,33 +2370,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
---- !u!114 &716625910 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5884405948343208762, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
-  m_PrefabInstance: {fileID: 716625909}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &716625911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5884405946357700844, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
   m_PrefabInstance: {fileID: 716625909}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &716625912 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5884405946559621821, guid: 36cc5b990a69dab408f0d225b0baf5d9, type: 3}
-  m_PrefabInstance: {fileID: 716625909}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &716847306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,7 +2439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &744940900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3171,7 +3059,7 @@ MonoBehaviour:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
     middleOffset: {x: 0, y: 0}
   upLeftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}

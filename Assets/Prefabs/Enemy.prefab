@@ -1576,10 +1576,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefa3ea82cc6d4548b36d13ba383a5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp:
-    baseValue: 20
-  moveSpeed:
-    baseValue: 0
+  stats:
+    maxHp:
+      baseValue: 10
+    moveSpeed:
+      baseValue: 5
+    reloadTime:
+      baseValue: 1
+    timeBetweenShots:
+      baseValue: 0.5
+    damageMultiplier:
+      baseValue: 1
   bulletStats:
     damage:
       baseValue: 2
@@ -1631,10 +1638,6 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 0
-  reloadTime:
-    baseValue: 0
-  timeBetweenShots:
-    baseValue: 0
   animator: {fileID: 1109022956259654619}
   bulletPrefab: {fileID: 2943491641176895762, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
   grenadePrefab: {fileID: 0}

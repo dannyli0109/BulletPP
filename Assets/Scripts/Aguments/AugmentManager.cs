@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
-using CsvHelper;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System;
+using ExcelDataReader;
+using System.Data;
 
+using Yinyue200.Corefx.CodePages;
 
 public class AugmentData
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public int id { get; set; }
+    public string name { get; set; }
 
-    public string Descriptions { get; set; }
+    public string descriptions { get; set; }
 
-    public int Rarity { get; set; }
+    public int rarity { get; set; }
 
-    public string Code { get; set; }
+    public string code { get; set; }
 
-    public Expression UpdateExpression;
-    public Expression AttachExpression;
+    public Expression updateExpression;
+    public Expression attachExpression;
 
 }
 
@@ -63,20 +65,40 @@ public class AugmentManager : MonoBehaviour
         eva = new Eva(env);
 
         augmentDatas = new List<AugmentData>();
+        string filePath = Application.streamingAssetsPath + "/AugmentList.xlsx";
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collection = ReadExcel(filePath, ref columnNum, ref rowNum);
 
-        using (var reader = new StreamReader(Application.streamingAssetsPath + "/AugmentList.csv"))
-        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        for (int i = 1; i < rowNum; i++)
         {
-            augmentDatas = Enumerable.ToList(csv.GetRecords<AugmentData>());
-
-            for (int i = 0; i < augmentDatas.Count; i++)
+            AugmentData data = new AugmentData()
             {
-                string code = augmentDatas[i].Code;
+                id = int.Parse(collection[i][0].ToString()),
+                name = collection[i][1].ToString(),
+                descriptions = collection[i][2].ToString(),
+                rarity = int.Parse(collection[i][3].ToString()),
+                code = collection[i][4].ToString()
+            };
 
-                augmentDatas[i].AttachExpression = parser.Parse(code + @"OnAttached();");
-                augmentDatas[i].UpdateExpression = parser.Parse(code + @"OnUpdate();");
-            }
+            data.updateExpression = parser.Parse(data.code + @"OnUpdate();");
+            data.attachExpression = parser.Parse(data.code + @"OnAttached();");
+            augmentDatas.Add(data);
         }
+    }
+
+    public DataRowCollection ReadExcel(string filePath, ref int columnnum, ref int rownum)
+    {
+        System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+        DataSet result = excelReader.AsDataSet();
+
+        
+        columnnum = result.Tables[0].Columns.Count;
+        rownum = result.Tables[0].Rows.Count;
+        stream.Close();
+
+        return result.Tables[0].Rows;
     }
 
     public Func<List<Value>, Expression> ToImportFunction(Action func)
@@ -98,12 +120,12 @@ public class AugmentManager : MonoBehaviour
     }
     public void OnAttached(int id)
     {
-        eva.eval(augmentDatas[id].AttachExpression);
+        eva.eval(augmentDatas[id].attachExpression);
     }
 
     private void OnUpdate(int id)
     {
-        eva.eval(augmentDatas[id].UpdateExpression);
+        eva.eval(augmentDatas[id].updateExpression);
     }
 
 

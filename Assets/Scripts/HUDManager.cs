@@ -89,8 +89,8 @@ public class HUDManager : MonoBehaviour
         if (player.laserStats.maxClip.value > 0)
         {
             laserUI.SetActive(true);
-            laserFuelText.text = player.currentLaserFuel.ToString("F");
-            if (player.currentLaserFuel == 0)
+            laserFuelText.text = player.currentLaserClip.ToString();
+            if (player.currentLaserClip == 0)
             {
                 laserFuelText.color = emptyClipColor;
             }

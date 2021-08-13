@@ -45,11 +45,11 @@ public class AugmentUI : MonoBehaviour
     public void Populate(AugmentData data)
     {
         AugmentManager augmentManager = AugmentManager.current;
-        id = data.Id;
-        title.text = data.Name;
-        descriptions.text = data.Descriptions;
-        cost.text = "$ " + augmentManager.costs[data.Rarity];
-        background.color = augmentManager.colors[data.Rarity];
+        id = data.id;
+        title.text = data.name;
+        descriptions.text = data.descriptions;
+        cost.text = "$ " + augmentManager.costs[data.rarity];
+        background.color = augmentManager.colors[data.rarity];
         background.color = new Color(background.color.r, background.color.g, background.color.b, 0.5f);
     }
 }

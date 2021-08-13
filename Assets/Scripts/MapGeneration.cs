@@ -519,9 +519,9 @@ public class MapGeneration : MonoBehaviour
                 break;
         }
 
-        CheckToStartEncounter();
+            CheckToStartEncounter();
             refreshMiniMapUI();
-        Debug.Log(directionInput);
+            Debug.Log(directionInput);
         }
     }
 
