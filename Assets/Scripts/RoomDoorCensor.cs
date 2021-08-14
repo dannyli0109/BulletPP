@@ -21,8 +21,7 @@ public class RoomDoorCensor : MonoBehaviour
     {
       if(  other.gameObject.layer == LayerMask.NameToLayer("Character"))
         {
-        Debug.Log(thisDirection);
-        mapGenerationScipt.ReceiveDoorInput(thisDirection);
+            mapGenerationScipt.ReceiveDoorInput(thisDirection);
 
         }
     }

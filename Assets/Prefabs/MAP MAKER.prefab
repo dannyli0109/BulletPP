@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7128933462229582447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7128933462229582434}
+  - component: {fileID: 7128933462229582446}
+  m_Layer: 0
+  m_Name: MAP MAKER
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7128933462229582434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128933462229582447}
+  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalPosition: {x: 7.5, y: 28.05, z: -16.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+--- !u!114 &7128933462229582446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128933462229582447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc182e4640323644841d09a3eea901a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  rooms: []
+  wallReConnectChanceOfHundred: 25
+  roomMultiplyValue: {x: 45, y: 30}
+  chanceOfHundredToSpawnNewRoom:
+  - 90
+  - 30
+  - 20
+  - 10
+  - 5
+  - 0
+  atHowManyCurrentRooms: 03000000090000000c00000018000000240000002a000000
+  roomSpawnChanceModifierBasedOnLength:
+  - 0
+  - 0
+  - -5
+  - -10
+  - 0
+  - 5
+  - 10
+  startingRoomID: 0
+  startingRoomDoorLayouts:
+  - needUpperRoom: 1
+    needLowerRoom: 1
+    needLeftRoom: 1
+    needRightRoom: 1
+  startingRooms:
+  - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
+  startingRoomPrefabInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  allDoorRoom:
+  - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
+  - {fileID: 4624463924144925947, guid: 7565c01c511424c47a6c66f8be31987a, type: 3}
+  - {fileID: 4984691470946668257, guid: 5255ced0caae55645a907c6a373c00d7, type: 3}
+  upRoom:
+  - {fileID: 3481950231860664795, guid: b86268729921b114482461b6de762d0b, type: 3}
+  downRoom:
+  - {fileID: 6534745952657641080, guid: 7d469fa8f40413546915bfd549bb95ae, type: 3}
+  leftRoom:
+  - {fileID: 1824836827662024726, guid: 916f7bdbc2c2b414e876759114180d9d, type: 3}
+  rightRoom:
+  - {fileID: 6194592526552580840, guid: c51f60528fcee334fa951ac803dd238f, type: 3}
+  upDownRoom:
+  - {fileID: 4318382585243863633, guid: 5544b35d1b1452448af64bfa2d748f2f, type: 3}
+  upLeftRoom:
+  - {fileID: 4621502232478974580, guid: 558efdb370e70864eba550488d663e67, type: 3}
+  - {fileID: 4013477804267822307, guid: 73ee3792feeb2a244a0a6d3e76e797b8, type: 3}
+  upRightRoom:
+  - {fileID: 1249736385051667748, guid: 8a4c990403ccffa47ac295a98a85aaff, type: 3}
+  downLeftRoom:
+  - {fileID: 7533526137600042590, guid: 720ed3c9b625772489594c0596897d3b, type: 3}
+  downRightRoom:
+  - {fileID: 1326487844555705191, guid: 0aa74dbe9e2dbdf44963f593c5879833, type: 3}
+  - {fileID: 176287628393437971, guid: b4bd9a3a5d75ed042a730a22aeeb7894, type: 3}
+  leftRightRoom:
+  - {fileID: 7166273750155598376, guid: 3b8d7c0b33cdd1e45ba21a872f531b63, type: 3}
+  - {fileID: 2748386830261423592, guid: ed3a2ac8fd86b5445a3c09ebd84642a7, type: 3}
+  upDownLeftRoom:
+  - {fileID: 7819917018087883527, guid: f86bf1993b10d5248b5fe27b2b134227, type: 3}
+  upDownRightRoom:
+  - {fileID: 1972704425016464564, guid: ab0a470c07229a240a5c2c407ee96665, type: 3}
+  upLeftRightRoom:
+  - {fileID: 5706285079197972649, guid: bd76d31cab2ad60448e82501d015c174, type: 3}
+  - {fileID: 2311721395412768925, guid: 29df3e47f04d2d5499c7dd3d1481a2b2, type: 3}
+  downLeftRightRoom:
+  - {fileID: 6879949707812021247, guid: 6cbaabcfe44021b42ac8fcf1cfd19464, type: 3}
+  - {fileID: 1391686635697823944, guid: 57c2ad63e9714544294c5212ea5906b5, type: 3}
+  allDoorRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    middleOffset: {x: 0, y: 0}
+  upRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  downRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  leftRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  rightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  upDownRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  upLeftRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  upRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  downLeftRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  downRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  leftRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  upDownLeftRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    middleOffset: {x: 0, y: 0}
+  upDownRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  upLeftRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  downLeftRightRoomInfo:
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    middleOffset: {x: 0, y: 0}
+  currentRoomInside: 0
+  playerTarget: {fileID: 0}
+  camTarget: {fileID: 0}
+  needToSetPos: 0
+  desiredSetPos: {x: 0, y: 0, z: 0}
+  Enemy: {fileID: 1109022956268930713, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
+  yEnemyHeight: 1
+  enemyRandOffset: {x: 9, y: 6}
+  inCombat: 0
+  EnemiesInEncounter: []
+  miniMapRooms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  miniMapStartingPos: {x: 810, y: 400}
+  miniMapRoomMultiplier: {x: 45, y: 45}
+  completedMiniMapRoomColour: {r: 0.7960785, g: 0.7960785, b: 0.7960785, a: 1}
+  CurrentMiniMapRoomColour: {r: 1, g: 1, b: 1, a: 1}
+  DefaultMiniMapRoomColour: {r: 1, g: 0.7052167, b: 0, a: 1}
+  thisBTSManager: {fileID: 0}

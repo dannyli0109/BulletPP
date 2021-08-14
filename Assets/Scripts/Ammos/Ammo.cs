@@ -10,7 +10,7 @@ public abstract class Ammo : MonoBehaviour
     protected float bornTime = 0;
 
     #region stats
-    protected int timesBounced = 0;
+    public int timesBounced = 0;
     #endregion stats
 
     public abstract float GetDamage();
@@ -24,10 +24,19 @@ public abstract class Ammo : MonoBehaviour
         );
     }
 
-    protected void BounceOffAmmo()
+    protected bool BounceOffAmmo()
     {
-        gameObject.transform.Rotate(new Vector3(0, Random.Range(155, 205), 0));
-        timesBounced++;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.5f, 1 << 10))
+        {
+            SpawnHitParticle(owner.grenadeStats.size.value);
+            Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, hit.normal);
+            gameObject.transform.forward = reflectionDir;
+            timesBounced++;
+            return true;
+        }
+
+        return false;
     }
 
     protected void HandleAmmoHit(Collider other)

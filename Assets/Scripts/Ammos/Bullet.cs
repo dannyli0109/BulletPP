@@ -18,6 +18,11 @@ public class Bullet : Ammo
         {
             Destroy(gameObject);
         }
+
+        if (timesBounced < owner.bulletStats.amountOfBounces.value)
+        {
+            BounceOffAmmo();
+        }
     }
 
     private void FixedUpdate()
@@ -37,16 +42,7 @@ public class Bullet : Ammo
     private void OnTriggerEnter(Collider other)
     {
         HandleAmmoHit(other);
-
-        if (timesBounced < owner.bulletStats.amountOfBounces.value)
-        {
-            SpawnHitParticle(owner.bulletStats.size.value);
-            BounceOffAmmo();
-        }
-        else
-        {
-            EventManager.current.OnAmmoDestroy(this.gameObject);
-        }      
+        EventManager.current.OnAmmoDestroy(gameObject);      
     }
 
     private void OnDestroy()

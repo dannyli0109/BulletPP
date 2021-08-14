@@ -21,7 +21,6 @@ public class HealthBar : MonoBehaviour
     {
         SetMaxValue(character.stats.maxHp.value);
         SetValue(character.hp);
-        Debug.Log(character.stats.maxHp.value);
         fill.color = gradient.Evaluate(character.hp / character.stats.maxHp.value);
     }
 

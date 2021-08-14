@@ -10,12 +10,18 @@ public class Rocket : Ammo
         currentSpeed = owner.rocketStats.speed.value;
         EventManager.current.onAmmoDestroy += OnRocketDestroy;
     }
-    private void OnRocketDestroy(GameObject gameObject)
+
+    void Update()
     {
-        if (this.gameObject == gameObject)
+        bornTime += Time.deltaTime;
+        if (bornTime >= owner.bulletStats.travelTime.value)
         {
-            SpawnHitParticle(owner.rocketStats.size.value);
             Destroy(gameObject);
+        }
+
+        if (timesBounced < owner.rocketStats.amountOfBounces.value)
+        {
+            BounceOffAmmo();
         }
     }
     private void FixedUpdate()
@@ -27,27 +33,17 @@ public class Rocket : Ammo
     private void OnTriggerEnter(Collider other)
     {
         HandleAmmoHit(other);
-
-        if (timesBounced < owner.rocketStats.amountOfBounces.value)
-        {
-            SpawnHitParticle(owner.rocketStats.size.value);
-            BounceOffAmmo();
-        }
-        else
-        {
-            EventManager.current.OnAmmoDestroy(this.gameObject);
-        }
+        EventManager.current.OnAmmoDestroy(gameObject);
     }
 
-    void Update()
+    private void OnRocketDestroy(GameObject gameObject)
     {
-        bornTime += Time.deltaTime;
-        if (bornTime >= owner.bulletStats.travelTime.value)
+        if (this.gameObject == gameObject)
         {
+            SpawnHitParticle(owner.rocketStats.size.value);
             Destroy(gameObject);
         }
     }
-
     private void OnDestroy()
     {
         EventManager.current.onAmmoDestroy -= OnRocketDestroy;

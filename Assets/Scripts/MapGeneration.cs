@@ -457,7 +457,6 @@ public class MapGeneration : MonoBehaviour
             {
                 if (EnemiesInEncounter[i].hp <= 0)
                 {
-                    Debug.Log(i + " Dead" + EnemiesInEncounter[i].hp);
                     EnemiesInEncounter.RemoveAt(i);
                 }
                 else
@@ -474,12 +473,10 @@ public class MapGeneration : MonoBehaviour
         {
             if (!rooms[i].completed)
             {
-                Debug.Log(i + " room");
                 return;
             }
 
         }
-        Debug.Log("all done");
         thisBTSManager.LoadWinGameScene();
     }
 

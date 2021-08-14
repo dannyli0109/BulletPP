@@ -16,7 +16,7 @@ public class RoomPrefabInformation
 }
 
 [Serializable]
-public class Room : MonoBehaviour
+public class Room
 {
     public Vector2 offsetPos;
     public int length = 0;

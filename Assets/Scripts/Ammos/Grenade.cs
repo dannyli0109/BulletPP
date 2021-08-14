@@ -20,17 +20,7 @@ public class Grenade : Ammo
     private void OnTriggerEnter(Collider other)
     {
         HandleAmmoHit(other);
-
-        if (timesBounced < owner.grenadeStats.amountOfBounces.value)
-        {
-            SpawnHitParticle(owner.grenadeStats.size.value);
-            BounceOffAmmo();
-            currentSpeed += owner.grenadeStats.BounceAdditionSpeed.value;
-        }
-        else
-        {
-            EventManager.current.OnAmmoDestroy(gameObject);
-        }
+        EventManager.current.OnAmmoDestroy(gameObject);
     }
 
     void Update()
@@ -39,6 +29,14 @@ public class Grenade : Ammo
         if (bornTime >= owner.grenadeStats.travelTime.value)
         {
             Destroy(gameObject);
+        }
+
+        if (timesBounced < owner.grenadeStats.amountOfBounces.value)
+        {
+            if (BounceOffAmmo())
+            {
+                currentSpeed += owner.grenadeStats.BounceAdditionSpeed.value;
+            }
         }
     }
 
