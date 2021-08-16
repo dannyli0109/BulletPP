@@ -63,6 +63,12 @@ public class CharacterStats
     public CharacterStat outOfCombatReloadTime;
 }
 
+public class ModifiedStat
+{
+    public CharacterStat stat;
+    public StatModifier modifier;
+}
+
 
 public abstract class Character : MonoBehaviour
 {
@@ -81,7 +87,6 @@ public abstract class Character : MonoBehaviour
 
     public float hp;
     public float gold = 0;
-    public List<Augment> augments = new List<Augment>();
     public float timeSinceFired;
 
     public bool reloading;
@@ -91,6 +96,10 @@ public abstract class Character : MonoBehaviour
     #region Lazer
     public LineRenderer thisLineRenderer;
     #endregion
+
+
+    public List<Augment> augments = new List<Augment>();
+    public List<ModifiedStat> modifiedStats = new List<ModifiedStat>();
     public virtual void Start()
     {
         hp = stats.maxHp.value;
@@ -178,14 +187,36 @@ public abstract class Character : MonoBehaviour
                 {
                     return -1;
                 }
+
+                int levelBefore = augments[i].level;
                 augments[i].count += 1;
+                int levelAfter = augments[i].level;
                 gold -= cost;
+
+                if (levelBefore != levelAfter)
+                {
+                    return 3;
+                }
                 return 1;
             }
         }
         augments.Add(new Augment() { id = id, count = 1 });
         gold -= cost;
         return 2;
+    }
+
+    public int GetAugmentLevel(int id)
+    {
+        int level = 0;
+        for (int i = 0; i < augments.Count; i++)
+        {
+            if (augments[i].id == id)
+            {
+                level = augments[i].level;
+                break;
+            }
+        }
+        return level;
     }
 
     public void AddModifier(string type, string stat, StatModifier modifier)
@@ -227,7 +258,21 @@ public abstract class Character : MonoBehaviour
                 break;
         }
 
+        modifiedStats.Add(new ModifiedStat()
+        {
+            stat = result,
+            modifier = modifier
+        });
         result.AddModifier(modifier);
+    }
+
+    public void RemoveAllModifiers()
+    {
+        for (int i = 0; i < modifiedStats.Count; i++)
+        {
+            modifiedStats[i].stat.RemoeModifier(modifiedStats[i].modifier);
+        }
+        modifiedStats.Clear();
     }
 
 

@@ -23,7 +23,15 @@ public class Shop : MonoBehaviour
         {
             int index = Random.Range(0, augmentManager.augmentDatas.Count);
             augmentUIs[i].gameObject.SetActive(true);
-            augmentUIs[i].Populate(augmentManager.augmentDatas[index]);
+            augmentUIs[i].Populate(index);
+        }
+    }
+
+    public void UpdateText()
+    {
+        for (int i = 0; i < augmentUIs.Count; i++)
+        {
+            augmentUIs[i].UpdateText();
         }
     }
 

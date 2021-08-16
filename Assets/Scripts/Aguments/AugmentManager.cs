@@ -16,13 +16,11 @@ public class AugmentData
     public int id { get; set; }
     public string name { get; set; }
 
-    public string descriptions { get; set; }
-
     public int rarity { get; set; }
 
-    public string code { get; set; }
+    public List<string> descriptions { get; set; }
 
-    public Eva evaluator;
+    public List<Eva> evaluators;
 
 }
 
@@ -56,7 +54,7 @@ public class AugmentManager : MonoBehaviour
         if (GameManager.current.gameState == GameState.Shop) return;
         for (int i = 0; i < character.augments.Count; i++)
         {
-            OnUpdate(character.augments[i].id);
+            OnUpdate(character.augments[i].id, character.augments[i].level);
         }
     }
 
@@ -74,26 +72,35 @@ public class AugmentManager : MonoBehaviour
 
         for (int i = 1; i < rowNum; i++)
         {
-            Dictionary<string, Value> records = new Dictionary<string, Value>()
-            {
-                { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
-                { "OnAttached", new Value(ToImportFunction(()=>{  })) },
-                { "LaserSight", new Value(ToImportFunction(LaserSight))},
-                { "AddModifier", new Value(ToImportFunction(AddModifier))}
-            };
 
-            Env env = new Env(records);
+            List<string> descriptions = new List<string>();
+            List<Eva> evaluators = new List<Eva>();
+            for (int j = 0; j < 3; j++)
+            {
+                Dictionary<string, Value> records = new Dictionary<string, Value>()
+                {
+                    { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
+                    { "OnAttached", new Value(ToImportFunction(()=>{  })) },
+                    { "LaserSight", new Value(ToImportFunction(LaserSight))},
+                    { "AddModifier", new Value(ToImportFunction(AddModifier))}
+                };
+
+                descriptions.Add(collection[i][3 + j * 2].ToString());
+
+                Env env = new Env(records);
+                Eva evaluator = new Eva(env);
+                evaluator.eval(parser.Parse(collection[i][4 + j * 2].ToString()));
+                evaluators.Add(evaluator);
+            }
+
             AugmentData data = new AugmentData()
             {
                 id = int.Parse(collection[i][0].ToString()),
                 name = collection[i][1].ToString(),
-                descriptions = collection[i][2].ToString(),
-                rarity = int.Parse(collection[i][3].ToString()),
-                code = collection[i][4].ToString(),
-                evaluator = new Eva(env)
+                rarity = int.Parse(collection[i][2].ToString()),
+                descriptions = descriptions,
+                evaluators = evaluators
             };
-
-            data.evaluator.eval(parser.Parse(data.code));
             augmentDatas.Add(data);
         }
     }
@@ -105,7 +112,7 @@ public class AugmentManager : MonoBehaviour
         IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
         DataSet result = excelReader.AsDataSet();
 
-        
+
         columnnum = result.Tables[0].Columns.Count;
         rownum = result.Tables[0].Rows.Count;
         stream.Close();
@@ -132,14 +139,14 @@ public class AugmentManager : MonoBehaviour
     }
 
     
-    public void OnAttached(int id)
+    public void OnAttached(int id, int level)
     {
-        augmentDatas[id].evaluator.eval(attachExpression);
+        augmentDatas[id].evaluators[level].eval(attachExpression);
     }
 
-    private void OnUpdate(int id)
+    private void OnUpdate(int id, int level)
     {
-        augmentDatas[id].evaluator.eval(updateExpression);
+        augmentDatas[id].evaluators[level].eval(updateExpression);
     }
 
 
@@ -155,9 +162,6 @@ public class AugmentManager : MonoBehaviour
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
     }
-
-   
-
     #endregion
 
 }

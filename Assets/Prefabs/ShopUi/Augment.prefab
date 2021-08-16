@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3212587864147374523}
   - component: {fileID: 1075530491}
   - component: {fileID: 1090386334}
+  - component: {fileID: 6055701703880611369}
   m_Layer: 5
   m_Name: Augment
   m_TagString: Untagged
@@ -228,6 +229,7 @@ MonoBehaviour:
   descriptions: {fileID: 3212587864711893001}
   cost: {fileID: 3212587863550439302}
   background: {fileID: 3212587864147374523}
+  outline: {fileID: 6055701703880611369}
   shop: {fileID: 0}
 --- !u!114 &1090386334
 MonoBehaviour:
@@ -284,6 +286,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &6055701703880611369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3212587864147374521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 1, b: 0.19680619, a: 1}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3212587864288866297
 GameObject:
   m_ObjectHideFlags: 0

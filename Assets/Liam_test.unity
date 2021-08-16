@@ -743,7 +743,7 @@ MonoBehaviour:
       baseValue: 0.6
   bulletStats:
     damage:
-      baseValue: 5
+      baseValue: 1
     speed:
       baseValue: 6
     size:
@@ -760,7 +760,7 @@ MonoBehaviour:
       baseValue: 1
   grenadeStats:
     damage:
-      baseValue: 3
+      baseValue: 1
     speed:
       baseValue: 4
     size:
@@ -774,12 +774,12 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 2
     maxClip:
-      baseValue: 1
+      baseValue: 0
     BounceAdditionSpeed:
       baseValue: 6
   rocketStats:
     damage:
-      baseValue: 6
+      baseValue: 1
     speed:
       baseValue: 2
     size:
@@ -793,7 +793,7 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 3
     maxClip:
-      baseValue: 5
+      baseValue: 0
     acceleration:
       baseValue: 5
   laserStats:
@@ -812,7 +812,7 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 7
+      baseValue: 0
     maxLaserLength:
       baseValue: 5
     maxLaserWidth:
@@ -824,7 +824,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
   bulletContainer: {fileID: 1094544659}
   hp: 0
-  gold: 5
+  gold: 100
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
