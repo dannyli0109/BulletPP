@@ -22,8 +22,7 @@ public class AugmentData
 
     public string code { get; set; }
 
-    public Expression updateExpression;
-    public Expression attachExpression;
+    public Eva evaluator;
 
 }
 
@@ -43,7 +42,8 @@ public class AugmentManager : MonoBehaviour
     public Transform gunPoint;
     public LineRenderer laserSightLineRenderer;
     Parser parser;
-    Eva eva;
+    Expression attachExpression;
+    Expression updateExpression;
 
     private void Awake()
     {
@@ -51,37 +51,49 @@ public class AugmentManager : MonoBehaviour
         Init();
     }
 
+    public void Update()
+    {
+        if (GameManager.current.gameState == GameState.Shop) return;
+        for (int i = 0; i < character.augments.Count; i++)
+        {
+            OnUpdate(character.augments[i].id);
+        }
+    }
+
     public void Init()
     {
         parser = new Parser();
-        Dictionary<string, Value> records = new Dictionary<string, Value>()
-        {
-            { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
-            { "OnAttached", new Value(ToImportFunction(()=>{  })) },
-            { "LaserSight", new Value(ToImportFunction(LaserSight))},
-            { "AddModifier", new Value(ToImportFunction(AddModifier))}
-        };
-        Env env = new Env(records);
-        eva = new Eva(env);
 
         augmentDatas = new List<AugmentData>();
         string filePath = Application.streamingAssetsPath + "/AugmentList.xlsx";
         int columnNum = 0, rowNum = 0;
         DataRowCollection collection = ReadExcel(filePath, ref columnNum, ref rowNum);
 
+        attachExpression = parser.Parse("OnAttached();");
+        updateExpression = parser.Parse("OnUpdate();");
+
         for (int i = 1; i < rowNum; i++)
         {
+            Dictionary<string, Value> records = new Dictionary<string, Value>()
+            {
+                { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
+                { "OnAttached", new Value(ToImportFunction(()=>{  })) },
+                { "LaserSight", new Value(ToImportFunction(LaserSight))},
+                { "AddModifier", new Value(ToImportFunction(AddModifier))}
+            };
+
+            Env env = new Env(records);
             AugmentData data = new AugmentData()
             {
                 id = int.Parse(collection[i][0].ToString()),
                 name = collection[i][1].ToString(),
                 descriptions = collection[i][2].ToString(),
                 rarity = int.Parse(collection[i][3].ToString()),
-                code = collection[i][4].ToString()
+                code = collection[i][4].ToString(),
+                evaluator = new Eva(env)
             };
 
-            data.updateExpression = parser.Parse(data.code + @"OnUpdate();");
-            data.attachExpression = parser.Parse(data.code + @"OnAttached();");
+            data.evaluator.eval(parser.Parse(data.code));
             augmentDatas.Add(data);
         }
     }
@@ -118,14 +130,16 @@ public class AugmentManager : MonoBehaviour
             return null;
         };
     }
+
+    
     public void OnAttached(int id)
     {
-        eva.eval(augmentDatas[id].attachExpression);
+        augmentDatas[id].evaluator.eval(attachExpression);
     }
 
     private void OnUpdate(int id)
     {
-        eva.eval(augmentDatas[id].updateExpression);
+        augmentDatas[id].evaluator.eval(updateExpression);
     }
 
 
@@ -137,7 +151,6 @@ public class AugmentManager : MonoBehaviour
     }
     public void LaserSight()
     {
-        Physics.SyncTransforms();
         Vector3 lookDir = gunPoint.forward * 100;
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
@@ -147,13 +160,4 @@ public class AugmentManager : MonoBehaviour
 
     #endregion
 
-    public void Update()
-    {
-        if (GameManager.current.gameState == GameState.Shop) return;
-        //OnUpdate(augmentDatas[0].Code);
-        for (int i = 0; i < character.augments.Count; i++)
-        {
-            OnUpdate(character.augments[i].id);
-        }
-    }
 }

@@ -19,6 +19,7 @@ public class Eva
         switch (exp.type)
         {
             case "Program":
+                return Program(exp, env);
             case "BlockStatement":
                 return BlockStatement(exp, env);
             case "BinaryExpression":
@@ -62,6 +63,11 @@ public class Eva
                 break;
         }
         return null;
+    }
+
+    public Expression Program(Expression exp, Env env)
+    {
+        return evalBlock(exp, env);
     }
 
     public Expression BlockStatement(Expression exp, Env env)
