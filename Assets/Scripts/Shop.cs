@@ -12,6 +12,15 @@ public class Shop : MonoBehaviour
 
     public GameObject synergyListUIContainer;
     public GameObject synergyUIPrefab;
+
+    public int level = 2;
+    public List<List<float>> percents = new List<List<float>>() { 
+        new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
+        new List<float>() { 0.5f, 0.35f, 0.15f, 0.0f, 0.0f },
+        new List<float>() { 0.3f, 0.3f, 0.3f, 0.1f, 0.0f },
+        new List<float>() { 0.2f, 0.25f, 0.30f, 0.2f, 0.05f },
+        new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
+    };
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +33,27 @@ public class Shop : MonoBehaviour
 
         for (int i = 0; i < augmentUIs.Count; i++)
         {
-            int index = Random.Range(0, augmentManager.augmentDatas.Count);
+            // Generate random index based on percents
+            float randNum = Random.Range(0.0f, 1.0f);
+            int rarity = 0;
+
+            float accumulated = 0;
+            for (int j = 0; j < percents[level].Count; j++)
+            {
+                accumulated += percents[level][j];
+                if (randNum <= accumulated)
+                {
+                    rarity = j;
+                    break;
+                }
+            }
+
+            List<int> augmentIndices = augmentManager.augmentRarities[rarity];
+            int randIndex = Random.Range(0, augmentIndices.Count);
+            int augmentIndex = augmentIndices[randIndex];
             augmentUIs[i].gameObject.SetActive(true);
-            augmentUIs[i].Populate(index);
+
+            augmentUIs[i].Populate(augmentIndex);
         }
     }
 
@@ -40,7 +67,7 @@ public class Shop : MonoBehaviour
 
     public void ReRoll()
     {
-        if (player.gold >=2)
+        if (player.gold >= 2)
         {
             player.gold -= 2;
             Refresh();

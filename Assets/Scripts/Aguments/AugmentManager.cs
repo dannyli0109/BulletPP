@@ -44,6 +44,8 @@ public class AugmentManager : MonoBehaviour
     public static AugmentManager current;
     public List<AugmentData> augmentDatas;
     public List<SynergyData> synergyDatas;
+    public int rarityLevels = 5;
+    public List<List<int>> augmentRarities;
     public int[] costs = { 1, 2, 3, 4, 5 };
     public Color[] colors = {
         new Color(1, 1, 1),
@@ -85,6 +87,14 @@ public class AugmentManager : MonoBehaviour
 
         attachExpression = parser.Parse("OnAttached();");
         updateExpression = parser.Parse("OnUpdate();");
+
+        augmentRarities = new List<List<int>>();
+
+        for (int i = 0; i < rarityLevels; i++)
+        {
+            augmentRarities.Add(new List<int>());
+        }
+
         InitAugmentDatas();
         InitSynergyDatas();
     }
@@ -139,6 +149,7 @@ public class AugmentManager : MonoBehaviour
                 evaluators = evaluators
             };
             augmentDatas.Add(data);
+            augmentRarities[data.rarity].Add(data.id);
         }
 
         File.Delete(tempFilePath);
