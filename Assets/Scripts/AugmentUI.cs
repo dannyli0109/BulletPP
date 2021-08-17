@@ -8,6 +8,8 @@ public class AugmentUI : MonoBehaviour
 {
     public TextMeshProUGUI title;
     public TextMeshProUGUI descriptions;
+    public GameObject synergyContainer;
+    public GameObject synergyUIPrefab;
     public TextMeshProUGUI cost;
     public Image background;
     public Outline outline;
@@ -32,15 +34,27 @@ public class AugmentUI : MonoBehaviour
         if (state == 1)
         {
             // obtained one that owned but remains the same level
-            gameObject.SetActive(false);
             shop.PopulateAugmentListUI();
+            gameObject.SetActive(false);
         }
         else if (state == 2)
         {
             // obtained a new augment
-            augmentManager.OnAttached(id, 0);
-            gameObject.SetActive(false);
+            shop.player.RemoveAllModifiers();
+
+            for (int i = 0; i < shop.player.augments.Count; i++)
+            {
+                augmentManager.OnAugmentAttached(shop.player.augments[i].id, shop.player.augments[i].level);
+            }
+
+            for (int i = 0; i < shop.player.synergies.Count; i++)
+            {
+                augmentManager.OnSynergyAttached(shop.player.synergies[i].id, shop.player.synergies[i].breakPoint);
+            }
+
             shop.PopulateAugmentListUI();
+            shop.PopulateSynergyListUI();
+            gameObject.SetActive(false);
         }
         else if (state == 3)
         {
@@ -48,10 +62,16 @@ public class AugmentUI : MonoBehaviour
 
             for (int i = 0; i < shop.player.augments.Count; i++)
             {
-                augmentManager.OnAttached(shop.player.augments[i].id, shop.player.augments[i].level);
+                augmentManager.OnAugmentAttached(shop.player.augments[i].id, shop.player.augments[i].level);
             }
-            gameObject.SetActive(false);
+
+            for (int i = 0; i < shop.player.synergies.Count; i++)
+            {
+                augmentManager.OnSynergyAttached(shop.player.synergies[i].id, shop.player.synergies[i].breakPoint);
+            }
+
             shop.PopulateAugmentListUI();
+            gameObject.SetActive(false);
         }
         shop.UpdateText();
     }
@@ -79,5 +99,18 @@ public class AugmentUI : MonoBehaviour
         descriptions.text = augmentManager.augmentDatas[id].descriptions[level];
         cost.text = "$ " + augmentManager.costs[augmentManager.augmentDatas[id].rarity];
         outline.effectColor = augmentManager.colors[augmentManager.augmentDatas[id].rarity];
+
+        foreach (Transform child in synergyContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
+        {
+            GameObject synergyUI = Instantiate(synergyUIPrefab);
+            synergyUI.GetComponent<TextMeshProUGUI>().text = augmentManager.synergyDatas[augmentManager.augmentDatas[id].synergies[i]].name;
+            synergyUI.transform.SetParent(synergyContainer.transform);
+            synergyUI.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }

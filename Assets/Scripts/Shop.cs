@@ -9,6 +9,9 @@ public class Shop : MonoBehaviour
     public Character player;
     public GameObject augmentListUIContainer;
     public GameObject augmentUIPrefab;
+
+    public GameObject synergyListUIContainer;
+    public GameObject synergyUIPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +67,23 @@ public class Shop : MonoBehaviour
             augmentUI.GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augments[i].id].name + ": " +  player.augments[i].count;
             augmentUI.transform.SetParent(augmentListUIContainer.transform);
             augmentUI.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
+    public void PopulateSynergyListUI()
+    {
+        foreach (Transform child in synergyListUIContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        AugmentManager augmentManager = AugmentManager.current;
+        for (int i = 0; i < player.synergies.Count; i++)
+        {
+            GameObject synergyUI = Instantiate(synergyUIPrefab);
+            synergyUI.GetComponent<TextMeshProUGUI>().text = augmentManager.synergyDatas[player.synergies[i].id].name + ": " + player.synergies[i].count;
+            synergyUI.transform.SetParent(synergyListUIContainer.transform);
+            synergyUI.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }

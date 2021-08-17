@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum StatType
 {
+    Character,
     Bullet,
     Grenade,
     Rocket,
@@ -99,6 +100,7 @@ public abstract class Character : MonoBehaviour
 
 
     public List<Augment> augments = new List<Augment>();
+    public List<Synergy> synergies = new List<Synergy>();
     public List<ModifiedStat> modifiedStats = new List<ModifiedStat>();
     public virtual void Start()
     {
@@ -201,6 +203,32 @@ public abstract class Character : MonoBehaviour
             }
         }
         augments.Add(new Augment() { id = id, count = 1 });
+
+        for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
+        {
+            SynergyData synergyData = augmentManager.synergyDatas[augmentManager.augmentDatas[id].synergies[i]];
+
+            bool existingSyngy = false;
+            for (int j = 0; j < synergies.Count; j++)
+            {
+                if (synergies[j].id == synergyData.id)
+                {
+                    synergies[j].count++;
+                    existingSyngy = true;
+                    break;
+                }
+            }
+            if (!existingSyngy)
+            {
+                synergies.Add(new Synergy()
+                {
+                    id = synergyData.id,
+                    count = 1,
+                    breakPoints = synergyData.breakpoints
+                });
+            }
+        }
+        // when obtain new augment, also update synergy list
         gold -= cost;
         return 2;
     }
@@ -251,6 +279,11 @@ public abstract class Character : MonoBehaviour
             case StatType.Laser:
             {
                     result = (CharacterStat)laserStats.GetType().GetField(stat).GetValue(laserStats);
+                    break;
+            }
+            case StatType.Character:
+            {
+                    result = (CharacterStat)stats.GetType().GetField(stat).GetValue(stats);
                     break;
             }
             default:

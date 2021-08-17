@@ -18,7 +18,22 @@ public class AugmentData
 
     public int rarity { get; set; }
 
+    public List<int> synergies { get; set; }
+
     public List<string> descriptions { get; set; }
+
+    public List<Eva> evaluators;
+
+}
+
+public class SynergyData
+{
+    public int id { get; set; }
+    public string name { get; set; }
+
+    public List<int> breakpoints { get; set; }
+    public List<string> descriptions { get; set; }
+
 
     public List<Eva> evaluators;
 
@@ -28,6 +43,7 @@ public class AugmentManager : MonoBehaviour
 {
     public static AugmentManager current;
     public List<AugmentData> augmentDatas;
+    public List<SynergyData> synergyDatas;
     public int[] costs = { 1, 2, 3, 4, 5 };
     public Color[] colors = {
         new Color(1, 1, 1),
@@ -54,7 +70,12 @@ public class AugmentManager : MonoBehaviour
         if (GameManager.current.gameState == GameState.Shop) return;
         for (int i = 0; i < character.augments.Count; i++)
         {
-            OnUpdate(character.augments[i].id, character.augments[i].level);
+            OnAugmentUpdate(character.augments[i].id, character.augments[i].level);
+        }
+
+        for (int i = 0; i < character.synergies.Count; i++)
+        {
+            OnSynergyUpdate(character.synergies[i].id, character.synergies[i].breakPoint);
         }
     }
 
@@ -62,34 +83,49 @@ public class AugmentManager : MonoBehaviour
     {
         parser = new Parser();
 
-        augmentDatas = new List<AugmentData>();
-        string filePath = Application.streamingAssetsPath + "/AugmentList.xlsx";
-        int columnNum = 0, rowNum = 0;
-        DataRowCollection collection = ReadExcel(filePath, ref columnNum, ref rowNum);
-
         attachExpression = parser.Parse("OnAttached();");
         updateExpression = parser.Parse("OnUpdate();");
+        InitAugmentDatas();
+        InitSynergyDatas();
+    }
+
+    public void InitAugmentDatas()
+    {
+        augmentDatas = new List<AugmentData>();
+
+        string fileName = "AugmentList";
+        string tempFileName = "temp";
+        string fileExtension = ".xlsx";
+        string filePath = Application.streamingAssetsPath + "/" + fileName + fileExtension;
+        string tempFilePath = Application.streamingAssetsPath + "/" + tempFileName + fileExtension;
+
+        // create a temp file instead of reading the existing one, so that the user can have the file open while running the game
+        File.Copy(filePath, tempFilePath, true);
+
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collection = ReadExcel(tempFilePath, 0, ref columnNum, ref rowNum);
 
         for (int i = 1; i < rowNum; i++)
         {
 
             List<string> descriptions = new List<string>();
             List<Eva> evaluators = new List<Eva>();
+            List<string> rawSynergies = collection[i][3].ToString().Split(',').ToList();
+            List<int> synergies = new List<int>();
+
+            for (int j = 0; j < rawSynergies.Count; j++)
+            {
+                synergies.Add(int.Parse(rawSynergies[j]));
+            }
+
+
             for (int j = 0; j < 3; j++)
             {
-                Dictionary<string, Value> records = new Dictionary<string, Value>()
-                {
-                    { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
-                    { "OnAttached", new Value(ToImportFunction(()=>{  })) },
-                    { "LaserSight", new Value(ToImportFunction(LaserSight))},
-                    { "AddModifier", new Value(ToImportFunction(AddModifier))}
-                };
+                Eva evaluator = InitEvaluator();
 
-                descriptions.Add(collection[i][3 + j * 2].ToString());
+                descriptions.Add(collection[i][4 + j * 2].ToString());
 
-                Env env = new Env(records);
-                Eva evaluator = new Eva(env);
-                evaluator.eval(parser.Parse(collection[i][4 + j * 2].ToString()));
+                evaluator.eval(parser.Parse(collection[i][5 + j * 2].ToString()));
                 evaluators.Add(evaluator);
             }
 
@@ -98,14 +134,72 @@ public class AugmentManager : MonoBehaviour
                 id = int.Parse(collection[i][0].ToString()),
                 name = collection[i][1].ToString(),
                 rarity = int.Parse(collection[i][2].ToString()),
+                synergies = synergies,
                 descriptions = descriptions,
                 evaluators = evaluators
             };
             augmentDatas.Add(data);
         }
+
+        File.Delete(tempFilePath);
     }
 
-    public DataRowCollection ReadExcel(string filePath, ref int columnnum, ref int rownum)
+
+    public void InitSynergyDatas()
+    {
+        synergyDatas = new List<SynergyData>();
+
+        string fileName = "AugmentList";
+        string tempFileName = "temp";
+        string fileExtension = ".xlsx";
+        string filePath = Application.streamingAssetsPath + "/" + fileName + fileExtension;
+        string tempFilePath = Application.streamingAssetsPath + "/" + tempFileName + fileExtension;
+
+        // create a temp file instead of reading the existing one, so that the user can have the file open while running the game
+        File.Copy(filePath, tempFilePath, true);
+
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collection = ReadExcel(tempFilePath, 1, ref columnNum, ref rowNum);
+
+        for (int i = 1; i < rowNum; i++)
+        {
+
+            List<string> descriptions = new List<string>();
+            List<Eva> evaluators = new List<Eva>();
+            List<string> rawBreakpoints = collection[i][2].ToString().Split(',').ToList();
+            List<int> breakpoints = new List<int>();
+
+            for (int j = 0; j < rawBreakpoints.Count; j++)
+            {
+                breakpoints.Add(int.Parse(rawBreakpoints[j]));
+            }
+
+
+            for (int j = 0; j < breakpoints.Count; j++)
+            {
+                Eva evaluator = InitEvaluator();
+
+                descriptions.Add(collection[i][3 + j * 2].ToString());
+
+                evaluator.eval(parser.Parse(collection[i][4 + j * 2].ToString()));
+                evaluators.Add(evaluator);
+            }
+
+            SynergyData data = new SynergyData()
+            {
+                id = int.Parse(collection[i][0].ToString()),
+                name = collection[i][1].ToString(),
+                breakpoints = breakpoints,
+                descriptions = descriptions,
+                evaluators = evaluators
+            };
+            synergyDatas.Add(data);
+        }
+
+        File.Delete(tempFilePath);
+    }
+
+    public DataRowCollection ReadExcel(string filePath, int tableIndex, ref int columnnum, ref int rownum)
     {
         System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -113,11 +207,24 @@ public class AugmentManager : MonoBehaviour
         DataSet result = excelReader.AsDataSet();
 
 
-        columnnum = result.Tables[0].Columns.Count;
-        rownum = result.Tables[0].Rows.Count;
+        columnnum = result.Tables[tableIndex].Columns.Count;
+        rownum = result.Tables[tableIndex].Rows.Count;
         stream.Close();
 
-        return result.Tables[0].Rows;
+        return result.Tables[tableIndex].Rows;
+    }
+
+    public Eva InitEvaluator()
+    {
+        Dictionary<string, Value> records = new Dictionary<string, Value>()
+                {
+                    { "OnUpdate", new Value(ToImportFunction(()=>{  })) },
+                    { "OnAttached", new Value(ToImportFunction(()=>{  })) },
+                    { "LaserSight", new Value(ToImportFunction(LaserSight))},
+                    { "AddModifier", new Value(ToImportFunction(AddModifier))}
+                };
+        Env env = new Env(records);
+        return new Eva(env);
     }
 
     public Func<List<Value>, Expression> ToImportFunction(Action func)
@@ -139,14 +246,26 @@ public class AugmentManager : MonoBehaviour
     }
 
     
-    public void OnAttached(int id, int level)
+    public void OnAugmentAttached(int id, int level)
     {
         augmentDatas[id].evaluators[level].eval(attachExpression);
     }
 
-    private void OnUpdate(int id, int level)
+    private void OnAugmentUpdate(int id, int level)
     {
         augmentDatas[id].evaluators[level].eval(updateExpression);
+    }
+
+    public void OnSynergyAttached(int id, int level)
+    {
+        if (level == -1) return;
+        synergyDatas[id].evaluators[level].eval(attachExpression);
+    }
+
+    private void OnSynergyUpdate(int id, int level)
+    {
+        if (level == -1) return;
+        synergyDatas[id].evaluators[level].eval(updateExpression);
     }
 
 

@@ -28,3 +28,22 @@ public class Augment
         }
     }
 }
+
+public class Synergy
+{
+    public int id;
+    public int count;
+    public List<int> breakPoints;
+
+    public int breakPoint
+    {
+        get
+        {
+            for (int i = breakPoints.Count - 1; i >= 0; i--)
+            {
+                if (count >= breakPoints[i]) return i;
+            }
+            return -1;
+        }
+    }
+}
