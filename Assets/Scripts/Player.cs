@@ -88,6 +88,7 @@ public class Player : Character
 
         angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+
     } 
 
     void HandleMovement()
