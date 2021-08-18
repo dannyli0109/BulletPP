@@ -6,10 +6,15 @@ using System;
 [Serializable]
 public class RoomPrefabInformation
 {
-    public Vector2 upperRoomDoorSpawnOffet;
-    public Vector2 lowerRoomDoorSpawnOffet;
-    public Vector2 leftRoomDoorSpawnOffet;
-    public Vector2 rightRoomDoorSpawnOffet;
+    public Vector2 upperRoomDoorSpawnOffet = new Vector2(0, 8.5f);
+    public Vector2 lowerRoomDoorSpawnOffet = new Vector2(0, -8.5f);
+    public Vector2 leftRoomDoorSpawnOffet = new Vector2(-13, 0);
+    public Vector2 rightRoomDoorSpawnOffet = new Vector2(13, 0);
+
+    public float cameraBoundryMaxX = 7;
+    public float cameraBoundryMinX = -7;
+    public float cameraBoundryMaxZ = 6.5f;
+    public float cameraBoundryMinZ = -3.7f;
 
     // where you enter from in the new room.
     public Vector2 middleOffset;

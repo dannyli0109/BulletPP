@@ -755,28 +755,28 @@ MonoBehaviour:
     fireRate:
       baseValue: 0.3
     amountOfBounces:
-      baseValue: 3
+      baseValue: 0
     maxClip:
       baseValue: 1
   grenadeStats:
     damage:
       baseValue: 1
     speed:
-      baseValue: 4
+      baseValue: 5
     size:
       baseValue: 1
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 3
+      baseValue: 10
     fireRate:
       baseValue: 0.4
     amountOfBounces:
       baseValue: 2
     maxClip:
-      baseValue: 0
+      baseValue: 3
     BounceAdditionSpeed:
-      baseValue: 6
+      baseValue: 5
   rocketStats:
     damage:
       baseValue: 1
@@ -791,11 +791,11 @@ MonoBehaviour:
     fireRate:
       baseValue: 0.4
     amountOfBounces:
-      baseValue: 3
-    maxClip:
       baseValue: 0
+    maxClip:
+      baseValue: 1
     acceleration:
-      baseValue: 5
+      baseValue: 7
   laserStats:
     damage:
       baseValue: 0.5
@@ -3389,6 +3389,17 @@ Transform:
   m_Father: {fileID: 208690976}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099120334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+  m_PrefabInstance: {fileID: 1426300194}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc182e4640323644841d09a3eea901a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1100877225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4563,6 +4574,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 284050206}
@@ -4594,6 +4609,378 @@ PrefabInstance:
       propertyPath: miniMapRooms.Array.data[4]
       value: 
       objectReference: {fileID: 1760548604}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[0].upperRoomDoorSpawnOffet.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[0].lowerRoomDoorSpawnOffet.y
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMaxY
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMinY
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoomInfo.Array.data[0].leftRoomDoorSpawnOffet.x
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[0].rightRoomDoorSpawnOffet.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[0].rightRoomDoorSpawnOffet.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[1].rightRoomDoorSpawnOffet.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[1].rightRoomDoorSpawnOffet.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[2].rightRoomDoorSpawnOffet.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoomInfo.Array.data[2].rightRoomDoorSpawnOffet.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
@@ -5790,6 +6177,26 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 284050212}
+    - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: mapGenerationScript
+      value: 
+      objectReference: {fileID: 1099120334}
+    - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: playerScript
+      value: 
+      objectReference: {fileID: 284050209}
+    - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: gunPointDistMutliplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: maxGunPointDist
+      value: 450
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184959538372637877, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
 --- !u!4 &1760548602 stripped
