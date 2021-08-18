@@ -85,30 +85,42 @@ public class AugmentUI : MonoBehaviour
     public void UpdateText()
     {
         AugmentManager augmentManager = AugmentManager.current;
-        int level = 0;
-        for (int i = 0; i < shop.player.augments.Count; i++)
-        {
-            if (shop.player.augments[i].id == id)
+        { 
+            int level = 0;
+            for (int i = 0; i < shop.player.augments.Count; i++)
             {
-                level = shop.player.augments[i].level;
-                break;
+                if (shop.player.augments[i].id == id)
+                {
+                    level = shop.player.augments[i].level;
+                    break;
+                }
             }
-        }
-        title.text = augmentManager.augmentDatas[id].name;
-        descriptions.richText = true;
-        descriptions.text = augmentManager.augmentDatas[id].descriptions[level];
-        cost.text = "$ " + augmentManager.costs[augmentManager.augmentDatas[id].rarity];
-        outline.effectColor = augmentManager.colors[augmentManager.augmentDatas[id].rarity];
+            title.text = augmentManager.augmentDatas[id].name;
+            descriptions.richText = true;
+            descriptions.text = augmentManager.augmentDatas[id].descriptions[level];
+            cost.text = "$ " + augmentManager.costs[augmentManager.augmentDatas[id].rarity];
+            outline.effectColor = augmentManager.colors[augmentManager.augmentDatas[id].rarity];
 
-        foreach (Transform child in synergyContainer.transform)
-        {
-            Destroy(child.gameObject);
+            foreach (Transform child in synergyContainer.transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
         {
             GameObject synergyUI = Instantiate(synergyUIPrefab);
-            synergyUI.GetComponent<TextMeshProUGUI>().text = augmentManager.synergyDatas[augmentManager.augmentDatas[id].synergies[i]].name;
+            int synergyId = augmentManager.augmentDatas[id].synergies[i];
+            int breakPoint = -1;
+            for (int j = 0; j < shop.player.synergies.Count; j++)
+            {
+                if (shop.player.synergies[j].id == synergyId)
+                {
+                    breakPoint = shop.player.synergies[j].breakPoint;
+                    break;
+                }
+            }
+            synergyUI.GetComponent<SynergyUI>().Populate(synergyId, breakPoint);
             synergyUI.transform.SetParent(synergyContainer.transform);
             synergyUI.transform.localScale = new Vector3(1, 1, 1);
         }

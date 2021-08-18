@@ -34,7 +34,6 @@ public class SynergyData
     public List<int> breakpoints { get; set; }
     public List<string> descriptions { get; set; }
 
-
     public List<Eva> evaluators;
 
 }
@@ -185,14 +184,16 @@ public class AugmentManager : MonoBehaviour
                 breakpoints.Add(int.Parse(rawBreakpoints[j]));
             }
 
+            // string when none is activated
+            descriptions.Add(collection[i][3].ToString());
 
             for (int j = 0; j < breakpoints.Count; j++)
             {
                 Eva evaluator = InitEvaluator();
 
-                descriptions.Add(collection[i][3 + j * 2].ToString());
+                descriptions.Add(collection[i][4 + j * 2].ToString());
 
-                evaluator.eval(parser.Parse(collection[i][4 + j * 2].ToString()));
+                evaluator.eval(parser.Parse(collection[i][5 + j * 2].ToString()));
                 evaluators.Add(evaluator);
             }
 
