@@ -7,8 +7,8 @@ public class Laser : Ammo
     public LineRenderer thisLineRenderer;
     public BoxCollider ourCollider;
 
-    Vector3 directiony;
-    float nichael;
+    Vector3 randomOffsetDirection;
+    float randomOffSet;
 
 
     public float lengthDecreaseSpeed;
@@ -19,8 +19,8 @@ public class Laser : Ammo
 
     void Start()
     {
-        directiony = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
-        nichael = Random.Range(0, 3);
+        randomOffsetDirection = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
+        randomOffSet = Random.Range(0, 3);
         currentLaserLength = owner.laserStats.maxLaserLength.value;
         currentLaserWidth = owner.laserStats.maxLaserWidth.value;
 
@@ -61,7 +61,7 @@ public class Laser : Ammo
                 Destroy(gameObject);
             }
         }
-        transform.rotation = Quaternion.RotateTowards(owner.bulletContainer.transform.rotation, Quaternion.LookRotation(directiony), nichael);
+        transform.rotation = Quaternion.RotateTowards(owner.bulletContainer.transform.rotation, Quaternion.LookRotation(randomOffsetDirection), randomOffSet);
 
         // Vector3 lookDir = (owner.gunTip.forward)* currentLaserLength;
         Vector3 lookDir = (transform.forward) * currentLaserLength;
