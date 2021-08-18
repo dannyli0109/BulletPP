@@ -110,10 +110,10 @@ public class AugmentManager : MonoBehaviour
         string tempFilePath = Application.streamingAssetsPath + "/" + tempFileName + fileExtension;
 
         // create a temp file instead of reading the existing one, so that the user can have the file open while running the game
-        File.Copy(filePath, tempFilePath, true);
+        //File.Copy(filePath, tempFilePath, true);
 
         int columnNum = 0, rowNum = 0;
-        DataRowCollection collection = ReadExcel(tempFilePath, 0, ref columnNum, ref rowNum);
+        DataRowCollection collection = ReadExcel(filePath, 0, ref columnNum, ref rowNum);
 
         for (int i = 1; i < rowNum; i++)
         {
@@ -152,7 +152,7 @@ public class AugmentManager : MonoBehaviour
             augmentRarities[data.rarity].Add(data.id);
         }
 
-        File.Delete(tempFilePath);
+        //File.Delete(filePath);
     }
 
 
@@ -167,10 +167,10 @@ public class AugmentManager : MonoBehaviour
         string tempFilePath = Application.streamingAssetsPath + "/" + tempFileName + fileExtension;
 
         // create a temp file instead of reading the existing one, so that the user can have the file open while running the game
-        File.Copy(filePath, tempFilePath, true);
+        //File.Copy(filePath, tempFilePath, true);
 
         int columnNum = 0, rowNum = 0;
-        DataRowCollection collection = ReadExcel(tempFilePath, 1, ref columnNum, ref rowNum);
+        DataRowCollection collection = ReadExcel(filePath, 1, ref columnNum, ref rowNum);
 
         for (int i = 1; i < rowNum; i++)
         {
@@ -207,7 +207,7 @@ public class AugmentManager : MonoBehaviour
             synergyDatas.Add(data);
         }
 
-        File.Delete(tempFilePath);
+        //File.Delete(filePath);
     }
 
     public DataRowCollection ReadExcel(string filePath, int tableIndex, ref int columnnum, ref int rownum)
