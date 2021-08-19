@@ -741,6 +741,10 @@ MonoBehaviour:
       baseValue: 0
     outOfCombatReloadTime:
       baseValue: 0.6
+    spreadAngle:
+      baseValue: 60
+    additionalAmmo:
+      baseValue: 0
   bulletStats:
     damage:
       baseValue: 1
@@ -757,7 +761,9 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 1
+      baseValue: 3
+    additionalAmmo:
+      baseValue: 2
   grenadeStats:
     damage:
       baseValue: 1
@@ -774,7 +780,9 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 2
     maxClip:
-      baseValue: 3
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
     BounceAdditionSpeed:
       baseValue: 5
   rocketStats:
@@ -793,7 +801,9 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 1
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
     acceleration:
       baseValue: 7
     radius:
@@ -814,6 +824,8 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 0
     maxClip:
+      baseValue: 0
+    additionalAmmo:
       baseValue: 0
     maxLaserLength:
       baseValue: 5

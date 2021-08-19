@@ -119,43 +119,120 @@ public class Player : Character
         if (Input.GetMouseButtonDown(0) || (timeSinceFired > stats.timeBetweenShots.value && Input.GetMouseButton(0)))
         {
             timeSinceFired = 0;
-            if (currentBulletClip > 0)
-            {
-                GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
-                bullet.transform.SetParent(null);
-                bullet.transform.localScale = new Vector3(bulletStats.size.value, bulletStats.size.value, bulletStats.size.value);
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
-                bulletComponent.owner = this;
-                currentBulletClip--;
-            }
+            // shoot the main one in the middle
+            ShootAmmos(0);
 
-            if (currentGrenadeClip > 0)
+            for (int i = 0; i < (int)AmmoType.Count; i++)
             {
-                GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
-                grenade.transform.SetParent(null);
-                Grenade grenadeComponent = grenade.GetComponent<Grenade>();
-                grenadeComponent.owner = this;
-                currentGrenadeClip--;
-            }
-
-            if (currentRocketClip > 0)
-            {
-                GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
-                rocket.transform.SetParent(null);
-                Rocket rocketComponent = rocket.GetComponent<Rocket>();
-                rocketComponent.owner = this;
-                currentRocketClip--;
-            }
-
-            if (currentLaserClip > 0)
-            {
-                GameObject laser = Instantiate(laserPrefab, bulletContainer);
-                laser.transform.SetParent(null);
-                Laser laserComponent = laser.GetComponent<Laser>();
-                laserComponent.owner = this;
-                currentLaserClip--;
+                AmmoStats ammoStat = GetAmmoStats(i);
+                float totalAdditionalAmmos = (ammoStat.additionalAmmo.value + stats.additionalAmmo.value);
+                int bulletsOnOneSide = Mathf.CeilToInt(totalAdditionalAmmos / 2.0f);
+                int count = 0;
+                for (int j = 1; j <= bulletsOnOneSide; j++)
+                {
+                    float angle = -(stats.spreadAngle.value / (float)(bulletsOnOneSide) * (float)j) / 2.0f;
+                    float increment = stats.spreadAngle.value / (float)(bulletsOnOneSide) * (float)j;
+                    for (int k = 0; k < 2; k++)
+                    {
+                        if (count >= totalAdditionalAmmos) break;
+                        angle += k * increment;
+                        Shoot(i, angle);
+                        count++;
+                    }
+                }
             }
         }
+    }
+
+    AmmoStats GetAmmoStats(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return bulletStats;
+            case 1:
+                return grenadeStats;
+            case 2:
+                return laserStats;
+            case 3:
+                return rocketStats;
+            default:
+                break;
+        }
+        return null;
+    }
+
+    void Shoot(int type, float angle)
+    {
+        switch (type)
+        {
+            case 0:
+                ShootBullet(angle);
+                break;
+            case 1:
+                ShootGrenade(angle);
+                break;
+            case 2:
+                ShootLaser(angle);
+                break;
+            case 3:
+                ShootRocket(angle);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void ShootBullet(float angle)
+    {
+        if (currentBulletClip > 0)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
+            Ammo ammoComponent = bullet.GetComponent<Ammo>();
+            ammoComponent.Init(this, angle);
+            currentBulletClip--;
+        }
+    }
+
+    void ShootRocket(float angle)
+    {
+        if (currentRocketClip > 0)
+        {
+            GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
+            Ammo ammoComponent = rocket.GetComponent<Ammo>();
+            ammoComponent.Init(this, angle);
+            currentRocketClip--;
+        }
+    }
+
+    void ShootGrenade(float angle)
+    {
+        if (currentGrenadeClip > 0)
+        {
+            GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
+            Ammo ammoComponent = grenade.GetComponent<Ammo>();
+            ammoComponent.Init(this, angle);
+            currentGrenadeClip--;
+        }
+    }
+
+    void ShootLaser(float angle)
+    {
+        if (currentLaserClip > 0)
+        {
+            GameObject laser = Instantiate(laserPrefab, bulletContainer);
+            Ammo ammoComponent = laser.GetComponent<Ammo>();
+            ammoComponent.Init(this, angle);
+            currentLaserClip--;
+        }
+    }
+
+    void ShootAmmos(float angle)
+    {
+        ShootBullet(angle);
+        ShootGrenade(angle);
+        ShootRocket(angle);
+        ShootLaser(angle);
     }
 
     void HandleReload()

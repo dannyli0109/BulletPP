@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AmmoType
+{
+    Bullet,
+    Grenade,
+    Laser,
+    Rocket,
+    Count
+}
+
 public abstract class Ammo : MonoBehaviour
 {
     public Character owner;
@@ -14,6 +23,7 @@ public abstract class Ammo : MonoBehaviour
     #endregion stats
 
     public abstract float GetDamage();
+    public abstract void Init(Character owner, float angle);
 
     protected void SpawnHitParticle(float size)
     {

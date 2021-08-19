@@ -24,6 +24,7 @@ public class AmmoStats
     public CharacterStat fireRate;
     public CharacterStat amountOfBounces;
     public CharacterStat maxClip;
+    public CharacterStat additionalAmmo;
 }
 
 [Serializable]
@@ -63,6 +64,8 @@ public class CharacterStats
     public CharacterStat immunityFromDashing;
     public CharacterStat immunityFromDamage;
     public CharacterStat outOfCombatReloadTime;
+    public CharacterStat spreadAngle;
+    public CharacterStat additionalAmmo;
 }
 
 public class ModifiedStat
