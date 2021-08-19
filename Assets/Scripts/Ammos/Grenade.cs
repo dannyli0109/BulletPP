@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Grenade : Ammo
 {
-    float currentSpeed;
+ public   float currentSpeed;
+    public float slowDownSpeed;
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnGrenadeDestroy;
@@ -27,6 +28,7 @@ public class Grenade : Ammo
     void Update()
     {
         if (GameManager.current.gameState == GameState.Shop) Destroy(gameObject);
+        currentSpeed = Mathf.Clamp(currentSpeed - slowDownSpeed * Time.deltaTime, owner.grenadeStats.speed.value, currentSpeed);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.grenadeStats.travelTime.value)
         {
@@ -37,7 +39,7 @@ public class Grenade : Ammo
         {
             if (BounceOffAmmo())
             {
-                currentSpeed += owner.grenadeStats.BounceAdditionSpeed.value;
+                currentSpeed += owner.grenadeStats.bounceAdditionSpeed.value;
             }
         }
     }

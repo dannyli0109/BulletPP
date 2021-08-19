@@ -18,6 +18,8 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI rocketAmmoText;
     public GameObject laserUI;
     public TextMeshProUGUI laserFuelText;
+    public GameObject bouncingBladeUI;
+    public TextMeshProUGUI bouncingBladeText;
 
     public Color32 filledClipColor;
     public Color32 emptyClipColor;
@@ -102,6 +104,24 @@ public class HUDManager : MonoBehaviour
         else
         {
             laserUI.SetActive(false);
+        }
+
+        if (player.bouncingBladeStats.maxClip.value > 0)
+        {
+            bouncingBladeUI.SetActive(true);
+            bouncingBladeText.text = player.currentBouncingBladeClip.ToString();
+            if (player.currentGrenadeClip == 0)
+            {
+                bouncingBladeText.color = emptyClipColor;
+            }
+            else
+            {
+                bouncingBladeText.color = filledClipColor;
+            }
+        }
+        else
+        {
+            bouncingBladeUI.SetActive(false);
         }
 
 

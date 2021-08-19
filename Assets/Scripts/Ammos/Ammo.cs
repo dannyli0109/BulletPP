@@ -8,6 +8,7 @@ public abstract class Ammo : MonoBehaviour
     public GameObject hitParticlePrefab;
     public Transform ammoTip;
     protected float bornTime = 0;
+    public bool overTimeDamage;
 
     #region stats
     public int timesBounced = 0;

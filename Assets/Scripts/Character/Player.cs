@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Player : Character
 {
@@ -26,12 +27,11 @@ public class Player : Character
     public int currentGrenadeClip;
     public int currentRocketClip;
     public int currentLaserClip;
+
     #endregion
 
     float angle;
     Vector2 movement;
-
-
 
     public override void Start()
     {
@@ -41,6 +41,7 @@ public class Player : Character
         currentGrenadeClip = (int)grenadeStats.maxClip.value;
         currentRocketClip = (int)rocketStats.maxClip.value;
         currentLaserClip = (int)laserStats.maxClip.value;
+        currentBouncingBladeClip = 1;
         base.Start();
     }
 
@@ -155,6 +156,15 @@ public class Player : Character
                 laserComponent.owner = this;
                 currentLaserClip--;
             }
+
+            if (currentBouncingBladeClip > 0&& bouncingBladeStats.maxClip.value>0)
+            {
+                GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
+                blade.transform.SetParent(null);
+                BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
+                bladeComponent.owner = this;
+                currentBouncingBladeClip--;
+            }
         }
     }
 
@@ -190,7 +200,10 @@ public class Player : Character
                 currentGrenadeClip = (int)grenadeStats.maxClip.value;
                 currentRocketClip = (int)rocketStats.maxClip.value;
                 currentLaserClip = (int)laserStats.maxClip.value;
+                //currentBouncingBladeClip = (int)bouncingBladeStats.maxClip.value;
                 reloading = false;
+
+                Debug.Log("Bullet " + currentBulletClip + " " + (int)bulletStats.maxClip.value + " grenade " + currentGrenadeClip + " " + (int)grenadeStats.maxClip.value + " rocket  " + currentRocketClip + " " + (int)rocketStats.maxClip.value + " current laser " + currentLaserClip + " " + (int)laserStats.maxClip.value + " blades " + currentBouncingBladeClip + " " + (int)bouncingBladeStats.maxClip.value);
             }
         }
     }
@@ -223,10 +236,8 @@ public class Player : Character
 
     }
 
-
     public override void OnDestroy()
     {
         base.OnDestroy();
     }
-
 }
