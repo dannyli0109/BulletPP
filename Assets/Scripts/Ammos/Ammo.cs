@@ -6,8 +6,9 @@ public enum AmmoType
 {
     Bullet,
     Grenade,
-    Laser,
     Rocket,
+    Laser,
+    BouncingBlade,
     Count
 }
 

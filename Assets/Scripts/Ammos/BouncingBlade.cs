@@ -109,6 +109,14 @@ public class BouncingBlade : Ammo
         EventManager.current.onAmmoDestroy -= OnBouncingBladeDestroy;
     }
 
+    public override void Init(Character owner, float angle)
+    {
+        this.owner = owner;
+        transform.SetParent(null);
+        transform.localScale = new Vector3(owner.bouncingBladeStats.size.value, owner.bouncingBladeStats.size.value, owner.bouncingBladeStats.size.value);
+        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localRotation.eulerAngles.y, 0f));
+    }
+
     public override float GetDamage()
     {
         return owner.bouncingBladeStats.damage.value * owner.stats.damageMultiplier.value;

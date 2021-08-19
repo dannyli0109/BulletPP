@@ -142,6 +142,23 @@ public class Player : Character
                     }
                 }
             }
+
+            if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
+            {
+                GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
+                Ammo ammoComponent = blade.GetComponent<Ammo>();
+                ammoComponent.Init(this, 0);
+                //BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
+                //  bladeComponent.owner = this;
+                currentBouncingBladeClip--;
+            }
+            if (currentLaserClip > 0)
+            {
+                GameObject laser = Instantiate(laserPrefab, bulletContainer);
+                Ammo ammoComponent = laser.GetComponent<Ammo>();
+                ammoComponent.Init(this, angle);
+                currentLaserClip--;
+            }
         }
     }
 
@@ -157,6 +174,13 @@ public class Player : Character
                 return laserStats;
             case 3:
                 return rocketStats;
+            case 4:
+                return laserStats;
+                break;
+            case 5:
+                return bouncingBladeStats;
+                break;
+
             default:
                 break;
         }
@@ -179,25 +203,14 @@ public class Player : Character
             case 3:
                 ShootRocket(angle);
                 break;
+            case 4:
+                ShootLaser(angle);
+                break;
+            case 5:
+                ShootBouncingBlade(angle);
+                break;
             default:
                 break;
-            if (currentLaserClip > 0)
-            {
-                GameObject laser = Instantiate(laserPrefab, bulletContainer);
-                laser.transform.SetParent(null);
-                Laser laserComponent = laser.GetComponent<Laser>();
-                laserComponent.owner = this;
-                currentLaserClip--;
-            }
-
-            if (currentBouncingBladeClip > 0&& bouncingBladeStats.maxClip.value>0)
-            {
-                GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
-                blade.transform.SetParent(null);
-                BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
-                bladeComponent.owner = this;
-                currentBouncingBladeClip--;
-            }
         }
     }
 
@@ -242,6 +255,20 @@ public class Player : Character
             Ammo ammoComponent = laser.GetComponent<Ammo>();
             ammoComponent.Init(this, angle);
             currentLaserClip--;
+        }
+    }
+
+    void ShootBouncingBlade(float angle)
+    {
+        Debug.Log("trying to shoot blade");
+        if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
+        {
+            GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
+            Ammo ammoComponent = blade.GetComponent<Ammo>();
+            ammoComponent.Init(this, angle);
+            //BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
+          //  bladeComponent.owner = this;
+            currentBouncingBladeClip--;
         }
     }
 

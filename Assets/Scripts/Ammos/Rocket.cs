@@ -67,6 +67,7 @@ public class Rocket : Ammo
             Destroy(gameObject);
         }
     }
+
     private void OnDestroy()
     {
         Vector3 pos = new Vector3(transform.position.x, 1.01f, transform.position.z);
@@ -81,7 +82,6 @@ public class Rocket : Ammo
         }
         EventManager.current.onAmmoDestroy -= OnRocketDestroy;
     }
-
 
     public override float GetDamage()
     {
