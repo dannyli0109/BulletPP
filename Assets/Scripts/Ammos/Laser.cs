@@ -32,6 +32,7 @@ public class Laser : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
+        if (GameManager.current.gameState == GameState.Shop) return;
         //if (owner)
         //{
         //    if (other.gameObject.layer == LayerMask.NameToLayer("Character"))

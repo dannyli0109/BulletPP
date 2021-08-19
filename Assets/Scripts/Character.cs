@@ -121,6 +121,12 @@ public abstract class Character : MonoBehaviour
 
     protected void OnAmmoHit(Ammo ammo, GameObject gameObject)
     {
+        if (GameManager.current.gameState == GameState.Shop)
+        {
+            Debug.Log("Ammo hit  but in shop");
+            return;
+        }
+
         //Debug.Log(ammo);
         if (this.gameObject == gameObject)
         {
@@ -129,6 +135,7 @@ public abstract class Character : MonoBehaviour
                 if (currentImmunityFrame <= 0)
                 {
                     hp -= ammo.GetDamage();
+                    Debug.Log(ammo.owner + " damage hp: " + hp);
                 }
                 else
                 {
@@ -162,7 +169,6 @@ public abstract class Character : MonoBehaviour
 
     public virtual void Shoot()
     {
-
         GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
         bullet.transform.SetParent(null);
         Vector3 scale = bullet.transform.localScale;

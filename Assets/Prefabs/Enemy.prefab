@@ -1587,6 +1587,16 @@ MonoBehaviour:
       baseValue: 0.5
     damageMultiplier:
       baseValue: 1
+    dashAmount:
+      baseValue: 0
+    timeBetweenDashs:
+      baseValue: 0
+    immunityFromDashing:
+      baseValue: 0
+    immunityFromDamage:
+      baseValue: 0
+    outOfCombatReloadTime:
+      baseValue: 0
   bulletStats:
     damage:
       baseValue: 2
@@ -1597,13 +1607,13 @@ MonoBehaviour:
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 3
+      baseValue: 4
     fireRate:
       baseValue: 0.3
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 10
+      baseValue: 12
   grenadeStats:
     damage:
       baseValue: 0
@@ -1620,6 +1630,8 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 0
     maxClip:
+      baseValue: 0
+    BounceAdditionSpeed:
       baseValue: 0
   rocketStats:
     damage:
@@ -1638,17 +1650,8 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 0
-  animator: {fileID: 1109022956259654619}
-  bulletPrefab: {fileID: 2943491641176895762, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
-  grenadePrefab: {fileID: 0}
-  rocketPrefab: {fileID: 0}
-  bulletContainer: {fileID: 1109022956828929431}
-  gunTip: {fileID: 0}
-  hp: 0
-  gold: 1
-  timeSinceFired: 0
-  reloading: 0
-  currentImmunityFrame: 0
+    acceleration:
+      baseValue: 0
   laserStats:
     damage:
       baseValue: 0
@@ -1670,13 +1673,17 @@ MonoBehaviour:
       baseValue: 0
     maxLaserWidth:
       baseValue: 0
-  currentLaserFuel: 0
-  currentLazerLength: 0
-  currentLazerWidth: 0
-  lazerGrowthSpeed: 0
-  lazerRecoilSpeed: 0
-  lazerWidthGrowth: 0
-  laserCollider: {fileID: 0}
+  animator: {fileID: 1109022956259654619}
+  bulletPrefab: {fileID: 2943491641176895762, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
+  grenadePrefab: {fileID: 0}
+  rocketPrefab: {fileID: 0}
+  laserPrefab: {fileID: 0}
+  bulletContainer: {fileID: 1109022956828929431}
+  hp: 0
+  gold: 1
+  timeSinceFired: 0
+  reloading: 0
+  currentImmunityFrame: 0
   thisLineRenderer: {fileID: 0}
   finalDestination: {x: 0, y: 0, z: 0}
   nextDestination: {x: 0, y: 0, z: 0}

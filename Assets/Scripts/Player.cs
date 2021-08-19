@@ -31,8 +31,6 @@ public class Player : Character
     float angle;
     Vector2 movement;
 
-
-
     public override void Start()
     {
         EventManager.current.receiveGold += ReceiveGold;
@@ -225,10 +223,8 @@ public class Player : Character
 
     }
 
-
     public override void OnDestroy()
     {
         base.OnDestroy();
     }
-
 }

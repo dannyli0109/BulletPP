@@ -32,6 +32,7 @@ public class Rocket : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
+        if (GameManager.current.gameState == GameState.Shop) return;
         HandleAmmoHit(other);
         EventManager.current.OnAmmoDestroy(gameObject);
     }
