@@ -40,6 +40,7 @@ public class GrenadeStats : AmmoStats
 public class RocketStats : AmmoStats
 {
     public CharacterStat acceleration;
+    public CharacterStat heatSeeking;
 }
 
 [Serializable]
@@ -92,6 +93,8 @@ public abstract class Character : MonoBehaviour
 
     public bool reloading;
     public float currentImmunityFrame;
+
+    public Transform TransformBeingUsedBecauseFunctionsNeedATranform;
 
     // TODO: Move this else where
     #region Lazer
