@@ -25,6 +25,7 @@ public class Grenade : Ammo
 
     void Update()
     {
+        if (GameManager.current.gameState == GameState.Shop) Destroy(gameObject);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.grenadeStats.travelTime.value)
         {

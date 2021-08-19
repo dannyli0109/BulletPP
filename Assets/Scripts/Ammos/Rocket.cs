@@ -14,6 +14,7 @@ public class Rocket : Ammo
 
     void Update()
     {
+        if (GameManager.current.gameState == GameState.Shop) Destroy(gameObject);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
