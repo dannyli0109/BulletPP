@@ -119,6 +119,18 @@ public class MapGeneration : MonoBehaviour
     public Color DefaultMiniMapRoomColour;
     #endregion
 
+    public float totalRoomDiffucluty;
+    public float singleEnemyCutOff;
+    public float secondWaveCutOff;
+
+    public float roomFinishMultiplier;
+
+    public List<int> numberOfWaves;
+    int currentWave;
+    public float waveWaitingTime;
+    public float currentWaveWaitingTime;
+    bool roomClear;
+
     public BTSManager thisBTSManager;
 
     void Start()
@@ -415,17 +427,31 @@ public class MapGeneration : MonoBehaviour
     {
         if (!rooms[currentRoomInside].completed && currentRoomInside != 0)
         {
-            int holdingRand = UnityEngine.Random.Range(1, 4);
-            if (currentRoomInside <= 4)
-            {
-                holdingRand = 1;
-            }
+            currentWave = 0;
+            numberOfWaves = new List<int>();
             // lock doors
-            Debug.Log("encounter start");
+            //Debug.Log("encounter start " + totalRoomDiffucluty);
             Vector3 placement = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
             inCombat = true;
 
-            for (int i = 0; i < holdingRand; i++)
+            //Debug.Log((totalRoomDiffucluty / 3) + " " + totalRoomDiffucluty / 2);
+            int holdingRand = (int)UnityEngine.Random.Range((totalRoomDiffucluty/3), totalRoomDiffucluty/2);
+            holdingRand++;
+          //  Debug.Log(holdingRand);
+            if (totalRoomDiffucluty< singleEnemyCutOff)
+            {
+                holdingRand = 1;
+            }
+            if(totalRoomDiffucluty> secondWaveCutOff)
+            {
+                holdingRand = holdingRand / 2;
+                numberOfWaves.Add(holdingRand+1);
+                Debug.Log("Two waves");
+            }
+
+            numberOfWaves.Add(holdingRand);
+
+            for (int i = 0; i <numberOfWaves[0]; i++)
             {
                 GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
                 holdingGameObject.GetComponent<Enemy>().target = playerTarget;
@@ -451,29 +477,64 @@ public class MapGeneration : MonoBehaviour
 
     public void UpdateEncounter()
     {
-        if (EnemiesInEncounter.Count <= 0)
+        if (roomClear)
         {
-            inCombat = false;
-            rooms[currentRoomInside].completed = true;
-            CheckIfMapCompleted();
-            refreshMiniMapUI();
-            if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
+            if (currentWaveWaitingTime > waveWaitingTime)
             {
-                GameManager.current.gameState = GameState.Shop;
-                GameManager.current.shop.Refresh();
+                roomClear = false;
+                Vector3 placement = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
+                for (int i = 0; i < numberOfWaves[currentWave]; i++)
+                {
+                    GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
+                    holdingGameObject.GetComponent<Enemy>().target = playerTarget;
+                    holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
+                    EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+                    GameManager.current.gameState = GameState.Game;
+                }
+            }
+            else
+            {
+                currentWaveWaitingTime += Time.deltaTime;
             }
         }
         else
         {
-            for (int i = 0; i < EnemiesInEncounter.Count; i++)
+            if (EnemiesInEncounter.Count <= 0)
             {
-                if (EnemiesInEncounter[i].hp <= 0)
+                currentWave++;
+                if (currentWave < numberOfWaves.Count)
                 {
-                    EnemiesInEncounter.RemoveAt(i);
+                    Debug.Log("Current wave");
+          
+                    roomClear = true;
+                    currentWaveWaitingTime = 0;
                 }
                 else
                 {
-                    //  Debug.Log(i + " Alive " + EnemiesInEncounter[i].hp);
+                    totalRoomDiffucluty += roomFinishMultiplier;
+                    inCombat = false;
+                    rooms[currentRoomInside].completed = true;
+                    CheckIfMapCompleted();
+                    refreshMiniMapUI();
+                    if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
+                    {
+                        GameManager.current.gameState = GameState.Shop;
+                        GameManager.current.shop.Refresh();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < EnemiesInEncounter.Count; i++)
+                {
+                    if (EnemiesInEncounter[i].hp <= 0)
+                    {
+                        EnemiesInEncounter.RemoveAt(i);
+                    }
+                    else
+                    {
+                        //  Debug.Log(i + " Alive " + EnemiesInEncounter[i].hp);
+                    }
                 }
             }
         }
@@ -530,7 +591,7 @@ public class MapGeneration : MonoBehaviour
 
             CheckToStartEncounter();
             refreshMiniMapUI();
-            Debug.Log(directionInput);
+            //Debug.Log(directionInput);
         }
     }
 
