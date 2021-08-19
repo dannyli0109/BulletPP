@@ -143,6 +143,7 @@ public class Player : Character
                 }
             }
 
+            /*
             if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
             {
                 GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
@@ -159,6 +160,7 @@ public class Player : Character
                 ammoComponent.Init(this, angle);
                 currentLaserClip--;
             }
+            */
         }
     }
 
@@ -278,6 +280,7 @@ public class Player : Character
         ShootGrenade(angle);
         ShootRocket(angle);
         ShootLaser(angle);
+        ShootBouncingBlade(angle);
     }
 
     void HandleReload()
