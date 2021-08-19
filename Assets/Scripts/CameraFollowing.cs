@@ -23,7 +23,7 @@ public class CameraFollowing : MonoBehaviour
         mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
 
         float holdingDist = Mathf.Clamp(Vector2.Distance(new Vector2(0, 0), mouseOnScreen), 0, maxGunPointDist);
-        Debug.Log(holdingDist);
+        //Debug.Log(holdingDist);
 
 
         Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier*(holdingDist/maxGunPointDist)));

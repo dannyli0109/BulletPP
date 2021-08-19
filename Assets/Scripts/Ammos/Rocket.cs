@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rocket : Ammo
 {
+    public AOEDamage aoePrefab;
     float currentSpeed;
     void Start()
     {
@@ -32,7 +33,8 @@ public class Rocket : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        HandleAmmoHit(other);
+        //HandleAmmoHit(other);
+
         EventManager.current.OnAmmoDestroy(gameObject);
     }
 
@@ -46,6 +48,16 @@ public class Rocket : Ammo
     }
     private void OnDestroy()
     {
+        Vector3 pos = new Vector3(transform.position.x, 1.01f, transform.position.z);
+        AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
+        if (owner.gameObject.layer == 11)
+        {
+            aoeDamage.Init(owner.rocketStats.radius.value, owner.rocketStats.damage.value, 1 << 12);
+        }
+        else
+        {
+            aoeDamage.Init(owner.rocketStats.radius.value, owner.rocketStats.damage.value, 1 << 11);
+        }
         EventManager.current.onAmmoDestroy -= OnRocketDestroy;
     }
 
