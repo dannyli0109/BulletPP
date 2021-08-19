@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 3518761386705644005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 344425783152976132}
   - {fileID: 8774733180300131909}
@@ -83,6 +83,7 @@ MonoBehaviour:
   hitParticlePrefab: {fileID: 1504079761642245970, guid: 4b953c9d8a6754a43a6adb40e06917bd, type: 3}
   ammoTip: {fileID: 8774733180300131909}
   timesBounced: 0
+  slowDownSpeed: 2
 --- !u!65 &4082053318812833439
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System;
 using UnityEngine;
 
 public enum StatType
@@ -10,6 +8,7 @@ public enum StatType
     Bullet,
     Grenade,
     Rocket,
+    BouncingBlade,
     Laser
 }
 
@@ -32,10 +31,18 @@ public class BulletStats : AmmoStats
 {
 
 }
+
+[Serializable]
+public class BouncingBladeStats : AmmoStats
+{
+    public CharacterStat bounceAdditionSpeed;
+    public CharacterStat bounceAdditionDamage;
+}
+
 [Serializable]
 public class GrenadeStats : AmmoStats
 {
-    public CharacterStat BounceAdditionSpeed;
+    public CharacterStat bounceAdditionSpeed;
 }
 [Serializable]
 public class RocketStats : AmmoStats
@@ -75,19 +82,20 @@ public class ModifiedStat
     public StatModifier modifier;
 }
 
-
 public abstract class Character : MonoBehaviour
 {
     public CharacterStats stats;
     public BulletStats bulletStats;
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
+    public BouncingBladeStats bouncingBladeStats;
     public LaserStats laserStats;
 
     public Animator animator;
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
     public GameObject rocketPrefab;
+    public GameObject bouncingBladePrefab;
     public GameObject laserPrefab;
     public Transform bulletContainer;
 
@@ -97,6 +105,7 @@ public abstract class Character : MonoBehaviour
 
     public bool reloading;
     public float currentImmunityFrame;
+    public int currentBouncingBladeClip;
 
     public Transform TransformBeingUsedBecauseFunctionsNeedATranform;
 
@@ -104,7 +113,6 @@ public abstract class Character : MonoBehaviour
     #region Lazer
     public LineRenderer thisLineRenderer;
     #endregion
-
 
     public List<Augment> augments = new List<Augment>();
     public List<Synergy> synergies = new List<Synergy>();
@@ -135,7 +143,16 @@ public abstract class Character : MonoBehaviour
             {
                 if (currentImmunityFrame <= 0)
                 {
+                    Debug.Log(ammo.overTimeDamage);
+                    if (ammo.overTimeDamage)
+                    {
+                        hp -= ammo.GetDamage()*Time.deltaTime;
+                    }
+                    else
+                    {
+
                     hp -= ammo.GetDamage();
+                    }
                 }
                 else
                 {
@@ -148,22 +165,38 @@ public abstract class Character : MonoBehaviour
 
     protected void OnLaserHit(float damage, Character owner, GameObject gameObjectInput)
     {
-        Debug.Log("Input " +gameObjectInput);
-        if (this.gameObject == gameObjectInput)
+        // Debug.Log("Input " +gameObjectInput);
+        if (gameObjectInput != null)
         {
-            if (currentImmunityFrame <= 0)
+            if (this.gameObject == gameObjectInput)
             {
-                if (owner != this)
+                if (currentImmunityFrame <= 0)
                 {
-                    hp -= damage;
-                    Debug.Log("deal damage to " + gameObjectInput);
+                    if (owner != this)
+                    {
+                        hp -= damage;
+                        Debug.Log(hp + " deal damage to " + gameObjectInput + " " + damage);
+                    }
                 }
+                else
+                {
+                    Debug.Log("near miss");
+                }
+                // EventManager.current.OnAmmoDestroy(ammo.gameObject);
             }
-            else
-            {
-                Debug.Log("near miss");
-            }
-            // EventManager.current.OnAmmoDestroy(ammo.gameObject);
+        }
+        else
+        {
+
+        }
+    }
+
+  public  void RegainBouncingBlade()
+    {
+        if (bouncingBladeStats.maxClip.value > 0)
+        {
+            Debug.Log("bouncing blade");
+            currentBouncingBladeClip++;
         }
     }
 
@@ -288,6 +321,9 @@ public abstract class Character : MonoBehaviour
                     result = (CharacterStat)laserStats.GetType().GetField(stat).GetValue(laserStats);
                     break;
             }
+            case StatType.BouncingBlade:
+                result = (CharacterStat)bouncingBladeStats.GetType().GetField(stat).GetValue(bouncingBladeStats);
+                break;
             case StatType.Character:
             {
                     result = (CharacterStat)stats.GetType().GetField(stat).GetValue(stats);
