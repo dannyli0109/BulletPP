@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7128933462229582447}
-  m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 7.5, y: 28.05, z: -16.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -76,6 +76,10 @@ MonoBehaviour:
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   allDoorRoom:
   - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
@@ -118,126 +122,214 @@ MonoBehaviour:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 0, y: 13}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   downRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   leftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   rightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upDownRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   downLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   downRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   leftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upDownLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upDownRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: 0, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   upLeftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: -8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   downLeftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
     rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
   currentRoomInside: 0
   playerTarget: {fileID: 0}
@@ -260,4 +352,11 @@ MonoBehaviour:
   completedMiniMapRoomColour: {r: 0.7960785, g: 0.7960785, b: 0.7960785, a: 1}
   CurrentMiniMapRoomColour: {r: 1, g: 1, b: 1, a: 1}
   DefaultMiniMapRoomColour: {r: 1, g: 0.7052167, b: 0, a: 1}
+  totalRoomDiffucluty: 0
+  singleEnemyCutOff: 3
+  secondWaveCutOff: 12
+  roomFinishMultiplier: 2
+  numberOfWaves: 
+  waveWaitingTime: 3
+  currentWaveWaitingTime: 0
   thisBTSManager: {fileID: 0}

@@ -743,7 +743,7 @@ MonoBehaviour:
       baseValue: 0.6
   bulletStats:
     damage:
-      baseValue: 1
+      baseValue: 4
     speed:
       baseValue: 6
     size:
@@ -757,10 +757,10 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 1
+      baseValue: 0
   grenadeStats:
     damage:
-      baseValue: 1
+      baseValue: 3
     speed:
       baseValue: 5
     size:
@@ -774,7 +774,7 @@ MonoBehaviour:
     amountOfBounces:
       baseValue: 2
     maxClip:
-      baseValue: 3
+      baseValue: 0
     BounceAdditionSpeed:
       baseValue: 5
   rocketStats:
@@ -787,17 +787,17 @@ MonoBehaviour:
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 6
+      baseValue: 30
     fireRate:
       baseValue: 0.4
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 1
+      baseValue: 3
     acceleration:
       baseValue: 7
-    radius:
-      baseValue: 3
+    heatSeeking:
+      baseValue: 0
   laserStats:
     damage:
       baseValue: 0.5
@@ -830,6 +830,7 @@ MonoBehaviour:
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
+  TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 1918247181}
   thisLineRenderer: {fileID: 284050211}
   thisBTSManager: {fileID: 716847307}
   characterController: {fileID: 284050210}
@@ -980,6 +981,7 @@ Transform:
   - {fileID: 716625911}
   - {fileID: 744940902}
   - {fileID: 1014138691}
+  - {fileID: 1918247181}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4575,10 +4577,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 284050206}
@@ -4586,10 +4584,6 @@ PrefabInstance:
       propertyPath: camTarget
       value: 
       objectReference: {fileID: 1760548603}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: thisBTSManager
-      value: 
-      objectReference: {fileID: 716847307}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: miniMapRooms.Array.data[0]
       value: 
@@ -4611,377 +4605,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1760548604}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.data[0].upperRoomDoorSpawnOffet.y
-      value: 8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.data[0].lowerRoomDoorSpawnOffet.y
-      value: -8.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[1].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[2].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: rightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upRightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: leftRightRoomInfo.Array.data[1].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownLeftRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upDownRightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: 3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: upLeftRightRoomInfo.Array.data[1].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downLeftRightRoomInfo.Array.data[1].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMaxX
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMinX
-      value: -7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMaxY
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: startingRoomPrefabInfo.Array.data[0].cameraBoundryMinY
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: downRightRoomInfo.Array.data[0].leftRoomDoorSpawnOffet.x
-      value: -13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[0].rightRoomDoorSpawnOffet.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[0].rightRoomDoorSpawnOffet.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[1].rightRoomDoorSpawnOffet.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[1].rightRoomDoorSpawnOffet.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[2].rightRoomDoorSpawnOffet.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: allDoorRoomInfo.Array.data[2].rightRoomDoorSpawnOffet.y
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: thisBTSManager
+      value: 
+      objectReference: {fileID: 716847307}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
@@ -7524,6 +7150,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892595664}
   m_CullTransparentMesh: 0
+--- !u!1 &1918247180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918247181}
+  m_Layer: 11
+  m_Name: TransformBeingUsedBecauseFunctionsNeedATranform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1918247181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918247180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 284050212}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946321449
 GameObject:
   m_ObjectHideFlags: 0
