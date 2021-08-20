@@ -622,7 +622,7 @@ public class MapGeneration : MonoBehaviour
         }
         int holdingPos = 1;
         miniMapRooms[0].SetActive(true);
-        miniMapRooms[0].transform.position = miniMapStartingPos;
+        //miniMapRooms[0].transform.position = miniMapStartingPos;
         if (rooms[currentRoomInside].completed)
         {
             miniMapRooms[0].GetComponent<Image>().color = CurrentMiniMapRoomColour;
@@ -635,7 +635,7 @@ public class MapGeneration : MonoBehaviour
         if (rooms[currentRoomInside].upperRoomRef > -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
-            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, 1) * miniMapRoomMultiplier;
+            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, 1) * miniMapRoomMultiplier;
             if (rooms[rooms[currentRoomInside].upperRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
@@ -650,7 +650,7 @@ public class MapGeneration : MonoBehaviour
         if (rooms[currentRoomInside].lowerRoomRef> -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
-            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, -1) * miniMapRoomMultiplier;
+            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, -1) * miniMapRoomMultiplier;
             if (rooms[rooms[currentRoomInside].lowerRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
@@ -665,7 +665,7 @@ public class MapGeneration : MonoBehaviour
         if (rooms[currentRoomInside].leftRoomRef > -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
-            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(-1, 0) * miniMapRoomMultiplier;
+            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(-1, 0) * miniMapRoomMultiplier;
             if (rooms[rooms[currentRoomInside].leftRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
@@ -680,7 +680,7 @@ public class MapGeneration : MonoBehaviour
         if (rooms[currentRoomInside].rightRoomRef > -1)
         {
             miniMapRooms[holdingPos].SetActive(true);
-            miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(1, 0) * miniMapRoomMultiplier;
+            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(1, 0) * miniMapRoomMultiplier;
             if (rooms[rooms[currentRoomInside].rightRoomRef].completed)
             {
                 miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
