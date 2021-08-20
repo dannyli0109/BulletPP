@@ -29,13 +29,13 @@ public class BouncingBlade : Ammo
             {
                 // make sure the bullet is not hitting itself
                 // EventManager.current.OnAmmoHit(this, other.gameObject);
-                EventManager.current.OnLaserHit(owner.bouncingBladeStats.damage.value, owner, other.gameObject);
+               // EventManager.current.OnLaserHit(owner.bouncingBladeStats.damage.value, owner, other.gameObject);
 
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                EventManager.current.OnAmmoHit(this, other.gameObject);
-                EventManager.current.OnLaserHit(owner.bouncingBladeStats.damage.value, owner, other.gameObject);
+                //EventManager.current.OnAmmoHit(this, other.gameObject);
+               // EventManager.current.OnLaserHit(owner.bouncingBladeStats.damage.value, owner, other.gameObject);
             }
         }
     }
