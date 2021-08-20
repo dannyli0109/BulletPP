@@ -31,6 +31,12 @@ public class AugmentUI : MonoBehaviour
     {
         AugmentManager augmentManager = AugmentManager.current;
         int state = shop.player.BuyAugment(id);
+        if (!shop.hasBoughtAnAugment)
+        {
+        shop.hasBoughtAnAugment = true;
+            shop.level = 3;
+        }
+
         if (state == 1)
         {
             // obtained one that owned but remains the same level

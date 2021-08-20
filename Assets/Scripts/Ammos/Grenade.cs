@@ -32,6 +32,7 @@ public class Grenade : Ammo
         bornTime += Time.deltaTime;
         if (bornTime >= owner.grenadeStats.travelTime.value)
         {
+            Debug.Log("grenade died of old age");
             Destroy(gameObject);
         }
 

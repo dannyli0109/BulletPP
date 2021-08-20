@@ -262,7 +262,7 @@ public class Player : Character
 
     void ShootBouncingBlade(float angle)
     {
-        Debug.Log("trying to shoot blade");
+       // Debug.Log("trying to shoot blade");
         if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
         {
             GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);

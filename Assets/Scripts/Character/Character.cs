@@ -74,6 +74,9 @@ public class CharacterStats
     public CharacterStat outOfCombatReloadTime;
     public CharacterStat spreadAngle;
     public CharacterStat additionalAmmo;
+    public CharacterStat extraBounces; // for things that bounce atleast once
+    public CharacterStat damageOnBounce;
+    public CharacterStat extraExplosionRange;
 }
 
 public class ModifiedStat
@@ -143,7 +146,7 @@ public abstract class Character : MonoBehaviour
             {
                 if (currentImmunityFrame <= 0)
                 {
-                    Debug.Log(ammo.overTimeDamage);
+                  
                     if (ammo.overTimeDamage)
                     {
                         hp -= ammo.GetDamage()*Time.deltaTime;
@@ -213,6 +216,7 @@ public abstract class Character : MonoBehaviour
 
     public int BuyAugment(int id)
     {
+        
         AugmentManager augmentManager = AugmentManager.current;
         AugmentData augment = augmentManager.augmentDatas[id];
         float cost = augmentManager.costs[augment.rarity];
