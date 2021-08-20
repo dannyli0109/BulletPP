@@ -185,7 +185,10 @@ public class Enemy : Character
                 // are we at the right place , get a new place
                 //this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
                 agent.speed = speed;
-                agent.SetDestination(nextDestination);
+                agent.SetDestination(target.transform.position);
+                //if (agent.hasPath)
+                //{
+                //}
                 //this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
 
                 Debug.DrawLine(this.transform.position, finalDestination, Color.green);

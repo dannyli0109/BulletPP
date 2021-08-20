@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public enum Direction
 {
@@ -136,6 +137,7 @@ public class MapGeneration : MonoBehaviour
     void Start()
     {
         GenerateMap();
+        //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         refreshMiniMapUI();
     }
 
