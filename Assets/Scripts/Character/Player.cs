@@ -318,7 +318,7 @@ public class Player : Character
                 //currentBouncingBladeClip = (int)bouncingBladeStats.maxClip.value;
                 reloading = false;
 
-                Debug.Log("Bullet " + currentBulletClip + " " + (int)bulletStats.maxClip.value + " grenade " + currentGrenadeClip + " " + (int)grenadeStats.maxClip.value + " rocket  " + currentRocketClip + " " + (int)rocketStats.maxClip.value + " current laser " + currentLaserClip + " " + (int)laserStats.maxClip.value + " blades " + currentBouncingBladeClip + " " + (int)bouncingBladeStats.maxClip.value);
+               // Debug.Log("Bullet " + currentBulletClip + " " + (int)bulletStats.maxClip.value + " grenade " + currentGrenadeClip + " " + (int)grenadeStats.maxClip.value + " rocket  " + currentRocketClip + " " + (int)rocketStats.maxClip.value + " current laser " + currentLaserClip + " " + (int)laserStats.maxClip.value + " blades " + currentBouncingBladeClip + " " + (int)bouncingBladeStats.maxClip.value);
             }
         }
     }

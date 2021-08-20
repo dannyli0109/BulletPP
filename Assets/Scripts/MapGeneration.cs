@@ -452,6 +452,7 @@ public class MapGeneration : MonoBehaviour
             }
 
             numberOfWaves.Add(holdingRand);
+            GameManager.current.gameState = GameState.Game;
 
             for (int i = 0; i <numberOfWaves[0]; i++)
             {
@@ -459,7 +460,7 @@ public class MapGeneration : MonoBehaviour
                 holdingGameObject.GetComponent<Enemy>().target = playerTarget;
                 holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
                 EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-                GameManager.current.gameState = GameState.Game;
+                
             }
 
         }
@@ -504,6 +505,7 @@ public class MapGeneration : MonoBehaviour
             if (EnemiesInEncounter.Count <= 0)
             {
                 currentWave++;
+                Debug.Log(currentWave+" "+numberOfWaves.Count);
                 if (currentWave < numberOfWaves.Count)
                 {
                     Debug.Log("Current wave");
