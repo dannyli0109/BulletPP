@@ -45,6 +45,8 @@ public abstract class Ammo : MonoBehaviour
             Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, hit.normal);
             gameObject.transform.forward = reflectionDir;
             timesBounced++;
+
+            
             return true;
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Enemy : Character
 {
     #region Movement
@@ -57,6 +57,7 @@ public class Enemy : Character
     #endregion
 
     public GameObject target;
+    public NavMeshAgent agent;
 
     float angle;
     public override void Start()
@@ -67,7 +68,22 @@ public class Enemy : Character
         currentShootingWaitTime = UnityEngine.Random.Range(minCreationShootingWaitTime,maxCreationShootingWaitTime);
     }
 
-    void GetNewDestination(bool Direct)
+    public override void Update()
+    {
+        if (GameManager.current.gameState == GameState.Shop) return;
+        HandleMovement();
+        base.Update();
+        if (!target) return;
+
+        UpdateAnimation();
+
+        timeSinceFired += Time.deltaTime;
+
+        HandleDecidingToShoot();
+
+    }
+
+    void GetNewDestination(bool direct)
     {
         // if in the normal range
         Vector3 directionTowardstarget = Vector3.Normalize(new Vector3(target.transform.position.x - this.transform.position.x, 0, target.transform.position.z - this.transform.position.z));
@@ -92,15 +108,14 @@ public class Enemy : Character
             }
             else
             {
-            finalDestination = target.transform.position - directionTowardstarget * favouredRange; 
-
+                finalDestination = target.transform.position - directionTowardstarget * favouredRange;
             }
 
         }
        
         nextDestination = Vector3.MoveTowards(this.transform.position, finalDestination, nextDistSegmentLength);
 
-        if (!Direct)
+        if (!direct)
         {
             Vector3 wanderingOffset = Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)));
             nextDestination += wanderingOffset * walkingOffsetRadius;
@@ -133,21 +148,6 @@ public class Enemy : Character
     }
     
 
-    public override void Update()
-    {
-        if (GameManager.current.gameState == GameState.Shop) return;
-        HandleMovement();
-        base.Update();
-        if (!target) return;
-      
-        UpdateAnimation();
-
-        timeSinceFired += Time.deltaTime;
-
-        HandleDecidingToShoot();
-
-    }
-
     public void HandleMovement()
     {
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
@@ -174,7 +174,7 @@ public class Enemy : Character
                     if(distFromTarget < desiredFurthestRange)
                     {
                         // if close enough
-                        currentWaitingTime =Random.Range(minWaitingTime, maxWaitingTime);
+                        currentWaitingTime = Random.Range(minWaitingTime, maxWaitingTime);
                     }
                     else
                     {
@@ -183,7 +183,10 @@ public class Enemy : Character
                     GetNewDestination(false);
                 }
                 // are we at the right place , get a new place
-                this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
+                //this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
+                agent.speed = speed;
+                agent.SetDestination(nextDestination);
+                //this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
 
                 Debug.DrawLine(this.transform.position, finalDestination, Color.green);
                 Debug.DrawLine(this.transform.position, nextDestination,Color.blue);
