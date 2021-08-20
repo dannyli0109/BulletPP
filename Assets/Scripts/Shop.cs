@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     public GameObject synergyListUIContainer;
     public GameObject synergyUIPrefab;
 
-    public int level = 2;
+    public int level = 0;
     public List<List<float>> percents = new List<List<float>>() { 
         new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
         new List<float>() { 0.5f, 0.35f, 0.15f, 0.0f, 0.0f },
@@ -21,7 +21,9 @@ public class Shop : MonoBehaviour
         new List<float>() { 0.2f, 0.25f, 0.30f, 0.2f, 0.05f },
         new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
     };
-    // Start is called before the first frame update
+
+    public bool hasBoughtAnAugment;
+
     void Start()
     {
         Refresh();
@@ -67,16 +69,24 @@ public class Shop : MonoBehaviour
 
     public void ReRoll()
     {
-        if (player.gold >= 2)
+        if (hasBoughtAnAugment)
         {
-            player.gold -= 2;
-            Refresh();
+
+            if (player.gold >= 2)
+            {
+                player.gold -= 2;
+                Refresh();
+            }
         }
     }
 
     public void Continue()
     {
+        if (hasBoughtAnAugment)
+        {
+
         GameManager.current.gameState = GameState.Casual;
+        }
         // gameObject.SetActive(false);
     }
 

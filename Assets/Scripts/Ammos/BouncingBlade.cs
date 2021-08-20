@@ -64,12 +64,14 @@ public class BouncingBlade : Ammo
 
     void Update()
     {
+
         if (GameManager.current.gameState == GameState.Shop)
-        {
-            owner.RegainBouncingBlade();
-            Destroy(gameObject);
-        }
-            
+            if (GameManager.current.gameState == GameState.Shop)
+            {
+                owner.RegainBouncingBlade();
+                Destroy(gameObject);
+            }
+
         currentSpeed = Mathf.Clamp(currentSpeed - slowDownSpeed * Time.deltaTime, owner.grenadeStats.speed.value, currentSpeed);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.bouncingBladeStats.travelTime.value)
@@ -80,11 +82,16 @@ public class BouncingBlade : Ammo
 
         if (timesBounced < owner.bouncingBladeStats.amountOfBounces.value)
         {
-            if (BounceOffAmmo())
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 0.5f, (1 << 10)))
             {
+                HandleAmmoHit(hit.collider);
+                SpawnHitParticle(owner.grenadeStats.size.value);
+                Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, hit.normal);
+                gameObject.transform.forward = reflectionDir;
+                timesBounced++;
                 currentSpeed += owner.bouncingBladeStats.bounceAdditionSpeed.value;
                 currentDamage += owner.bouncingBladeStats.bounceAdditionDamage.value;
-
             }
         }
         else

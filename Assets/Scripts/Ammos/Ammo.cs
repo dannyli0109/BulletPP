@@ -39,8 +39,9 @@ public abstract class Ammo : MonoBehaviour
     protected bool BounceOffAmmo()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.5f, 1 << 10))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.5f, (1 << 10)|(1<<12)))
         {
+            HandleAmmoHit(hit.collider);
             SpawnHitParticle(owner.grenadeStats.size.value);
             Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, hit.normal);
             gameObject.transform.forward = reflectionDir;

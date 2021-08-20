@@ -1597,6 +1597,10 @@ MonoBehaviour:
       baseValue: 0
     outOfCombatReloadTime:
       baseValue: 0
+    spreadAngle:
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
   bulletStats:
     damage:
       baseValue: 2
@@ -1614,6 +1618,8 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 12
+    additionalAmmo:
+      baseValue: 0
   grenadeStats:
     damage:
       baseValue: 0
@@ -1631,7 +1637,9 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 0
-    BounceAdditionSpeed:
+    additionalAmmo:
+      baseValue: 0
+    bounceAdditionSpeed:
       baseValue: 0
   rocketStats:
     damage:
@@ -1650,7 +1658,36 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 0
+    additionalAmmo:
+      baseValue: 0
     acceleration:
+      baseValue: 0
+    radius:
+      baseValue: 0
+    heatSeeking:
+      baseValue: 0
+  bouncingBladeStats:
+    damage:
+      baseValue: 0
+    speed:
+      baseValue: 0
+    size:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    travelTime:
+      baseValue: 0
+    fireRate:
+      baseValue: 0
+    amountOfBounces:
+      baseValue: 0
+    maxClip:
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
+    bounceAdditionSpeed:
+      baseValue: 0
+    bounceAdditionDamage:
       baseValue: 0
   laserStats:
     damage:
@@ -1669,6 +1706,8 @@ MonoBehaviour:
       baseValue: 0
     maxClip:
       baseValue: 0
+    additionalAmmo:
+      baseValue: 0
     maxLaserLength:
       baseValue: 0
     maxLaserWidth:
@@ -1677,6 +1716,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2943491641176895762, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
   grenadePrefab: {fileID: 0}
   rocketPrefab: {fileID: 0}
+  bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
   bulletContainer: {fileID: 1109022956828929431}
   hp: 0
@@ -1684,6 +1724,8 @@ MonoBehaviour:
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
+  currentBouncingBladeClip: 0
+  TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
   thisLineRenderer: {fileID: 0}
   finalDestination: {x: 0, y: 0, z: 0}
   nextDestination: {x: 0, y: 0, z: 0}
@@ -1703,8 +1745,8 @@ MonoBehaviour:
   enemyAvoidAmount: 1
   fullStopMovingTime: 1
   currentStopMovingTime: 0
-  maxCreationShootingWaitTime: 6
-  minCreationShootingWaitTime: 3
+  maxCreationShootingWaitTime: 4
+  minCreationShootingWaitTime: 1
   currentShootingWaitTime: 0
   currentVolleySize: 0
   currentReloadTime: 0
