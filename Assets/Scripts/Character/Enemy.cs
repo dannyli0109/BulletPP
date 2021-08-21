@@ -123,7 +123,7 @@ public class Enemy : Character
     }
 
     
-    void UpdateAnimation()
+    protected void UpdateAnimation()
     {
         Vector2 current = new Vector2(transform.position.x, transform.position.z);
         Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.z);
@@ -345,5 +345,11 @@ public class Enemy : Character
     public override void OnDestroy()
     {
         base.OnDestroy();
+    }
+
+    public virtual void Init(GameObject target, Transform cam)
+    {
+        this.target = target;
+        transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = cam;
     }
 }

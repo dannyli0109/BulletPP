@@ -43,7 +43,8 @@ public abstract class Ammo : MonoBehaviour
         {
             HandleAmmoHit(hit.collider);
             SpawnHitParticle(owner.grenadeStats.size.value);
-            Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, hit.normal);
+            Vector3 normal = new Vector3(hit.normal.x, 0, hit.normal.z);
+            Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, normal);
             gameObject.transform.forward = reflectionDir;
             timesBounced++;
 

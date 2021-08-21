@@ -4796,26 +4796,6 @@ PrefabInstance:
       propertyPath: thisBTSManager
       value: 
       objectReference: {fileID: 716847307}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: DefaultMiniMapRoomColour.r
-      value: 0.83137256
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: DefaultMiniMapRoomColour.g
-      value: 0.42745098
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: DefaultMiniMapRoomColour.b
-      value: 0.09803922
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: enemyRandOffset.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
-      propertyPath: enemyRandOffset.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
@@ -4881,18 +4861,6 @@ PrefabInstance:
       propertyPath: gunPoint
       value: 
       objectReference: {fileID: 1094544659}
-    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
-      propertyPath: costs.Array.data[3]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
-      propertyPath: costs.Array.data[4]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
-      propertyPath: costs.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279983, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_Name
       value: AugmentManager
@@ -6878,50 +6846,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3030286385767294009, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294010, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294010, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294010, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 185.36023
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294010, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 676.8876
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294010, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.59654176
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294010, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_Pivot.y
-      value: 1.0788643
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294013, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294013, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294013, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286385767294013, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_Color.a
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3030286386825310823, guid: 80b437562e397cb4bb34385bac700675, type: 3}
       propertyPath: m_Name
       value: ToolTip Canvas
@@ -7008,54 +6932,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3030286386825310827, guid: 80b437562e397cb4bb34385bac700675, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386827414667, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386827414667, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386827414667, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386827414667, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386827414667, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386827414667, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386945340134, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386945340134, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386945340134, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386945340134, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386945340134, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3030286386945340134, guid: 80b437562e397cb4bb34385bac700675, type: 3}
-      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

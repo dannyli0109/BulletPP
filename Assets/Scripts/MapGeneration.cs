@@ -457,8 +457,8 @@ public class MapGeneration : MonoBehaviour
             for (int i = 0; i <numberOfWaves[0]; i++)
             {
                 GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
-                holdingGameObject.GetComponent<Enemy>().target = playerTarget;
-                holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
+                holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
+
                 EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                 
             }
@@ -489,8 +489,7 @@ public class MapGeneration : MonoBehaviour
                 for (int i = 0; i < numberOfWaves[currentWave]; i++)
                 {
                     GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().target = playerTarget;
-                    holdingGameObject.transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = camTarget;
+                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                     GameManager.current.gameState = GameState.Game;
                 }

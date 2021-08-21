@@ -132,7 +132,7 @@ public abstract class Character : MonoBehaviour
     {
         if (hp <= 0)
         {
-            EventManager.current.ReceiveGold(this.gold);
+            EventManager.current.ReceiveGold(gold);
             Destroy(gameObject);
         }
     }

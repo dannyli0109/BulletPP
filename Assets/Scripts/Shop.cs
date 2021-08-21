@@ -17,8 +17,9 @@ public class Shop : MonoBehaviour
     public List<List<float>> percents = new List<List<float>>() { 
         new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
         new List<float>() { 0.5f, 0.35f, 0.15f, 0.0f, 0.0f },
-        new List<float>() { 0.3f, 0.3f, 0.3f, 0.1f, 0.0f },
-        new List<float>() { 0.2f, 0.25f, 0.30f, 0.2f, 0.05f },
+        new List<float>() { 0.4f, 0.3f, 0.3f, 0.0f, 0.0f },
+        new List<float>() { 0.4f, 0.3f, 0.3f, 0.0f, 0.0f },
+        // new List<float>() { 0.2f, 0.25f, 0.30f, 0.2f, 0.05f },
         new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
     };
 
