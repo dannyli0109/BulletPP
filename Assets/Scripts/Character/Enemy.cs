@@ -59,7 +59,7 @@ public class Enemy : Character
     public GameObject target;
     public NavMeshAgent agent;
 
-    float angle;
+    protected float angle;
     public override void Start()
     {
         base.Start();
@@ -123,7 +123,7 @@ public class Enemy : Character
     }
 
     
-    protected void UpdateAnimation()
+    protected virtual void UpdateAnimation()
     {
         Vector2 current = new Vector2(transform.position.x, transform.position.z);
         Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.z);

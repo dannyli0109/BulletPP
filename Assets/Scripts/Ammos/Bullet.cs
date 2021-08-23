@@ -28,7 +28,9 @@ public class Bullet : Ammo
 
     private void FixedUpdate()
     {
-        transform.position += transform.forward * owner.bulletStats.speed.value * Time.fixedDeltaTime;
+        velocity += acceleration * Time.fixedDeltaTime;
+        transform.position += velocity * Time.fixedDeltaTime;
+        acceleration = new Vector3(0, 0, 0);
     }
 
     private void OnBulletDestroy(GameObject gameObject)
@@ -53,16 +55,21 @@ public class Bullet : Ammo
         EventManager.current.onAmmoDestroy -= OnBulletDestroy;
     }
 
-    public override float GetDamage()
-    {
-        return owner.bulletStats.damage.value * owner.stats.damageMultiplier.value;
-    }
+    //public override float GetDamage()
+    //{
+    //    //return owner.bulletStats.damage.value * owner.stats.damageMultiplier.value;
+    //    return damage;
+    //}
 
-    public override void Init(Character owner, float angle)
-    {
-        this.owner = owner;
-        transform.SetParent(null);
-        transform.localScale = new Vector3(owner.bulletStats.size.value, owner.bulletStats.size.value, owner.bulletStats.size.value);
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localRotation.eulerAngles.y, 0f));
-    }
+    //public override void Init(Character owner, float damage, float size, Vector3 velocity, Vector3 acceleration)
+    //{
+    //    this.owner = owner;
+    //    this.damage = damage;
+    //    this.velocity = velocity;
+    //    this.acceleration = acceleration;
+    //    transform.SetParent(null);
+    //    transform.localScale = new Vector3(size, size, size);
+
+    //    //transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localRotation.eulerAngles.y, 0f));
+    //}
 }

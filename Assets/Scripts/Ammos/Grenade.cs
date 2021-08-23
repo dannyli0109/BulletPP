@@ -59,16 +59,16 @@ public class Grenade : Ammo
         EventManager.current.onAmmoDestroy -= OnGrenadeDestroy;
     }
 
-    public override float GetDamage()
-    {
-        return owner.grenadeStats.damage.value * owner.stats.damageMultiplier.value;
-    }
+    //public override float GetDamage()
+    //{
+    //    return owner.grenadeStats.damage.value * owner.stats.damageMultiplier.value;
+    //}
 
-    public override void Init(Character owner, float angle)
-    {
-        this.owner = owner;
-        transform.SetParent(null);
-        transform.localScale = new Vector3(owner.bulletStats.size.value, owner.bulletStats.size.value, owner.bulletStats.size.value);
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localRotation.eulerAngles.y, 0f));
-    }
+    //public override void Init(Character owner, float angle)
+    //{
+    //    this.owner = owner;
+    //    transform.SetParent(null);
+    //    transform.localScale = new Vector3(owner.bulletStats.size.value, owner.bulletStats.size.value, owner.bulletStats.size.value);
+    //    transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localRotation.eulerAngles.y, 0f));
+    //}
 }

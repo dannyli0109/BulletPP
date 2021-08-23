@@ -218,7 +218,8 @@ public class Player : Character
         {
             GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
             Ammo ammoComponent = bullet.GetComponent<Ammo>();
-            ammoComponent.Init(this, angle);
+            Vector3 forward = bulletContainer.forward;
+            ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
             currentBulletClip--;
         }
     }
@@ -229,7 +230,8 @@ public class Player : Character
         {
             GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
             Ammo ammoComponent = rocket.GetComponent<Ammo>();
-            ammoComponent.Init(this, angle);
+            Vector3 forward = bulletContainer.forward;
+            ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
             currentRocketClip--;
         }
     }
@@ -240,7 +242,8 @@ public class Player : Character
         {
             GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
             Ammo ammoComponent = grenade.GetComponent<Ammo>();
-            ammoComponent.Init(this, angle);
+            Vector3 forward = bulletContainer.forward;
+            ammoComponent.Init(this, forward, angle, grenadeStats.speed.value, stats.damageMultiplier.value * grenadeStats.damage.value, grenadeStats.size.value);
             currentGrenadeClip--;
         }
     }
@@ -251,7 +254,8 @@ public class Player : Character
         {
             GameObject laser = Instantiate(laserPrefab, bulletContainer);
             Ammo ammoComponent = laser.GetComponent<Ammo>();
-            ammoComponent.Init(this, angle);
+            Vector3 forward = bulletContainer.forward;
+            ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value);
             currentLaserClip--;
         }
     }
@@ -263,9 +267,8 @@ public class Player : Character
         {
             GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
             Ammo ammoComponent = blade.GetComponent<Ammo>();
-            ammoComponent.Init(this, angle);
-            //BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
-          //  bladeComponent.owner = this;
+            Vector3 forward = bulletContainer.forward;
+            ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value);
             currentBouncingBladeClip--;
         }
     }

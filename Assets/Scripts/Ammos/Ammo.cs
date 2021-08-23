@@ -24,8 +24,44 @@ public abstract class Ammo : MonoBehaviour
     public int timesBounced = 0;
     #endregion stats
 
-    public abstract float GetDamage();
-    public abstract void Init(Character owner, float angle);
+    public float damage;
+    public float size;
+    public Vector3 velocity;
+    public Vector3 acceleration;
+
+    protected Vector3 currentAcceleration;
+    public float GetDamage()
+    {
+        return damage;
+    }
+    public void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
+    {
+        this.owner = owner;
+        this.damage = damage;
+        this.acceleration = acceleration;
+        this.size = size;
+        transform.forward = forward;
+        transform.SetParent(null);
+        transform.localScale = new Vector3(size, size, size);
+        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
+        Vector3 offsetVector = new Vector3(transform.forward.x * offset, transform.forward.y * offset, transform.forward.z * offset);
+        transform.localPosition += offsetVector;
+        this.velocity = transform.forward * speed;
+    }
+
+
+    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
+    {
+        this.owner = owner;
+        this.damage = damage;
+        this.acceleration = new Vector3(0, 0, 0);
+        this.size = size;
+        transform.forward = forward;
+        transform.SetParent(null);
+        transform.localScale = new Vector3(size, size, size);
+        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
+        this.velocity = transform.forward * speed;
+    }
 
     protected void SpawnHitParticle(float size)
     {
@@ -47,11 +83,8 @@ public abstract class Ammo : MonoBehaviour
             Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, normal);
             gameObject.transform.forward = reflectionDir;
             timesBounced++;
-
-            
             return true;
         }
-
         return false;
     }
 
