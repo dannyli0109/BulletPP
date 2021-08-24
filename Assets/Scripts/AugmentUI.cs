@@ -101,7 +101,7 @@ public class AugmentUI : MonoBehaviour
                     break;
                 }
             }
-            title.text = augmentManager.augmentDatas[id].name;
+            title.text = augmentManager.augmentDatas[id].title;
             descriptions.richText = true;
             descriptions.text = augmentManager.augmentDatas[id].descriptions[level];
             cost.text = "$ " + augmentManager.costs[augmentManager.augmentDatas[id].rarity];
@@ -116,7 +116,7 @@ public class AugmentUI : MonoBehaviour
         for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
         {
             GameObject synergyUI = Instantiate(synergyUIPrefab);
-            int synergyId = augmentManager.augmentDatas[id].synergies[i];
+            int synergyId = augmentManager.augmentDatas[id].synergies[i].id;
             int breakPoint = -1;
             for (int j = 0; j < shop.player.synergies.Count; j++)
             {

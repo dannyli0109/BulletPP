@@ -11,9 +11,9 @@ public class SynergyUI : MonoBehaviour
 
     public void Populate(int id, int breakPoint)
     {
-        string name = AugmentManager.current.synergyDatas[id].name;
+        string name = AugmentManager.current.synergyDatas[id].title;
         string description = AugmentManager.current.synergyDatas[id].descriptions[breakPoint + 1];
-        nameUI.text = AugmentManager.current.synergyDatas[id].name;
+        nameUI.text = AugmentManager.current.synergyDatas[id].title;
         tooltipTrigger.header = name;
         tooltipTrigger.content = description;
     }

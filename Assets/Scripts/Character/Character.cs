@@ -250,7 +250,7 @@ public abstract class Character : MonoBehaviour
 
         for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
         {
-            SynergyData synergyData = augmentManager.synergyDatas[augmentManager.augmentDatas[id].synergies[i]];
+            SynergyData synergyData = augmentManager.augmentDatas[id].synergies[i];
 
             bool existingSyngy = false;
             for (int j = 0; j < synergies.Count; j++)

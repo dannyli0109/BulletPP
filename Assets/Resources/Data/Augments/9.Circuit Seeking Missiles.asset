@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0cf1f1832ee9b748bacf6a18e3ee30f, type: 3}
+  m_Name: 9.Circuit Seeking Missiles
+  m_EditorClassIdentifier: 
+  id: 9
+  title: Circuit Seeking Missiles
+  rarity: 3
+  synergies:
+  - {fileID: 11400000, guid: 3cc38ca77cc995641bc8a776d1481d02, type: 2}
+  - {fileID: 11400000, guid: 5169b41905b5a4a40bccd78b96e65403, type: 2}
+  descriptions:
+  - '<b>+<color=#c5c5c5ff><color=#00d100>1</color>/2/3</color></b> Rocket
+
+    <b>+<color=#c5c5c5ff><color=#00d100>0.2</color>/0.3/0.4</color></b>
+    Rocket Damage
+
+    Rockets you can recorrect after being fired'
+  - '<b>+<color=#c5c5c5ff>1/<color=#00d100>2</color>/3</color></b> Rocket
+
+    <b>+<color=#c5c5c5ff>0.2/<color=#00d100>0.3</color>/0.4</color></b>
+    Rocket Damage
+
+    Rockets you can recorrect after being fired'
+  - '<b>+<color=#c5c5c5ff>1/2/<color=#00d100>2</color>3</color></b> Rocket
+
+    <b>+<color=#c5c5c5ff>0.2/0.3/<color=#00d100>0.4</color></color></b>
+    Rocket Damage
+
+    Rockets you can recorrect after being fired'
+  codes:
+  - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 1);\nAddModifier(\"Rocket\",\"heatSeeking\",\"Flat\",3);\nAddModifier(\"Rocket\",\"damage\",\"Flat\",0.2);\n} "
+  - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Rocket\",\"heatSeeking\",\"Flat\",3);\nAddModifier(\"Rocket\",\"damage\",\"Flat\",0.3);\n} "
+  - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 3);\nAddModifier(\"Rocket\",\"heatSeeking\",\"Flat\",3);\nAddModifier(\"Rocket\",\"damage\",\"Flat\",0.4);\n} "

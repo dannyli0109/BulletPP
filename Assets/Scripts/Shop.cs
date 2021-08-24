@@ -102,7 +102,7 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < player.augments.Count; i++)
         {
             GameObject augmentUI = Instantiate(augmentUIPrefab);
-            augmentUI.GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augments[i].id].name + ": " +  player.augments[i].count;
+            augmentUI.GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augments[i].id].title + ": " +  player.augments[i].count;
             augmentUI.transform.SetParent(augmentListUIContainer.transform);
             augmentUI.transform.localScale = new Vector3(1, 1, 1);
         }
@@ -119,7 +119,7 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < player.synergies.Count; i++)
         {
             GameObject synergyUI = Instantiate(synergyUIPrefab);
-            synergyUI.GetComponent<TextMeshProUGUI>().text = augmentManager.synergyDatas[player.synergies[i].id].name + ": " + player.synergies[i].count;
+            synergyUI.GetComponent<TextMeshProUGUI>().text = augmentManager.synergyDatas[player.synergies[i].id].title + ": " + player.synergies[i].count;
             synergyUI.transform.SetParent(synergyListUIContainer.transform);
             synergyUI.transform.localScale = new Vector3(1, 1, 1);
         }

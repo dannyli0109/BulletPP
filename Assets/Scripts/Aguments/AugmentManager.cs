@@ -10,33 +10,7 @@ using ExcelDataReader;
 using System.Data;
 
 using Yinyue200.Corefx.CodePages;
-
-public class AugmentData
-{
-    public int id { get; set; }
-    public string name { get; set; }
-
-    public int rarity { get; set; }
-
-    public List<int> synergies { get; set; }
-
-    public List<string> descriptions { get; set; }
-
-    public List<Eva> evaluators;
-
-}
-
-public class SynergyData
-{
-    public int id { get; set; }
-    public string name { get; set; }
-
-    public List<int> breakpoints { get; set; }
-    public List<string> descriptions { get; set; }
-
-    public List<Eva> evaluators;
-
-}
+using OfficeOpenXml;
 
 public class AugmentManager : MonoBehaviour
 {
@@ -94,13 +68,13 @@ public class AugmentManager : MonoBehaviour
             augmentRarities.Add(new List<int>());
         }
 
-        InitAugmentDatas();
-        InitSynergyDatas();
+        synergyDatas = InitSynergyDatas();
+        augmentDatas = InitAugmentDatas(synergyDatas);
     }
 
-    public void InitAugmentDatas()
+    public List<AugmentData> InitAugmentDatas(List<SynergyData> allSynergies)
     {
-        augmentDatas = new List<AugmentData>();
+        List<AugmentData> list = new List<AugmentData>();
 
         string fileName = "AugmentList";
         string tempFileName = "temp";
@@ -118,46 +92,47 @@ public class AugmentManager : MonoBehaviour
         {
 
             List<string> descriptions = new List<string>();
+            List<string> codes = new List<string>();
             List<Eva> evaluators = new List<Eva>();
             List<string> rawSynergies = collection[i][3].ToString().Split(',').ToList();
-            List<int> synergies = new List<int>();
+            List<SynergyData> synergies = new List<SynergyData>();
 
             for (int j = 0; j < rawSynergies.Count; j++)
             {
-                synergies.Add(int.Parse(rawSynergies[j]));
+                synergies.Add(allSynergies[int.Parse(rawSynergies[j])]);
             }
 
 
             for (int j = 0; j < 3; j++)
             {
+                string code = collection[i][5 + j * 2].ToString();
+                codes.Add(code);
+
                 Eva evaluator = InitEvaluator();
-
                 descriptions.Add(collection[i][4 + j * 2].ToString());
-
-                evaluator.eval(parser.Parse(collection[i][5 + j * 2].ToString()));
+                evaluator.eval(parser.Parse(code));
                 evaluators.Add(evaluator);
             }
 
-            AugmentData data = new AugmentData()
-            {
-                id = int.Parse(collection[i][0].ToString()),
-                name = collection[i][1].ToString(),
-                rarity = int.Parse(collection[i][2].ToString()),
-                synergies = synergies,
-                descriptions = descriptions,
-                evaluators = evaluators
-            };
-            augmentDatas.Add(data);
+            AugmentData data = ScriptableObject.CreateInstance<AugmentData>();
+            data.id = int.Parse(collection[i][0].ToString());
+            data.title = collection[i][1].ToString();
+            data.rarity = int.Parse(collection[i][2].ToString());
+            data.synergies = synergies;
+            data.descriptions = descriptions;
+            data.codes = codes;
+            data.evaluators = evaluators;
+
+            list.Add(data);
             augmentRarities[data.rarity].Add(data.id);
         }
-
-        //File.Delete(filePath);
+        return list;
     }
 
 
-    public void InitSynergyDatas()
+    public List<SynergyData> InitSynergyDatas()
     {
-        synergyDatas = new List<SynergyData>();
+        List<SynergyData> list = new List<SynergyData>();
 
         string fileName = "AugmentList";
         string tempFileName = "temp";
@@ -175,6 +150,7 @@ public class AugmentManager : MonoBehaviour
         {
 
             List<string> descriptions = new List<string>();
+            List<string> codes = new List<string>();
             List<Eva> evaluators = new List<Eva>();
             List<string> rawBreakpoints = collection[i][2].ToString().Split(',').ToList();
             List<int> breakpoints = new List<int>();
@@ -189,26 +165,32 @@ public class AugmentManager : MonoBehaviour
 
             for (int j = 0; j < breakpoints.Count; j++)
             {
+                string code = collection[i][5 + j * 2].ToString();
+                codes.Add(code);
+
                 Eva evaluator = InitEvaluator();
-
                 descriptions.Add(collection[i][4 + j * 2].ToString());
-
-                evaluator.eval(parser.Parse(collection[i][5 + j * 2].ToString()));
+                evaluator.eval(parser.Parse(code));
                 evaluators.Add(evaluator);
             }
 
-            SynergyData data = new SynergyData()
-            {
-                id = int.Parse(collection[i][0].ToString()),
-                name = collection[i][1].ToString(),
-                breakpoints = breakpoints,
-                descriptions = descriptions,
-                evaluators = evaluators
-            };
-            synergyDatas.Add(data);
+            SynergyData data = ScriptableObject.CreateInstance<SynergyData>();
+            data.id = int.Parse(collection[i][0].ToString());
+            data.title = collection[i][1].ToString();
+            data.breakpoints = breakpoints;
+            data.descriptions = descriptions;
+            data.codes = codes;
+            data.evaluators = evaluators;
+
+            list.Add(data);
         }
 
-        //File.Delete(filePath);
+        return list;
+    }
+
+    public void ImportAugmentData()
+    {
+ 
     }
 
     public DataRowCollection ReadExcel(string filePath, int tableIndex, ref int columnnum, ref int rownum)
@@ -225,6 +207,88 @@ public class AugmentManager : MonoBehaviour
 
         return result.Tables[tableIndex].Rows;
     }
+
+    public void WriteExcel(string filePath)
+    {
+        string fileExtension = ".xlsx";
+        string path = Application.streamingAssetsPath + "/" + filePath + fileExtension;
+        FileInfo newFile = new FileInfo(path);
+        if (newFile.Exists)
+        {
+            newFile.Delete();
+            newFile = new FileInfo(path);
+        }
+
+        using (ExcelPackage package = new ExcelPackage(newFile))
+        {
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Augments");
+
+                worksheet.Cells[1, 1].Value = "Id";
+                worksheet.Cells[1, 2].Value = "Name";
+                worksheet.Cells[1, 3].Value = "Rarity";
+                worksheet.Cells[1, 4].Value = "Synergies";
+                worksheet.Cells[1, 5].Value = "Descriptions";
+                worksheet.Cells[1, 6].Value = "Code";
+                worksheet.Cells[1, 7].Value = "Descriptions";
+                worksheet.Cells[1, 8].Value = "Code";
+                worksheet.Cells[1, 9].Value = "Descriptions";
+                worksheet.Cells[1, 10].Value = "Code";
+
+                UnityEngine.Object[] augments = Resources.LoadAll("Data/Augments", typeof(AugmentData));
+                for (int i = 0; i < augments.Length; i++)
+                {
+                    AugmentData augment = (AugmentData)augments[i];
+                    int id = augment.id;
+                    worksheet.Cells[id + 2, 1].Value = augment.id;
+                    worksheet.Cells[id + 2, 2].Value = augment.title;
+                    worksheet.Cells[id + 2, 3].Value = augment.rarity;
+                    var synergies = augment.synergies.Select(synergy => synergy.id).ToArray();
+                    worksheet.Cells[id + 2, 4].Value = String.Join(",", synergies);
+                    for (int j = 0; j < 3; j++)
+                    {
+                        worksheet.Cells[id + 2, 5 + j * 2].Value = augment.descriptions[j];
+                        worksheet.Cells[id + 2, 5 + j * 2 + 1].Value = augment.codes[j];
+                    }
+                }
+            }
+
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Synergies");
+
+                worksheet.Cells[1, 1].Value = "Id";
+                worksheet.Cells[1, 2].Value = "Name";
+                worksheet.Cells[1, 3].Value = "Break Points";
+                worksheet.Cells[1, 4].Value = "Descriptions";
+                worksheet.Cells[1, 5].Value = "Descriptions";
+                worksheet.Cells[1, 6].Value = "Code";
+                worksheet.Cells[1, 7].Value = "Descriptions";
+                worksheet.Cells[1, 8].Value = "Code";
+                worksheet.Cells[1, 9].Value = "Descriptions";
+                worksheet.Cells[1, 10].Value = "Code";
+
+                UnityEngine.Object[] synergies = Resources.LoadAll("Data/Synergies", typeof(SynergyData));
+                for (int i = 0; i < synergies.Length; i++)
+                {
+                    SynergyData synergy = (SynergyData)synergies[i];
+                    int id = synergy.id;
+                    worksheet.Cells[id + 2, 1].Value = synergy.id;
+                    worksheet.Cells[id + 2, 2].Value = synergy.title;
+                    worksheet.Cells[id + 2, 3].Value = String.Join(",", synergy.breakpoints);
+                    worksheet.Cells[id + 2, 4].Value = synergy.descriptions[0];
+
+                    for (int j = 0; j < synergy.breakpoints.Count; j++)
+                    {
+                        worksheet.Cells[id + 2, 5 + j * 2].Value = synergy.descriptions[j + 1];
+                        worksheet.Cells[id + 2, 5 + j * 2 + 1].Value = synergy.codes[j];
+                    }
+                }
+            }
+
+            package.Save();
+        }
+    }
+
 
     public Eva InitEvaluator()
     {
