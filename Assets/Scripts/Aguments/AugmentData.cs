@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Augment")]
 public class AugmentData : ScriptableObject
 {
     public int id;
@@ -18,5 +19,11 @@ public class AugmentData : ScriptableObject
     public List<string> codes;
 
     public List<Eva> evaluators;
+
+    void Reset()
+    {
+        //Output the message to the Console
+        id = Resources.LoadAll("Data/Augments", typeof(AugmentData)).Length;
+    }
 
 }

@@ -31,7 +31,7 @@ MonoBehaviour:
     <b>+<color=#c5c5c5ff>0/<color=#00d100>1</color></color></b>
     Bounce to all Bouncing Ammo'
   codes:
-  - "def OnAttached() { \nAddModifier(\"Character\", \"damageOnBounces\", \"Flat\",
+  - "def OnAttached() { \nAddModifier(\"Character\", \"damageOnBounce\", \"Flat\",
     0.1);\n} "
   - "def OnAttached() { \nAddModifier(\"Character\", \"extraBounces\", \"Flat\",
-    1);\nAddModifier(\"Character\", \"damageOnBounces\", \"Flat\", 0.15);\n} "
+    1);\nAddModifier(\"Character\", \"damageOnBounce\", \"Flat\", 0.15);\n} "
