@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Windows;
 
 [CustomEditor(typeof(AugmentManager), true)]
 public class AugmentManagerEditor : Editor
@@ -12,24 +13,42 @@ public class AugmentManagerEditor : Editor
 
         AugmentManager augmentManager = (AugmentManager)target;
 
-        //if (GUILayout.Button("Import Augments"))
-        //{
-        //    augmentManager.Init();
-        //    for (int i = 0; i < augmentManager.synergyDatas.Count; i++)
-        //    {
-        //        AssetDatabase.CreateAsset(augmentManager.synergyDatas[i], $"Assets/Resources/Data/Synergies/{augmentManager.synergyDatas[i].id}.{augmentManager.synergyDatas[i].title}.asset");
-        //    }
+        GUI.backgroundColor = new Color(227/255.0f, 36/255.0f, 43/255.0f);
+        if (GUILayout.Button("Import Augments") && 
+            EditorUtility.DisplayDialog(
+                "Confirmation", 
+                "Are you sure to import all the augment data from the excel file? " +
+                "This will override all the augment scriptable objests.", 
+                "Yes", "No"))
+        {
+            string synergyDirectory = $"Assets/Resources/Data/Synergies";
+            string augmentDirectory = $"Assets/Resources/Data/Augments";
 
-        //    for (int i = 0; i < augmentManager.augmentDatas.Count; i++)
-        //    {
-        //        AssetDatabase.CreateAsset(augmentManager.augmentDatas[i], $"Assets/Resources/Data/Augments/{augmentManager.augmentDatas[i].id}.{augmentManager.augmentDatas[i].title}.asset");
-        //    }
-        //}
+            if (Directory.Exists(synergyDirectory)) { Directory.Delete(synergyDirectory); }
+            Directory.CreateDirectory(synergyDirectory);
 
+            if (Directory.Exists(augmentDirectory)) { Directory.Delete(augmentDirectory); }
+            Directory.CreateDirectory(augmentDirectory);
+
+            augmentManager.Init();
+            for (int i = 0; i < augmentManager.synergyDatas.Count; i++)
+            {
+                AssetDatabase.CreateAsset(augmentManager.synergyDatas[i], $"{synergyDirectory}/{augmentManager.synergyDatas[i].id}.{augmentManager.synergyDatas[i].title}.asset");
+            }
+
+            for (int i = 0; i < augmentManager.augmentDatas.Count; i++)
+            {
+                AssetDatabase.CreateAsset(augmentManager.augmentDatas[i], $"{augmentDirectory}/{augmentManager.augmentDatas[i].id}.{augmentManager.augmentDatas[i].title}.asset");
+            }
+        }
+        GUI.backgroundColor = Color.white;
+
+        GUI.backgroundColor = Color.blue;
         if (GUILayout.Button("Save Augments"))
         {
             augmentManager.WriteExcel("AugmentList");
         }
+        GUI.backgroundColor = Color.white;
 
     }
 }
