@@ -110,7 +110,11 @@ public class MapGeneration : MonoBehaviour
     #endregion
 
     #region MiniMap
-    public List<GameObject> miniMapRooms;
+    public GameObject miniMapCenterRoom;
+    public GameObject miniMapUpperRoom;
+    public GameObject miniMapLowerRoom;
+    public GameObject miniMapLeftRoom;
+    public GameObject miniMapRightRoom;
 
     public Vector2 miniMapStartingPos;
     public Vector2 miniMapRoomMultiplier;
@@ -614,82 +618,88 @@ public class MapGeneration : MonoBehaviour
 
     public void refreshMiniMapUI()
     {
-        for(int i=1; i < 5;i++)
-        {
-            miniMapRooms[i].SetActive(false);
-
-        }
-        int holdingPos = 1;
-        miniMapRooms[0].SetActive(true);
+    int holdingPos = 1;
         //miniMapRooms[0].transform.position = miniMapStartingPos;
         if (rooms[currentRoomInside].completed)
         {
-            miniMapRooms[0].GetComponent<Image>().color = CurrentMiniMapRoomColour;
+            miniMapCenterRoom.GetComponent<Image>().color = CurrentMiniMapRoomColour;
         }
         else
         {
-            miniMapRooms[0].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+            miniMapCenterRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
         }
 
         if (rooms[currentRoomInside].upperRoomRef > -1)
         {
-            miniMapRooms[holdingPos].SetActive(true);
-            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, 1) * miniMapRoomMultiplier;
+            miniMapUpperRoom.SetActive(true);
+         
             if (rooms[rooms[currentRoomInside].upperRoomRef].completed)
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+                miniMapUpperRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
             }
             else
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+                miniMapUpperRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
             }
             holdingPos++;
         }
-
-        if (rooms[currentRoomInside].lowerRoomRef> -1)
+        else
         {
-            miniMapRooms[holdingPos].SetActive(true);
-            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(0, -1) * miniMapRoomMultiplier;
+            miniMapUpperRoom.SetActive(false);
+        }
+
+        if (rooms[currentRoomInside].lowerRoomRef > -1)
+        {
+            miniMapLowerRoom.SetActive(true);
             if (rooms[rooms[currentRoomInside].lowerRoomRef].completed)
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+                miniMapLowerRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
             }
             else
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+                miniMapLowerRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
             }
             holdingPos++;
+        }
+        else
+        {
+            miniMapLowerRoom.SetActive(false);
         }
 
         if (rooms[currentRoomInside].leftRoomRef > -1)
         {
-            miniMapRooms[holdingPos].SetActive(true);
-            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(-1, 0) * miniMapRoomMultiplier;
+            miniMapLeftRoom.SetActive(true);
             if (rooms[rooms[currentRoomInside].leftRoomRef].completed)
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+                miniMapLeftRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
             }
             else
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+                miniMapLeftRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
             }
             holdingPos++;
+        }
+        else
+        {
+            miniMapLeftRoom.SetActive(false);
         }
 
         if (rooms[currentRoomInside].rightRoomRef > -1)
         {
-            miniMapRooms[holdingPos].SetActive(true);
-            //miniMapRooms[holdingPos].transform.position = miniMapStartingPos + new Vector2(1, 0) * miniMapRoomMultiplier;
+            miniMapRightRoom.SetActive(true);
             if (rooms[rooms[currentRoomInside].rightRoomRef].completed)
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = completedMiniMapRoomColour;
+                miniMapRightRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
             }
             else
             {
-                miniMapRooms[holdingPos].GetComponent<Image>().color = DefaultMiniMapRoomColour;
+                miniMapRightRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
             }
             holdingPos++;
         }
-
+        else
+        {
+            miniMapRightRoom.SetActive(false);
+        }
     }
 }
