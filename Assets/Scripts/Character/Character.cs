@@ -198,7 +198,7 @@ public abstract class Character : MonoBehaviour
     {
         if (bouncingBladeStats.maxClip.value > 0)
         {
-            Debug.Log("bouncing blade");
+           // Debug.Log("bouncing blade");
             currentBouncingBladeClip++;
         }
     }

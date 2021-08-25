@@ -25,7 +25,6 @@ public class StartingRoom
 
 public class MapGeneration : MonoBehaviour
 {
-    public bool debug;
 
     public List<Room> rooms;
 
@@ -458,12 +457,23 @@ public class MapGeneration : MonoBehaviour
             numberOfWaves.Add(holdingRand);
             GameManager.current.gameState = GameState.Game;
 
+            int holdingSpawnInt=0;
+
             for (int i = 0; i <numberOfWaves[0]; i++)
             {
-                GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
+                if(holdingSpawnInt>= rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint.Count)
+                {
+                    holdingSpawnInt = 0;
+                }
+                Vector3 holdingPosition = new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].x, 0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].y);
+
+                GameObject holdingGameObject = Instantiate(Enemy, placement +holdingPosition , Enemy.transform.rotation);
                 holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
 
                 EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+
+                Debug.Log("making enem  " + holdingSpawnInt + "  " + holdingPosition);
+                holdingSpawnInt++;
                 
             }
 
@@ -571,10 +581,6 @@ public class MapGeneration : MonoBehaviour
                 needToSetPos = true;
                 desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.y);
                 playerTarget.transform.position = desiredSetPos;
-                if (debug)
-                {
-                    Debug.Log("Moving up " + desiredSetPos + "  " + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet);
-                }
                 break;
             case Direction.Lower:
                 currentRoomInside = rooms[currentRoomInside].lowerRoomRef;

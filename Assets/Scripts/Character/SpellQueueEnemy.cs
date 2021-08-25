@@ -69,7 +69,8 @@ public class SpellQueueEnemy : Enemy
             int j = i;
             spellQueue.Add(
                 () => {
-                    ShootBullets(10, (float)j * 30.0f, forawrd, 360, 3, 5);
+                    // ShootBullets(10, (float)j * 30.0f, forawrd, 360, 3, 5);
+                    ShootBullets(1, (float)j * 32.0f, forawrd, 360, 3, 5);
                 }
             );
 
@@ -104,7 +105,7 @@ public class SpellQueueEnemy : Enemy
         return UnityEngine.Random.Range(minCooldown, maxCooldown);
     }
 
-    // Update is called once per frame
+
     public override void Update()
     {
         if (GameManager.current.gameState == GameState.Shop) return;
