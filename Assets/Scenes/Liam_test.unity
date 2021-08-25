@@ -870,7 +870,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
   bulletContainer: {fileID: 1094544659}
   hp: 0
-  gold: 2
+  gold: 100
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
@@ -4800,6 +4800,26 @@ PrefabInstance:
       propertyPath: Enemy
       value: 
       objectReference: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: miniMapCenterRoom
+      value: 
+      objectReference: {fileID: 1760548608}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: miniMapUpperRoom
+      value: 
+      objectReference: {fileID: 1760548607}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: miniMapLowerRoom
+      value: 
+      objectReference: {fileID: 1760548606}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: miniMapLeftRoom
+      value: 
+      objectReference: {fileID: 1760548605}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: miniMapRightRoom
+      value: 
+      objectReference: {fileID: 1760548604}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
@@ -5935,6 +5955,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2184959537939473260, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2184959537996862893, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5995,6 +6019,22 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 284050209}
+    - target: {fileID: 2184959538667500032, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184959538688849989, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184959538753698234, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184959539721240472, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
 --- !u!4 &1760548602 stripped
