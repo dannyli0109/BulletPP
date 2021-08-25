@@ -18,4 +18,11 @@ public class SynergyData : ScriptableObject
 
     public List<Eva> evaluators;
 
+
+    void Reset()
+    {
+        //Output the message to the Console
+        id = Resources.LoadAll("Data/Synergies", typeof(SynergyData)).Length;
+    }
+
 }

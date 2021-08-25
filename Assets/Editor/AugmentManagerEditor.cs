@@ -103,6 +103,12 @@ public class AugmentDataEditor : Editor
                     }
                 }
                 else if (prop.name == "codes") { }
+                else if (prop.name == "id")
+                {
+                    GUI.enabled = false;
+                    EditorGUILayout.PropertyField(prop, new GUIContent("Id"));
+                    GUI.enabled = true;
+                }
                 else
                 {
                     EditorGUILayout.PropertyField(serializedObject.FindProperty(prop.name), true);
@@ -163,7 +169,13 @@ public class SynergyDataEditor : Editor
                         }
                     }
                 }
-                else if (prop.name == "codes"){ }
+                else if (prop.name == "codes") { }
+                else if (prop.name == "id")
+                {
+                    GUI.enabled = false;
+                    EditorGUILayout.PropertyField(prop, new GUIContent("Id"));
+                    GUI.enabled = true;
+                }
                 else
                 {
                     EditorGUILayout.PropertyField(serializedObject.FindProperty(prop.name), true);

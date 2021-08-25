@@ -20,4 +20,10 @@ public class AugmentData : ScriptableObject
 
     public List<Eva> evaluators;
 
+    void Reset()
+    {
+        //Output the message to the Console
+        id = Resources.LoadAll("Data/Augments", typeof(AugmentData)).Length;
+    }
+
 }
