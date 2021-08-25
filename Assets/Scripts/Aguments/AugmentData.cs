@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Augment")]
 public class AugmentData : ScriptableObject
 {
     public int id;

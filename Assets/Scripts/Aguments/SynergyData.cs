@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Synergy")]
 public class SynergyData : ScriptableObject
 {
     public int id;

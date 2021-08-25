@@ -63,13 +63,12 @@ public class SpellQueueEnemy : Enemy
         spellQueue = new List<Action>();
         spellTime = new List<float>();
 
-        Vector3 forawrd = bulletContainer.forward;
         for (int i = 0; i < 3; i++)
         {
             int j = i;
             spellQueue.Add(
                 () => {
-                    ShootBullets(10, (float)j * 30.0f, forawrd, 360, 3, 5);
+                    ShootBullets(10, 0, 180, 3, 5);
                 }
             );
 
@@ -82,6 +81,7 @@ public class SpellQueueEnemy : Enemy
                 spellTime.Add(0.8f);
             }
         }
+        
         for (int i = 0; i < 10; i++)
         {
             spellQueue.Add(

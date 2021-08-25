@@ -68,7 +68,6 @@ public class AugmentDataEditor : Editor
             {
                 if (prop.name == "descriptions")
                 {
-                    //ArrayGUI(serializedObject, "descriptions");
                     SerializedProperty arrayProp = serializedObject.FindProperty("descriptions");
                     SerializedProperty codesProp = serializedObject.FindProperty("codes");
 
