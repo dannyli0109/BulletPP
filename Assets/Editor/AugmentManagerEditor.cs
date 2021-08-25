@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Windows;
+using System;
 
 [CustomEditor(typeof(AugmentManager), true)]
 public class AugmentManagerEditor : Editor
@@ -53,6 +54,7 @@ public class AugmentManagerEditor : Editor
     }
 }
 
+
 [CustomEditor(typeof(AugmentData), true)]
 public class AugmentDataEditor : Editor
 {
@@ -75,12 +77,18 @@ public class AugmentDataEditor : Editor
                     arrayProp.isExpanded = EditorGUILayout.Foldout(arrayProp.isExpanded, "Array");
                     if (arrayProp.isExpanded)
                     {
-                        arrayProp.arraySize = EditorGUILayout.IntField("Size", arrayProp.arraySize);
+                        //AugmentData data = target as AugmentData;
+                        arrayProp.arraySize = 3;
+                        codesProp.arraySize = 3;
+                        //EditorGUILayout.PropertyField(arrayProp.FindPropertyRelative("Array.size"));
+
+                        serializedObject.ApplyModifiedProperties();
+                        //Array.Resize<string>(ref data.descriptions., arrayProp.arraySize);
 
                         for (int i = 0; i < arrayProp.arraySize; ++i)
                         {
                             SerializedProperty elementProp = arrayProp.GetArrayElementAtIndex(i);
-                            EditorGUILayout.PropertyField(elementProp, new GUIContent("Element " + i));
+                            EditorGUILayout.PropertyField(elementProp, new GUIContent("Description " + i));
 
                             GUIStyle style = new GUIStyle(GUI.skin.textArea);
                             style.richText = true;
@@ -90,7 +98,7 @@ public class AugmentDataEditor : Editor
                             GUI.enabled = true;
 
                             SerializedProperty codeProp = codesProp.GetArrayElementAtIndex(i);
-                            EditorGUILayout.PropertyField(codeProp);
+                            EditorGUILayout.PropertyField(codeProp, new GUIContent("Code " + i));
                         }
                     }
                 }
@@ -126,16 +134,19 @@ public class SynergyDataEditor : Editor
                     //ArrayGUI(serializedObject, "descriptions");
                     SerializedProperty descriptionsProp = serializedObject.FindProperty("descriptions");
                     SerializedProperty codesProp = serializedObject.FindProperty("codes");
-
+                    SerializedProperty breakPointsProp = serializedObject.FindProperty("breakpoints");
                     descriptionsProp.isExpanded = EditorGUILayout.Foldout(descriptionsProp.isExpanded, "Array");
                     if (descriptionsProp.isExpanded)
                     {
-                        descriptionsProp.arraySize = EditorGUILayout.IntField("Size", descriptionsProp.arraySize);
+                        descriptionsProp.arraySize = breakPointsProp.arraySize + 1;
+                        codesProp.arraySize = descriptionsProp.arraySize > 1 ? descriptionsProp.arraySize - 1 : 0;
+
+                        serializedObject.ApplyModifiedProperties();
 
                         for (int i = 0; i < descriptionsProp.arraySize; ++i)
                         {
                             SerializedProperty descriptionProp = descriptionsProp.GetArrayElementAtIndex(i);
-                            EditorGUILayout.PropertyField(descriptionProp, new GUIContent("Element " + i));
+                            EditorGUILayout.PropertyField(descriptionProp, new GUIContent("Description " + i), true);
 
                             GUIStyle style = new GUIStyle(GUI.skin.textArea);
                             style.richText = true;
@@ -147,7 +158,7 @@ public class SynergyDataEditor : Editor
                             if (i != 0)
                             {
                                 SerializedProperty codeProp = codesProp.GetArrayElementAtIndex(i - 1);
-                                EditorGUILayout.PropertyField(codeProp);
+                                EditorGUILayout.PropertyField(codeProp, new GUIContent("Code " + i), true);
                             }
                         }
                     }

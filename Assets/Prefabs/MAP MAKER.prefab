@@ -336,17 +336,16 @@ MonoBehaviour:
   camTarget: {fileID: 0}
   needToSetPos: 0
   desiredSetPos: {x: 0, y: 0, z: 0}
-  Enemy: {fileID: 1109022956268930713, guid: 01b1f7f633d6f8f4389ffd73c22bc569, type: 3}
+  Enemy: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
   yEnemyHeight: 1
   enemyRandOffset: {x: 2, y: 1}
   inCombat: 0
   EnemiesInEncounter: []
-  miniMapRooms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  miniMapCenterRoom: {fileID: 0}
+  miniMapUpperRoom: {fileID: 0}
+  miniMapLowerRoom: {fileID: 0}
+  miniMapLeftRoom: {fileID: 0}
+  miniMapRightRoom: {fileID: 0}
   miniMapStartingPos: {x: 810, y: 400}
   miniMapRoomMultiplier: {x: 45, y: 45}
   completedMiniMapRoomColour: {r: 0.7960785, g: 0.7960785, b: 0.7960785, a: 1}
