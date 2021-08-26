@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2551096348176210294}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Corner Piece 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2551096348176210294
 Transform:
@@ -39,6 +39,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2551096348176210294}
     m_Modifications:
+    - target: {fileID: 572876766839031735, guid: b0af3101bf2469f4a8bfbaece2d61a5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 572876766839031735, guid: b0af3101bf2469f4a8bfbaece2d61a5e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1515405569005892387, guid: b0af3101bf2469f4a8bfbaece2d61a5e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -87,6 +95,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corner
       objectReference: {fileID: 0}
+    - target: {fileID: 4811239576765958335, guid: b0af3101bf2469f4a8bfbaece2d61a5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4811239576765958335, guid: b0af3101bf2469f4a8bfbaece2d61a5e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0af3101bf2469f4a8bfbaece2d61a5e, type: 3}
 --- !u!4 &1181074558197877577 stripped
@@ -101,9 +117,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2551096348176210294}
     m_Modifications:
+    - target: {fileID: 19303677086736477, guid: 46fb5b721707e1645b0ba69e7dd379ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 19303677086736477, guid: 46fb5b721707e1645b0ba69e7dd379ee, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1933854095953059757, guid: 46fb5b721707e1645b0ba69e7dd379ee, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933854095953059757, guid: 46fb5b721707e1645b0ba69e7dd379ee, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933854095953059757, guid: 46fb5b721707e1645b0ba69e7dd379ee, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8627357106213074777, guid: 46fb5b721707e1645b0ba69e7dd379ee, type: 3}
       propertyPath: m_LocalPosition.x

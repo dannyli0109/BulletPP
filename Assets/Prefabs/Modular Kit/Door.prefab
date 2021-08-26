@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &1240526986924472109
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678227186870631301}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19590092, y: 2.4742947, z: 2}
+  m_Center: {x: -0.09795046, y: 1.2371473, z: 1}
 --- !u!1 &6016099396691495328
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,12 +107,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2f09cddbf9d1ee44f8b3ca0fc11de53b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3c0c79f00c4bc664ebfee462dd939d34, type: 2}
     - target: {fileID: 919132149155446097, guid: 2f09cddbf9d1ee44f8b3ca0fc11de53b, type: 3}
       propertyPath: m_Name
       value: Door2x3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f09cddbf9d1ee44f8b3ca0fc11de53b, type: 3}
+--- !u!1 &3678227186870631301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2f09cddbf9d1ee44f8b3ca0fc11de53b, type: 3}
+  m_PrefabInstance: {fileID: 4596726005381891796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4053345836060107071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2f09cddbf9d1ee44f8b3ca0fc11de53b, type: 3}
