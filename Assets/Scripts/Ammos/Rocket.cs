@@ -70,7 +70,7 @@ public class Rocket : Ammo
 
     private void OnDestroy()
     {
-        Vector3 pos = new Vector3(transform.position.x, 1.01f, transform.position.z);
+        Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
         AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
         if (owner.gameObject.layer == 11)
         {

@@ -109,7 +109,7 @@ public class Player : Character
         {
             currentTimeBetweenDashes = stats.timeBetweenDashs.value;
             currentImmunityFrame = stats.immunityFromDashing.value;
-            transform.position = new Vector3(transform.position.x, 1.12f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
             characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
         }
     }
@@ -339,7 +339,7 @@ public class Player : Character
 
     void MoveCharacter()
     {
-        transform.position = new Vector3(transform.position.x, 1.12f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
         Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
         characterController.Move(
             new Vector3(

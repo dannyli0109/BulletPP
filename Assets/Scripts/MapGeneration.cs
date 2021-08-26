@@ -138,6 +138,9 @@ public class MapGeneration : MonoBehaviour
 
     public BTSManager thisBTSManager;
 
+    public GameEvent beginEnounter;
+    public GameEvent finishEnounter;
+
     void Start()
     {
         GenerateMap();
@@ -359,6 +362,7 @@ public class MapGeneration : MonoBehaviour
         // if first room do all
         // else have chance to add more rooms
         // process each room until they don't add more 
+        finishEnounter?.Invoke();
         rooms[0].completed = true;
     }
 
@@ -433,6 +437,7 @@ public class MapGeneration : MonoBehaviour
     {
         if (!rooms[currentRoomInside].completed && currentRoomInside != 0)
         {
+            beginEnounter?.Invoke();
             currentWave = 0;
             numberOfWaves = new List<int>();
             // lock doors
@@ -525,6 +530,7 @@ public class MapGeneration : MonoBehaviour
                     refreshMiniMapUI();
                     if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
                     {
+                        finishEnounter?.Invoke();
                         GameManager.current.gameState = GameState.Shop;
                         GameManager.current.shop.Refresh();
                     }

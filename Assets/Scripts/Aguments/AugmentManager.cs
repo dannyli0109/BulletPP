@@ -356,6 +356,8 @@ public class AugmentManager : MonoBehaviour
     public void LaserSight()
     {
         Vector3 lookDir = gunPoint.forward * 100;
+        laserSightLineRenderer.startWidth = 0.01f;
+        laserSightLineRenderer.endWidth = 0.01f;
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
     }
