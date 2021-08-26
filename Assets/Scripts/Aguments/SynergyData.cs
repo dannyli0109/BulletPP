@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 [CreateAssetMenu(fileName = "New Synergy")]
 public class SynergyData : ScriptableObject
@@ -16,8 +18,10 @@ public class SynergyData : ScriptableObject
     [TextArea(5, 20)]
     public List<string> codes;
 
-    public List<Eva> evaluators;
+    public UnityEvent OnAttached;
+    public UnityEvent OnUpdate;
 
+    public List<Eva> evaluators;
 
     void Reset()
     {

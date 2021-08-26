@@ -47,3 +47,9 @@ MonoBehaviour:
     \"damage\", \"PercentAdd\", 0.1);\n} \ndef OnUpdate() { LaserSight(); }"
   - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 4);\nAddModifier(\"Bullet\",
     \"damage\", \"PercentAdd\", 0.2);\n} \ndef OnUpdate() { LaserSight(); }"
+  OnAttached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []

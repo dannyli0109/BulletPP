@@ -12,6 +12,7 @@ using System.Data;
 using Yinyue200.Corefx.CodePages;
 using OfficeOpenXml;
 
+
 public class AugmentManager : MonoBehaviour
 {
     public static AugmentManager current;
@@ -255,6 +256,7 @@ public class AugmentManager : MonoBehaviour
 
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Synergies");
+                
 
                 worksheet.Cells[1, 1].Value = "Id";
                 worksheet.Cells[1, 2].Value = "Name";

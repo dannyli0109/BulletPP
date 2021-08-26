@@ -166,6 +166,7 @@ public class SpellQueueEnemy : Enemy
         }
     }
 
+    // TODO: FIX THIS
     public void ShootBullets(int amount, float initialAngle, Vector3 forward, float angle, float speed, float size)
     {
         if (amount == 1) ShootBullet(forward, initialAngle, speed, stats.damageMultiplier.value * bulletStats.damage.value, size);
