@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpellQueueEnemy : Enemy
+public class SpellQueueSniper : Enemy
 {
     public List<Action> spellQueue;
     public List<float> spellTime;
@@ -12,8 +12,9 @@ public class SpellQueueEnemy : Enemy
     public float maxCooldown = 3.0f;
     public float viewAngle = 60.0f;
 
-  protected Decision decision;
+    Decision decision;
     public float rotationSpeed;
+    bool usinglaser;
 
     public override void Start()
     {
@@ -32,7 +33,7 @@ public class SpellQueueEnemy : Enemy
             action = () => { },
             condition = () =>
             {
-                return InRange(10);
+                return InRange(100);
             },
             trueBranch = new Decision()
             {
@@ -49,7 +50,7 @@ public class SpellQueueEnemy : Enemy
                 action = () => { },
                 condition = () =>
                 {
-                    return InRange(30);
+                    return InRange(100);
                 },
                 trueBranch = ToMove(),
                 falseBranch = null
@@ -62,35 +63,22 @@ public class SpellQueueEnemy : Enemy
         spellQueue = new List<Action>();
         spellTime = new List<float>();
 
-        float holdingRand = UnityEngine.Random.Range(2, 4);
-        spellQueue.Add(
-            () =>
-            {
-                ShootBullets((int)holdingRand, 0, transform.forward, 60, 5f, 2);
-            }
-        );
-        spellTime.Add(2.0f);
+        spellQueue.Add(() => { 
+            ShootBullets(2, 0, transform.forward,25, 4, 4);
+              });
+        spellTime.Add(2.2f);
 
-       holdingRand = UnityEngine.Random.Range(2, 4);
-        for (int i = 0; i < holdingRand; i++)
-        {
-            spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 4, 3); }
-            );
+        spellQueue.Add(() =>{
+               ActivateLaser(true);    
+           });
+        spellTime.Add(1.2f);
 
-            spellTime.Add(0.2f);
-        }
-        spellTime.Add(1.5f);
-        holdingRand = UnityEngine.Random.Range(2, 4);
-        for (int i = 0; i < holdingRand; i++)
-        {
-            spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 4, 3); }
-            );
+        spellQueue.Add( () =>{
+         ActivateLaser(false);
+            ShootBullets(1, 0, 0, 50, 3);
+        } );
+        spellTime.Add(0.6f);
 
-            spellTime.Add(0.2f);
-        }
-        spellTime.Add(2f);
         index = 0;
     }
 
@@ -109,9 +97,11 @@ public class SpellQueueEnemy : Enemy
             Destroy(gameObject);
         }
 
+
         agent.speed = 0;
-        decision.MakeDecision();
+       decision.MakeDecision();
         UpdateAnimation();
+        UpdatelaserSight();
 
         timeSinceFired += Time.deltaTime;
     }
@@ -164,6 +154,30 @@ public class SpellQueueEnemy : Enemy
             ShootBullet(currentAngle + initialAngle, speed, stats.damageMultiplier.value * bulletStats.damage.value, size);
             currentAngle += angleIncrement;
         }
+    }
+
+    public void ActivateLaser(bool usingLaser)
+    {
+        usinglaser = usingLaser;
+    }
+
+    public void UpdatelaserSight()
+    {
+        if (usinglaser)
+        {
+            Debug.Log("on");
+            Vector3 lookDir = (transform.forward) * 36;
+            thisLineRenderer.SetPosition(0, transform.position);
+            thisLineRenderer.SetPosition(1, transform.position + lookDir);
+        }
+        else
+        {
+            Debug.Log("off");
+            Vector3 lookDir = (transform.forward) * 12;
+            thisLineRenderer.SetPosition(0, transform.position);
+            thisLineRenderer.SetPosition(1, transform.position );
+        }
+
     }
 
     public void ShootBullets(int amount, float initialAngle, Vector3 forward, float angle, float speed, float size)
@@ -283,4 +297,5 @@ public class SpellQueueEnemy : Enemy
         };
         return decision;
     }
+
 }

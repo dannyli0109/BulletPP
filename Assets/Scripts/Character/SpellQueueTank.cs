@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpellQueueEnemy : Enemy
+public class SpellQueueTank : Enemy
 {
     public List<Action> spellQueue;
     public List<float> spellTime;
@@ -12,8 +12,10 @@ public class SpellQueueEnemy : Enemy
     public float maxCooldown = 3.0f;
     public float viewAngle = 60.0f;
 
-  protected Decision decision;
+    Decision decision;
     public float rotationSpeed;
+    bool usinglaser;
+    float currentAngle;
 
     public override void Start()
     {
@@ -32,7 +34,7 @@ public class SpellQueueEnemy : Enemy
             action = () => { },
             condition = () =>
             {
-                return InRange(10);
+                return InRange(100);
             },
             trueBranch = new Decision()
             {
@@ -49,7 +51,7 @@ public class SpellQueueEnemy : Enemy
                 action = () => { },
                 condition = () =>
                 {
-                    return InRange(30);
+                    return InRange(2);
                 },
                 trueBranch = ToMove(),
                 falseBranch = null
@@ -61,36 +63,30 @@ public class SpellQueueEnemy : Enemy
     {
         spellQueue = new List<Action>();
         spellTime = new List<float>();
-
-        float holdingRand = UnityEngine.Random.Range(2, 4);
-        spellQueue.Add(
-            () =>
-            {
-                ShootBullets((int)holdingRand, 0, transform.forward, 60, 5f, 2);
-            }
-        );
-        spellTime.Add(2.0f);
-
-       holdingRand = UnityEngine.Random.Range(2, 4);
-        for (int i = 0; i < holdingRand; i++)
+        for(int i=0; i < 3; i++)
         {
-            spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 4, 3); }
-            );
+        spellQueue.Add(() => {
+            currentAngle += 5;
+            ShootBullets(12,currentAngle , transform.forward,360, 3.5f, 3);
+              });
+        spellTime.Add(0.6f);
 
-            spellTime.Add(0.2f);
         }
-        spellTime.Add(1.5f);
-        holdingRand = UnityEngine.Random.Range(2, 4);
-        for (int i = 0; i < holdingRand; i++)
+        spellTime.Add(2.5f);
+
+        for (int i=0; i<12; i++)
         {
-            spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 4, 3); }
-            );
-
-            spellTime.Add(0.2f);
+            Debug.Log(i);
+            float holdingAngle = i * 35.0f;
+            spellQueue.Add(() => {
+              //  Debug.Log(currentAngle + i * 180);
+                ShootBullets(2, holdingAngle, transform.forward, 180, 3.5f, 3);
+            });
+            spellTime.Add(0.3f);
+           
         }
-        spellTime.Add(2f);
+        spellTime.Add(4.0f);
+
         index = 0;
     }
 
@@ -110,7 +106,7 @@ public class SpellQueueEnemy : Enemy
         }
 
         agent.speed = 0;
-        decision.MakeDecision();
+       decision.MakeDecision();
         UpdateAnimation();
 
         timeSinceFired += Time.deltaTime;
@@ -260,7 +256,7 @@ public class SpellQueueEnemy : Enemy
                 return Vector3.Distance(transform.position, target.transform.position) <= range;
             },
             trueBranch = ToShoot(),
-            falseBranch = DecideToMove(20)
+            falseBranch = DecideToMove(100)
         };
         return decision;
     }
@@ -283,4 +279,5 @@ public class SpellQueueEnemy : Enemy
         };
         return decision;
     }
+
 }

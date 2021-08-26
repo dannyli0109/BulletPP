@@ -99,7 +99,8 @@ public class MapGeneration : MonoBehaviour
     #endregion
 
     #region Encounter
-    public GameObject Enemy;
+
+    public List<GameObject> AllEnemies;
     public float yEnemyHeight;
     public Vector2 enemyRandOffset;
 
@@ -466,8 +467,8 @@ public class MapGeneration : MonoBehaviour
                     holdingSpawnInt = 0;
                 }
                 Vector3 holdingPosition = new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].x, 0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].y);
-
-                GameObject holdingGameObject = Instantiate(Enemy, placement +holdingPosition , Enemy.transform.rotation);
+                int holdingRandomEnemType = UnityEngine.Random.Range(0, AllEnemies.Count);
+                GameObject holdingGameObject = Instantiate(AllEnemies[holdingRandomEnemType], placement +holdingPosition ,AllEnemies[0].transform.rotation);
                 holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
 
                 EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
@@ -500,12 +501,18 @@ public class MapGeneration : MonoBehaviour
             {
                 roomClear = false;
                 Vector3 placement = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
+
+                int holdingSpawnInt = 0;
                 for (int i = 0; i < numberOfWaves[currentWave]; i++)
                 {
-                    GameObject holdingGameObject = Instantiate(Enemy, placement + new Vector3(UnityEngine.Random.Range(-enemyRandOffset.x, enemyRandOffset.x), 0, UnityEngine.Random.Range(-enemyRandOffset.y, enemyRandOffset.y)), Enemy.transform.rotation);
+                    Vector3 holdingPosition = new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].x, 0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].y);
+                    int holdingRandomEnemType = UnityEngine.Random.Range(0, AllEnemies.Count);
+                    GameObject holdingGameObject = Instantiate(AllEnemies[holdingRandomEnemType], placement + holdingPosition, AllEnemies[0].transform.rotation);
+                   
                     holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                     GameManager.current.gameState = GameState.Game;
+                    holdingSpawnInt++;
                 }
             }
             else
