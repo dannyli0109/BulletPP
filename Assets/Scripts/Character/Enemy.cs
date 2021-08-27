@@ -70,6 +70,7 @@ public class Enemy : Character
 
     public override void Update()
     {
+        Debug.Log("enemy update");
         if (GameManager.current.gameState == GameState.Shop) return;
         HandleMovement();
         base.Update();
@@ -80,7 +81,6 @@ public class Enemy : Character
         timeSinceFired += Time.deltaTime;
 
         HandleDecidingToShoot();
-
     }
 
     void GetNewDestination(bool direct)

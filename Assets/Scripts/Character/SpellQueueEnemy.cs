@@ -5,8 +5,6 @@ using System;
 
 public class SpellQueueEnemy : Enemy
 {
-    // Start is called before the first frame update
-
     public List<Action> spellQueue;
     public List<float> spellTime;
     public int index = 0;
@@ -14,7 +12,8 @@ public class SpellQueueEnemy : Enemy
     public float maxCooldown = 3.0f;
     public float viewAngle = 60.0f;
 
-    Decision decision;
+  protected Decision decision;
+    public float rotationSpeed;
 
     public override void Start()
     {
@@ -63,39 +62,35 @@ public class SpellQueueEnemy : Enemy
         spellQueue = new List<Action>();
         spellTime = new List<float>();
 
-        for (int i = 0; i < 3; i++)
+        float holdingRand = UnityEngine.Random.Range(2, 4);
+        spellQueue.Add(
+            () =>
+            {
+                ShootBullets((int)holdingRand, 0, transform.forward, 60, 5f, 2);
+            }
+        );
+        spellTime.Add(2.0f);
+
+       holdingRand = UnityEngine.Random.Range(2, 4);
+        for (int i = 0; i < holdingRand; i++)
         {
-            int j = i;
             spellQueue.Add(
-                () => {
-                    ShootBullets(10, 0, 180, 3, 5);
-                }
+                () => { ShootBullets(1, 0, 0, 4, 3); }
             );
 
-            if (i == 0)
-            {
-                spellTime.Add(GetCooldown());
-            }
-            else
-            {
-                spellTime.Add(0.8f);
-            }
+            spellTime.Add(0.2f);
         }
-        
-        for (int i = 0; i < 10; i++)
+        spellTime.Add(1.5f);
+        holdingRand = UnityEngine.Random.Range(2, 4);
+        for (int i = 0; i < holdingRand; i++)
         {
             spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 5, 5); }
+                () => { ShootBullets(1, 0, 0, 4, 3); }
             );
-            if (i == 0)
-            {
-                spellTime.Add(GetCooldown());
-            }
-            else
-            {
-                spellTime.Add(0.5f);
-            }
+
+            spellTime.Add(0.2f);
         }
+        spellTime.Add(2f);
         index = 0;
     }
 
@@ -104,7 +99,6 @@ public class SpellQueueEnemy : Enemy
         return UnityEngine.Random.Range(minCooldown, maxCooldown);
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         if (GameManager.current.gameState == GameState.Shop) return;
@@ -114,7 +108,6 @@ public class SpellQueueEnemy : Enemy
             EventManager.current.ReceiveGold(gold);
             Destroy(gameObject);
         }
-
 
         agent.speed = 0;
         decision.MakeDecision();
@@ -127,8 +120,16 @@ public class SpellQueueEnemy : Enemy
     {
         Vector2 current = new Vector2(transform.position.x, transform.position.z);
         Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.z);
-        angle = Util.AngleBetweenTwoPoints(targetPos, current) + 90;
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+        //angle = Util.AngleBetweenTwoPoints(targetPos, current) + 90;
+
+        //Vector3.MoveTowards(transform.localEulerAngles, new Vector3(0f, angle, 0f), 1);
+        /// transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+
+        Vector3 holdingAngle = target.transform.position - transform.position;
+        holdingAngle.y = 0; // keep the direction strictly horizontal
+        Quaternion rotation = Quaternion.LookRotation(holdingAngle);
+        // slerp to the desired rotation over time
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
         float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
         float cos = Mathf.Cos(angle * Mathf.Deg2Rad);
@@ -147,7 +148,6 @@ public class SpellQueueEnemy : Enemy
         animator.SetFloat("x", movemntRotated.x);
         animator.SetFloat("y", movemntRotated.y);
     }
-
 
     public override void OnDestroy()
     {
@@ -251,7 +251,6 @@ public class SpellQueueEnemy : Enemy
         return decision;
     }
 
-
     public Decision DecideToShoot(float range)
     {
         Decision decision = new Decision()
@@ -285,5 +284,4 @@ public class SpellQueueEnemy : Enemy
         };
         return decision;
     }
-
 }

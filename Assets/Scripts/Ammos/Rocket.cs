@@ -32,7 +32,6 @@ public class Rocket : Ammo
 
         if (owner.rocketStats.heatSeeking.value > 0)
         {
-            Debug.Log(owner.rocketStats.heatSeeking.value);
             transform.position += transform.forward * currentSpeed / 2 * Time.fixedDeltaTime;
 
             transform.position += transform.forward * currentSpeed * Time.fixedDeltaTime;
