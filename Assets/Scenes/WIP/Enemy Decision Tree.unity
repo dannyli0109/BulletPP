@@ -4766,6 +4766,54 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoom.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoom.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoom.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoom.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoom.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downRightRoomInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoomInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoom.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 284050206}
@@ -4824,7 +4872,7 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: startingRooms.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 8713667842214811878, guid: 6a3baf9e942e2b348b63c631a54bbd30, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: startingRoomPrefabInfo.Array.data[0].middleOffset.y
       value: 0
@@ -4832,55 +4880,55 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: allDoorRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 8713667842214811878, guid: 6a3baf9e942e2b348b63c631a54bbd30, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: allDoorRoom.Array.data[1]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 8800733369545872879, guid: 5c04123bf73d2e743b2c64c776c024d2, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: allDoorRoom.Array.data[2]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 6226753198333860991, guid: 15303d770ab7e864e8c23ee4cedda707, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 8395571390937848587, guid: 740a39b0c0e0a8b4dac24b4aabc2fc74, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 6337651392741508450, guid: 9b2e38e0f0f44a645b888305635e62c1, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: leftRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 2996591743845039312, guid: 626cf421ed1ef2a4ea8e60a46972927d, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: rightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 3375263972283231953, guid: 4bb191deed65ba541bfab15604b0b15d, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upDownRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 1507773041024335627, guid: 22634613d73d39242823eed5659afc6a, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upLeftRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 8510972283225194166, guid: e06f80869f6813445bce1a51a682bc9d, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upLeftRoom.Array.data[1]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 3900672511122298674, guid: 123d1f6221249f549b59bdf281dbc53e, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upRightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 6269006165980416335, guid: cd986ad4436ce1f4ba0f4a055162d87f, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downLeftRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 4818074823781205614, guid: d1ccf5a79aa220d46ba3a69e8722dc7e, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downRightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 609573755983872433, guid: d6d3edcd1e0181146b9019248064d57a, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downRightRoom.Array.data[1]
       value: 
@@ -4888,23 +4936,23 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: leftRightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 2848187980329817985, guid: cd26bbd0d241f084ead061be22f06c62, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: leftRightRoom.Array.data[1]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 5897518658685647682, guid: ab756812e95f2b74bb63f4c1971b0005, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upDownLeftRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 1586102728231599803, guid: 8e4d5eaffc327c94ea911b552aa6682c, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upDownRightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 8040146210755937923, guid: 330e2c100e1e6b94cbf1378c4396c962, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upLeftRightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 6837488744800805105, guid: 3cfddec110cf167489e63a89b6b27ee5, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upLeftRightRoom.Array.data[1]
       value: 
@@ -4912,11 +4960,11 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downLeftRightRoom.Array.data[0]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 7878566143796668014, guid: 44703b0812572a44ea93b745286e350b, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downLeftRightRoom.Array.data[1]
       value: 
-      objectReference: {fileID: 8840983879915140876, guid: 8237ec1ce556cf24993ecf88d2885d50, type: 3}
+      objectReference: {fileID: 1696351470953771166, guid: 6d1b0f58ac529c94a820db092791be4c, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: startingRoomPrefabInfo.Array.data[0].leftRoomDoorSpawnOffet.x
       value: -15
@@ -4933,6 +4981,126 @@ PrefabInstance:
       propertyPath: beginEnounter
       value: 
       objectReference: {fileID: 11400000, guid: a963e0b2af3a1ef4eb789e5e30fb65fc, type: 2}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 553863326089285642, guid: 6aa87135a3849c6468c0a1f26518f491, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 3633754501737509999, guid: e762f65fe6b2cf84b9756379c6799226, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 6218834408990899238, guid: 04c502bae4e5c8d41a14ae1cdc1cd4e5, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[1].upperRoomDoorSpawnOffet.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[1].lowerRoomDoorSpawnOffet.y
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[1].cameraBoundryMaxZ
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoomInfo.Array.data[1].cameraBoundryMinZ
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[1].upperRoomDoorSpawnOffet.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[1].rightRoomDoorSpawnOffet.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[1].cameraBoundryMaxZ
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoomInfo.Array.data[1].cameraBoundryMinZ
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].upperRoomDoorSpawnOffet.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].lowerRoomDoorSpawnOffet.y
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].rightRoomDoorSpawnOffet.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].cameraBoundryMaxZ
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoomInfo.Array.data[1].cameraBoundryMinZ
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 6218834408990899238, guid: 04c502bae4e5c8d41a14ae1cdc1cd4e5, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].upperRoomDoorSpawnOffet.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].lowerRoomDoorSpawnOffet.y
+      value: -8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].leftRoomDoorSpawnOffet.x
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].cameraBoundryMaxX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].cameraBoundryMinX
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].cameraBoundryMaxZ
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoomInfo.Array.data[1].cameraBoundryMinZ
+      value: -3.7
+      objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
