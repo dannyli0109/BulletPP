@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc182e4640323644841d09a3eea901a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
   rooms: []
   wallReConnectChanceOfHundred: 25
   roomMultiplyValue: {x: 45, y: 30}
@@ -70,54 +69,57 @@ MonoBehaviour:
     needLeftRoom: 1
     needRightRoom: 1
   startingRooms:
-  - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
+  - {fileID: 8713667842214811878, guid: 6a3baf9e942e2b348b63c631a54bbd30, type: 3}
   startingRoomPrefabInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
-    leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    leftRoomDoorSpawnOffet: {x: -15, y: 0}
+    rightRoomDoorSpawnOffet: {x: 15, y: 0}
     cameraBoundryMaxX: 7
     cameraBoundryMinX: -7
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   allDoorRoom:
-  - {fileID: 1453351808915093445, guid: 133561be572fb054593f4c64c08567c8, type: 3}
-  - {fileID: 4624463924144925947, guid: 7565c01c511424c47a6c66f8be31987a, type: 3}
-  - {fileID: 4984691470946668257, guid: 5255ced0caae55645a907c6a373c00d7, type: 3}
+  - {fileID: 8713667842214811878, guid: 6a3baf9e942e2b348b63c631a54bbd30, type: 3}
+  - {fileID: 8800733369545872879, guid: 5c04123bf73d2e743b2c64c776c024d2, type: 3}
+  - {fileID: 6226753198333860991, guid: 15303d770ab7e864e8c23ee4cedda707, type: 3}
   upRoom:
-  - {fileID: 3481950231860664795, guid: b86268729921b114482461b6de762d0b, type: 3}
+  - {fileID: 8395571390937848587, guid: 740a39b0c0e0a8b4dac24b4aabc2fc74, type: 3}
   downRoom:
-  - {fileID: 6534745952657641080, guid: 7d469fa8f40413546915bfd549bb95ae, type: 3}
+  - {fileID: 6337651392741508450, guid: 9b2e38e0f0f44a645b888305635e62c1, type: 3}
   leftRoom:
-  - {fileID: 1824836827662024726, guid: 916f7bdbc2c2b414e876759114180d9d, type: 3}
+  - {fileID: 2996591743845039312, guid: 626cf421ed1ef2a4ea8e60a46972927d, type: 3}
   rightRoom:
-  - {fileID: 6194592526552580840, guid: c51f60528fcee334fa951ac803dd238f, type: 3}
+  - {fileID: 3375263972283231953, guid: 4bb191deed65ba541bfab15604b0b15d, type: 3}
   upDownRoom:
-  - {fileID: 4318382585243863633, guid: 5544b35d1b1452448af64bfa2d748f2f, type: 3}
+  - {fileID: 1507773041024335627, guid: 22634613d73d39242823eed5659afc6a, type: 3}
+  - {fileID: 553863326089285642, guid: 6aa87135a3849c6468c0a1f26518f491, type: 3}
   upLeftRoom:
-  - {fileID: 4621502232478974580, guid: 558efdb370e70864eba550488d663e67, type: 3}
-  - {fileID: 4013477804267822307, guid: 73ee3792feeb2a244a0a6d3e76e797b8, type: 3}
+  - {fileID: 8510972283225194166, guid: e06f80869f6813445bce1a51a682bc9d, type: 3}
+  - {fileID: 3900672511122298674, guid: 123d1f6221249f549b59bdf281dbc53e, type: 3}
   upRightRoom:
-  - {fileID: 1249736385051667748, guid: 8a4c990403ccffa47ac295a98a85aaff, type: 3}
+  - {fileID: 6269006165980416335, guid: cd986ad4436ce1f4ba0f4a055162d87f, type: 3}
+  - {fileID: 3633754501737509999, guid: e762f65fe6b2cf84b9756379c6799226, type: 3}
   downLeftRoom:
-  - {fileID: 7533526137600042590, guid: 720ed3c9b625772489594c0596897d3b, type: 3}
+  - {fileID: 4818074823781205614, guid: d1ccf5a79aa220d46ba3a69e8722dc7e, type: 3}
   downRightRoom:
-  - {fileID: 1326487844555705191, guid: 0aa74dbe9e2dbdf44963f593c5879833, type: 3}
-  - {fileID: 176287628393437971, guid: b4bd9a3a5d75ed042a730a22aeeb7894, type: 3}
+  - {fileID: 609573755983872433, guid: d6d3edcd1e0181146b9019248064d57a, type: 3}
   leftRightRoom:
-  - {fileID: 7166273750155598376, guid: 3b8d7c0b33cdd1e45ba21a872f531b63, type: 3}
-  - {fileID: 2748386830261423592, guid: ed3a2ac8fd86b5445a3c09ebd84642a7, type: 3}
+  - {fileID: 2848187980329817985, guid: cd26bbd0d241f084ead061be22f06c62, type: 3}
+  - {fileID: 5897518658685647682, guid: ab756812e95f2b74bb63f4c1971b0005, type: 3}
   upDownLeftRoom:
-  - {fileID: 7819917018087883527, guid: f86bf1993b10d5248b5fe27b2b134227, type: 3}
+  - {fileID: 1586102728231599803, guid: 8e4d5eaffc327c94ea911b552aa6682c, type: 3}
+  - {fileID: 6218834408990899238, guid: 04c502bae4e5c8d41a14ae1cdc1cd4e5, type: 3}
   upDownRightRoom:
-  - {fileID: 1972704425016464564, guid: ab0a470c07229a240a5c2c407ee96665, type: 3}
+  - {fileID: 8040146210755937923, guid: 330e2c100e1e6b94cbf1378c4396c962, type: 3}
   upLeftRightRoom:
-  - {fileID: 5706285079197972649, guid: bd76d31cab2ad60448e82501d015c174, type: 3}
-  - {fileID: 2311721395412768925, guid: 29df3e47f04d2d5499c7dd3d1481a2b2, type: 3}
+  - {fileID: 6837488744800805105, guid: 3cfddec110cf167489e63a89b6b27ee5, type: 3}
   downLeftRightRoom:
-  - {fileID: 6879949707812021247, guid: 6cbaabcfe44021b42ac8fcf1cfd19464, type: 3}
-  - {fileID: 1391686635697823944, guid: 57c2ad63e9714544294c5212ea5906b5, type: 3}
+  - {fileID: 7878566143796668014, guid: 44703b0812572a44ea93b745286e350b, type: 3}
+  - {fileID: 1696351470953771166, guid: 6d1b0f58ac529c94a820db092791be4c, type: 3}
   allDoorRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -128,6 +130,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
@@ -137,6 +141,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
@@ -146,6 +152,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   upRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -156,6 +164,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   downRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -166,6 +176,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   leftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -176,6 +188,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   rightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -186,6 +200,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   upDownRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -196,6 +212,19 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
+    middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   upLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -206,6 +235,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
@@ -215,6 +246,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   upRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -225,6 +258,19 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
+    leftRoomDoorSpawnOffet: {x: 0, y: 0}
+    rightRoomDoorSpawnOffet: {x: 13, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
+    middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   downLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -235,6 +281,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   downRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -245,15 +293,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
-  - upperRoomDoorSpawnOffet: {x: 0, y: 0}
-    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
-    leftRoomDoorSpawnOffet: {x: 0, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
-    cameraBoundryMaxX: 7
-    cameraBoundryMinX: -7
-    cameraBoundryMaxZ: 6.5
-    cameraBoundryMinZ: -3.7
-    middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   leftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -264,6 +305,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
@@ -273,6 +316,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: -7.5}
   upDownLeftRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -283,6 +328,19 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
+  - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
+    lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
+    leftRoomDoorSpawnOffet: {x: -13, y: 0}
+    rightRoomDoorSpawnOffet: {x: 0, y: 0}
+    cameraBoundryMaxX: 7
+    cameraBoundryMinX: -7
+    cameraBoundryMaxZ: 6.5
+    cameraBoundryMinZ: -3.7
+    middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   upDownRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -293,6 +351,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   upLeftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 8.5}
     lowerRoomDoorSpawnOffet: {x: 0, y: 0}
@@ -303,15 +363,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
-  - upperRoomDoorSpawnOffet: {x: 0, y: -8.5}
-    lowerRoomDoorSpawnOffet: {x: 0, y: 0}
-    leftRoomDoorSpawnOffet: {x: -13, y: 0}
-    rightRoomDoorSpawnOffet: {x: 13, y: 0}
-    cameraBoundryMaxX: 7
-    cameraBoundryMinX: -7
-    cameraBoundryMaxZ: 6.5
-    cameraBoundryMinZ: -3.7
-    middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   downLeftRightRoomInfo:
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
@@ -322,6 +375,8 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   - upperRoomDoorSpawnOffet: {x: 0, y: 0}
     lowerRoomDoorSpawnOffet: {x: 0, y: -8.5}
     leftRoomDoorSpawnOffet: {x: -13, y: 0}
@@ -331,13 +386,18 @@ MonoBehaviour:
     cameraBoundryMaxZ: 6.5
     cameraBoundryMinZ: -3.7
     middleOffset: {x: 0, y: 0}
+    enemySpawnPoint:
+    - {x: 0, y: 0}
   currentRoomInside: 0
   playerTarget: {fileID: 0}
   camTarget: {fileID: 0}
   needToSetPos: 0
   desiredSetPos: {x: 0, y: 0, z: 0}
-  Enemy: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
-  yEnemyHeight: 1
+  AllEnemies:
+  - {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+  - {fileID: 5077297002888340751, guid: 2fe8c023552f8f247a78be833f0d26a7, type: 3}
+  - {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
+  yEnemyHeight: 0
   enemyRandOffset: {x: 2, y: 1}
   inCombat: 0
   EnemiesInEncounter: []
@@ -359,3 +419,5 @@ MonoBehaviour:
   waveWaitingTime: 3
   currentWaveWaitingTime: 0
   thisBTSManager: {fileID: 0}
+  beginEnounter: {fileID: 11400000, guid: a963e0b2af3a1ef4eb789e5e30fb65fc, type: 2}
+  finishEnounter: {fileID: 11400000, guid: 18b2b99bc56fbab4e8ae426875a04213, type: 2}

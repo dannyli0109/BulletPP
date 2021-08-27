@@ -440,6 +440,7 @@ public class MapGeneration : MonoBehaviour
             beginEnounter?.Invoke();
             currentWave = 0;
             numberOfWaves = new List<int>();
+
             // lock doors
             //Debug.Log("encounter start " + totalRoomDiffucluty);
             Vector3 placement = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.middleOffset.x, yEnemyHeight, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.middleOffset.y);
@@ -457,7 +458,6 @@ public class MapGeneration : MonoBehaviour
             {
                 holdingRand = holdingRand / 2;
                 numberOfWaves.Add(holdingRand+1);
-                Debug.Log("Two waves");
             }
 
             numberOfWaves.Add(holdingRand);
@@ -472,13 +472,13 @@ public class MapGeneration : MonoBehaviour
                     holdingSpawnInt = 0;
                 }
                 Vector3 holdingPosition = new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].x, 0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].y);
+                
                 int holdingRandomEnemType = UnityEngine.Random.Range(0, AllEnemies.Count);
                 GameObject holdingGameObject = Instantiate(AllEnemies[holdingRandomEnemType], placement +holdingPosition ,AllEnemies[0].transform.rotation);
                 holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
 
                 EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
 
-                Debug.Log("making enem  " + holdingSpawnInt + "  " + holdingPosition);
                 holdingSpawnInt++;
                 
             }
