@@ -870,7 +870,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
   bulletContainer: {fileID: 1094544659}
   hp: 0
-  gold: 100
+  gold: 2
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
@@ -4951,7 +4951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downLeftRoomInfo.Array.data[0].enemySpawnPoint.Array.data[0].y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downRightRoomInfo.Array.data[0].enemySpawnPoint.Array.data[0].x
@@ -5001,6 +5001,14 @@ PrefabInstance:
       propertyPath: AllEnemies.Array.data[2]
       value: 
       objectReference: {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRoomInfo.Array.data[0].rightRoomDoorSpawnOffet.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRoomInfo.Array.data[0].upperRoomDoorSpawnOffet.y
+      value: 8.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
@@ -5020,7 +5028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279977, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279977, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5072,7 +5080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8999348283891798871, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
