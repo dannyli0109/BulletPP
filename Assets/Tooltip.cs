@@ -42,7 +42,7 @@ public class Tooltip : MonoBehaviour
     }
 
 
-    private void Update()
+    private void LateUpdate()
     {
 
         //if (Application.isEditor)
@@ -53,7 +53,7 @@ public class Tooltip : MonoBehaviour
         //    layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
         //}
 
-        Vector2 position = Input.mousePosition;
+        Vector2 position = Input.mousePosition + new Vector3(50, 50, 0);
 
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0cf1f1832ee9b748bacf6a18e3ee30f, type: 3}
+  m_Name: 4.Laser sight
+  m_EditorClassIdentifier: 
+  id: 4
+  title: Laser sight
+  rarity: 1
+  synergies:
+  - {fileID: 11400000, guid: f9ec3d7f3edaddd4da2abff0b3b3800c, type: 2}
+  - {fileID: 11400000, guid: e90fea168972820499a5d7068cf67bb9, type: 2}
+  iconPath: icons/Cross.png
+  descriptions:
+  - '<b>+<color=#c5c5c5ff><color=#00d100>2</color>/3/4</color></b> Bullets
+
+    <b>+<color=#c5c5c5ff><color=#00d100>5</color>/10/20</color>%</b>
+    Bullet Damage
+
+
+    You get a red laser sight to improve your aim'
+  - '<b>+<color=#c5c5c5ff>2/<color=#00d100>3</color>/4</color></b> Bullets
+
+    <b>+<color=#c5c5c5ff>5/<color=#00d100>10</color>/20</color>%</b>
+    Bullet Damage
+
+
+    You get a red laser sight to improve your aim'
+  - '<b>+<color=#c5c5c5ff>2/3/<color=#00d100>4</color></color></b> Bullets
+
+    <b>+<color=#c5c5c5ff>5/10/<color=#00d100>20</color></color>%</b>
+    Bullet Damage
+
+
+    You get a red laser sight to improve your aim'
+  codes:
+  - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Bullet\",
+    \"damage\", \"PercentAdd\", 0.05);\n} \ndef OnUpdate() { LaserSight(); }"
+  - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 3);\nAddModifier(\"Bullet\",
+    \"damage\", \"PercentAdd\", 0.1);\n} \ndef OnUpdate() { LaserSight(); }"
+  - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 4);\nAddModifier(\"Bullet\",
+    \"damage\", \"PercentAdd\", 0.2);\n} \ndef OnUpdate() { LaserSight(); }"
+  iconSprite: {fileID: 0}

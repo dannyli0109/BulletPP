@@ -102,7 +102,10 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < player.augments.Count; i++)
         {
             GameObject augmentUI = Instantiate(augmentUIPrefab);
-            augmentUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = augmentManager.augmentDatas[player.augments[i].id].title + ": " +  player.augments[i].count;
+            augmentUI.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = augmentManager.augmentDatas[player.augments[i].id].iconSprite;
+            augmentUI.transform.GetChild(0).GetComponent<AugmentHUD>().Populate(player.augments[i].id, player.augments[i].level);
+            augmentUI.transform.GetChild(0).GetComponent<Outline>().effectColor = augmentManager.colors[augmentManager.augmentDatas[player.augments[i].id].rarity];
+            augmentUI.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = player.augments[i].count.ToString();
             augmentUI.transform.SetParent(augmentListUIContainer.transform);
             augmentUI.transform.localScale = new Vector3(1, 1, 1);
         }

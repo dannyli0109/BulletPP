@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0cf1f1832ee9b748bacf6a18e3ee30f, type: 3}
+  m_Name: 0.Extra Bullets
+  m_EditorClassIdentifier: 
+  id: 0
+  title: Extra Bullets
+  rarity: 0
+  synergies:
+  - {fileID: 11400000, guid: e90fea168972820499a5d7068cf67bb9, type: 2}
+  iconPath: icons/LotsofBullets.png
+  descriptions:
+  - <b>+<color=#c5c5c5ff><color=#00d100>3</color>/4/6</color></b> Bullets
+  - <b>+<color=#c5c5c5ff>3/<color=#00d100>4</color>/6</color></b> Bullets
+  - <b>+<color=#c5c5c5ff>3/4/<color=#00d100>6</color></color></b> Bullets
+  codes:
+  - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 3);\n} "
+  - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 4);\n} "
+  - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 6);\n} "
+  iconSprite: {fileID: 0}

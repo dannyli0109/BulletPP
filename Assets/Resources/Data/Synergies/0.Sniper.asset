@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4538330d9ba9340b4ec68e307f5e52, type: 3}
+  m_Name: 0.Sniper
+  m_EditorClassIdentifier: 
+  id: 0
+  title: Sniper
+  breakpoints: 020000000400000006000000
+  descriptions:
+  - '<b>+<color=#c5c5c5ff>25/50/100</color>%</b> Damage
+
+    <b>+<color=#c5c5c5ff>50%</color></b>
+    Reload Time'
+  - '<b>+<color=#c5c5c5ff><color=#00d100>25</color>/50/100</color>%</b> Damage
+
+    <b>+<color=#c5c5c5ff><color=#00d100>50%</color></color></b>
+    Reload Time'
+  - '<b>+<color=#c5c5c5ff>25/<color=#00d100>50</color>/100</color>%</b> Damage
+
+    <b>+<color=#c5c5c5ff><color=#00d100>50%</color></color></b>
+    Reload Time'
+  - '<b>+<color=#c5c5c5ff>25/50/<color=#00d100>100</color></color>%</b> Damage
+
+    <b>+<color=#c5c5c5ff><color=#00d100>50%</color></color></b>
+    Reload Time'
+  codes:
+  - "def OnAttached() { \nAddModifier(\"Character\", \"damageMultiplier\", \"PercentAdd\",
+    0.25);\nAddModifier(\"Character\", \"reloadTime\", \"PercentAdd\", 0.5);\n} "
+  - "def OnAttached() { \nAddModifier(\"Character\", \"damageMultiplier\", \"PercentAdd\",
+    0.5);\nAddModifier(\"Character\", \"reloadTime\", \"PercentAdd\", 0.5);\n} "
+  - "def OnAttached() { \nAddModifier(\"Character\", \"damageMultiplier\", \"PercentAdd\",
+    1);\nAddModifier(\"Character\", \"reloadTime\", \"PercentAdd\", 0.5);\n} "
+  OnAttached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []
