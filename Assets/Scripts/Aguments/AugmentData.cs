@@ -14,6 +14,8 @@ public class AugmentData : ScriptableObject
 
     public List<SynergyData> synergies;
 
+    public string iconPath;
+
     [TextArea(5, 20)]
     public List<string> descriptions;
 
@@ -21,6 +23,8 @@ public class AugmentData : ScriptableObject
     public List<string> codes;
 
     public List<Eva> evaluators;
+
+    public Sprite iconSprite;
 
     void Reset()
     {

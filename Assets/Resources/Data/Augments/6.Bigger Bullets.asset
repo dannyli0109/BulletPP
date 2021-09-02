@@ -16,8 +16,9 @@ MonoBehaviour:
   title: Bigger Bullets
   rarity: 1
   synergies:
-  - {fileID: 11400000, guid: 452ad31be8662e042864193e5fe5a595, type: 2}
-  - {fileID: 11400000, guid: a2d7425b5125d1e4683b59901caf72f1, type: 2}
+  - {fileID: 11400000, guid: 64a8ed208633f4c40a52fc70fab63d68, type: 2}
+  - {fileID: 11400000, guid: e90fea168972820499a5d7068cf67bb9, type: 2}
+  iconPath: icons/BulletUpgrade.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>2</color>/3/4</color></b> Bullets
 
@@ -50,3 +51,4 @@ MonoBehaviour:
   - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 4);\nAddModifier(\"Bullet\",
     \"size\", \"PercentAdd\", 0.8);\nAddModifier(\"Bullet\", \"damage\", \"Flat\",
     0.6);\n} "
+  iconSprite: {fileID: 0}

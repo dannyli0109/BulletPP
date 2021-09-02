@@ -16,8 +16,9 @@ MonoBehaviour:
   title: Under barrel rocket launcher
   rarity: 1
   synergies:
-  - {fileID: 11400000, guid: 5169b41905b5a4a40bccd78b96e65403, type: 2}
-  - {fileID: 11400000, guid: 452ad31be8662e042864193e5fe5a595, type: 2}
+  - {fileID: 11400000, guid: 8e9d9e54a68f6f34dac6fc6d4a3b59f6, type: 2}
+  - {fileID: 11400000, guid: 64a8ed208633f4c40a52fc70fab63d68, type: 2}
+  iconPath: icons/RocketBlack.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>1</color>/1/2</color></b> Rockets
 
@@ -38,3 +39,4 @@ MonoBehaviour:
     \"damage\",\"Flat\", 0.7);\n} "
   - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Rokcet\",
     \"damage\",\"Flat\", 1);\n} "
+  iconSprite: {fileID: 0}

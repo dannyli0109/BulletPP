@@ -473,7 +473,12 @@ public class MapGeneration : MonoBehaviour
         float holdingX= Mathf.Clamp(input.x, rooms[currentRoomInside].offsetPos.x* roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX);
         float holdingZ = Mathf.Clamp(input.z, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX);
 
-        holdingOutPut = new Vector3(Mathf.Clamp(input.x, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX), 0, Mathf.Clamp(input.z, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinZ, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxZ));
+        holdingOutPut = new Vector3(
+            Mathf.Clamp(input.x, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, 
+            rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX), 
+            0, 
+            Mathf.Clamp(input.z, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinZ, 
+            rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxZ));
 
         return holdingOutPut;
     }

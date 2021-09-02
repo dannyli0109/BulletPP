@@ -16,7 +16,8 @@ MonoBehaviour:
   title: Thick Laser
   rarity: 2
   synergies:
-  - {fileID: 11400000, guid: 452ad31be8662e042864193e5fe5a595, type: 2}
+  - {fileID: 11400000, guid: 64a8ed208633f4c40a52fc70fab63d68, type: 2}
+  iconPath: icons/DangerLaser.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>2</color>/4/8</color></b> Laser Fuel
 
@@ -58,3 +59,4 @@ MonoBehaviour:
   - "def OnAttached() { \nAddModifier(\"Laser\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Laser\",
     \"maxLaserWidth\", \"PercentAdd\", 2);\nAddModifier(\"Laser\", \"damage\", \"Flat\",
     0.5);\nAddModifier(\"Laser\", \"travelTime\", \"Flat\", 0.3);\n} "
+  iconSprite: {fileID: 0}

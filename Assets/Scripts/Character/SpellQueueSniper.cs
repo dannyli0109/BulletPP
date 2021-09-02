@@ -12,6 +12,8 @@ public class SpellQueueSniper : Enemy
     public float maxCooldown = 3.0f;
     public float viewAngle = 60.0f;
 
+    public Transform gunPoint;
+
     Decision decision;
     public float rotationSpeed;
     bool usinglaser;
@@ -163,19 +165,19 @@ public class SpellQueueSniper : Enemy
 
     public void UpdatelaserSight()
     {
+        thisLineRenderer.useWorldSpace = true;
         if (usinglaser)
         {
-            Debug.Log("on");
-            Vector3 lookDir = (transform.forward) * 36;
-            thisLineRenderer.SetPosition(0, transform.position);
-            thisLineRenderer.SetPosition(1, transform.position + lookDir);
+            Vector3 lookDir = (gunPoint.forward) * 36;
+            thisLineRenderer.SetPosition(0, gunPoint.position);
+            thisLineRenderer.SetPosition(1, gunPoint.position + lookDir);
         }
         else
         {
             Debug.Log("off");
-            Vector3 lookDir = (transform.forward) * 12;
-            thisLineRenderer.SetPosition(0, transform.position);
-            thisLineRenderer.SetPosition(1, transform.position );
+            Vector3 lookDir = (gunPoint.forward) * 12;
+            thisLineRenderer.SetPosition(0, gunPoint.position);
+            thisLineRenderer.SetPosition(1, gunPoint.position );
         }
 
     }

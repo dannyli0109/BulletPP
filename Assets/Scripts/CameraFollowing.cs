@@ -39,7 +39,6 @@ public class CameraFollowing : MonoBehaviour
         Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier*(holdingDist/maxGunPointDist)));
 
 
-
          desiredPos = mapGenerationScript.ClampCameraVectorToCameraBoundsOfCurrentRoom(desiredPos);
 
 

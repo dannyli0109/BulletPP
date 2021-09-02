@@ -16,7 +16,8 @@ MonoBehaviour:
   title: Loose Saw Blade
   rarity: 3
   synergies:
-  - {fileID: 11400000, guid: 339fa490ee0fdba48888817ffb95a869, type: 2}
+  - {fileID: 11400000, guid: 837ea453203011549935d102c5635d30, type: 2}
+  iconPath: icons/SawBlade.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>1</color></color></b> Saw Blade
 
@@ -54,3 +55,4 @@ MonoBehaviour:
     1);\nAddModifier(\"BouncingBlade\", \"amountOfBounces\", \"Flat\", 5);\nAddModifier(\"BouncingBlade\",\"bounceAdditionDamage\",\"Flat\",0.1);\n} "
   - "def OnAttached() {  \nAddModifier(\"BouncingBlade\", \"maxClip\", \"Flat\",
     1);\nAddModifier(\"BouncingBlade\", \"amountOfBounces\", \"Flat\", 7);\nAddModifier(\"BouncingBlade\",\"bounceAdditionDamage\",\"Flat\",0.2);\n} "
+  iconSprite: {fileID: 0}

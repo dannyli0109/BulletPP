@@ -22,3 +22,9 @@ MonoBehaviour:
   codes:
   - "def OnAttached() { \nAddModifier(\"Character\", \"reloadTime\", \"Flat\", -0.1);\n} "
   - "def OnAttached() { \nAddModifier(\"Character\", \"reloadTime\", \"Flat\", -0.3);\n} "
+  OnAttached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []

@@ -16,7 +16,8 @@ MonoBehaviour:
   title: Bouncy Balls
   rarity: 0
   synergies:
-  - {fileID: 11400000, guid: 339fa490ee0fdba48888817ffb95a869, type: 2}
+  - {fileID: 11400000, guid: 837ea453203011549935d102c5635d30, type: 2}
+  iconPath: icons/BulletBounce.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>2</color>/3/4</color></b> Grenades
 
@@ -34,3 +35,4 @@ MonoBehaviour:
   - "def OnAttached() { \nAddModifier(\"Grenade\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Grenade\",\"amountOfBounces\",\"Flat\",1);\n} "
   - "def OnAttached() { \nAddModifier(\"Grenade\", \"maxClip\", \"Flat\", 3);\nAddModifier(\"Grenade\",\"amountOfBounces\",\"Flat\",1);\n} "
   - "def OnAttached() { \nAddModifier(\"Grenade\", \"maxClip\", \"Flat\", 4);\nAddModifier(\"Grenade\",\"amountOfBounces\",\"Flat\",2);\n} "
+  iconSprite: {fileID: 0}

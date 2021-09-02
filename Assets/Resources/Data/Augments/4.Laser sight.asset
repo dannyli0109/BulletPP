@@ -16,8 +16,9 @@ MonoBehaviour:
   title: Laser sight
   rarity: 1
   synergies:
-  - {fileID: 11400000, guid: 3cc38ca77cc995641bc8a776d1481d02, type: 2}
-  - {fileID: 11400000, guid: a2d7425b5125d1e4683b59901caf72f1, type: 2}
+  - {fileID: 11400000, guid: f9ec3d7f3edaddd4da2abff0b3b3800c, type: 2}
+  - {fileID: 11400000, guid: e90fea168972820499a5d7068cf67bb9, type: 2}
+  iconPath: icons/Cross.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>2</color>/3/4</color></b> Bullets
 
@@ -47,9 +48,4 @@ MonoBehaviour:
     \"damage\", \"PercentAdd\", 0.1);\n} \ndef OnUpdate() { LaserSight(); }"
   - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 4);\nAddModifier(\"Bullet\",
     \"damage\", \"PercentAdd\", 0.2);\n} \ndef OnUpdate() { LaserSight(); }"
-  OnAttached:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUpdate:
-    m_PersistentCalls:
-      m_Calls: []
+  iconSprite: {fileID: 0}

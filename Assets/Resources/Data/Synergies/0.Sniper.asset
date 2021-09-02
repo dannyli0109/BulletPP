@@ -39,3 +39,9 @@ MonoBehaviour:
     0.5);\nAddModifier(\"Character\", \"reloadTime\", \"PercentAdd\", 0.5);\n} "
   - "def OnAttached() { \nAddModifier(\"Character\", \"damageMultiplier\", \"PercentAdd\",
     1);\nAddModifier(\"Character\", \"reloadTime\", \"PercentAdd\", 0.5);\n} "
+  OnAttached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []

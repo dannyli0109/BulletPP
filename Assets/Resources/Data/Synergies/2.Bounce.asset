@@ -35,3 +35,9 @@ MonoBehaviour:
     0.1);\n} "
   - "def OnAttached() { \nAddModifier(\"Character\", \"extraBounces\", \"Flat\",
     1);\nAddModifier(\"Character\", \"damageOnBounce\", \"Flat\", 0.15);\n} "
+  OnAttached:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []

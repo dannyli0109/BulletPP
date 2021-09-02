@@ -16,8 +16,9 @@ MonoBehaviour:
   title: Circuit Seeking Missiles
   rarity: 3
   synergies:
-  - {fileID: 11400000, guid: 3cc38ca77cc995641bc8a776d1481d02, type: 2}
-  - {fileID: 11400000, guid: 5169b41905b5a4a40bccd78b96e65403, type: 2}
+  - {fileID: 11400000, guid: f9ec3d7f3edaddd4da2abff0b3b3800c, type: 2}
+  - {fileID: 11400000, guid: 8e9d9e54a68f6f34dac6fc6d4a3b59f6, type: 2}
+  iconPath: icons/Cross.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>1</color>/2/3</color></b> Rocket
 
@@ -41,3 +42,4 @@ MonoBehaviour:
   - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 1);\nAddModifier(\"Rocket\",\"heatSeeking\",\"Flat\",3);\nAddModifier(\"Rocket\",\"damage\",\"Flat\",0.2);\n} "
   - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Rocket\",\"heatSeeking\",\"Flat\",3);\nAddModifier(\"Rocket\",\"damage\",\"Flat\",0.3);\n} "
   - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 3);\nAddModifier(\"Rocket\",\"heatSeeking\",\"Flat\",3);\nAddModifier(\"Rocket\",\"damage\",\"Flat\",0.4);\n} "
+  iconSprite: {fileID: 0}

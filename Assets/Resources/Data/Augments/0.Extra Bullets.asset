@@ -16,7 +16,8 @@ MonoBehaviour:
   title: Extra Bullets
   rarity: 0
   synergies:
-  - {fileID: 11400000, guid: a2d7425b5125d1e4683b59901caf72f1, type: 2}
+  - {fileID: 11400000, guid: e90fea168972820499a5d7068cf67bb9, type: 2}
+  iconPath: icons/LotsofBullets.png
   descriptions:
   - <b>+<color=#c5c5c5ff><color=#00d100>3</color>/4/6</color></b> Bullets
   - <b>+<color=#c5c5c5ff>3/<color=#00d100>4</color>/6</color></b> Bullets
@@ -25,21 +26,4 @@ MonoBehaviour:
   - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 3);\n} "
   - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 4);\n} "
   - "def OnAttached() { \nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 6);\n} "
-  OnAttached:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUpdate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11500000, guid: e46484fe58b7e39498cf314f7b7d6938, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  iconSprite: {fileID: 0}

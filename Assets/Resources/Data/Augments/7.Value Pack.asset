@@ -16,7 +16,8 @@ MonoBehaviour:
   title: Value Pack
   rarity: 2
   synergies:
-  - {fileID: 11400000, guid: 452ad31be8662e042864193e5fe5a595, type: 2}
+  - {fileID: 11400000, guid: 64a8ed208633f4c40a52fc70fab63d68, type: 2}
+  iconPath: icons/LotsofBullets.png
   descriptions:
   - '<b>+<color=#c5c5c5ff><color=#00d100>1</color>/2/2</color></b> Bullet
 
@@ -61,3 +62,4 @@ MonoBehaviour:
   - "def OnAttached() { \nAddModifier(\"Rocket\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Laser\",
     \"maxClip\", \"Flat\", 2);\nAddModifier(\"Bullet\", \"maxClip\", \"Flat\", 2);\nAddModifier(\"Grenade\",
     \"maxClip\", \"Flat\", 2);\n} "
+  iconSprite: {fileID: 0}

@@ -106,11 +106,11 @@ public class AugmentManager : MonoBehaviour
 
             for (int j = 0; j < 3; j++)
             {
-                string code = collection[i][5 + j * 2].ToString();
+                string code = collection[i][6 + j * 2].ToString();
                 codes.Add(code);
 
                 Eva evaluator = InitEvaluator();
-                descriptions.Add(collection[i][4 + j * 2].ToString());
+                descriptions.Add(collection[i][5 + j * 2].ToString());
                 evaluator.eval(parser.Parse(code));
                 evaluators.Add(evaluator);
             }
@@ -120,9 +120,11 @@ public class AugmentManager : MonoBehaviour
             data.title = collection[i][1].ToString();
             data.rarity = int.Parse(collection[i][2].ToString());
             data.synergies = synergies;
+            data.iconPath = collection[i][4].ToString();
             data.descriptions = descriptions;
             data.codes = codes;
             data.evaluators = evaluators;
+            data.iconSprite = Util.LoadNewSprite(Application.streamingAssetsPath + "/" + data.iconPath);
 
             list.Add(data);
             augmentRarities[data.rarity].Add(data.id);
@@ -182,7 +184,6 @@ public class AugmentManager : MonoBehaviour
             data.descriptions = descriptions;
             data.codes = codes;
             data.evaluators = evaluators;
-
             list.Add(data);
         }
 
@@ -229,12 +230,13 @@ public class AugmentManager : MonoBehaviour
                 worksheet.Cells[1, 2].Value = "Name";
                 worksheet.Cells[1, 3].Value = "Rarity";
                 worksheet.Cells[1, 4].Value = "Synergies";
-                worksheet.Cells[1, 5].Value = "Descriptions";
-                worksheet.Cells[1, 6].Value = "Code";
-                worksheet.Cells[1, 7].Value = "Descriptions";
-                worksheet.Cells[1, 8].Value = "Code";
-                worksheet.Cells[1, 9].Value = "Descriptions";
-                worksheet.Cells[1, 10].Value = "Code";
+                worksheet.Cells[1, 5].Value = "IconPath";
+                worksheet.Cells[1, 6].Value = "Descriptions";
+                worksheet.Cells[1, 7].Value = "Code";
+                worksheet.Cells[1, 8].Value = "Descriptions";
+                worksheet.Cells[1, 9].Value = "Code";
+                worksheet.Cells[1, 10].Value = "Descriptions";
+                worksheet.Cells[1, 11].Value = "Code";
 
                 UnityEngine.Object[] augments = Resources.LoadAll("Data/Augments", typeof(AugmentData));
                 for (int i = 0; i < augments.Length; i++)
@@ -246,10 +248,11 @@ public class AugmentManager : MonoBehaviour
                     worksheet.Cells[id + 2, 3].Value = augment.rarity;
                     var synergies = augment.synergies.Select(synergy => synergy.id).ToArray();
                     worksheet.Cells[id + 2, 4].Value = String.Join(",", synergies);
+                    worksheet.Cells[id + 2, 5].Value = augment.iconPath;
                     for (int j = 0; j < 3; j++)
                     {
-                        worksheet.Cells[id + 2, 5 + j * 2].Value = augment.descriptions[j];
-                        worksheet.Cells[id + 2, 5 + j * 2 + 1].Value = augment.codes[j];
+                        worksheet.Cells[id + 2, 6 + j * 2].Value = augment.descriptions[j];
+                        worksheet.Cells[id + 2, 6 + j * 2 + 1].Value = augment.codes[j];
                     }
                 }
             }
@@ -358,6 +361,7 @@ public class AugmentManager : MonoBehaviour
         Vector3 lookDir = gunPoint.forward * 100;
         laserSightLineRenderer.startWidth = 0.01f;
         laserSightLineRenderer.endWidth = 0.01f;
+        laserSightLineRenderer.useWorldSpace = true;
         laserSightLineRenderer.SetPosition(0, gunPoint.position);
         laserSightLineRenderer.SetPosition(1, gunPoint.position + lookDir);
     }
