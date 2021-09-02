@@ -10,9 +10,12 @@ public class BTSManager : MonoBehaviour
     public int firstRoomSceneIndex = 1;
     public int loseGameSceneIndex = 2;
     public int winGameSceneIndex = 3;
+
+    public Animator transition;
+    public float transitionTime = 1.0f;
     void Start()
     {
-     //   ScreenCapture.CaptureScreenshot("UNITY BULLET ++");
+        transition.speed = transition.speed = 1.0f / transitionTime;
     }
 
     void Update()
@@ -22,23 +25,30 @@ public class BTSManager : MonoBehaviour
 
     public void LoadFirstRoomScene()
     {
-        SceneManager.LoadScene(firstRoomSceneIndex);
+        StartCoroutine(LoadLevel(firstRoomSceneIndex));
     }
 
     public void LoadOpeningMenuScene()
     {
-        SceneManager.LoadScene(openingMenuSceneIndex);
+        StartCoroutine(LoadLevel(openingMenuSceneIndex));
     }
 
     public void LoadLoseGameScene()
     {
-        Debug.Log("BTS load lose");
-        SceneManager.LoadScene(loseGameSceneIndex);
+        StartCoroutine(LoadLevel(loseGameSceneIndex));
     }
 
     public void LoadWinGameScene()
     {
-        SceneManager.LoadScene(winGameSceneIndex);
+        StartCoroutine(LoadLevel(winGameSceneIndex));
+    }
+
+    IEnumerator LoadLevel(int index)
+    {
+        transition.speed = 1.0f / transitionTime;
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(index);
     }
 
     public void QuitGame()

@@ -70,9 +70,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8395571390937848586}
   - component: {fileID: -2462012986484036187}
+  - component: {fileID: 972574185974119134}
   - component: {fileID: 5026173702040732584}
   - component: {fileID: 7897541015238152110}
-  - component: {fileID: 972574185974119134}
   - component: {fileID: 4636131165444293336}
   m_Layer: 0
   m_Name: 1U 1
@@ -129,6 +129,20 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 86fad9443023bab4282fb5e1d18acd50, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &972574185974119134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395571390937848587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e363d37be6554fb4caaf6e8f27fa5eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - {fileID: 807788262768528240}
 --- !u!114 &5026173702040732584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,20 +199,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &972574185974119134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8395571390937848587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e363d37be6554fb4caaf6e8f27fa5eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 807788262768528240}
 --- !u!114 &4636131165444293336
 MonoBehaviour:
   m_ObjectHideFlags: 0

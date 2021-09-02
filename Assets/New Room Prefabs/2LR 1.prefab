@@ -146,9 +146,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2848187980329817986}
   - component: {fileID: 4010478143788805506}
+  - component: {fileID: 4433145641825057836}
   - component: {fileID: 5160544967847948634}
   - component: {fileID: 4820485160298943843}
-  - component: {fileID: 4433145641825057836}
   - component: {fileID: 5250219753843892230}
   m_Layer: 0
   m_Name: 2LR 1
@@ -206,6 +206,21 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 2504222e015509447bfcbd397f44fc2a, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &4433145641825057836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848187980329817985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e363d37be6554fb4caaf6e8f27fa5eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - {fileID: 6354600477991116626}
+  - {fileID: 6354600477442565882}
 --- !u!114 &5160544967847948634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,21 +277,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4433145641825057836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2848187980329817985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e363d37be6554fb4caaf6e8f27fa5eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 6354600477991116626}
-  - {fileID: 6354600477442565882}
 --- !u!114 &5250219753843892230
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class BouncingBlade : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.gameState == GameState.Shop) return;
+        if (GameManager.current.GamePausing()) return;
         if (owner)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
@@ -65,12 +65,11 @@ public class BouncingBlade : Ammo
     void Update()
     {
 
-        if (GameManager.current.gameState == GameState.Shop)
-            if (GameManager.current.gameState == GameState.Shop)
-            {
-                owner.RegainBouncingBlade();
-                Destroy(gameObject);
-            }
+        if (GameManager.current.GamePausing())
+        {
+            owner.RegainBouncingBlade();
+            Destroy(gameObject);
+        }
 
         currentSpeed = Mathf.Clamp(currentSpeed - slowDownSpeed * Time.deltaTime, owner.grenadeStats.speed.value, currentSpeed);
         bornTime += Time.deltaTime;

@@ -43,7 +43,7 @@ public class AugmentManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameManager.current.gameState == GameState.Shop) return;
+        if (GameManager.current.GamePausing()) return;
         for (int i = 0; i < character.augments.Count; i++)
         {
             OnAugmentUpdate(character.augments[i].id, character.augments[i].level);

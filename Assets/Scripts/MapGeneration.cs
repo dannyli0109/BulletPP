@@ -441,7 +441,8 @@ public class MapGeneration : MonoBehaviour
             }
 
             numberOfWaves.Add(holdingRand);
-            GameManager.current.gameState = GameState.Game;
+
+            GameManager.current.ChangeStateImmdeiate(GameState.Game);
 
             int holdingSpawnInt=0;
 
@@ -542,7 +543,7 @@ public class MapGeneration : MonoBehaviour
                    
                     holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-                    GameManager.current.gameState = GameState.Game;
+                    GameManager.current.ChangeState(GameState.Game);
                     holdingSpawnInt++;
                 }
             }
@@ -571,10 +572,10 @@ public class MapGeneration : MonoBehaviour
                     rooms[currentRoomInside].completed = true;
                     CheckIfMapCompleted();
                     refreshMiniMapUI();
-                    if (currentRoomInside != 0 && GameManager.current.gameState != GameState.Casual)
+                    if (currentRoomInside != 0 && GameManager.current.GetState() != GameState.Casual)
                     {
                         finishEnounter?.Invoke();
-                        GameManager.current.gameState = GameState.Shop;
+                        GameManager.current.ChangeState(GameState.Shop);
                         GameManager.current.shop.Refresh();
                     }
                 }

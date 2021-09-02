@@ -14,7 +14,7 @@ public class Rocket : Ammo
 
     void Update()
     {
-        if (GameManager.current.gameState == GameState.Shop) Destroy(gameObject);
+        if (GameManager.current.GamePausing()) Destroy(gameObject);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.rocketStats.travelTime.value)
         {
@@ -53,7 +53,7 @@ public class Rocket : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.gameState == GameState.Shop) return;
+        if (GameManager.current.GamePausing()) return;
         HandleAmmoHit(other);
         EventManager.current.OnAmmoDestroy(gameObject);
     }

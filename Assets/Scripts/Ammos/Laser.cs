@@ -32,7 +32,7 @@ public class Laser : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.gameState == GameState.Shop) return;
+        if (GameManager.current.GamePausing()) return;
         //if (owner)
         //{
         //    if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
@@ -52,7 +52,7 @@ public class Laser : Ammo
 
     void Update()
     {
-        if (GameManager.current.gameState == GameState.Shop) Destroy(gameObject);
+        if (GameManager.current.GamePausing()) Destroy(gameObject);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.laserStats.travelTime.value)
         {

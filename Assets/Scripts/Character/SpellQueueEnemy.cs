@@ -101,7 +101,7 @@ public class SpellQueueEnemy : Enemy
 
     public override void Update()
     {
-        if (GameManager.current.gameState == GameState.Shop) return;
+        if (GameManager.current.GamePausing()) return;
 
         if (hp <= 0)
         {
