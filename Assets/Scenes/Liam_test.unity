@@ -4798,6 +4798,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: sniperTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 284050206}
@@ -4949,6 +4957,22 @@ PrefabInstance:
       propertyPath: downLeftRoomInfo.Array.data[0].upperRoomDoorSpawnOffet.y
       value: 8.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[2]
+      value: 
+      objectReference: {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: sniperTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 5077297002888340751, guid: 2fe8c023552f8f247a78be833f0d26a7, type: 3}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)

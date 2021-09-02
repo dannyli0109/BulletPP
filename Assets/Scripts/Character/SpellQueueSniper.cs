@@ -174,7 +174,7 @@ public class SpellQueueSniper : Enemy
         }
         else
         {
-            Debug.Log("off");
+           // Debug.Log("off");
             Vector3 lookDir = (gunPoint.forward) * 12;
             thisLineRenderer.SetPosition(0, gunPoint.position);
             thisLineRenderer.SetPosition(1, gunPoint.position );
