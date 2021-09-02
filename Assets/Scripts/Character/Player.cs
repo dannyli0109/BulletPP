@@ -111,6 +111,7 @@ public class Player : Character
             currentImmunityFrame = stats.immunityFromDashing.value;
             transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
             characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
+            ResolveDashEffects();
         }
     }
 
@@ -322,6 +323,15 @@ public class Player : Character
         }
     }
 
+    void PartialReload()
+    {
+        Debug.Log("part reload");
+        currentBulletClip = (int)Mathf.Clamp(currentBulletClip+1, 0, bulletStats.maxClip.value);
+        currentGrenadeClip = (int)Mathf.Clamp(currentGrenadeClip + 1, 0, grenadeStats.maxClip.value);
+        currentRocketClip = (int)Mathf.Clamp(currentRocketClip + 1, 0, rocketStats.maxClip.value);
+        currentLaserClip = (int)Mathf.Clamp(currentBulletClip + 1, 0, bulletStats.maxClip.value);
+    }
+
     void UpdateAnimation()
     {
         float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
@@ -335,6 +345,11 @@ public class Player : Character
 
         animator.SetFloat("x", movemntRotated.x);
         animator.SetFloat("y", movemntRotated.y);
+    }
+
+    void ResolveDashEffects()
+    {
+      //  PartialReload();
     }
 
     void MoveCharacter()

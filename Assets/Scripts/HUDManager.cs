@@ -25,6 +25,28 @@ public class HUDManager : MonoBehaviour
     public Color32 emptyClipColor;
     #endregion
 
+    #region Ammo Images
+    public Vector2 defaultOffset;
+    public Vector2 spacing;
+    public Color defaultAmmoColour;
+
+    public Image[] bulletSprites;
+    public Color bulletColour;
+
+    public Image[] grenadeSprites;
+    public Color grenadeColour;
+
+    public Image[] rocketSprites;
+    public Color rocketColour;
+
+    public Image[] laserSprites;
+    public Color laserColour;
+
+    public Image[] bouncingBladeSprites;
+    public Color bouncingBladeColour;
+
+    #endregion
+
     void Update()
     {
         playerGoldUI.richText = true;
@@ -34,6 +56,95 @@ public class HUDManager : MonoBehaviour
 
     void UpdatePlayerAmmoUI()
     {
+        int xIndex = 0;
+
+        for(int i=0; i<bulletSprites.Length; i++)
+        {
+            if (i < player.bulletStats.maxClip.value)
+            {
+                bulletSprites[i].gameObject.SetActive(true);
+                bulletSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+                xIndex++;
+                if (i < player.currentBulletClip)
+                {
+                    bulletSprites[i].color = bulletColour;
+                }
+                else
+                {
+                    bulletSprites[i].color = defaultAmmoColour;
+                }
+            }
+            else
+            {
+                bulletSprites[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < player.grenadeStats.maxClip.value; i++)
+        {
+            grenadeSprites[i].gameObject.SetActive(true);
+            grenadeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+            xIndex++;
+            if (i < player.currentGrenadeClip)
+            {
+                grenadeSprites[i].color = grenadeColour;
+            }
+            else
+            {
+                grenadeSprites[i].color = defaultAmmoColour;
+            }
+
+        }
+
+        for (int i = 0; i < player.rocketStats.maxClip.value; i++)
+        {
+            rocketSprites[i].gameObject.SetActive(true);
+            rocketSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+            xIndex++;
+            if (i < player.currentRocketClip)
+            {
+                rocketSprites[i].color = rocketColour;
+            }
+            else
+            {
+                rocketSprites[i].color = defaultAmmoColour;
+            }
+
+        }
+
+        for (int i = 0; i < player.laserStats.maxClip.value; i++)
+        {
+            laserSprites[i].gameObject.SetActive(true);
+            laserSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+            xIndex++;
+            if (i < player.currentLaserClip)
+            {
+                laserSprites[i].color = laserColour;
+            }
+            else
+            {
+                laserSprites[i].color = defaultAmmoColour;
+            }
+
+        }
+
+        for (int i = 0; i < player.bouncingBladeStats.maxClip.value; i++)
+        {
+            bouncingBladeSprites[i].gameObject.SetActive(true);
+            bouncingBladeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+            xIndex++;
+            if (i < player.currentBouncingBladeClip)
+            {
+                bouncingBladeSprites[i].color = bouncingBladeColour;
+            }
+            else
+            {
+                bouncingBladeSprites[i].color = defaultAmmoColour;
+            }
+
+        }
+
+        /*
         if (player.bulletStats.maxClip.value > 0)
         {
             bulletsUI.SetActive(true);
@@ -124,6 +235,7 @@ public class HUDManager : MonoBehaviour
             bouncingBladeUI.SetActive(false);
         }
 
+         */
 
     }
 }
