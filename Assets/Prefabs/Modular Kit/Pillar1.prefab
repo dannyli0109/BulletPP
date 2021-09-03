@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2092645739617164867}
   - component: {fileID: 5023485997135081583}
   - component: {fileID: 98825081672562599}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pillar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.79200006, y: 2, z: 0.505}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.79200006, y: 2, z: 0.505}
   m_TimeToStationary: 0.5
