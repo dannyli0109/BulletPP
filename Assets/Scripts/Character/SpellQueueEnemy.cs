@@ -242,7 +242,7 @@ public class SpellQueueEnemy : Enemy
         {
             action = () => {
                 agent.speed = speed;
-                agent.SetDestination(target.transform.position);
+                agent?.SetDestination(target.transform.position);
             },
             condition = null,
             trueBranch = null,
