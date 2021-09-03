@@ -43,7 +43,7 @@ public class AugmentHUD : MonoBehaviour
                 }
             }
         }
-        else
+        else if (level == 1)
         {
             for (int i = 0; i < expContainer.transform.childCount; i++)
             {
@@ -58,6 +58,15 @@ public class AugmentHUD : MonoBehaviour
                 {
                     expObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
                 }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < expContainer.transform.childCount; i++)
+            {
+                GameObject expObject = expContainer.transform.GetChild(i).gameObject;
+                expObject.SetActive(false);
+
             }
         }
     }
