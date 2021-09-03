@@ -945,7 +945,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
   bulletContainer: {fileID: 1094544659}
   hp: 0
-  gold: 100
+  gold: 300
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
@@ -9348,6 +9348,10 @@ PrefabInstance:
     - target: {fileID: 1823151629070869609, guid: 22643bbf62bd509459ea0e0ca11d9ee5, type: 3}
       propertyPath: m_Name
       value: BTS Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823151629070869609, guid: 22643bbf62bd509459ea0e0ca11d9ee5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1823151629070869615, guid: 22643bbf62bd509459ea0e0ca11d9ee5, type: 3}
       propertyPath: m_LocalPosition.x
