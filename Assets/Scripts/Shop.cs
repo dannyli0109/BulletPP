@@ -87,6 +87,7 @@ public class Shop : MonoBehaviour
         {
 
         GameManager.current.ChangeState(GameState.Casual);
+            player.reloading = true;
         }
         // gameObject.SetActive(false);
     }

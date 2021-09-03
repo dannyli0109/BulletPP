@@ -32,6 +32,8 @@ public class MapGeneration : MonoBehaviour
 
     public Vector2 roomMultiplyValue;
 
+    public Vector3 startingPos;
+
     #region map generate
     public List<float> chanceOfHundredToSpawnNewRoom;
     public List<int> atHowManyCurrentRooms;
@@ -124,6 +126,7 @@ public class MapGeneration : MonoBehaviour
         GenerateMap();
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         refreshMiniMapUI();
+        playerTarget.transform.position = startingPos;
     }
 
     private void Update()
