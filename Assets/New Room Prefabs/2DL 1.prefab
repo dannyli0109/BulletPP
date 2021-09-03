@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631201160102023952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.5, y: 2.0000007, z: 0.9}
+  m_LocalPosition: {x: -15.33, y: 2.0000007, z: -0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4818074823781205615}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4354397227836034276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 2.0000007, z: -8.4}
+  m_LocalPosition: {x: -0.93, y: 2.0000007, z: -8.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4818074823781205615}
@@ -378,13 +378,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upperRoomDoorSpawnOffet: {fileID: 0}
-  lowerRoomDoorSpawnOffet: {fileID: 5252201285837276231}
-  leftRoomDoorSpawnOffet: {fileID: 345903710580732942}
+  lowerRoomDoorSpawnOffet: {fileID: 345903710580732942}
+  leftRoomDoorSpawnOffet: {fileID: 5252201285837276231}
   rightRoomDoorSpawnOffet: {fileID: 0}
   cameraBoundryMaxX: 7
   cameraBoundryMinX: -7
   cameraBoundryMaxZ: 6.5
-  cameraBoundryMinZ: -3.7
+  cameraBoundryMinZ: -4.5
   enemySpawnPoint:
   - {fileID: 4815460907171086680}
   sniperSpawnPoint:
