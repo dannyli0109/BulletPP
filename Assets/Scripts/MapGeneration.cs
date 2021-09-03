@@ -375,44 +375,54 @@ public class MapGeneration : MonoBehaviour
 
     public void reconnectWalls()
     {
+
         for (int i = 0; i < rooms.Count; i++)
         {
+
             for (int k = 0; k < rooms.Count; k++)
             {
-                if (new Vector2(-1, 0) + rooms[i].offsetPos == rooms[k].offsetPos)
+                if (rooms[i].offsetPos != new Vector2(0, 0) && rooms[k].offsetPos != new Vector2(0, 0))
                 {
-                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
+
+                    if (new Vector2(-1, 0) + rooms[i].offsetPos == rooms[k].offsetPos)
                     {
-                        rooms[i].leftRoomRef = k;
-                        rooms[k].rightRoomRef = i;
+                        if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
+                        {
+                            rooms[i].leftRoomRef = k;
+                            rooms[k].rightRoomRef = i;
+                        }
+                    }
+
+                    if (new Vector2(1, 0) + rooms[i].offsetPos == rooms[k].offsetPos)
+                    {
+                        if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
+                        {
+                            rooms[i].rightRoomRef = k;
+                            rooms[k].leftRoomRef = i;
+                        }
+                    }
+
+                    if (new Vector2(0, 1) + rooms[i].offsetPos == rooms[k].offsetPos)
+                    {
+                        if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
+                        {
+                            rooms[i].upperRoomRef = k;
+                            rooms[k].lowerRoomRef = i;
+                        }
+                    }
+
+                    if (new Vector2(0, -1) + rooms[i].offsetPos == rooms[k].offsetPos)
+                    {
+                        if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
+                        {
+                            rooms[i].lowerRoomRef = k;
+                            rooms[k].upperRoomRef = i;
+                        }
                     }
                 }
-
-                if (new Vector2(1, 0) + rooms[i].offsetPos == rooms[k].offsetPos)
+                else
                 {
-                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
-                    {
-                        rooms[i].rightRoomRef = k;
-                        rooms[k].leftRoomRef = i;
-                    }
-                }
-
-                if (new Vector2(0, 1) + rooms[i].offsetPos == rooms[k].offsetPos)
-                {
-                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
-                    {
-                        rooms[i].upperRoomRef = k;
-                        rooms[k].lowerRoomRef = i;
-                    }
-                }
-
-                if (new Vector2(0, -1) + rooms[i].offsetPos == rooms[k].offsetPos)
-                {
-                    if (UnityEngine.Random.Range(0, 100) < wallReConnectChanceOfHundred)
-                    {
-                        rooms[i].lowerRoomRef = k;
-                        rooms[k].upperRoomRef = i;
-                    }
+                    Debug.Log("Start room");
                 }
             }
         }
