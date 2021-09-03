@@ -945,7 +945,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
   bulletContainer: {fileID: 1094544659}
   hp: 0
-  gold: 100
+  gold: 2
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
@@ -5650,6 +5650,10 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: roomMultiplyValue.x
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: startingRoomDoorLayouts.Array.data[0].needUpperRoom
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name

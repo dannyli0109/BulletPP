@@ -76,6 +76,18 @@ public class Player : Character
         gold += amount;
     }
 
+    public Vector3 GetPlayerPlaneMousePos(Vector3 aPlayerPos)
+    {
+        Plane plane = new Plane(Vector3.up, aPlayerPos);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float dist;
+        if (plane.Raycast(ray, out dist))
+        {
+            return ray.GetPoint(dist);
+        }
+        return Vector3.zero;
+    }
+
     void HandleRotation()
     {
         Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
@@ -89,7 +101,6 @@ public class Player : Character
 
         angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
-
     } 
 
     void HandleMovement()
