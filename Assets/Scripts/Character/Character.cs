@@ -149,12 +149,11 @@ public abstract class Character : MonoBehaviour
                   
                     if (ammo.overTimeDamage)
                     {
-                        hp -= ammo.GetDamage()*Time.deltaTime;
+                        hp -= ammo.GetDamage() * Time.deltaTime;
                     }
                     else
                     {
-
-                    hp -= ammo.GetDamage();
+                        hp -= ammo.GetDamage();
                     }
                 }
                 else

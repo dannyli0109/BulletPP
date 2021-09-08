@@ -47,13 +47,117 @@ public class HUDManager : MonoBehaviour
     public Image[] bouncingBladeSprites;
     public Color bouncingBladeColour;
 
+    public TextMeshProUGUI dpsText;
+    public TextMeshProUGUI bulletDpsText;
+    public TextMeshProUGUI grenadeDpsText;
+    public TextMeshProUGUI rocketDpsText;
+    public TextMeshProUGUI laserDpsText;
+    public TextMeshProUGUI bouncingBladeDpsText;
+    public static HUDManager current;
+    float time = 0;
+    float dps = 0;
+
+    float bulletDps = 0;
+    float grenadeDps = 0;
+    float rocketDps = 0;
+    float laserDps = 0;
+    float bouncingBladeDps = 0;
+
+    public float damage = 0;
+
+    public float bulletDamage = 0;
+    public float grenadeDamage = 0;
+    public float rocketDamage = 0;
+    public float laserDamage = 0;
+    public float bouncingBladeDamage = 0;
+
+    public bool updatingDPS = false;
+
     #endregion
+
+    void Awake()
+    {
+        current = this;
+    }
+
+    public void ShouldUpdateDPS(bool val)
+    {
+        updatingDPS = val;
+        if (val)
+        {
+            damage = 0;
+            bulletDamage = 0;
+            grenadeDamage = 0;
+            rocketDamage = 0;
+            laserDamage = 0;
+            bouncingBladeDamage = 0;
+
+            time = 0;
+            dps = 0;
+            bulletDps = 0;
+            grenadeDps = 0;
+            rocketDps = 0;
+            laserDps = 0;
+            bouncingBladeDps = 0;
+        }
+    }
 
     void Update()
     {
         playerGoldUI.richText = true;
         playerGoldUI.text = "$: " + player.gold;
         UpdatePlayerAmmoUI();
+
+        if (time > 0)
+        {
+            dps = damage / time;
+            bulletDps = bulletDamage / time;
+            grenadeDps = grenadeDamage / time;
+            rocketDps = rocketDamage / time;
+            laserDps = laserDamage / time;
+            bouncingBladeDps = bouncingBladeDamage / time;
+        }
+        if (damage > 0)
+        {
+            time += Time.deltaTime;
+        }
+
+        if (updatingDPS)
+        {
+           if (player.bulletStats.maxClip.value > 0)
+            {
+                bulletDpsText.gameObject.SetActive(true);
+            }
+
+            if (player.grenadeStats.maxClip.value > 0)
+            {
+                grenadeDpsText.gameObject.SetActive(true);
+            }
+
+            if (player.rocketStats.maxClip.value > 0)
+            {
+                rocketDpsText.gameObject.SetActive(true);
+            }
+
+            if (player.laserStats.maxClip.value > 0)
+            {
+                laserDpsText.gameObject.SetActive(true);
+            }
+
+            if (player.bouncingBladeStats.maxClip.value > 0)
+            {
+                bouncingBladeDpsText.gameObject.SetActive(true);
+            }
+
+
+            dpsText.text = "DPS: " + dps.ToString("F");
+            bulletDpsText.text = "Bullet DPS: " + bulletDps.ToString("F");
+            grenadeDpsText.text = "Grenade DPS: " + grenadeDps.ToString("F");
+            rocketDpsText.text = "Rocket DPS: " + rocketDps.ToString("F");
+            laserDpsText.text = "Laser DPS: " + laserDps.ToString("F");
+            bouncingBladeDpsText.text = "Bouncing Blade DPS: " + bouncingBladeDps.ToString("F");
+        }
+
     }
 
     void UpdatePlayerAmmoUI()

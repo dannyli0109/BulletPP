@@ -96,11 +96,37 @@ public abstract class Ammo : MonoBehaviour
             {
                 // make sure the bullet is not hitting itself
                 EventManager.current.OnAmmoHit(this, other.gameObject);
-
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 EventManager.current.OnAmmoHit(this, other.gameObject);
+                HUDManager.current.damage += GetDamage();
+                
+                if (GetType().ToString() == "Bullet")
+                {
+                    HUDManager.current.bulletDamage += GetDamage();
+                }
+
+                if (GetType().ToString() == "Grenade")
+                {
+                    HUDManager.current.grenadeDamage += GetDamage();
+                }
+
+                if (GetType().ToString() == "Rocket")
+                {
+                    HUDManager.current.rocketDamage += GetDamage();
+                }
+
+                if (GetType().ToString() == "Laser")
+                {
+                    HUDManager.current.laserDamage += GetDamage();
+                }
+
+
+                if (GetType().ToString() == "BouncingBlade")
+                {
+                    HUDManager.current.bouncingBladeDamage += GetDamage();
+                }
             }
         }
     }
