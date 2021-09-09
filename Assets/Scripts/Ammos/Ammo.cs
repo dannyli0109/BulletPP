@@ -12,7 +12,7 @@ public enum AmmoType
     Count
 }
 
-public abstract class Ammo : MonoBehaviour
+public abstract class Ammo : PooledItem
 {
     public Character owner;
     public GameObject hitParticlePrefab;
@@ -41,7 +41,8 @@ public abstract class Ammo : MonoBehaviour
         this.acceleration = acceleration;
         this.size = size;
         transform.forward = forward;
-        transform.SetParent(null);
+        bornTime = 0;
+        //transform.SetParent(null);
         transform.localScale = new Vector3(size, size, size);
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
         Vector3 offsetVector = new Vector3(transform.forward.x * offset, transform.forward.y * offset, transform.forward.z * offset);
@@ -52,15 +53,7 @@ public abstract class Ammo : MonoBehaviour
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
     {
-        this.owner = owner;
-        this.damage = damage;
-        this.acceleration = new Vector3(0, 0, 0);
-        this.size = size;
-        transform.forward = forward;
-        transform.SetParent(null);
-        transform.localScale = new Vector3(size, size, size);
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
-        this.velocity = transform.forward * speed;
+        Init(owner, forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size);
     }
 
     protected void SpawnHitParticle(float size)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pool<T> where T : PooledItem
 {
-    Queue<T> available;
+    public Queue<T> available;
 
     public Pool(T prefab, int count)
     {

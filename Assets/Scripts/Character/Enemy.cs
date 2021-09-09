@@ -347,7 +347,7 @@ public class Enemy : Character
         base.OnDestroy();
     }
 
-    public virtual void Init(GameObject target, Transform cam)
+    public virtual void Init(GameObject target, Transform cam, AmmoPool ammoPool)
     {
         this.target = target;
         transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = cam;

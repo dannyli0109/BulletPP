@@ -14,11 +14,12 @@ public class Rocket : Ammo
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) Destroy(gameObject);
+        if (GameManager.current.GamePausing()) ReturnToPool();
         bornTime += Time.deltaTime;
         if (bornTime >= owner.rocketStats.travelTime.value)
         {
-            Destroy(gameObject);
+            ReturnToPool();
+            Explode();
         }
 
         if (timesBounced < owner.rocketStats.amountOfBounces.value)
@@ -63,11 +64,12 @@ public class Rocket : Ammo
         if (this.gameObject == gameObject)
         {
             SpawnHitParticle(owner.rocketStats.size.value);
-            Destroy(gameObject);
+            ReturnToPool();
+            Explode();
         }
     }
 
-    private void OnDestroy()
+    private void Explode()
     {
         Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
         AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
@@ -79,6 +81,10 @@ public class Rocket : Ammo
         {
             aoeDamage.Init(owner.rocketStats.radius.value, owner.rocketStats.damage.value, 1 << 11);
         }
+    }
+
+    private void OnDestroy()
+    {
         EventManager.current.onAmmoDestroy -= OnRocketDestroy;
     }
 

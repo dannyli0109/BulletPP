@@ -494,6 +494,10 @@ PrefabInstance:
       propertyPath: thisBTSManager
       value: 
       objectReference: {fileID: 464595771}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: ammoPool
+      value: 
+      objectReference: {fileID: 1310377051}
     - target: {fileID: 6680669848201933449, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: cam
       value: 
@@ -2455,6 +2459,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1310377050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.829655
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 68.569046
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.9112566
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815989, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: m_Name
+      value: AmmoPool
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+--- !u!114 &1310377051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8318605735942815986, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+  m_PrefabInstance: {fileID: 1310377050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247d8d50959581447b36d0b826941a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1339963896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2766,10 @@ PrefabInstance:
       propertyPath: thisBTSManager
       value: 
       objectReference: {fileID: 464595771}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: ammoPool
+      value: 
+      objectReference: {fileID: 1310377051}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
