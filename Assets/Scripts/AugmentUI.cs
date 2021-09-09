@@ -31,11 +31,13 @@ public class AugmentUI : MonoBehaviour
     {
         AugmentManager augmentManager = AugmentManager.current;
         int state = shop.player.BuyAugment(id);
+        if (state == -1) return;
         if (!shop.hasBoughtAnAugment)
         {
-        shop.hasBoughtAnAugment = true;
+            shop.hasBoughtAnAugment = true;
             shop.level = 3;
         }
+        shop.augmentIds = augmentManager.GetAugmentIdList();
 
         if (state == 1)
         {
