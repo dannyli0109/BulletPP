@@ -33,20 +33,14 @@ public class Laser : Ammo
     private void OnTriggerEnter(Collider other)
     {
         if (GameManager.current.GamePausing()) return;
-        //if (owner)
-        //{
-        //    if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
-        //    {
-        //        // make sure the bullet is not hitting itself
-        //        EventManager.current.OnAmmoHit(owner, other.gameObject);
-        //    }
-        //    else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        //    {
-        //        Debug.Log("enem " + owner.laserStats.damage.value * Time.deltaTime);
-        //        EventManager.current.OnLaserHit(owner.laserStats.damage.value * Time.deltaTime, owner, other.gameObject);
-        //    }
-        //}
 
+        HandleAmmoHit(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (GameManager.current.GamePausing()) return;
+        Debug.Log("laser");
         HandleAmmoHit(other);
     }
 
@@ -90,10 +84,11 @@ public class Laser : Ammo
         EventManager.current.onAmmoDestroy -= OnLaserDestroy;
     }
 
-    //public override float GetDamage()
-    //{
-    //    return owner.laserStats.damage.value * owner.stats.damageMultiplier.value;
-    //}
+   public override float GetDamage()
+   {
+        Debug.Log(owner.laserStats.damage.value * owner.stats.damageMultiplier.value * Time.deltaTime);
+       return owner.laserStats.damage.value * owner.stats.damageMultiplier.value*Time.deltaTime;
+   }
 
     //public override void Init(Character owner, float angle)
     //{
