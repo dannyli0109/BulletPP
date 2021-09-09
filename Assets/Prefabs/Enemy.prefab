@@ -1602,9 +1602,15 @@ MonoBehaviour:
       baseValue: 0
     additionalAmmo:
       baseValue: 0
+    extraBounces:
+      baseValue: 0
+    damageOnBounce:
+      baseValue: 0
+    extraExplosionRange:
+      baseValue: 0
   bulletStats:
     damage:
-      baseValue: 2
+      baseValue: 1
     speed:
       baseValue: 5
     size:

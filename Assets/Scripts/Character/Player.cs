@@ -179,6 +179,16 @@ public class Player : Character
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 17)
+        {
+            Debug.Log("health");
+            hp++;
+            other.gameObject.transform.parent.gameObject.SetActive(false);
+
+        }
+    }
     AmmoStats GetAmmoStats(int type)
     {
         switch (type)

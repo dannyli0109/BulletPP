@@ -87,6 +87,11 @@ public class MapGeneration : MonoBehaviour
     public bool inCombat;
 
     public List< Enemy> EnemiesInEncounter;
+    public List<int> numberOfWaves;
+    int currentWave;
+    public float waveWaitingTime;
+    public float currentWaveWaitingTime;
+    bool roomClear;
     #endregion
 
     #region MiniMap
@@ -104,17 +109,18 @@ public class MapGeneration : MonoBehaviour
     public Color DefaultMiniMapRoomColour;
     #endregion
 
-    public float totalRoomDiffucluty;
+    #region difficulty
+    public float totalRoomDiffculty;
     public float singleEnemyCutOff;
     public float secondWaveCutOff;
-
     public float roomFinishMultiplier;
+    #endregion
 
-    public List<int> numberOfWaves;
-    int currentWave;
-    public float waveWaitingTime;
-    public float currentWaveWaitingTime;
-    bool roomClear;
+    #region healthPickup
+
+   public GameObject healthPickUpObject;
+
+    #endregion
 
     public BTSManager thisBTSManager;
 
@@ -235,8 +241,7 @@ public class MapGeneration : MonoBehaviour
                             if (rooms[i].rightRoomRef != -1)
                             {
                                 int holding = UnityEngine.Random.Range(0, allDoorRoom.Count);
-                                holdingObject = Instantiate(allDoorRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), allDoorRoom[holding].transform.rotation);
-                              
+                                holdingObject = Instantiate(allDoorRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), allDoorRoom[holding].transform.rotation);                             
                             }
                             else
                             {
@@ -369,13 +374,11 @@ public class MapGeneration : MonoBehaviour
             rooms.Add(ToAdd);
             return true;
         }
-
         return false;
     }
 
     public void reconnectWalls()
     {
-
         for (int i = 0; i < rooms.Count; i++)
         {
 
@@ -422,7 +425,7 @@ public class MapGeneration : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Start room");
+                 //   Debug.Log("Start room");
                 }
             }
         }
@@ -440,14 +443,14 @@ public class MapGeneration : MonoBehaviour
             inCombat = true;
 
             //Debug.Log((totalRoomDiffucluty / 3) + " " + totalRoomDiffucluty / 2);
-            int holdingRand = (int)UnityEngine.Random.Range((totalRoomDiffucluty/3), totalRoomDiffucluty/2);
+            int holdingRand = (int)UnityEngine.Random.Range((totalRoomDiffculty/3), totalRoomDiffculty/2);
             holdingRand++;
           //  Debug.Log(holdingRand);
-            if (totalRoomDiffucluty< singleEnemyCutOff)
+            if (totalRoomDiffculty< singleEnemyCutOff)
             {
                 holdingRand = 1;
             }
-            if(totalRoomDiffucluty> secondWaveCutOff)
+            if(totalRoomDiffculty> secondWaveCutOff)
             {
                 holdingRand = holdingRand / 2;
                 numberOfWaves.Add(holdingRand+1);
@@ -470,7 +473,7 @@ public class MapGeneration : MonoBehaviour
             {
                 Debug.Log("Add" + i);
                 int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count+ sniperTypes.Count);
-                if(totalRoomDiffucluty < singleEnemyCutOff)
+                if(totalRoomDiffculty < singleEnemyCutOff)
                 {
                     holdingRandomEnemType = 0;
                 }
@@ -505,7 +508,7 @@ public class MapGeneration : MonoBehaviour
                     holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
 
                     Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
-                    if (totalRoomDiffucluty < singleEnemyCutOff)
+                    if (totalRoomDiffculty < singleEnemyCutOff)
                     {
                         holdingRandomEnemType = 0;
                     }
@@ -560,7 +563,7 @@ public class MapGeneration : MonoBehaviour
                 {
                     Debug.Log("Add" + i);
                     int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count);
-                    if (totalRoomDiffucluty < singleEnemyCutOff)
+                    if (totalRoomDiffculty < singleEnemyCutOff)
                     {
                         holdingRandomEnemType = 0;
                     }
@@ -595,7 +598,7 @@ public class MapGeneration : MonoBehaviour
                         holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
 
                         Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
-                        if (totalRoomDiffucluty < singleEnemyCutOff)
+                        if (totalRoomDiffculty < singleEnemyCutOff)
                         {
                             holdingRandomEnemType = 0;
                         }
@@ -620,6 +623,9 @@ public class MapGeneration : MonoBehaviour
             if (EnemiesInEncounter.Count <= 0)
             {
                 currentWave++;
+
+
+
                // Debug.Log(currentWave+" "+numberOfWaves.Count);
                 if (currentWave < numberOfWaves.Count)
                 {
@@ -630,7 +636,7 @@ public class MapGeneration : MonoBehaviour
                 }
                 else
                 {
-                    totalRoomDiffucluty += roomFinishMultiplier;
+                    totalRoomDiffculty += roomFinishMultiplier;
                     inCombat = false;
                     rooms[currentRoomInside].completed = true;
                     CheckIfMapCompleted();
@@ -645,16 +651,25 @@ public class MapGeneration : MonoBehaviour
             }
             else
             {
+                Vector2 holdingLastEnemy = new Vector2(0,0);
                 for (int i = 0; i < EnemiesInEncounter.Count; i++)
                 {
                     if (EnemiesInEncounter[i].hp <= 0)
                     {
+                        holdingLastEnemy = new Vector2(EnemiesInEncounter[i].transform.position.x, EnemiesInEncounter[i].transform.position.z);
                         EnemiesInEncounter.RemoveAt(i);
                     }
                     else
                     {
                         //  Debug.Log(i + " Alive " + EnemiesInEncounter[i].hp);
                     }
+                }
+
+                if(EnemiesInEncounter.Count <= 0)
+                {
+                    Debug.Log("health");
+                    healthPickUpObject.SetActive(true);
+                    healthPickUpObject.transform.position = new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y);
                 }
             }
         }

@@ -146,16 +146,17 @@ public abstract class Character : MonoBehaviour
             {
                 if (currentImmunityFrame <= 0)
                 {
-                  
                     if (ammo.overTimeDamage)
                     {
                         hp -= ammo.GetDamage()*Time.deltaTime;
+                      
                     }
                     else
                     {
-
+                      //  Debug.Log(ammo.GetDamage() + "Damage");
                     hp -= ammo.GetDamage();
                     }
+                    currentImmunityFrame = stats.immunityFromDamage.value;
                 }
                 else
                 {
