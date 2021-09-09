@@ -30,7 +30,7 @@ public abstract class Ammo : PooledItem
     public Vector3 acceleration;
 
     protected Vector3 currentAcceleration;
-    public float GetDamage()
+    public virtual float GetDamage()
     {
         return damage;
     }
