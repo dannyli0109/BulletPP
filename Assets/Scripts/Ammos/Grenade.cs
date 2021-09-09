@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grenade : Ammo
 {
- public   float currentSpeed;
+    public float currentSpeed;
     public float slowDownSpeed;
     void Start()
     {
@@ -27,13 +27,13 @@ public class Grenade : Ammo
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) Destroy(gameObject);
+        if (GameManager.current.GamePausing()) ReturnToPool();
         currentSpeed = Mathf.Clamp(currentSpeed - slowDownSpeed * Time.deltaTime, owner.grenadeStats.speed.value, currentSpeed);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.grenadeStats.travelTime.value)
         {
             Debug.Log("grenade died of old age");
-            Destroy(gameObject);
+            ReturnToPool();
         }
 
         if (timesBounced < owner.grenadeStats.amountOfBounces.value)
@@ -50,7 +50,7 @@ public class Grenade : Ammo
         if (this.gameObject == gameObject)
         {
             SpawnHitParticle(owner.grenadeStats.size.value);
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 

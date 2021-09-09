@@ -127,6 +127,7 @@ public class MapGeneration : MonoBehaviour
     public GameEvent beginEnounter;
     public GameEvent finishEnounter;
 
+    public AmmoPool ammoPool;
     void Start()
     {
         GenerateMap();
@@ -490,8 +491,8 @@ public class MapGeneration : MonoBehaviour
 
                     Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
                     holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
-                    GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType- enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
+                    GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType - enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
+                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
 
                     Debug.Log("sniper " + holdingSpawnInt + "  " + holdingPossibleSniperSpawnPoints.Count);
@@ -514,7 +515,7 @@ public class MapGeneration : MonoBehaviour
                     }
 
                     GameObject holdingGameObject = Instantiate(enemiesTypes[holdingRandomEnemType], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
+                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                     Debug.Log("not sniper " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
                    // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
@@ -581,7 +582,7 @@ public class MapGeneration : MonoBehaviour
                         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
                         holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
                         GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType - enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
+                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
                         EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
 
                         Debug.Log("sniper " + holdingSpawnInt + "  " + holdingPossibleSniperSpawnPoints.Count);
@@ -604,7 +605,7 @@ public class MapGeneration : MonoBehaviour
                         }
 
                         GameObject holdingGameObject = Instantiate(enemiesTypes[holdingRandomEnemType], holdingPosition, enemiesTypes[0].transform.rotation);
-                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget);
+                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
                         EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                         Debug.Log("not sniper " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
                         // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);

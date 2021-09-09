@@ -13,11 +13,11 @@ public class Bullet : Ammo
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) Destroy(gameObject);
+        if (GameManager.current.GamePausing()) { ReturnToPool(); }
         bornTime += Time.deltaTime;
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
 
         if (timesBounced < owner.bulletStats.amountOfBounces.value)
@@ -38,7 +38,7 @@ public class Bullet : Ammo
         if (this.gameObject == gameObject)
         {
             SpawnHitParticle(owner.bulletStats.size.value);
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 

@@ -30,6 +30,8 @@ public class Player : Character
 
     #endregion
 
+    public AmmoPool ammoPool;
+
     float angle;
     Vector2 movement;
 
@@ -240,11 +242,14 @@ public class Player : Character
     {
         if (currentBulletClip > 0)
         {
-            GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
-            Ammo ammoComponent = bullet.GetComponent<Ammo>();
-            Vector3 forward = bulletContainer.forward;
-            ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
-            currentBulletClip--;
+            Bullet bullet;
+            if (ammoPool.bulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation))
+            {
+                Ammo ammoComponent = bullet.GetComponent<Ammo>();
+                Vector3 forward = bulletContainer.forward;
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                currentBulletClip--;
+            }
         }
     }
 
@@ -252,11 +257,14 @@ public class Player : Character
     {
         if (currentRocketClip > 0)
         {
-            GameObject rocket = Instantiate(rocketPrefab, bulletContainer);
-            Ammo ammoComponent = rocket.GetComponent<Ammo>();
-            Vector3 forward = bulletContainer.forward;
-            ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
-            currentRocketClip--;
+            Rocket rocket;
+            if (ammoPool.rocketPool.TryInstantiate(out rocket, bulletContainer.position, bulletContainer.rotation))
+            {
+                Ammo ammoComponent = rocket.GetComponent<Ammo>();
+                Vector3 forward = bulletContainer.forward;
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                currentRocketClip--;
+            }
         }
     }
 
@@ -264,11 +272,14 @@ public class Player : Character
     {
         if (currentGrenadeClip > 0)
         {
-            GameObject grenade = Instantiate(grenadePrefab, bulletContainer);
-            Ammo ammoComponent = grenade.GetComponent<Ammo>();
-            Vector3 forward = bulletContainer.forward;
-            ammoComponent.Init(this, forward, angle, grenadeStats.speed.value, stats.damageMultiplier.value * grenadeStats.damage.value, grenadeStats.size.value);
-            currentGrenadeClip--;
+            Grenade grenade;
+            if (ammoPool.grenadePool.TryInstantiate(out grenade, bulletContainer.position, bulletContainer.rotation))
+            {
+                Ammo ammoComponent = grenade.GetComponent<Ammo>();
+                Vector3 forward = bulletContainer.forward;
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                currentGrenadeClip--;
+            }
         }
     }
 

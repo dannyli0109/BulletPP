@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Animator transition;
     public float transitionTime;
 
+
     void Awake()
     {
         current = this;

@@ -12,8 +12,9 @@ public class SpellQueueEnemy : Enemy
     public float maxCooldown = 3.0f;
     public float viewAngle = 60.0f;
 
-  protected Decision decision;
+    protected Decision decision;
     public float rotationSpeed;
+    public AmmoPool ammoPool;
 
     public override void Start()
     {
@@ -22,9 +23,10 @@ public class SpellQueueEnemy : Enemy
 
     }
 
-    public override void Init(GameObject target, Transform cam)
+    public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
     {
-        base.Init(target, cam);
+        base.Init(target, cam, ammoPool);
+        this.ammoPool = ammoPool;
         InitSpellQueue();
 
         decision = new Decision()
@@ -57,7 +59,7 @@ public class SpellQueueEnemy : Enemy
         };
     }
 
-    public void InitSpellQueue()
+    public virtual void InitSpellQueue()
     {
         spellQueue = new List<Action>();
         spellTime = new List<float>();
@@ -181,25 +183,26 @@ public class SpellQueueEnemy : Enemy
 
     void ShootBullet(float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
-        Ammo ammoComponent = bullet.GetComponent<Ammo>();
         Vector3 forward = bulletContainer.forward;
-        ammoComponent.Init(this, forward, angle, offset, speed, acceleration, damage, size);
+        ShootBullet(forward, angle, offset, speed, acceleration, damage, size);
     }
 
     void ShootBullet(float angle, float speed, float damage, float size)
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
-        Ammo ammoComponent = bullet.GetComponent<Ammo>();
-        Vector3 forward = bulletContainer.forward;
-        ammoComponent.Init(this, forward, angle, speed, damage, size);
+        ShootBullet(angle, 0, speed, new Vector3(0, 0, 0), damage, size);
     }
 
     void ShootBullet(Vector3 forward, float angle, float speed, float damage, float size)
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletContainer);
+        ShootBullet(forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size);
+    }
+
+    void ShootBullet(Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
+    {
+        Bullet bullet;
+        ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
         Ammo ammoComponent = bullet.GetComponent<Ammo>();
-        ammoComponent.Init(this, forward, angle, speed, damage, size);
+        ammoComponent.Init(this, forward, angle, offset, speed, acceleration, damage, size);
     }
 
     public bool InLineOfSight(float viewAngle)
