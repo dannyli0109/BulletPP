@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     public GameObject synergyUIPrefab;
 
     public int level = 0;
-    public List<List<float>> percents = new List<List<float>>() { 
+    public List<List<float>> percents = new List<List<float>>() {
         new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
         new List<float>() { 0.5f, 0.35f, 0.1f, 0.05f, 0.0f },
         new List<float>() { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f },
@@ -25,8 +25,12 @@ public class Shop : MonoBehaviour
 
     public bool hasBoughtAnAugment;
 
+    public List<int> augmentIds;
+
     void Start()
     {
+        AugmentManager augmentManager = AugmentManager.current;
+        augmentIds = augmentManager.GetAugmentIdList();
         Refresh();
     }
 
@@ -35,29 +39,45 @@ public class Shop : MonoBehaviour
         AugmentManager augmentManager = AugmentManager.current;
 
         for (int i = 0; i < augmentUIs.Count; i++)
-        {
-            // Generate random index based on percents
-            float randNum = Random.Range(0.0f, 1.0f);
-            int rarity = 0;
+        { 
+            if (augmentIds.Count == 0) augmentIds = augmentManager.GetAugmentIdList();
 
-            float accumulated = 0;
-            for (int j = 0; j < percents[level].Count; j++)
+            int rarity = GetRandomRarity();
+            List<List<int>> augmentRarities = augmentManager.GetRarityList(augmentIds);
+            List<int> augmentIndices = augmentRarities[rarity];
+
+            // if there's no augment in a given rarity, generate another rarity
+            while (augmentIndices.Count == 0)
             {
-                accumulated += percents[level][j];
-                if (randNum <= accumulated)
-                {
-                    rarity = j;
-                    break;
-                }
+                rarity = GetRandomRarity();
+                augmentIndices = augmentRarities[rarity];
             }
-
-            List<int> augmentIndices = augmentManager.augmentRarities[rarity];
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
-            augmentUIs[i].gameObject.SetActive(true);
 
+            augmentIds.Remove(augmentIndex);
+            augmentUIs[i].gameObject.SetActive(true);
             augmentUIs[i].Populate(augmentIndex);
         }
+    }
+
+    public int GetRandomRarity()
+    {
+        // Generate random index based on percents
+        float randNum = Random.Range(0.0f, 1.0f);
+        int rarity = 0;
+
+        float accumulated = 0;
+        for (int j = 0; j < percents[level].Count; j++)
+        {
+            accumulated += percents[level][j];
+            if (randNum <= accumulated)
+            {
+                rarity = j;
+                break;
+            }
+        }
+        return rarity;
     }
 
     public void UpdateText()
@@ -85,8 +105,7 @@ public class Shop : MonoBehaviour
     {
         if (hasBoughtAnAugment)
         {
-
-        GameManager.current.ChangeState(GameState.Casual);
+            GameManager.current.ChangeState(GameState.Casual);
             player.reloading = true;
         }
         // gameObject.SetActive(false);

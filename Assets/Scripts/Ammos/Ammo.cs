@@ -34,7 +34,7 @@ public abstract class Ammo : PooledItem
     {
         return damage;
     }
-    public void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
+    public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
     {
         this.owner = owner;
         this.damage = damage;
@@ -42,6 +42,7 @@ public abstract class Ammo : PooledItem
         this.size = size;
         transform.forward = forward;
         bornTime = 0;
+        timesBounced = 0;
         //transform.SetParent(null);
         transform.localScale = new Vector3(size, size, size);
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));

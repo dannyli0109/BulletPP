@@ -55,6 +55,32 @@ public class AugmentManager : MonoBehaviour
         }
     }
 
+    public List<int> GetAugmentIdList()
+    {
+        List<int> ids = new List<int>();
+        for (int i = 0; i < augmentDatas.Count; i++)
+        {
+            ids.Add(augmentDatas[i].id);
+        }
+        return ids;
+    }
+
+    public List<List<int>> GetRarityList(List<int> ids)
+    {
+        List<List<int>> rarities = new List<List<int>>();
+        for (int i = 0; i < rarityLevels; i++)
+        {
+            rarities.Add(new List<int>());
+        }
+
+        for (int i = 0; i < ids.Count; i++)
+        {
+            int rarity = augmentDatas[ids[i]].rarity;
+            rarities[rarity].Add(augmentDatas[ids[i]].id);
+        }
+        return rarities;
+    }
+
     public void Init()
     {
         parser = new Parser();
