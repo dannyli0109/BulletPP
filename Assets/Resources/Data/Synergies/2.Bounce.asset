@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 2
   title: Bounce
   breakpoints: 0200000004000000
+  iconPath: icons/BulletBounce.png
   descriptions:
   - '<b>+<color=#c5c5c5ff>0.1/0.15</color>%</b> Increase damage on hit
 
@@ -41,3 +42,4 @@ MonoBehaviour:
   OnUpdate:
     m_PersistentCalls:
       m_Calls: []
+  iconSprite: {fileID: 0}

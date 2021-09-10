@@ -169,7 +169,7 @@ public class HUDManager : MonoBehaviour
             if (i < player.bulletStats.maxClip.value)
             {
                 bulletSprites[i].gameObject.SetActive(true);
-                bulletSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+                //bulletSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
                 xIndex++;
                 if (i < player.currentBulletClip)
                 {
@@ -191,7 +191,7 @@ public class HUDManager : MonoBehaviour
             if (i < player.grenadeStats.maxClip.value)
             {
                 grenadeSprites[i].gameObject.SetActive(true);
-                grenadeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+                //grenadeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
                 xIndex++;
                 if (i < player.currentGrenadeClip)
                 {
@@ -210,7 +210,7 @@ public class HUDManager : MonoBehaviour
             if (i < player.rocketStats.maxClip.value)
             {
                 rocketSprites[i].gameObject.SetActive(true);
-                rocketSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+                //rocketSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
                 xIndex++;
                 if (i < player.currentRocketClip)
                 {
@@ -228,7 +228,7 @@ public class HUDManager : MonoBehaviour
             if (i < player.laserStats.maxClip.value)
             {
                 laserSprites[i].gameObject.SetActive(true);
-                laserSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+                //laserSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
                 xIndex++;
                 if (i < player.currentLaserClip)
                 {
@@ -244,7 +244,7 @@ public class HUDManager : MonoBehaviour
         for (int i = 0; i < player.bouncingBladeStats.maxClip.value; i++)
         {
             bouncingBladeSprites[i].gameObject.SetActive(true);
-            bouncingBladeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
+            //bouncingBladeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
             xIndex++;
             if (i < player.currentBouncingBladeClip)
             {

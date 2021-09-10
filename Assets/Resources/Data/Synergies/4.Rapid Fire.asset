@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 4
   title: Rapid Fire
   breakpoints: 0200000004000000
+  iconPath: icons/Cross.png
   descriptions:
   - <b>+<color=#c5c5c5ff>0.1/0.3</color>%</b> Reload time secs faster
   - <b>-<color=#c5c5c5ff><color=#00d100>0.1</color>/0.3</color>s</b> Reload time
@@ -28,3 +29,4 @@ MonoBehaviour:
   OnUpdate:
     m_PersistentCalls:
       m_Calls: []
+  iconSprite: {fileID: 0}

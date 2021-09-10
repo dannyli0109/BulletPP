@@ -117,7 +117,6 @@ public class AugmentManager : MonoBehaviour
 
         for (int i = 1; i < rowNum; i++)
         {
-
             List<string> descriptions = new List<string>();
             List<string> codes = new List<string>();
             List<Eva> evaluators = new List<Eva>();
@@ -190,15 +189,15 @@ public class AugmentManager : MonoBehaviour
             }
 
             // string when none is activated
-            descriptions.Add(collection[i][3].ToString());
+            descriptions.Add(collection[i][4].ToString());
 
             for (int j = 0; j < breakpoints.Count; j++)
             {
-                string code = collection[i][5 + j * 2].ToString();
+                string code = collection[i][6 + j * 2].ToString();
                 codes.Add(code);
 
                 Eva evaluator = InitEvaluator();
-                descriptions.Add(collection[i][4 + j * 2].ToString());
+                descriptions.Add(collection[i][5 + j * 2].ToString());
                 evaluator.eval(parser.Parse(code));
                 evaluators.Add(evaluator);
             }
@@ -207,9 +206,13 @@ public class AugmentManager : MonoBehaviour
             data.id = int.Parse(collection[i][0].ToString());
             data.title = collection[i][1].ToString();
             data.breakpoints = breakpoints;
+            data.iconPath = collection[i][3].ToString();
             data.descriptions = descriptions;
             data.codes = codes;
             data.evaluators = evaluators;
+
+            data.iconSprite = Util.LoadNewSprite(Application.streamingAssetsPath + "/" + data.iconPath);
+
             list.Add(data);
         }
 
@@ -290,13 +293,14 @@ public class AugmentManager : MonoBehaviour
                 worksheet.Cells[1, 1].Value = "Id";
                 worksheet.Cells[1, 2].Value = "Name";
                 worksheet.Cells[1, 3].Value = "Break Points";
-                worksheet.Cells[1, 4].Value = "Descriptions";
+                worksheet.Cells[1, 4].Value = "IconPath";
                 worksheet.Cells[1, 5].Value = "Descriptions";
-                worksheet.Cells[1, 6].Value = "Code";
-                worksheet.Cells[1, 7].Value = "Descriptions";
-                worksheet.Cells[1, 8].Value = "Code";
-                worksheet.Cells[1, 9].Value = "Descriptions";
-                worksheet.Cells[1, 10].Value = "Code";
+                worksheet.Cells[1, 6].Value = "Descriptions";
+                worksheet.Cells[1, 7].Value = "Code";
+                worksheet.Cells[1, 8].Value = "Descriptions";
+                worksheet.Cells[1, 9].Value = "Code";
+                worksheet.Cells[1, 10].Value = "Descriptions";
+                worksheet.Cells[1, 11].Value = "Code";
 
                 UnityEngine.Object[] synergies = Resources.LoadAll("Data/Synergies", typeof(SynergyData));
                 for (int i = 0; i < synergies.Length; i++)
@@ -306,12 +310,14 @@ public class AugmentManager : MonoBehaviour
                     worksheet.Cells[id + 2, 1].Value = synergy.id;
                     worksheet.Cells[id + 2, 2].Value = synergy.title;
                     worksheet.Cells[id + 2, 3].Value = String.Join(",", synergy.breakpoints);
-                    worksheet.Cells[id + 2, 4].Value = synergy.descriptions[0];
+                    worksheet.Cells[id + 2, 4].Value = synergy.iconPath;
+
+                    worksheet.Cells[id + 2, 5].Value = synergy.descriptions[0];
 
                     for (int j = 0; j < synergy.breakpoints.Count; j++)
                     {
-                        worksheet.Cells[id + 2, 5 + j * 2].Value = synergy.descriptions[j + 1];
-                        worksheet.Cells[id + 2, 5 + j * 2 + 1].Value = synergy.codes[j];
+                        worksheet.Cells[id + 2, 6 + j * 2].Value = synergy.descriptions[j + 1];
+                        worksheet.Cells[id + 2, 6 + j * 2 + 1].Value = synergy.codes[j];
                     }
                 }
             }

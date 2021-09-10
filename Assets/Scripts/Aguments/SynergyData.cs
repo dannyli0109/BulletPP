@@ -12,6 +12,8 @@ public class SynergyData : ScriptableObject
 
     public List<int> breakpoints;
 
+    public string iconPath;
+
     [TextArea(5, 20)]
     public List<string> descriptions;
 
@@ -22,6 +24,8 @@ public class SynergyData : ScriptableObject
     public UnityEvent OnUpdate;
 
     public List<Eva> evaluators;
+
+    public Sprite iconSprite;
 
     void Reset()
     {

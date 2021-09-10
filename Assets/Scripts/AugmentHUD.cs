@@ -19,11 +19,11 @@ public class AugmentHUD : MonoBehaviour
         AugmentManager augmentManager = AugmentManager.current;
         string name = augmentManager.augmentDatas[id].title;
         string description = augmentManager.augmentDatas[id].descriptions[level];
-        tooltipTrigger.header = name;
+        tooltipTrigger.header = name + " Lv." + (level + 1); ;
         tooltipTrigger.content = description;
         icon.sprite = augmentManager.augmentDatas[id].iconSprite;
         outline.effectColor = augmentManager.colors[augmentManager.augmentDatas[id].rarity];
-        levelText.text = "Lv." + (level + 1);
+        //levelText.text = "Lv." + (level + 1);
 
 
         if (level == 0)

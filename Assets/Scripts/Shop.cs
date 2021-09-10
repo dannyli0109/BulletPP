@@ -139,7 +139,7 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < player.synergies.Count; i++)
         {
             GameObject synergyUI = Instantiate(synergyUIPrefab);
-            synergyUI.GetComponent<TextMeshProUGUI>().text = augmentManager.synergyDatas[player.synergies[i].id].title + ": " + player.synergies[i].count;
+            synergyUI.GetComponent<SynergyHUD>().Populate(player.synergies[i].id, player.synergies[i].breakPoint, player.synergies[i].count);
             synergyUI.transform.SetParent(synergyListUIContainer.transform);
             synergyUI.transform.localScale = new Vector3(1, 1, 1);
         }

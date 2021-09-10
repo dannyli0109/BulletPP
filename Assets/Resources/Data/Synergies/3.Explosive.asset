@@ -15,11 +15,12 @@ MonoBehaviour:
   id: 3
   title: Explosive
   breakpoints: 020000000400000006000000
+  iconPath: icons/Explosive.png
   descriptions:
   - <b>+<color=#c5c5c5ff>15/30/50</color>%</b> Explosion Range
-  - <b>+<color=#c5c5c5ff><color=#00d100>15</color>/30/50</color>%</b> Max Health
-  - <b>+<color=#c5c5c5ff>15/<color=#00d100>30</color>/50</color>%</b> Max Health
-  - <b>+<color=#c5c5c5ff>15/30/<color=#00d100>50</color></color>%</b> Max Health
+  - <b>+<color=#c5c5c5ff><color=#00d100>15</color>/30/50</color>%</b> Explosion Range
+  - <b>+<color=#c5c5c5ff>15/<color=#00d100>30</color>/50</color>%</b> Explosion Range
+  - <b>+<color=#c5c5c5ff>15/30/<color=#00d100>50</color></color>%</b> Explosion Range
   codes:
   - 
   - 
@@ -30,3 +31,4 @@ MonoBehaviour:
   OnUpdate:
     m_PersistentCalls:
       m_Calls: []
+  iconSprite: {fileID: 0}
