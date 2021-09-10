@@ -3128,7 +3128,7 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: playerTarget
       value: 
-      objectReference: {fileID: 1949125667}
+      objectReference: {fileID: 1949125668}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: camTarget
       value: 
@@ -3181,6 +3181,18 @@ PrefabInstance:
       propertyPath: healthPickUpObject
       value: 
       objectReference: {fileID: 1057259559}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: damagedChanceToSpawnHealthPickup
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: difficultyNoDamageMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: chanceOfSpawnOutOfOneHundredHealthPickup
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
@@ -5430,17 +5442,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1949125667 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6680669848137463560, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-  m_PrefabInstance: {fileID: 500789362}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1949125668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
   m_PrefabInstance: {fileID: 500789362}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949125667}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4890625cdfad4d48b8cfda39e1cb555, type: 3}
