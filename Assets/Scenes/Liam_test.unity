@@ -665,9 +665,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-      propertyPath: thisBTSManager
-      value: 
-      objectReference: {fileID: 464595771}
+      propertyPath: laserStats.maxLaserLength.baseValue
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: laserStats.maxLaserWidth.baseValue
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: laserStats.travelTime.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: laserStats.speed.baseValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: ammoPool
       value: 
@@ -4731,7 +4743,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1580158240
 GameObject:
@@ -5677,7 +5689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1891872735620922684, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1891872735620922684, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
