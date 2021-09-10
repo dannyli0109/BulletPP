@@ -43,7 +43,7 @@ public class Laser : Ammo
     private void OnTriggerStay(Collider other)
     {
         if (GameManager.current.GamePausing()) return;
-        Debug.Log("laser");
+        //Debug.Log("laser");
         HandleAmmoHit(other);
     }
 

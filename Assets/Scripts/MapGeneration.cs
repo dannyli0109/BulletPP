@@ -70,7 +70,7 @@ public class MapGeneration : MonoBehaviour
     #region BetweenRoomMovement
     public int currentRoomInside = 0;
 
-    public GameObject playerTarget;
+    public Player playerTarget;
     public Transform camTarget;
 
     public bool needToSetPos;
@@ -114,9 +114,13 @@ public class MapGeneration : MonoBehaviour
     public float singleEnemyCutOff;
     public float secondWaveCutOff;
     public float roomFinishMultiplier;
+    public float difficultyNoDamageMultiplier;
+
     #endregion
 
     #region healthPickup
+    public float chanceOfSpawnOutOfOneHundredHealthPickup;
+    public float damagedChanceToSpawnHealthPickup; // * recently Taken Damage
 
    public GameObject healthPickUpObject;
 
@@ -439,7 +443,11 @@ public class MapGeneration : MonoBehaviour
             beginEnounter?.Invoke();
             currentWave = 0;
             numberOfWaves = new List<int>();
+            if (playerTarget.RecentlyTakenDamage > 0)
+            {
+            playerTarget.RecentlyTakenDamage--; 
 
+            }
             // lock doors
             inCombat = true;
 
@@ -492,7 +500,7 @@ public class MapGeneration : MonoBehaviour
                     Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
                     holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
                     GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType - enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
+                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
 
                     Debug.Log("sniper " + holdingSpawnInt + "  " + holdingPossibleSniperSpawnPoints.Count);
@@ -515,7 +523,7 @@ public class MapGeneration : MonoBehaviour
                     }
 
                     GameObject holdingGameObject = Instantiate(enemiesTypes[holdingRandomEnemType], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
+                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
                     EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                     Debug.Log("not sniper " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
                    // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
@@ -582,7 +590,7 @@ public class MapGeneration : MonoBehaviour
                         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
                         holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
                         GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType - enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
+                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
                         EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
 
                         Debug.Log("sniper " + holdingSpawnInt + "  " + holdingPossibleSniperSpawnPoints.Count);
@@ -605,7 +613,7 @@ public class MapGeneration : MonoBehaviour
                         }
 
                         GameObject holdingGameObject = Instantiate(enemiesTypes[holdingRandomEnemType], holdingPosition, enemiesTypes[0].transform.rotation);
-                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
+                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
                         EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
                         Debug.Log("not sniper " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
                         // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
@@ -624,8 +632,6 @@ public class MapGeneration : MonoBehaviour
             if (EnemiesInEncounter.Count <= 0)
             {
                 currentWave++;
-
-
 
                // Debug.Log(currentWave+" "+numberOfWaves.Count);
                 if (currentWave < numberOfWaves.Count)
@@ -668,9 +674,10 @@ public class MapGeneration : MonoBehaviour
 
                 if(EnemiesInEncounter.Count <= 0)
                 {
-                    Debug.Log("health");
-                    healthPickUpObject.SetActive(true);
-                    healthPickUpObject.transform.position = new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y);
+                   // Debug.Log("health");
+
+                    TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
+                   
                 }
             }
         }
@@ -744,6 +751,18 @@ public class MapGeneration : MonoBehaviour
             }
         }
         return holdingVal;
+    }
+
+    public void TryToSpawnHealthPickup(Vector3 pos)
+    {
+        float holdingRandom = UnityEngine.Random.RandomRange(0, 100);
+
+        if (holdingRandom < chanceOfSpawnOutOfOneHundredHealthPickup +  playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)
+        {
+            Debug.Log("Spawn " + (chanceOfSpawnOutOfOneHundredHealthPickup + playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)+ "  " + playerTarget.RecentlyTakenDamage);
+            healthPickUpObject.SetActive(true);
+            healthPickUpObject.transform.position = pos;
+        }
     }
 
     public void refreshMiniMapUI()

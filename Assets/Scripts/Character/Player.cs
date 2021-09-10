@@ -10,6 +10,8 @@ public class Player : Character
     public BTSManager thisBTSManager;
     public CharacterController characterController;
 
+    public float RecentlyTakenDamage; // goes up when taken damage, goes down each turn
+
     #region movementStats
     public Vector2 lastMovementDirection;
     public float currentTimeBetweenDashes;
@@ -71,6 +73,11 @@ public class Player : Character
     {
         if (GameManager.current.GamePausing()) return;
         MoveCharacter();
+    }
+
+  public override void CheckOnDamageTrigger()
+    {
+        RecentlyTakenDamage++;
     }
 
     protected void ReceiveGold(float amount)
