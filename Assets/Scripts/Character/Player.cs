@@ -298,6 +298,7 @@ public class Player : Character
             Ammo ammoComponent = laser.GetComponent<Ammo>();
             Vector3 forward = bulletContainer.forward;
             ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value);
+            laser.transform.SetParent(null);
             currentLaserClip--;
         }
     }
@@ -311,6 +312,7 @@ public class Player : Character
             Ammo ammoComponent = blade.GetComponent<Ammo>();
             Vector3 forward = bulletContainer.forward;
             ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value);
+            blade.transform.SetParent(null);
             currentBouncingBladeClip--;
         }
     }

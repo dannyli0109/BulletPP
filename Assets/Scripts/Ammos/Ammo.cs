@@ -43,7 +43,6 @@ public abstract class Ammo : PooledItem
         transform.forward = forward;
         bornTime = 0;
         timesBounced = 0;
-        //transform.SetParent(null);
         transform.localScale = new Vector3(size, size, size);
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
         Vector3 offsetVector = new Vector3(transform.forward.x * offset, transform.forward.y * offset, transform.forward.z * offset);

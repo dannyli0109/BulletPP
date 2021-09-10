@@ -62,8 +62,8 @@ public class Laser : Ammo
         }
         //transform.rotation = Quaternion.RotateTowards(owner.bulletContainer.transform.rotation, Quaternion.LookRotation(randomOffsetDirection), randomOffSet);
 
-        //Vector3 lookDir = (owner.bulletContainer.forward) * currentLaserLength;
-        Vector3 lookDir = (transform.forward) * currentLaserLength;
+        Vector3 lookDir = (owner.bulletContainer.forward) * currentLaserLength;
+        //Vector3 lookDir = (transform.forward) * currentLaserLength;
         lookDir = Quaternion.AngleAxis(-randomOffSet, Vector3.up) * lookDir;
 
         thisLineRenderer.SetPosition(0, owner.bulletContainer.position);
