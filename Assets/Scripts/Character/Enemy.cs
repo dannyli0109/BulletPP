@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 public class Enemy : Character
 {
     #region Movement
-    public Vector3 finalDestination;
-    public Vector3 nextDestination;
+    public Vector3 oldfinalDestination;
+    public Vector3 oldnextDestination;
 
-    public float smoothingRange;
+    public float oldsmoothingRange;
 
     public float speed;
     public float desiredFurthestRange;
@@ -88,13 +86,13 @@ public class Enemy : Character
         // if in the normal range
         Vector3 directionTowardstarget = Vector3.Normalize(new Vector3(target.transform.position.x - this.transform.position.x, 0, target.transform.position.z - this.transform.position.z));
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
-        float distFromFinal = Vector3.Distance(this.transform.position, finalDestination);
+        float distFromFinal = Vector3.Distance(this.transform.position, oldfinalDestination);
 
         if (distFromTarget < desiredFurthestRange && distFromTarget > closestRange)
         {
-            if (smoothingRange > distFromFinal)
+            if (oldsmoothingRange > distFromFinal)
             {
-                finalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * wanderingOffsetRadius;
+                oldfinalDestination = this.transform.position + Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1))) * wanderingOffsetRadius;
             }
 
         }
@@ -102,27 +100,26 @@ public class Enemy : Character
         {
            if(distFromTarget < closestRange)
             {
-                finalDestination = target.transform.position - directionTowardstarget * favouredRange;
+                oldfinalDestination = target.transform.position - directionTowardstarget * favouredRange;
                 // FinalDestination = target.transform.position - new Vector3(directionTowardstarget.x, 0, directionTowardstarget.y) * FavouredRange;
                // Debug.Log(directionTowardstarget);
             }
             else
             {
-                finalDestination = target.transform.position - directionTowardstarget * favouredRange;
+                oldfinalDestination = target.transform.position - directionTowardstarget * favouredRange;
             }
 
         }
        
-        nextDestination = Vector3.MoveTowards(this.transform.position, finalDestination, nextDistSegmentLength);
+        oldnextDestination = Vector3.MoveTowards(this.transform.position, oldfinalDestination, nextDistSegmentLength);
 
         if (!direct)
         {
             Vector3 wanderingOffset = Vector3.Normalize(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)));
-            nextDestination += wanderingOffset * walkingOffsetRadius;
+            oldnextDestination += wanderingOffset * walkingOffsetRadius;
         }
     }
-
-    
+ 
     protected virtual void UpdateAnimation()
     {
         Vector2 current = new Vector2(transform.position.x, transform.position.z);
@@ -133,8 +130,8 @@ public class Enemy : Character
         float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
         float cos = Mathf.Cos(angle * Mathf.Deg2Rad);
 
-        float tx = nextDestination.x;
-        float ty = nextDestination.z;
+        float tx = oldnextDestination.x;
+        float ty = oldnextDestination.z;
 
         Vector2 movemntRotated;
         movemntRotated.x = (cos * tx) - (sin * ty);
@@ -147,7 +144,6 @@ public class Enemy : Character
         animator.SetFloat("y", movemntRotated.y);
     }
     
-
     public void HandleMovement()
     {
         float distFromTarget = Vector3.Distance(this.transform.position, target.transform.position);
@@ -158,7 +154,7 @@ public class Enemy : Character
           
         }
 
-        float distFromNext = Vector3.Distance(this.transform.position, nextDestination);
+        float distFromNext = Vector3.Distance(this.transform.position, oldnextDestination);
         Vector3 directionTowardstarget = Vector3.Normalize(new Vector3( target.transform.position.x- this.transform.position.x , 0, target.transform.position.z - this.transform.position.z));
 
         if (currentWaitingTime <= 0)
@@ -169,7 +165,7 @@ public class Enemy : Character
                 Debug.DrawLine(this.transform.position, this.transform.position + directionTowardstarget, Color.cyan);
 
                 // if we're too close, make a new place to go
-                if(distFromNext< smoothingRange)
+                if(distFromNext< oldsmoothingRange)
                 {
                     if(distFromTarget < desiredFurthestRange)
                     {
@@ -191,8 +187,8 @@ public class Enemy : Character
                 //}
                 //this.transform.position = Vector3.MoveTowards(this.transform.position, nextDestination, speed * Time.deltaTime);
 
-                Debug.DrawLine(this.transform.position, finalDestination, Color.green);
-                Debug.DrawLine(this.transform.position, nextDestination,Color.blue);
+                Debug.DrawLine(this.transform.position, oldfinalDestination, Color.green);
+                Debug.DrawLine(this.transform.position, oldnextDestination,Color.blue);
 
             }
             else
@@ -312,7 +308,7 @@ public class Enemy : Character
         {
             Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
             Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
-            nextDestination += directionAwayFromWall *enemyAvoidAmount*Time.deltaTime;
+            oldnextDestination += directionAwayFromWall *enemyAvoidAmount*Time.deltaTime;
             currentWaitingTime = 0;
 
         }
@@ -321,7 +317,7 @@ public class Enemy : Character
         {
             Vector3 directionAwayFromWall = Vector3.Normalize(new Vector3(this.transform.position.x - other.gameObject.transform.position.x, 0, this.transform.position.z - other.gameObject.transform.position.z));
             Debug.DrawLine(this.transform.position, this.transform.position + directionAwayFromWall * wallAvoidAmount, Color.red, 2);
-            nextDestination += directionAwayFromWall * wallAvoidAmount * Time.deltaTime; ;
+            oldnextDestination += directionAwayFromWall * wallAvoidAmount * Time.deltaTime; ;
             currentWaitingTime = 0;
             touchingWall = true;
             float dist = Vector3.Distance(this.transform.position, target.transform.position);

@@ -1797,9 +1797,9 @@ MonoBehaviour:
   currentBouncingBladeClip: 0
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
   thisLineRenderer: {fileID: 0}
-  finalDestination: {x: 0, y: 0, z: 0}
-  nextDestination: {x: 0, y: 0, z: 0}
-  smoothingRange: 0
+  oldfinalDestination: {x: 0, y: 0, z: 0}
+  oldnextDestination: {x: 0, y: 0, z: 0}
+  oldsmoothingRange: 0
   speed: 2
   desiredFurthestRange: 0
   favouredRange: 0
@@ -1838,6 +1838,14 @@ MonoBehaviour:
   maxCooldown: 3
   viewAngle: 60
   rotationSpeed: 3
+  ammoPool: {fileID: 0}
+  tooFarToSeePlayer: 20
+  tooFarToShoot: 16
+  tooClose: 2
+  closeEnoughtDodge: 10
+  desiredRange: 7
+  smoothingRange: 1
+  finalDestination: {x: 0, y: 0, z: 0}
 --- !u!1 &1109022956269157045
 GameObject:
   m_ObjectHideFlags: 0

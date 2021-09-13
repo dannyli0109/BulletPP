@@ -690,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: gold
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: stats.timeBetweenShots.baseValue
@@ -4126,6 +4126,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1949125668}
@@ -4193,6 +4197,26 @@ PrefabInstance:
       propertyPath: chanceOfSpawnOutOfOneHundredHealthPickup
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[3]
+      value: 
+      objectReference: {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[2]
+      value: 
+      objectReference: {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: enemiesTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)

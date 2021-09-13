@@ -92,6 +92,9 @@ public class SpellQueueTank : SpellQueueEnemy
 
         agent.speed = 0;
        decision.MakeDecision();
+
+        HandleMoving();
+
         UpdateAnimation();
 
         timeSinceFired += Time.deltaTime;

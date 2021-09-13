@@ -16,11 +16,28 @@ public class SpellQueueEnemy : Enemy
     public float rotationSpeed;
     public AmmoPool ammoPool;
 
+    #region MoveStats
+    [Header("Move Stats")]
+
+    public float tooFarToSeePlayer; // wander
+    public float tooFarToShoot; // won't shoot
+    public float tooClose; // will move away
+    public float closeEnoughtDodge; // will
+
+    public float desiredRange;
+    public float smoothingRange;
+
+   public Vector3 finalDestination;
+    Vector3 nextDestination;
+
+    Vector3 lastKnownPos;
+    float timeStuck;
+    #endregion
+
     public override void Start()
     {
         base.Start();
-
-
+        finalDestination = target.transform.position;
     }
 
     public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
@@ -34,7 +51,7 @@ public class SpellQueueEnemy : Enemy
             action = () => { },
             condition = () =>
             {
-                return InRange(10);
+                return InRange(tooFarToShoot);
             },
             trueBranch = new Decision()
             {
@@ -51,7 +68,7 @@ public class SpellQueueEnemy : Enemy
                 action = () => { },
                 condition = () =>
                 {
-                    return InRange(30);
+                    return InRange(1000);
                 },
                 trueBranch = ToMove(),
                 falseBranch = null
@@ -113,9 +130,58 @@ public class SpellQueueEnemy : Enemy
 
         agent.speed = 0;
         decision.MakeDecision();
+
+        HandleMoving();
+
         UpdateAnimation();
 
         timeSinceFired += Time.deltaTime;
+    }
+
+    public virtual void HandleMoving()
+    {
+        Debug.Log("To Move()");
+        agent.speed = speed;
+        if(lastKnownPos== transform.position)
+        {
+            timeStuck += Time.deltaTime;
+            if (timeStuck < 0.3f)
+            {
+                timeStuck = 0;
+                finalDestination = target.transform.position;
+            }
+        }
+        // too close move back
+        else if (InRange(tooClose))
+        {
+            Vector3 normalAwayFromPlayer =Vector3.Normalize( transform.position - target.transform.position);
+            finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);
+           
+        }
+        // if line of sight and close enough get a random place
+        else if((InLineOfSight(60)|| InRange(closeEnoughtDodge )|| InRange(tooFarToSeePlayer)))
+        {
+            float distanceFromFinal = Vector3.Distance(transform.position, finalDestination);
+            if (distanceFromFinal < smoothingRange)
+            {
+
+            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
+            finalDestination = target.transform.position + normalAwayFromPlayer * 2;
+            }
+            else
+            {
+                Debug.Log("nah " + distanceFromFinal);
+            }
+        }
+        else
+        {
+            finalDestination = target.transform.position;
+        }
+        Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
+        agent?.SetDestination(finalDestination);
+
+        Debug.Log("dist "+ Vector3.Distance(transform.position, finalDestination));
+        lastKnownPos = transform.position;
     }
 
     protected override void UpdateAnimation()
@@ -244,8 +310,9 @@ public class SpellQueueEnemy : Enemy
         Decision decision = new Decision()
         {
             action = () => {
-                agent.speed = speed;
-                agent?.SetDestination(target.transform.position);
+         //   Debug.Log("To Move()");
+         //       agent.speed = speed;
+         //       agent?.SetDestination(target.transform.position);
             },
             condition = null,
             trueBranch = null,
@@ -276,6 +343,7 @@ public class SpellQueueEnemy : Enemy
             action = () => {
                 if (timeSinceFired >= spellTime[index % spellTime.Count])
                 {
+            
                     spellQueue[index % spellQueue.Count]();
                     timeSinceFired = 0;
                     index++;

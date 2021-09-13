@@ -1,24 +1,29 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpellQueueSniper : SpellQueueEnemy
+public class SpellQueueRunner : SpellQueueEnemy
 {
-    public Transform gunPoint;
-    bool usinglaser;
+    float currentAngle;
+
+    bool exploding;
+    public float ExplodingTime;
+    float currentExplodingTime;
+
+    public AOEDamage aoePrefab;
 
     public override void Start()
     {
         base.Start();
-
-
     }
 
     public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
     {
         base.Init(target, cam, ammoPool);
         this.ammoPool = ammoPool;
+
         InitSpellQueue();
 
         decision = new Decision()
@@ -43,7 +48,7 @@ public class SpellQueueSniper : SpellQueueEnemy
                 action = () => { },
                 condition = () =>
                 {
-                    return InRange(100);
+                    return InRange(2);
                 },
                 trueBranch = ToMove(),
                 falseBranch = null
@@ -56,21 +61,11 @@ public class SpellQueueSniper : SpellQueueEnemy
         spellQueue = new List<Action>();
         spellTime = new List<float>();
 
-        spellQueue.Add(() => { 
-            ShootBullets(2, 0, transform.forward,25, 4, 4);
-              });
-        spellTime.Add(2.2f);
-
-        spellQueue.Add(() =>{
-               ActivateLaser(true);    
-           });
-        spellTime.Add(1.2f);
-
-        spellQueue.Add( () =>{
-         ActivateLaser(false);
-            ShootBullets(1, 0, 0, 50, 3);
-        } );
-        spellTime.Add(0.6f);
+        spellQueue.Add(() => {
+            // ShootBullets(2, 0, transform.forward, 180, 3.5f, 3);
+            doNothing();
+        });
+        spellTime.Add(5.0f);
 
         index = 0;
     }
@@ -85,16 +80,74 @@ public class SpellQueueSniper : SpellQueueEnemy
             Destroy(gameObject);
         }
 
-
         agent.speed = 0;
-       decision.MakeDecision();
-
-        HandleMoving();
+        decision.MakeDecision();
+        if (exploding)
+        {
+            handleExploding();
+            agent.speed = 0;
+        }
+        else
+        {
+            HandleMoving();
+        }
 
         UpdateAnimation();
-        UpdatelaserSight();
 
         timeSinceFired += Time.deltaTime;
+    }
+
+    public override void HandleMoving()
+    {
+        agent.speed = speed;
+
+        // too close move back
+        if (InRange(tooClose))
+        {
+            Debug.Log("exploding");
+            exploding = true;
+            agent.speed = 0;
+        }
+        else
+        {
+            finalDestination = target.transform.position;
+        }
+        Debug.DrawLine(transform.position, finalDestination, Color.red, 0.1f);
+        agent?.SetDestination(finalDestination);
+
+        //Debug.Log("dist " + Vector3.Distance(transform.position, finalDestination));
+    }
+
+    public void CreateAOE()
+    {
+        Debug.Log("AOE");
+        Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
+        if (gameObject.layer == 11)
+        {
+            aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 12);
+        }
+        else
+        {
+            aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 11);
+        }
+    }
+
+    public void doNothing()
+    {
+
+    }
+
+    public void handleExploding()
+    {
+
+        Debug.Log(currentExplodingTime);
+        currentExplodingTime += Time.deltaTime;
+        if(currentExplodingTime> ExplodingTime)
+        {
+            EventManager.current.ReceiveGold(gold);
+            Destroy(gameObject);
+        }
     }
 
     protected override void UpdateAnimation()
@@ -132,31 +185,9 @@ public class SpellQueueSniper : SpellQueueEnemy
 
     public override void OnDestroy()
     {
+        CreateAOE();
         base.OnDestroy();
     }
 
-    public void ActivateLaser(bool usingLaser)
-    {
-        usinglaser = usingLaser;
-    }
-
-    public void UpdatelaserSight()
-    {
-        thisLineRenderer.useWorldSpace = true;
-        if (usinglaser)
-        {
-            Vector3 lookDir = (gunPoint.forward) * 36;
-            thisLineRenderer.SetPosition(0, gunPoint.position);
-            thisLineRenderer.SetPosition(1, gunPoint.position + lookDir);
-        }
-        else
-        {
-           // Debug.Log("off");
-            Vector3 lookDir = (gunPoint.forward) * 12;
-            thisLineRenderer.SetPosition(0, gunPoint.position);
-            thisLineRenderer.SetPosition(1, gunPoint.position );
-        }
-
-    }
 
 }
