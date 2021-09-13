@@ -2800,6 +2800,10 @@ MonoBehaviour:
       baseValue: 0
     extraExplosionRange:
       baseValue: 0
+    reloadOnDash:
+      baseValue: 0
+    shootRocketOnDash:
+      baseValue: 0
   bulletStats:
     damage:
       baseValue: 1
@@ -2925,10 +2929,12 @@ MonoBehaviour:
   currentImmunityFrame: 0
   currentBouncingBladeClip: 0
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 6680669847558100251}
+  rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 6680669848137463605}
   thisBTSManager: {fileID: 0}
   characterController: {fileID: 6680669848137463604}
-  lastMovementDirection: {x: 0, y: 0}
+  RecentlyTakenDamage: 0
+  lastMovementDirection: {x: 0, y: 0, z: 0}
   currentTimeBetweenDashes: 0
   currentReloadTime: 0
   currentBulletClip: 0

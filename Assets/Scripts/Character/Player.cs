@@ -13,9 +13,8 @@ public class Player : Character
     public float RecentlyTakenDamage; // goes up when taken damage, goes down each turn
 
     #region movementStats
-    public Vector2 lastMovementDirection;
+    public Vector3 lastMovementDirection;
     public float currentTimeBetweenDashes;
-
 
     #endregion
 
@@ -114,6 +113,7 @@ public class Player : Character
 
     void HandleMovement()
     {
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
@@ -121,6 +121,7 @@ public class Player : Character
         if(movement.x!=0|| movement.y != 0)
         {
             lastMovementDirection = movement;
+            rocketExitPoint.LookAt(transform);
         }
     }
 
@@ -133,6 +134,7 @@ public class Player : Character
             currentImmunityFrame = stats.immunityFromDashing.value;
             transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
             characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
+            rocketExitPoint.position = transform.position;
             ResolveDashEffects();
         }
     }
@@ -198,6 +200,7 @@ public class Player : Character
 
         }
     }
+
     AmmoStats GetAmmoStats(int type)
     {
         switch (type)
@@ -269,7 +272,7 @@ public class Player : Character
             {
                 Ammo ammoComponent = rocket.GetComponent<Ammo>();
                 Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
                 currentRocketClip--;
             }
         }
@@ -372,7 +375,7 @@ public class Player : Character
         currentBulletClip = (int)Mathf.Clamp(currentBulletClip+1, 0, bulletStats.maxClip.value);
         currentGrenadeClip = (int)Mathf.Clamp(currentGrenadeClip + 1, 0, grenadeStats.maxClip.value);
         currentRocketClip = (int)Mathf.Clamp(currentRocketClip + 1, 0, rocketStats.maxClip.value);
-        currentLaserClip = (int)Mathf.Clamp(currentBulletClip + 1, 0, bulletStats.maxClip.value);
+        currentLaserClip = (int)Mathf.Clamp(currentLaserClip + 1, 0, laserStats.maxClip.value);
     }
 
     void UpdateAnimation()
@@ -392,11 +395,26 @@ public class Player : Character
 
     void ResolveDashEffects()
     {
-      //  PartialReload();
+        if (stats.reloadOnDash.value > 0)
+        {
+            PartialReload();
+        }
+
+        if (stats.shootRocketOnDash.value > 0)
+        {
+            Rocket rocket;
+            if (ammoPool.rocketPool.TryInstantiate(out rocket, rocketExitPoint.position, rocketExitPoint.rotation))
+            {
+                Ammo ammoComponent = rocket.GetComponent<Ammo>();
+                Vector3 forward = lastMovementDirection;
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+            }
+        }
     }
 
     void MoveCharacter()
     {
+        rocketExitPoint.position = transform.position;
         transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
         Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
         characterController.Move(

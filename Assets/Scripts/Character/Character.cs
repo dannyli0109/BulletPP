@@ -77,6 +77,9 @@ public class CharacterStats
     public CharacterStat extraBounces; // for things that bounce atleast once
     public CharacterStat damageOnBounce;
     public CharacterStat extraExplosionRange;
+
+    public CharacterStat reloadOnDash;
+    public CharacterStat shootRocketOnDash;
 }
 
 public class ModifiedStat
@@ -111,6 +114,7 @@ public abstract class Character : MonoBehaviour
     public int currentBouncingBladeClip;
 
     public Transform TransformBeingUsedBecauseFunctionsNeedATranform;
+    public Transform rocketExitPoint;
 
     // TODO: Move this else where
     #region Lazer

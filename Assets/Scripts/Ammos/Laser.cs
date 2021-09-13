@@ -10,7 +10,6 @@ public class Laser : Ammo
     Vector3 randomOffsetDirection;
     float randomOffSet;
 
-
     public float lengthDecreaseSpeed;
     public float widthDecreaseSpeed;
 
@@ -23,6 +22,10 @@ public class Laser : Ammo
         randomOffSet = Random.Range(-3, 3);
         currentLaserLength = owner.laserStats.maxLaserLength.value;
         currentLaserWidth = owner.laserStats.maxLaserWidth.value;
+        if (facingOtherWay)
+        {
+            currentLaserLength = 8;
+        }
 
         thisLineRenderer.startWidth = 0;
         thisLineRenderer.endWidth = 0;
@@ -55,25 +58,24 @@ public class Laser : Ammo
         {
             currentLaserLength -= Time.deltaTime * lengthDecreaseSpeed;
             currentLaserWidth -= Time.deltaTime * widthDecreaseSpeed;
-            if (currentLaserWidth <= 0)
+            if (currentLaserLength <= 0)
             {
                 Destroy(gameObject);
             }
         }
         //transform.rotation = Quaternion.RotateTowards(owner.bulletContainer.transform.rotation, Quaternion.LookRotation(randomOffsetDirection), randomOffSet);
+            Vector3 lookDir = (owner.bulletContainer.forward) * currentLaserLength;
+            //Vector3 lookDir = (transform.forward) * currentLaserLength;
+            lookDir = Quaternion.AngleAxis(-randomOffSet, Vector3.up) * lookDir;
 
-        Vector3 lookDir = (owner.bulletContainer.forward) * currentLaserLength;
-        //Vector3 lookDir = (transform.forward) * currentLaserLength;
-        lookDir = Quaternion.AngleAxis(-randomOffSet, Vector3.up) * lookDir;
+            thisLineRenderer.SetPosition(0, owner.bulletContainer.position);
+            thisLineRenderer.SetPosition(1, owner.bulletContainer.position + lookDir);
 
-        thisLineRenderer.SetPosition(0, owner.bulletContainer.position);
-        thisLineRenderer.SetPosition(1, owner.bulletContainer.position + lookDir);
+            thisLineRenderer.startWidth = currentLaserWidth;
+            thisLineRenderer.endWidth = currentLaserWidth * 1.3f;
 
-        thisLineRenderer.startWidth = currentLaserWidth;
-        thisLineRenderer.endWidth = currentLaserWidth * 1.3f;
-
-        transform.position = owner.bulletContainer.position + (lookDir / 2);
-        ourCollider.GetComponent<BoxCollider>().size = new Vector3(currentLaserWidth, 1, currentLaserLength);
+            transform.position = owner.bulletContainer.position + (lookDir / 2);
+            ourCollider.GetComponent<BoxCollider>().size = new Vector3(currentLaserWidth, 1, currentLaserLength);
     }
 
     private void OnLaserDestroy(GameObject gameObject)

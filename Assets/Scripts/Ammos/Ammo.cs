@@ -20,6 +20,8 @@ public abstract class Ammo : PooledItem
     protected float bornTime = 0;
     public bool overTimeDamage;
 
+    public bool facingOtherWay;
+
     #region stats
     public int timesBounced = 0;
     #endregion stats
@@ -49,7 +51,6 @@ public abstract class Ammo : PooledItem
         transform.localPosition += offsetVector;
         this.velocity = transform.forward * speed;
     }
-
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
     {
