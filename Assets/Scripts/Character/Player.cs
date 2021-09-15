@@ -117,9 +117,9 @@ public class Player : Character
         // Save the info
         RaycastHit hit;
         // You successfully hit
-        if (Physics.Raycast(ray, out hit, 100, 1 << 11))
+        if (Physics.Raycast(ray, out hit, 100, 1 << 18))
         {
-          //  Debug.Log(hit.collider.gameObject.layer);
+            //Debug.Log(hit.collider.gameObject.layer);
             // Find the direction to move in
             //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
             Vector3 dir = hit.point - transform.position;
@@ -355,12 +355,13 @@ public class Player : Character
 
     bool ShootAmmos(float angle)
     {
-        return 
-            ShootBullet(angle) || 
-            ShootGrenade(angle) ||
-            ShootRocket(angle) ||
-            ShootLaser(angle) ||
-            ShootBouncingBlade(angle);
+        bool shot = false;
+        if (ShootBullet(angle)) shot = true;
+        if (ShootGrenade(angle)) shot = true;
+        if (ShootRocket(angle)) shot = true;
+        if (ShootLaser(angle)) shot = true;
+        if (ShootBouncingBlade(angle)) shot = true;
+        return shot;
     }
 
     void HandleReload()

@@ -50,9 +50,9 @@ public class HealthHearts : MonoBehaviour
             }
             else
             {
+                // healthHearts[i].gameObject.SetActive(false);
                 //if (healthHearts[i].gameObject)
                 //{
-                //    healthHearts[i].gameObject.SetActive(false);
                 //}
             }
         }
