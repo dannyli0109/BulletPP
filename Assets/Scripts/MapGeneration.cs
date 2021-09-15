@@ -667,11 +667,11 @@ public class MapGeneration : MonoBehaviour
                         EnemiesInEncounter.RemoveAt(i);
                     }
 
-                 //  else if(EnemiesInEncounter[i]== null)
-                 //   {
-                 //       Debug.Log("doesn't exist");
-                 //       EnemiesInEncounter.RemoveAt(i);
-                 //   }
+                   else if(EnemiesInEncounter[i]== null)
+                    {
+                        Debug.Log("doesn't exist");
+                        EnemiesInEncounter.RemoveAt(i);
+                    }
                 }
 
                 if(EnemiesInEncounter.Count <= 0)

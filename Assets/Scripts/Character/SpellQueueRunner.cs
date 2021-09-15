@@ -125,14 +125,9 @@ public class SpellQueueRunner : SpellQueueEnemy
         Debug.Log("AOE");
         Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
         AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
-        if (gameObject.layer == 11)
-        {
-            aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 12);
-        }
-        else
-        {
-            aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 11);
-        }
+
+       aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 12|1<<11);
+
     }
 
     public void doNothing()
@@ -143,7 +138,7 @@ public class SpellQueueRunner : SpellQueueEnemy
     public void handleExploding()
     {
 
-        Debug.Log(currentExplodingTime);
+      //  Debug.Log(currentExplodingTime);
         currentExplodingTime += Time.deltaTime;
         if(currentExplodingTime> ExplodingTime)
         {

@@ -118,6 +118,8 @@ MonoBehaviour:
   - {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
   - {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
   - {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
+  - {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
+  - {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
   sniperTypes:
   - {fileID: 5077297002888340751, guid: 2fe8c023552f8f247a78be833f0d26a7, type: 3}
   yEnemyHeight: 0
@@ -138,9 +140,12 @@ MonoBehaviour:
   CurrentMiniMapRoomColour: {r: 1, g: 1, b: 1, a: 1}
   DefaultMiniMapRoomColour: {r: 0.83137256, g: 0.42745098, b: 0.09803922, a: 1}
   totalRoomDiffculty: 0
-  singleEnemyCutOff: 3
+  singleEnemyCutOff: 2
   secondWaveCutOff: 12
   roomFinishMultiplier: 2
+  difficultyNoDamageMultiplier: 0.5
+  chanceOfSpawnOutOfOneHundredHealthPickup: 30
+  damagedChanceToSpawnHealthPickup: 10
   healthPickUpObject: {fileID: 0}
   thisBTSManager: {fileID: 0}
   beginEnounter: {fileID: 11400000, guid: a963e0b2af3a1ef4eb789e5e30fb65fc, type: 2}

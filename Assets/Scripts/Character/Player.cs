@@ -119,7 +119,7 @@ public class Player : Character
         // You successfully hit
         if (Physics.Raycast(ray, out hit, 100, 1 << 11))
         {
-            Debug.Log(hit.collider.gameObject.layer);
+          //  Debug.Log(hit.collider.gameObject.layer);
             // Find the direction to move in
             //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
             Vector3 dir = hit.point - transform.position;
