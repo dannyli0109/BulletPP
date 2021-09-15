@@ -113,8 +113,10 @@ public class SpellQueueRunner : SpellQueueEnemy
             finalDestination = target.transform.position;
         }
         Debug.DrawLine(transform.position, finalDestination, Color.red, 0.1f);
-        agent?.SetDestination(finalDestination);
-
+        if (hp > 0)
+        {
+            agent?.SetDestination(finalDestination);
+        }
         //Debug.Log("dist " + Vector3.Distance(transform.position, finalDestination));
     }
 

@@ -19,6 +19,8 @@ public class SpellQueueEnemy : Enemy
     #region MoveStats
     [Header("Move Stats")]
 
+    public float setAcceleration;
+
     public float tooFarToSeePlayer; // wander
     public float tooFarToShoot; // won't shoot
     public float tooClose; // will move away
@@ -38,6 +40,7 @@ public class SpellQueueEnemy : Enemy
     {
         base.Start();
         finalDestination = target.transform.position;
+        agent.acceleration = setAcceleration;
     }
 
     public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
@@ -85,7 +88,7 @@ public class SpellQueueEnemy : Enemy
         spellQueue.Add(
             () =>
             {
-                ShootBullets((int)holdingRand, 0, transform.forward, 60, 5f, 2);
+                ShootBullets((int)holdingRand, 0, transform.forward, 60, bulletStats.speed.baseValue, 2);
             }
         );
         spellTime.Add(2.0f);
@@ -94,7 +97,7 @@ public class SpellQueueEnemy : Enemy
         for (int i = 0; i < holdingRand; i++)
         {
             spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 4, 3); }
+                () => { ShootBullets(1, 0, 0, bulletStats.speed.baseValue, 3); }
             );
 
             spellTime.Add(0.2f);
@@ -104,7 +107,7 @@ public class SpellQueueEnemy : Enemy
         for (int i = 0; i < holdingRand; i++)
         {
             spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, 4, 3); }
+                () => { ShootBullets(1, 0, 0, bulletStats.speed.baseValue, 3); }
             );
 
             spellTime.Add(0.2f);
@@ -131,7 +134,11 @@ public class SpellQueueEnemy : Enemy
         agent.speed = 0;
         decision.MakeDecision();
 
+        if (hp > 0)
+        {
         HandleMoving();
+
+        }
 
         UpdateAnimation();
 
@@ -140,7 +147,7 @@ public class SpellQueueEnemy : Enemy
 
     public virtual void HandleMoving()
     {
-        Debug.Log("To Move()");
+      //  Debug.Log("To Move()");
         agent.speed = speed;
         if(lastKnownPos== transform.position)
         {
@@ -170,7 +177,7 @@ public class SpellQueueEnemy : Enemy
             }
             else
             {
-                Debug.Log("nah " + distanceFromFinal);
+            //    Debug.Log("nah " + distanceFromFinal);
             }
         }
         else
@@ -180,7 +187,7 @@ public class SpellQueueEnemy : Enemy
         Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
         agent?.SetDestination(finalDestination);
 
-        Debug.Log("dist "+ Vector3.Distance(transform.position, finalDestination));
+       // Debug.Log("dist "+ Vector3.Distance(transform.position, finalDestination));
         lastKnownPos = transform.position;
     }
 

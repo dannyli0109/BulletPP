@@ -194,7 +194,7 @@ public class Player : Character
     {
         if (other.gameObject.layer == 17)
         {
-            Debug.Log("health");
+           // Debug.Log("health");
             hp++;
             other.gameObject.transform.parent.gameObject.SetActive(false);
 

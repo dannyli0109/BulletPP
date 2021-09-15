@@ -57,7 +57,7 @@ public class SpellQueueSniper : SpellQueueEnemy
         spellTime = new List<float>();
 
         spellQueue.Add(() => { 
-            ShootBullets(2, 0, transform.forward,25, 4, 4);
+            ShootBullets(2, 0, transform.forward,25, bulletStats.speed.baseValue, 4);
               });
         spellTime.Add(2.2f);
 
@@ -88,9 +88,10 @@ public class SpellQueueSniper : SpellQueueEnemy
 
         agent.speed = 0;
        decision.MakeDecision();
-
-        HandleMoving();
-
+        if (hp > 0)
+        {
+            HandleMoving();
+        }
         UpdateAnimation();
         UpdatelaserSight();
 
