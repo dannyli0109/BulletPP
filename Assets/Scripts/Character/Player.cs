@@ -147,7 +147,10 @@ public class Player : Character
         {
             timeSinceFired = 0;
             // shoot the main one in the middle
-            ShootAmmos(0);
+            if (ShootAmmos(0))
+            {
+                SoundManager.PlaySound(SoundType.Gunshot, bulletContainer.position, 1.0f);
+            }
 
             for (int i = 0; i < (int)AmmoType.Count; i++)
             {
@@ -248,7 +251,7 @@ public class Player : Character
         }
     }
 
-    void ShootBullet(float angle)
+    bool ShootBullet(float angle)
     {
         if (currentBulletClip > 0)
         {
@@ -259,11 +262,13 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
                 currentBulletClip--;
+                return true;
             }
         }
+        return false;
     }
 
-    void ShootRocket(float angle)
+    bool ShootRocket(float angle)
     {
         if (currentRocketClip > 0)
         {
@@ -274,11 +279,13 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
                 currentRocketClip--;
+                return true;
             }
         }
+        return false;
     }
 
-    void ShootGrenade(float angle)
+    bool ShootGrenade(float angle)
     {
         if (currentGrenadeClip > 0)
         {
@@ -289,11 +296,13 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
                 currentGrenadeClip--;
+                return true;
             }
         }
+        return false;
     }
 
-    void ShootLaser(float angle)
+    bool ShootLaser(float angle)
     {
         if (currentLaserClip > 0)
         {
@@ -303,10 +312,12 @@ public class Player : Character
             ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value);
             laser.transform.SetParent(null);
             currentLaserClip--;
+            return true;
         }
+        return false;
     }
 
-    void ShootBouncingBlade(float angle)
+    bool ShootBouncingBlade(float angle)
     {
        // Debug.Log("trying to shoot blade");
         if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
@@ -317,16 +328,19 @@ public class Player : Character
             ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value);
             blade.transform.SetParent(null);
             currentBouncingBladeClip--;
+            return true;
         }
+        return false;
     }
 
-    void ShootAmmos(float angle)
+    bool ShootAmmos(float angle)
     {
-        ShootBullet(angle);
-        ShootGrenade(angle);
-        ShootRocket(angle);
-        ShootLaser(angle);
-        ShootBouncingBlade(angle);
+        return 
+            ShootBullet(angle) || 
+            ShootGrenade(angle) ||
+            ShootRocket(angle) ||
+            ShootLaser(angle) ||
+            ShootBouncingBlade(angle);
     }
 
     void HandleReload()

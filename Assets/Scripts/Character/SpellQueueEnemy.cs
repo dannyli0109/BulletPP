@@ -343,7 +343,7 @@ public class SpellQueueEnemy : Enemy
             action = () => {
                 if (timeSinceFired >= spellTime[index % spellTime.Count])
                 {
-            
+                    SoundManager.PlaySound(SoundType.GunshotEnemy, bulletContainer.position, 1);
                     spellQueue[index % spellQueue.Count]();
                     timeSinceFired = 0;
                     index++;
