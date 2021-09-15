@@ -134,10 +134,10 @@ public class SpellQueueEnemy : Enemy
         agent.speed = 0;
         decision.MakeDecision();
 
-        if (hp > 0)
-        {
+        if (hp > 0)
+        {
         HandleMoving();
-
+
         }
 
         UpdateAnimation();
@@ -145,50 +145,50 @@ public class SpellQueueEnemy : Enemy
         timeSinceFired += Time.deltaTime;
     }
 
-    public virtual void HandleMoving()
-    {
-      //  Debug.Log("To Move()");
-        agent.speed = speed;
-        if(lastKnownPos== transform.position)
-        {
-            timeStuck += Time.deltaTime;
-            if (timeStuck < 0.3f)
-            {
-                timeStuck = 0;
-                finalDestination = target.transform.position;
-            }
-        }
-        // too close move back
-        else if (InRange(tooClose))
-        {
-            Vector3 normalAwayFromPlayer =Vector3.Normalize( transform.position - target.transform.position);
-            finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);
-           
-        }
-        // if line of sight and close enough get a random place
-        else if((InLineOfSight(60)|| InRange(closeEnoughtDodge )|| InRange(tooFarToSeePlayer)))
-        {
-            float distanceFromFinal = Vector3.Distance(transform.position, finalDestination);
-            if (distanceFromFinal < smoothingRange)
-            {
-
-            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
-            finalDestination = target.transform.position + normalAwayFromPlayer * 2;
-            }
-            else
-            {
-            //    Debug.Log("nah " + distanceFromFinal);
-            }
-        }
-        else
-        {
-            finalDestination = target.transform.position;
-        }
-        Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
-        agent?.SetDestination(finalDestination);
-
-       // Debug.Log("dist "+ Vector3.Distance(transform.position, finalDestination));
-        lastKnownPos = transform.position;
+    public virtual void HandleMoving()
+    {
+      //  Debug.Log("To Move()");
+        agent.speed = speed;
+        if(lastKnownPos== transform.position)
+        {
+            timeStuck += Time.deltaTime;
+            if (timeStuck < 0.3f)
+            {
+                timeStuck = 0;
+                finalDestination = target.transform.position;
+            }
+        }
+        // too close move back
+        else if (InRange(tooClose))
+        {
+            Vector3 normalAwayFromPlayer =Vector3.Normalize( transform.position - target.transform.position);
+            finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);
+           
+        }
+        // if line of sight and close enough get a random place
+        else if((InLineOfSight(60)|| InRange(closeEnoughtDodge )|| InRange(tooFarToSeePlayer)))
+        {
+            float distanceFromFinal = Vector3.Distance(transform.position, finalDestination);
+            if (distanceFromFinal < smoothingRange)
+            {
+
+            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
+            finalDestination = target.transform.position + normalAwayFromPlayer * 2;
+            }
+            else
+            {
+            //    Debug.Log("nah " + distanceFromFinal);
+            }
+        }
+        else
+        {
+            finalDestination = target.transform.position;
+        }
+        Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
+        agent?.SetDestination(finalDestination);
+
+       // Debug.Log("dist "+ Vector3.Distance(transform.position, finalDestination));
+        lastKnownPos = transform.position;
     }
 
     protected override void UpdateAnimation()
@@ -350,7 +350,7 @@ public class SpellQueueEnemy : Enemy
             action = () => {
                 if (timeSinceFired >= spellTime[index % spellTime.Count])
                 {
-            
+                    SoundManager.PlaySound(SoundType.GunshotEnemy, bulletContainer.position, 1);
                     spellQueue[index % spellQueue.Count]();
                     timeSinceFired = 0;
                     index++;
