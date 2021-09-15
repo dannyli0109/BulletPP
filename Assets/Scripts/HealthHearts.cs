@@ -25,7 +25,7 @@ public class HealthHearts : MonoBehaviour
 
     void Update()
     {
-        if(LastKnownHealth> character.hp)
+        if(LastKnownHealth > character.hp)
         {
             currentColour = damageColour;
         }
@@ -40,7 +40,7 @@ public class HealthHearts : MonoBehaviour
         }
 
         float holdingXOffset = -(character.hp) * xOffset / 2;
-        for (int i=0; i< healthHearts.Length; i++)
+        for (int i = 0; i< healthHearts.Length; i++)
         {
             if (i < character.hp)
             {
@@ -50,7 +50,10 @@ public class HealthHearts : MonoBehaviour
             }
             else
             {
-                healthHearts[i].gameObject.SetActive(false);
+                //if (healthHearts[i].gameObject)
+                //{
+                //    healthHearts[i].gameObject.SetActive(false);
+                //}
             }
         }
 

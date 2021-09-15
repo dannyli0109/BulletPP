@@ -98,18 +98,38 @@ public class Player : Character
 
     void HandleRotation()
     {
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        //Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
-        positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
+        //positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
+        //positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
 
-        mouseOnScreen.x = mouseOnScreen.x * Screen.width - Screen.width / 2.0f;
-        mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
+        //mouseOnScreen.x = mouseOnScreen.x * Screen.width - Screen.width / 2.0f;
+        //mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
 
-        angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
-    } 
+        //angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen);
+        //transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+
+        // Cast a ray from screen point
+        Vector3 mousePosition = Input.mousePosition;
+        //Debug.Log(mousePosition.y);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // Save the info
+        RaycastHit hit;
+        // You successfully hit
+        if (Physics.Raycast(ray, out hit, 100, 1 << 11))
+        {
+            Debug.Log(hit.collider.gameObject.layer);
+            // Find the direction to move in
+            //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
+            Vector3 dir = hit.point - transform.position;
+            dir.y = 0;
+            //dir.y = bulletContainer.position.y;
+            //Debug.Log(dir.y);
+
+            transform.localRotation = Quaternion.LookRotation(dir);
+        }
+    }
 
     void HandleMovement()
     {
