@@ -122,7 +122,7 @@ public class Player : Character
             //Debug.Log(hit.collider.gameObject.layer);
             // Find the direction to move in
             //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
-            Vector3 dir = hit.point - transform.position;
+            Vector3 dir = hit.point - bulletContainer.position;
             dir.y = 0;
             //dir.y = bulletContainer.position.y;
             //Debug.Log(dir.y);
