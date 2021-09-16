@@ -54,6 +54,18 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI laserDpsText;
     public TextMeshProUGUI bouncingBladeDpsText;
     public static HUDManager current;
+    #endregion
+
+    #region AugmentHUD
+    public GameObject augmentListUIContainer;
+    public GameObject augmentUIPrefab;
+
+    public GameObject synergyListUIContainer;
+    public GameObject synergyUIPrefab;
+
+    public TextMeshProUGUI headerTextGUI;
+    #endregion
+
     float time = 0;
     float dps = 0;
 
@@ -73,7 +85,6 @@ public class HUDManager : MonoBehaviour
 
     public bool updatingDPS = false;
 
-    #endregion
 
     void Awake()
     {
@@ -107,7 +118,11 @@ public class HUDManager : MonoBehaviour
         playerGoldUI.richText = true;
         playerGoldUI.text = "$: " + player.gold;
         UpdatePlayerAmmoUI();
+        //UpdateDPSGUI();
+    }
 
+    void UpdateDPSGUI()
+    {
         if (time > 0)
         {
             dps = damage / time;
@@ -124,7 +139,7 @@ public class HUDManager : MonoBehaviour
 
         if (updatingDPS)
         {
-           if (player.bulletStats.maxClip.value > 0)
+            if (player.bulletStats.maxClip.value > 0)
             {
                 bulletDpsText.gameObject.SetActive(true);
             }
@@ -157,7 +172,6 @@ public class HUDManager : MonoBehaviour
             laserDpsText.text = "Laser DPS: " + laserDps.ToString("F");
             bouncingBladeDpsText.text = "Bouncing Blade DPS: " + bouncingBladeDps.ToString("F");
         }
-
     }
 
     void UpdatePlayerAmmoUI()
@@ -350,5 +364,46 @@ public class HUDManager : MonoBehaviour
 
          */
 
+    }
+
+
+    public void PopulateAugmentListUI()
+    {
+        foreach (Transform child in augmentListUIContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
+
+        AugmentManager augmentManager = AugmentManager.current;
+        for (int i = 0; i < player.inventory.augments.Count; i++)
+        {
+            GameObject augmentUI = Instantiate(augmentUIPrefab);
+            AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
+
+            augmentHUD.Populate(player.inventory.augments[i].id, player.inventory.augments[i].level, player.inventory.augments[i].count);
+            augmentUI.transform.SetParent(augmentListUIContainer.transform);
+            augmentUI.transform.localScale = new Vector3(1, 1, 1);
+
+            augmentHUD.sellAugmentTrigger.Init(player, i);
+        }
+    }
+
+    public void PopulateSynergyListUI()
+    {
+        foreach (Transform child in synergyListUIContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        AugmentManager augmentManager = AugmentManager.current;
+        for (int i = 0; i < player.synergies.Count; i++)
+        {
+            GameObject synergyUI = Instantiate(synergyUIPrefab);
+            synergyUI.GetComponent<SynergyHUD>().Populate(player.synergies[i].id, player.synergies[i].breakPoint, player.synergies[i].count);
+            synergyUI.transform.SetParent(synergyListUIContainer.transform);
+            synergyUI.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }

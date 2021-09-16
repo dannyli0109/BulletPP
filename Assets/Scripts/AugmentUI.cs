@@ -14,6 +14,7 @@ public class AugmentUI : MonoBehaviour
     public Image background;
     public Outline outline;
     public Shop shop;
+    public HUDManager HUDManager;
     int id;
 
     // Start is called before the first frame update
@@ -32,17 +33,13 @@ public class AugmentUI : MonoBehaviour
         AugmentManager augmentManager = AugmentManager.current;
         int state = shop.player.BuyAugment(id);
         if (state == -1) return;
-        if (!shop.hasBoughtAnAugment)
-        {
-            shop.hasBoughtAnAugment = true;
-            shop.level = 3;
-        }
+        shop.level = 3;
         shop.augmentIds = augmentManager.GetAugmentIdList();
 
         if (state == 1)
         {
             // obtained one that owned but remains the same level
-            shop.PopulateAugmentListUI();
+            HUDManager.PopulateAugmentListUI();
             gameObject.SetActive(false);
         }
         else if (state == 2)
@@ -50,9 +47,9 @@ public class AugmentUI : MonoBehaviour
             // obtained a new augment
             shop.player.RemoveAllModifiers();
 
-            for (int i = 0; i < shop.player.augments.Count; i++)
+            for (int i = 0; i < shop.player.inventory.augments.Count; i++)
             {
-                augmentManager.OnAugmentAttached(shop.player.augments[i].id, shop.player.augments[i].level);
+                augmentManager.OnAugmentAttached(shop.player.inventory.augments[i].id, shop.player.inventory.augments[i].level);
             }
 
             for (int i = 0; i < shop.player.synergies.Count; i++)
@@ -60,17 +57,17 @@ public class AugmentUI : MonoBehaviour
                 augmentManager.OnSynergyAttached(shop.player.synergies[i].id, shop.player.synergies[i].breakPoint);
             }
 
-            shop.PopulateAugmentListUI();
-            shop.PopulateSynergyListUI();
+            HUDManager.PopulateAugmentListUI();
+            HUDManager.PopulateSynergyListUI();
             gameObject.SetActive(false);
         }
         else if (state == 3)
         {
             shop.player.RemoveAllModifiers();
 
-            for (int i = 0; i < shop.player.augments.Count; i++)
+            for (int i = 0; i < shop.player.inventory.augments.Count; i++)
             {
-                augmentManager.OnAugmentAttached(shop.player.augments[i].id, shop.player.augments[i].level);
+                augmentManager.OnAugmentAttached(shop.player.inventory.augments[i].id, shop.player.inventory.augments[i].level);
             }
 
             for (int i = 0; i < shop.player.synergies.Count; i++)
@@ -78,7 +75,7 @@ public class AugmentUI : MonoBehaviour
                 augmentManager.OnSynergyAttached(shop.player.synergies[i].id, shop.player.synergies[i].breakPoint);
             }
 
-            shop.PopulateAugmentListUI();
+            HUDManager.PopulateAugmentListUI();
             gameObject.SetActive(false);
         }
         shop.UpdateText();
@@ -95,11 +92,11 @@ public class AugmentUI : MonoBehaviour
         AugmentManager augmentManager = AugmentManager.current;
         { 
             int level = 0;
-            for (int i = 0; i < shop.player.augments.Count; i++)
+            for (int i = 0; i < shop.player.inventory.augments.Count; i++)
             {
-                if (shop.player.augments[i].id == id)
+                if (shop.player.inventory.augments[i].id == id)
                 {
-                    level = shop.player.augments[i].level;
+                    level = shop.player.inventory.augments[i].level;
                     break;
                 }
             }

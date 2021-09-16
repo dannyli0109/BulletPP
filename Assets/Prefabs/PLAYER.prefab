@@ -3311,7 +3311,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
   bulletContainer: {fileID: 6680669847303903493}
   hp: 0
-  gold: 3
+  gold: 200
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
@@ -3330,6 +3330,7 @@ MonoBehaviour:
   currentRocketClip: 0
   currentLaserClip: 0
   ammoPool: {fileID: 0}
+  sellAugment: {fileID: 11400000, guid: 4441624397332cf4d887e62c3b70e424, type: 2}
 --- !u!1 &6680669848143220023
 GameObject:
   m_ObjectHideFlags: 0
