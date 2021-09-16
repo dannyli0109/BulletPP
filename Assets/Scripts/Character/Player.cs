@@ -13,9 +13,8 @@ public class Player : Character
     public float RecentlyTakenDamage; // goes up when taken damage, goes down each turn
 
     #region movementStats
-    public Vector2 lastMovementDirection;
+    public Vector3 lastMovementDirection;
     public float currentTimeBetweenDashes;
-
 
     #endregion
 
@@ -99,21 +98,42 @@ public class Player : Character
 
     void HandleRotation()
     {
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        //Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
-        positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
+        //positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
+        //positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
 
-        mouseOnScreen.x = mouseOnScreen.x * Screen.width - Screen.width / 2.0f;
-        mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
+        //mouseOnScreen.x = mouseOnScreen.x * Screen.width - Screen.width / 2.0f;
+        //mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
 
-        angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen) + 90;
-        transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
-    } 
+        //angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen);
+        //transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+
+        // Cast a ray from screen point
+        Vector3 mousePosition = Input.mousePosition;
+        //Debug.Log(mousePosition.y);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // Save the info
+        RaycastHit hit;
+        // You successfully hit
+        if (Physics.Raycast(ray, out hit, 100, 1 << 18))
+        {
+            //Debug.Log(hit.collider.gameObject.layer);
+            // Find the direction to move in
+            //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
+            Vector3 dir = hit.point - bulletContainer.position;
+            dir.y = 0;
+            //dir.y = bulletContainer.position.y;
+            //Debug.Log(dir.y);
+
+            transform.localRotation = Quaternion.LookRotation(dir);
+        }
+    }
 
     void HandleMovement()
     {
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
@@ -121,6 +141,7 @@ public class Player : Character
         if(movement.x!=0|| movement.y != 0)
         {
             lastMovementDirection = movement;
+            rocketExitPoint.LookAt(transform);
         }
     }
 
@@ -133,6 +154,7 @@ public class Player : Character
             currentImmunityFrame = stats.immunityFromDashing.value;
             transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
             characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
+            rocketExitPoint.position = transform.position;
             ResolveDashEffects();
         }
     }
@@ -145,7 +167,10 @@ public class Player : Character
         {
             timeSinceFired = 0;
             // shoot the main one in the middle
-            ShootAmmos(0);
+            if (ShootAmmos(0))
+            {
+                SoundManager.PlaySound(SoundType.Gunshot, bulletContainer.position, 1.0f);
+            }
 
             for (int i = 0; i < (int)AmmoType.Count; i++)
             {
@@ -192,12 +217,13 @@ public class Player : Character
     {
         if (other.gameObject.layer == 17)
         {
-            Debug.Log("health");
+           // Debug.Log("health");
             hp++;
             other.gameObject.transform.parent.gameObject.SetActive(false);
 
         }
     }
+
     AmmoStats GetAmmoStats(int type)
     {
         switch (type)
@@ -245,7 +271,7 @@ public class Player : Character
         }
     }
 
-    void ShootBullet(float angle)
+    bool ShootBullet(float angle)
     {
         if (currentBulletClip > 0)
         {
@@ -256,11 +282,13 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
                 currentBulletClip--;
+                return true;
             }
         }
+        return false;
     }
 
-    void ShootRocket(float angle)
+    bool ShootRocket(float angle)
     {
         if (currentRocketClip > 0)
         {
@@ -269,13 +297,15 @@ public class Player : Character
             {
                 Ammo ammoComponent = rocket.GetComponent<Ammo>();
                 Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
                 currentRocketClip--;
+                return true;
             }
         }
+        return false;
     }
 
-    void ShootGrenade(float angle)
+    bool ShootGrenade(float angle)
     {
         if (currentGrenadeClip > 0)
         {
@@ -286,11 +316,13 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
                 currentGrenadeClip--;
+                return true;
             }
         }
+        return false;
     }
 
-    void ShootLaser(float angle)
+    bool ShootLaser(float angle)
     {
         if (currentLaserClip > 0)
         {
@@ -300,10 +332,12 @@ public class Player : Character
             ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value);
             laser.transform.SetParent(null);
             currentLaserClip--;
+            return true;
         }
+        return false;
     }
 
-    void ShootBouncingBlade(float angle)
+    bool ShootBouncingBlade(float angle)
     {
        // Debug.Log("trying to shoot blade");
         if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
@@ -314,16 +348,20 @@ public class Player : Character
             ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value);
             blade.transform.SetParent(null);
             currentBouncingBladeClip--;
+            return true;
         }
+        return false;
     }
 
-    void ShootAmmos(float angle)
+    bool ShootAmmos(float angle)
     {
-        ShootBullet(angle);
-        ShootGrenade(angle);
-        ShootRocket(angle);
-        ShootLaser(angle);
-        ShootBouncingBlade(angle);
+        bool shot = false;
+        if (ShootBullet(angle)) shot = true;
+        if (ShootGrenade(angle)) shot = true;
+        if (ShootRocket(angle)) shot = true;
+        if (ShootLaser(angle)) shot = true;
+        if (ShootBouncingBlade(angle)) shot = true;
+        return shot;
     }
 
     void HandleReload()
@@ -372,7 +410,7 @@ public class Player : Character
         currentBulletClip = (int)Mathf.Clamp(currentBulletClip+1, 0, bulletStats.maxClip.value);
         currentGrenadeClip = (int)Mathf.Clamp(currentGrenadeClip + 1, 0, grenadeStats.maxClip.value);
         currentRocketClip = (int)Mathf.Clamp(currentRocketClip + 1, 0, rocketStats.maxClip.value);
-        currentLaserClip = (int)Mathf.Clamp(currentBulletClip + 1, 0, bulletStats.maxClip.value);
+        currentLaserClip = (int)Mathf.Clamp(currentLaserClip + 1, 0, laserStats.maxClip.value);
     }
 
     void UpdateAnimation()
@@ -392,11 +430,26 @@ public class Player : Character
 
     void ResolveDashEffects()
     {
-      //  PartialReload();
+        if (stats.reloadOnDash.value > 0)
+        {
+            PartialReload();
+        }
+
+        if (stats.shootRocketOnDash.value > 0)
+        {
+            Rocket rocket;
+            if (ammoPool.rocketPool.TryInstantiate(out rocket, rocketExitPoint.position, rocketExitPoint.rotation))
+            {
+                Ammo ammoComponent = rocket.GetComponent<Ammo>();
+                Vector3 forward = lastMovementDirection;
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+            }
+        }
     }
 
     void MoveCharacter()
     {
+        rocketExitPoint.position = transform.position;
         transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
         Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
         characterController.Move(

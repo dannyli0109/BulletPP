@@ -1484,11 +1484,15 @@ MonoBehaviour:
       baseValue: 0
     extraExplosionRange:
       baseValue: 0
+    reloadOnDash:
+      baseValue: 0
+    shootRocketOnDash:
+      baseValue: 0
   bulletStats:
     damage:
       baseValue: 1
     speed:
-      baseValue: 7
+      baseValue: 5
     size:
       baseValue: 3
     critChance:
@@ -1609,11 +1613,12 @@ MonoBehaviour:
   currentImmunityFrame: 0
   currentBouncingBladeClip: 0
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 5899302560793758629}
+  rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 0}
-  finalDestination: {x: 0, y: 0, z: 0}
-  nextDestination: {x: 0, y: 0, z: 0}
-  smoothingRange: 0
-  speed: 5
+  oldfinalDestination: {x: 0, y: 0, z: 0}
+  oldnextDestination: {x: 0, y: 0, z: 0}
+  oldsmoothingRange: 0
+  speed: 2
   desiredFurthestRange: 0
   favouredRange: 0
   closestRange: 0
@@ -1651,6 +1656,15 @@ MonoBehaviour:
   maxCooldown: 3
   viewAngle: 60
   rotationSpeed: 1
+  ammoPool: {fileID: 0}
+  setAcceleration: 3
+  tooFarToSeePlayer: 18
+  tooFarToShoot: 16
+  tooClose: 3
+  closeEnoughtDodge: 8
+  desiredRange: 8
+  smoothingRange: 1
+  finalDestination: {x: 0, y: 0, z: 0}
 --- !u!1 &5899302560263412871
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ public class SpellQueueTank : SpellQueueEnemy
         {
         spellQueue.Add(() => {
             currentAngle += 5;
-            ShootBullets(12,currentAngle , transform.forward,360, 3.5f, 3);
+            ShootBullets(12,currentAngle , transform.forward,360, bulletStats.speed.baseValue, 3);
               });
         spellTime.Add(0.6f);
 
@@ -70,7 +70,7 @@ public class SpellQueueTank : SpellQueueEnemy
             float holdingAngle = i * 35.0f;
             spellQueue.Add(() => {
               //  Debug.Log(currentAngle + i * 180);
-                ShootBullets(2, holdingAngle, transform.forward, 180, 3.5f, 3);
+                ShootBullets(2, holdingAngle, transform.forward, 180, bulletStats.speed.baseValue, 3);
             });
             spellTime.Add(0.3f);
            
@@ -92,6 +92,9 @@ public class SpellQueueTank : SpellQueueEnemy
 
         agent.speed = 0;
        decision.MakeDecision();
+
+        HandleMoving();
+
         UpdateAnimation();
 
         timeSinceFired += Time.deltaTime;

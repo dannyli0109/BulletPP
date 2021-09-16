@@ -666,9 +666,11 @@ public class MapGeneration : MonoBehaviour
                         holdingLastEnemy = new Vector2(EnemiesInEncounter[i].transform.position.x, EnemiesInEncounter[i].transform.position.z);
                         EnemiesInEncounter.RemoveAt(i);
                     }
-                    else
+
+                   else if(EnemiesInEncounter[i]== null)
                     {
-                        //  Debug.Log(i + " Alive " + EnemiesInEncounter[i].hp);
+                        Debug.Log("doesn't exist");
+                        EnemiesInEncounter.RemoveAt(i);
                     }
                 }
 
