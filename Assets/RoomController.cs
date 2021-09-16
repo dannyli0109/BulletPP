@@ -11,7 +11,7 @@ public class RoomController : MonoBehaviour
     {
         foreach(var door in doors)
         {
-            LeanTween.moveLocalZ(door, 2, 1);
+            LeanTween.moveLocalZ(door, 1, 1);
         }
     }
 
@@ -20,7 +20,7 @@ public class RoomController : MonoBehaviour
         foreach (var door in doors)
         {
             //door.SetActive(true);
-            LeanTween.moveLocalZ(door, 0, 1);
+            LeanTween.moveLocalZ(door, -1, 1);
         }
     }
 }
