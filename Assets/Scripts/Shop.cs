@@ -52,20 +52,25 @@ public class Shop : MonoBehaviour
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
 
-            int holdingAmount = amountOfAugment(augmentIndex);
-            if (holdingAmount > 0)
-            {
-                amountText[i].gameObject.SetActive(true);
-                amountText[i].text = holdingAmount.ToString();
-            }
-            else
-            {
-                amountText[i].gameObject.SetActive(false);
-            }
+            UpdateHoldingAmount(augmentIndex, i);
 
             augmentIds.Remove(augmentIndex);
             augmentUIs[i].gameObject.SetActive(true);
             augmentUIs[i].Populate(augmentIndex);
+        }
+    }
+
+    public void UpdateHoldingAmount(int augmentIndex, int amoutTextIndex)
+    {
+        int holdingAmount = amountOfAugment(augmentIndex);
+        if (holdingAmount > 0)
+        {
+            amountText[amoutTextIndex].gameObject.SetActive(true);
+            amountText[amoutTextIndex].text = holdingAmount.ToString();
+        }
+        else
+        {
+            amountText[amoutTextIndex].gameObject.SetActive(false);
         }
     }
 
