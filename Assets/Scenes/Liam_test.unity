@@ -2761,6 +2761,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 666512809, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 666512810, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -4074,11 +4078,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!4 &1413330920 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6680669847303903493, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-  m_PrefabInstance: {fileID: 500789362}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1426300194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4234,7 +4233,7 @@ PrefabInstance:
     - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: gunPoint
       value: 
-      objectReference: {fileID: 1413330920}
+      objectReference: {fileID: 1895491253}
     - target: {fileID: 6380439006657279983, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_Name
       value: AugmentManager
@@ -6514,6 +6513,11 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!4 &1895491253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 240791816331796829, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+  m_PrefabInstance: {fileID: 500789362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1916201361
 GameObject:
   m_ObjectHideFlags: 0

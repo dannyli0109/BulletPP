@@ -174,12 +174,13 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    void UpdatePlayerAmmoUI()
+    public void UpdatePlayerAmmoUI()
     {
         int xIndex = 0;
 
         for(int i=0; i<bulletSprites.Length; i++)
         {
+            bulletSprites[i].gameObject.SetActive(false);
             if (i < player.bulletStats.maxClip.value)
             {
                 bulletSprites[i].gameObject.SetActive(true);
@@ -202,6 +203,7 @@ public class HUDManager : MonoBehaviour
 
         for (int i = 0; i < grenadeSprites.Length; i++)
         {
+            grenadeSprites[i].gameObject.SetActive(false);
             if (i < player.grenadeStats.maxClip.value)
             {
                 grenadeSprites[i].gameObject.SetActive(true);
@@ -221,6 +223,7 @@ public class HUDManager : MonoBehaviour
 
         for (int i = 0; i < rocketSprites.Length; i++)
         {
+            rocketSprites[i].gameObject.SetActive(false);
             if (i < player.rocketStats.maxClip.value)
             {
                 rocketSprites[i].gameObject.SetActive(true);
@@ -239,6 +242,8 @@ public class HUDManager : MonoBehaviour
 
         for (int i = 0; i < laserSprites.Length; i++)
         {
+            laserSprites[i].gameObject.SetActive(false);
+
             if (i < player.laserStats.maxClip.value)
             {
                 laserSprites[i].gameObject.SetActive(true);
@@ -254,20 +259,25 @@ public class HUDManager : MonoBehaviour
                 }
             }
         }
-
-        for (int i = 0; i < player.bouncingBladeStats.maxClip.value; i++)
+        
+        for (int i = 0; i < bouncingBladeSprites.Length; i++)
         {
-            bouncingBladeSprites[i].gameObject.SetActive(true);
+            bouncingBladeSprites[i].gameObject.SetActive(false);
+
+            if (i < player.bouncingBladeStats.maxClip.value)
+            {
+                bouncingBladeSprites[i].gameObject.SetActive(true);
+                xIndex++;
+                if (i < player.currentBouncingBladeClip)
+                {
+                    bouncingBladeSprites[i].color = bouncingBladeColour;
+                }
+                else
+                {
+                    bouncingBladeSprites[i].color = defaultAmmoColour;
+                }
+            }
             //bouncingBladeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
-            xIndex++;
-            if (i < player.currentBouncingBladeClip)
-            {
-                bouncingBladeSprites[i].color = bouncingBladeColour;
-            }
-            else
-            {
-                bouncingBladeSprites[i].color = defaultAmmoColour;
-            }
 
         }
 
@@ -364,6 +374,23 @@ public class HUDManager : MonoBehaviour
 
          */
 
+    }
+
+    public void RefreshPlayerStats()
+    {
+        AugmentManager augmentManager = AugmentManager.current;
+
+        player.RemoveAllModifiers();
+
+        for (int i = 0; i < player.inventory.augments.Count; i++)
+        {
+            augmentManager.OnAugmentAttached(player.inventory.augments[i].id, player.inventory.augments[i].level);
+        }
+
+        for (int i = 0; i < player.synergies.Count; i++)
+        {
+            augmentManager.OnSynergyAttached(player.synergies[i].id, player.synergies[i].breakPoint);
+        }
     }
 
 

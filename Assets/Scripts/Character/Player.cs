@@ -123,12 +123,18 @@ public class Player : Character
             //Debug.Log(hit.collider.gameObject.layer);
             // Find the direction to move in
             //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
-            Vector3 dir = hit.point - bulletContainer.position;
-            dir.y = 0;
-            //dir.y = bulletContainer.position.y;
-            //Debug.Log(dir.y);
 
-            transform.localRotation = Quaternion.LookRotation(dir);
+            //Vector3 dirFromPlayer = hit.point - transform.position;
+            Vector3 dir = hit.point - bulletContainer.position;
+
+            float distance = Vector3.Distance(hit.point, bulletContainer.position);
+            dir.y = 0;
+
+            if (distance > 0.9)
+            {
+                transform.localRotation = Quaternion.LookRotation(dir);
+                angle = transform.localRotation.eulerAngles.y;
+            }
         }
     }
 

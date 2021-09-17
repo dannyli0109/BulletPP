@@ -43,7 +43,9 @@ public class AugmentManager : MonoBehaviour
 
     public void Update()
     {
+
         if (GameManager.current.GamePausing()) return;
+        laserSightLineRenderer.gameObject.SetActive(false);
         for (int i = 0; i < character.inventory.augments.Count; i++)
         {
             OnAugmentUpdate(character.inventory.augments[i].id, character.inventory.augments[i].level);
@@ -390,6 +392,7 @@ public class AugmentManager : MonoBehaviour
     }
     public void LaserSight()
     {
+        laserSightLineRenderer.gameObject.SetActive(true);
         Vector3 lookDir = gunPoint.forward * 100;
         laserSightLineRenderer.startWidth = 0.01f;
         laserSightLineRenderer.endWidth = 0.01f;
