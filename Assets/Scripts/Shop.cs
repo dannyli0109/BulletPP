@@ -8,6 +8,8 @@ public class Shop : MonoBehaviour
     public List<AugmentUI> augmentUIs;
     public Character player;
 
+    public List<TextMeshProUGUI> amountText;
+
     public int level = 0;
     public List<List<float>> percents = new List<List<float>>() {
         new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
@@ -50,6 +52,17 @@ public class Shop : MonoBehaviour
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
 
+            int holdingAmount = amountOfAugment(augmentIndex);
+            if (holdingAmount > 0)
+            {
+                amountText[i].gameObject.SetActive(true);
+                amountText[i].text = holdingAmount.ToString();
+            }
+            else
+            {
+                amountText[i].gameObject.SetActive(false);
+            }
+
             augmentIds.Remove(augmentIndex);
             augmentUIs[i].gameObject.SetActive(true);
             augmentUIs[i].Populate(augmentIndex);
@@ -86,6 +99,18 @@ public class Shop : MonoBehaviour
     bool HasBoughtAnAugemnt()
     {
         return player.inventory.augments.Count > 0;
+    }
+
+    int amountOfAugment(int input)
+    {
+       for(int i=0; i< player.inventory.augments.Count; i++)
+        {
+            if (player.inventory.augments[i].id == input)
+            {
+                return player.inventory.augments[i].count;
+            }
+        }
+            return -1;
     }
 
     public void ReRoll()
