@@ -12,13 +12,20 @@ public class AugmentHUD : MonoBehaviour
     public Outline outline;
     public GameObject expContainer;
     public GameObject expPrefab;
+    public SellAugmentTrigger sellAugmentTrigger;
 
 
     public void Populate(int id, int level, int count)
     {
         AugmentManager augmentManager = AugmentManager.current;
         string name = augmentManager.augmentDatas[id].title;
-        string description = augmentManager.augmentDatas[id].descriptions[level];
+
+        string description = "<b>Selling Price: " + augmentManager.costs[augmentManager.augmentDatas[id].rarity] * (level + 1) + "</b>" + "\n";
+
+        description += augmentManager.augmentDatas[id].descriptions[level];
+
+        description += "\n<b>Right click to sell</b>";
+
         tooltipTrigger.header = name + " Lv." + (level + 1); ;
         tooltipTrigger.content = description;
         icon.sprite = augmentManager.augmentDatas[id].iconSprite;

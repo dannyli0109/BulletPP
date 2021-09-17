@@ -44,9 +44,9 @@ public class AugmentManager : MonoBehaviour
     public void Update()
     {
         if (GameManager.current.GamePausing()) return;
-        for (int i = 0; i < character.augments.Count; i++)
+        for (int i = 0; i < character.inventory.augments.Count; i++)
         {
-            OnAugmentUpdate(character.augments[i].id, character.augments[i].level);
+            OnAugmentUpdate(character.inventory.augments[i].id, character.inventory.augments[i].level);
         }
 
         for (int i = 0; i < character.synergies.Count; i++)

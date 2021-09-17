@@ -32,6 +32,7 @@ public class Player : Character
     #endregion
 
     public AmmoPool ammoPool;
+    public GameEvent sellAugment;
 
     float angle;
     Vector2 movement;
@@ -122,7 +123,7 @@ public class Player : Character
             //Debug.Log(hit.collider.gameObject.layer);
             // Find the direction to move in
             //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
-            Vector3 dir = hit.point - transform.position;
+            Vector3 dir = hit.point - bulletContainer.position;
             dir.y = 0;
             //dir.y = bulletContainer.position.y;
             //Debug.Log(dir.y);
@@ -466,5 +467,18 @@ public class Player : Character
     {
         GameManager.current.ChangeStateImmdeiate(GameState.Pause);
         base.OnDestroy();
+    }
+
+    public void SellAugment(int index)
+    {
+        if (GameManager.current.GetState() != GameState.Shop) return;
+        Augment augment = inventory.augments[index];
+        AugmentManager augmentManager = AugmentManager.current;
+
+        if (inventory.RemoveAt(index))
+        {
+            gold += augmentManager.costs[augmentManager.augmentDatas[augment.id].rarity] * (augment.level + 1);
+            sellAugment?.Invoke();
+        }
     }
 }
