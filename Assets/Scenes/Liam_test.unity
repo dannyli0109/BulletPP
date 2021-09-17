@@ -176,6 +176,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10190535}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &26421841 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 26421841, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+  m_PrefabInstance: {fileID: 500789362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &96372184
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,10 +650,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 526047776, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6680669847592378827, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -718,17 +719,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1310377051}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-      propertyPath: gold
-      value: 99
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-      propertyPath: rocketStats.acceleration.baseValue
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
-      propertyPath: rocketStats.speed.baseValue
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: gunpointForAiming
+      value: 
+      objectReference: {fileID: 26421841}
     - target: {fileID: 6680669848201933449, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: cam
       value: 
@@ -2741,6 +2734,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1118176272, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: m_fontStyle
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1192233129, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2764,6 +2761,42 @@ PrefabInstance:
     - target: {fileID: 1192233129, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192233130, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: m_fontStyle
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: HUDManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 483425283}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PopulateAugmentListUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295753033, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RefreshPlayerStats
       objectReference: {fileID: 0}
     - target: {fileID: 1484174015, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_AnchorMin.y
