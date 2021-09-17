@@ -32,6 +32,8 @@ public class Rocket : Ammo
         {
             BounceOffAmmo();
         }
+
+      //  Debug.Log(currentSpeed);
     }
     private void FixedUpdate()
     {

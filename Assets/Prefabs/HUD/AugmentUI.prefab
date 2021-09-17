@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 4120056436380306528}
   - component: {fileID: 1930218775}
   - component: {fileID: 2993371393041120088}
+  - component: {fileID: 4643521910333483106}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -197,6 +198,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 
   header: 
+--- !u!114 &4643521910333483106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998473950421456648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d278f53d00a5cd6438dfaabd676cd4d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  index: 0
 --- !u!1 &1796847538670802840
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +441,7 @@ MonoBehaviour:
   outline: {fileID: 1930218775}
   expContainer: {fileID: 1197128573}
   expPrefab: {fileID: 930607732781817592, guid: 5d494acadd036e745ba6578171ced17a, type: 3}
+  sellAugmentTrigger: {fileID: 4643521910333483106}
 --- !u!1 &5788482814430305535
 GameObject:
   m_ObjectHideFlags: 0

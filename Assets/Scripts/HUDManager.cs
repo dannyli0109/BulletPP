@@ -54,6 +54,18 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI laserDpsText;
     public TextMeshProUGUI bouncingBladeDpsText;
     public static HUDManager current;
+    #endregion
+
+    #region AugmentHUD
+    public GameObject augmentListUIContainer;
+    public GameObject augmentUIPrefab;
+
+    public GameObject synergyListUIContainer;
+    public GameObject synergyUIPrefab;
+
+    public TextMeshProUGUI headerTextGUI;
+    #endregion
+
     float time = 0;
     float dps = 0;
 
@@ -73,7 +85,6 @@ public class HUDManager : MonoBehaviour
 
     public bool updatingDPS = false;
 
-    #endregion
 
     void Awake()
     {
@@ -107,7 +118,11 @@ public class HUDManager : MonoBehaviour
         playerGoldUI.richText = true;
         playerGoldUI.text = "$: " + player.gold;
         UpdatePlayerAmmoUI();
+        //UpdateDPSGUI();
+    }
 
+    void UpdateDPSGUI()
+    {
         if (time > 0)
         {
             dps = damage / time;
@@ -124,7 +139,7 @@ public class HUDManager : MonoBehaviour
 
         if (updatingDPS)
         {
-           if (player.bulletStats.maxClip.value > 0)
+            if (player.bulletStats.maxClip.value > 0)
             {
                 bulletDpsText.gameObject.SetActive(true);
             }
@@ -157,15 +172,15 @@ public class HUDManager : MonoBehaviour
             laserDpsText.text = "Laser DPS: " + laserDps.ToString("F");
             bouncingBladeDpsText.text = "Bouncing Blade DPS: " + bouncingBladeDps.ToString("F");
         }
-
     }
 
-    void UpdatePlayerAmmoUI()
+    public void UpdatePlayerAmmoUI()
     {
         int xIndex = 0;
 
         for(int i=0; i<bulletSprites.Length; i++)
         {
+            bulletSprites[i].gameObject.SetActive(false);
             if (i < player.bulletStats.maxClip.value)
             {
                 bulletSprites[i].gameObject.SetActive(true);
@@ -188,6 +203,7 @@ public class HUDManager : MonoBehaviour
 
         for (int i = 0; i < grenadeSprites.Length; i++)
         {
+            grenadeSprites[i].gameObject.SetActive(false);
             if (i < player.grenadeStats.maxClip.value)
             {
                 grenadeSprites[i].gameObject.SetActive(true);
@@ -207,6 +223,7 @@ public class HUDManager : MonoBehaviour
 
         for (int i = 0; i < rocketSprites.Length; i++)
         {
+            rocketSprites[i].gameObject.SetActive(false);
             if (i < player.rocketStats.maxClip.value)
             {
                 rocketSprites[i].gameObject.SetActive(true);
@@ -225,6 +242,8 @@ public class HUDManager : MonoBehaviour
 
         for (int i = 0; i < laserSprites.Length; i++)
         {
+            laserSprites[i].gameObject.SetActive(false);
+
             if (i < player.laserStats.maxClip.value)
             {
                 laserSprites[i].gameObject.SetActive(true);
@@ -240,20 +259,25 @@ public class HUDManager : MonoBehaviour
                 }
             }
         }
-
-        for (int i = 0; i < player.bouncingBladeStats.maxClip.value; i++)
+        
+        for (int i = 0; i < bouncingBladeSprites.Length; i++)
         {
-            bouncingBladeSprites[i].gameObject.SetActive(true);
+            bouncingBladeSprites[i].gameObject.SetActive(false);
+
+            if (i < player.bouncingBladeStats.maxClip.value)
+            {
+                bouncingBladeSprites[i].gameObject.SetActive(true);
+                xIndex++;
+                if (i < player.currentBouncingBladeClip)
+                {
+                    bouncingBladeSprites[i].color = bouncingBladeColour;
+                }
+                else
+                {
+                    bouncingBladeSprites[i].color = defaultAmmoColour;
+                }
+            }
             //bouncingBladeSprites[i].gameObject.transform.position = new Vector3(xIndex * spacing.x + defaultOffset.x, 0 + defaultOffset.y, 0);
-            xIndex++;
-            if (i < player.currentBouncingBladeClip)
-            {
-                bouncingBladeSprites[i].color = bouncingBladeColour;
-            }
-            else
-            {
-                bouncingBladeSprites[i].color = defaultAmmoColour;
-            }
 
         }
 
@@ -350,5 +374,68 @@ public class HUDManager : MonoBehaviour
 
          */
 
+    }
+
+    public void RefreshPlayerStats()
+    {
+        AugmentManager augmentManager = AugmentManager.current;
+
+        player.RemoveAllModifiers();
+
+        for (int i = 0; i < player.inventory.augments.Count; i++)
+        {
+            augmentManager.OnAugmentAttached(player.inventory.augments[i].id, player.inventory.augments[i].level);
+        }
+
+        for (int i = 0; i < player.synergies.Count; i++)
+        {
+            augmentManager.OnSynergyAttached(player.synergies[i].id, player.synergies[i].breakPoint);
+        }
+    }
+
+    public void UpdateAugmentMaxSizeUI()
+    {
+        headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
+    }
+
+
+    public void PopulateAugmentListUI()
+    {
+        foreach (Transform child in augmentListUIContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        UpdateAugmentMaxSizeUI();
+
+        AugmentManager augmentManager = AugmentManager.current;
+        for (int i = 0; i < player.inventory.augments.Count; i++)
+        {
+            GameObject augmentUI = Instantiate(augmentUIPrefab);
+            AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
+
+            augmentHUD.Populate(player.inventory.augments[i].id, player.inventory.augments[i].level, player.inventory.augments[i].count);
+            augmentUI.transform.SetParent(augmentListUIContainer.transform);
+            augmentUI.transform.localScale = new Vector3(1, 1, 1);
+
+            augmentHUD.sellAugmentTrigger.Init(player, i);
+        }
+    }
+
+    public void PopulateSynergyListUI()
+    {
+        foreach (Transform child in synergyListUIContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        AugmentManager augmentManager = AugmentManager.current;
+        for (int i = 0; i < player.synergies.Count; i++)
+        {
+            GameObject synergyUI = Instantiate(synergyUIPrefab);
+            synergyUI.GetComponent<SynergyHUD>().Populate(player.synergies[i].id, player.synergies[i].breakPoint, player.synergies[i].count);
+            synergyUI.transform.SetParent(synergyListUIContainer.transform);
+            synergyUI.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }

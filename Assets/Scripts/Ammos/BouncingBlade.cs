@@ -8,6 +8,9 @@ public class BouncingBlade : Ammo
     public float slowDownSpeed;
     public float currentDamage;
 
+    public float spinAmount;
+    public GameObject blade;
+
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBouncingBladeDestroy;
@@ -64,7 +67,7 @@ public class BouncingBlade : Ammo
 
     void Update()
     {
-
+        handleAnimating();
         if (GameManager.current.GamePausing())
         {
             owner.RegainBouncingBlade();
@@ -98,6 +101,15 @@ public class BouncingBlade : Ammo
             owner.RegainBouncingBlade();
             Destroy(gameObject);
         }
+    }
+
+    void handleAnimating()
+    {
+        blade.transform.eulerAngles += new Vector3(0, spinAmount*currentSpeed *2 * Time.deltaTime, 0);
+            
+         //   RotateAround(new Vector3(0, 1, 0),);
+
+        //    += new Vector3(0, , 0);
     }
 
     private void OnBouncingBladeDestroy(GameObject gameObject)

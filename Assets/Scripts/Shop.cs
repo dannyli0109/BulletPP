@@ -7,11 +7,8 @@ public class Shop : MonoBehaviour
 {
     public List<AugmentUI> augmentUIs;
     public Character player;
-    public GameObject augmentListUIContainer;
-    public GameObject augmentUIPrefab;
 
-    public GameObject synergyListUIContainer;
-    public GameObject synergyUIPrefab;
+    public List<TextMeshProUGUI> amountText;
 
     public int level = 0;
     public List<List<float>> percents = new List<List<float>>() {
@@ -23,7 +20,7 @@ public class Shop : MonoBehaviour
         new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
     };
 
-    public bool hasBoughtAnAugment;
+    bool hasBoughtAnAugment;
 
     public List<int> augmentIds;
 
@@ -55,9 +52,25 @@ public class Shop : MonoBehaviour
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
 
+            UpdateHoldingAmount(augmentIndex, i);
+
             augmentIds.Remove(augmentIndex);
             augmentUIs[i].gameObject.SetActive(true);
             augmentUIs[i].Populate(augmentIndex);
+        }
+    }
+
+    public void UpdateHoldingAmount(int augmentIndex, int amoutTextIndex)
+    {
+        int holdingAmount = amountOfAugment(augmentIndex);
+        if (holdingAmount > 0)
+        {
+            amountText[amoutTextIndex].gameObject.SetActive(true);
+            amountText[amoutTextIndex].text = holdingAmount.ToString();
+        }
+        else
+        {
+            amountText[amoutTextIndex].gameObject.SetActive(false);
         }
     }
 
@@ -88,11 +101,27 @@ public class Shop : MonoBehaviour
         }
     }
 
+    bool HasBoughtAnAugemnt()
+    {
+        return player.inventory.augments.Count > 0;
+    }
+
+    int amountOfAugment(int input)
+    {
+       for(int i=0; i< player.inventory.augments.Count; i++)
+        {
+            if (player.inventory.augments[i].id == input)
+            {
+                return player.inventory.augments[i].count;
+            }
+        }
+            return -1;
+    }
+
     public void ReRoll()
     {
-        if (hasBoughtAnAugment)
+        if (HasBoughtAnAugemnt())
         {
-
             if (player.gold >= 2)
             {
                 player.gold -= 2;
@@ -103,45 +132,11 @@ public class Shop : MonoBehaviour
 
     public void Continue()
     {
-        if (hasBoughtAnAugment)
+        if (HasBoughtAnAugemnt())
         {
             GameManager.current.ChangeState(GameState.Casual);
             player.reloading = true;
         }
         // gameObject.SetActive(false);
-    }
-
-    public void PopulateAugmentListUI()
-    {
-        foreach (Transform child in augmentListUIContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        AugmentManager augmentManager = AugmentManager.current;
-        for (int i = 0; i < player.augments.Count; i++)
-        {
-            GameObject augmentUI = Instantiate(augmentUIPrefab);
-            augmentUI.transform.GetComponent<AugmentHUD>().Populate(player.augments[i].id, player.augments[i].level, player.augments[i].count);
-            augmentUI.transform.SetParent(augmentListUIContainer.transform);
-            augmentUI.transform.localScale = new Vector3(1, 1, 1);
-        }
-    }
-
-    public void PopulateSynergyListUI()
-    {
-        foreach (Transform child in synergyListUIContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        AugmentManager augmentManager = AugmentManager.current;
-        for (int i = 0; i < player.synergies.Count; i++)
-        {
-            GameObject synergyUI = Instantiate(synergyUIPrefab);
-            synergyUI.GetComponent<SynergyHUD>().Populate(player.synergies[i].id, player.synergies[i].breakPoint, player.synergies[i].count);
-            synergyUI.transform.SetParent(synergyListUIContainer.transform);
-            synergyUI.transform.localScale = new Vector3(1, 1, 1);
-        }
     }
 }

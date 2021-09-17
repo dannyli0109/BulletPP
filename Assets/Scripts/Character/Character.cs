@@ -121,7 +121,7 @@ public abstract class Character : MonoBehaviour
     public LineRenderer thisLineRenderer;
     #endregion
 
-    public List<Augment> augments = new List<Augment>();
+    public Inventory inventory = new Inventory(3);
     public List<Synergy> synergies = new List<Synergy>();
     public List<ModifiedStat> modifiedStats = new List<ModifiedStat>();
     public virtual void Start()
@@ -233,18 +233,18 @@ public abstract class Character : MonoBehaviour
         {
             return -1;
         }
-        for (int i = 0; i < augments.Count; i++)
+        for (int i = 0; i < inventory.augments.Count; i++)
         {
-            if (augments[i].id == id)
+            if (inventory.augments[i].id == id)
             {
-                if (augments[i].count >= 9)
+                if (inventory.augments[i].count >= 9)
                 {
                     return -1;
                 }
 
-                int levelBefore = augments[i].level;
-                augments[i].count += 1;
-                int levelAfter = augments[i].level;
+                int levelBefore = inventory.augments[i].level;
+                inventory.augments[i].count += 1;
+                int levelAfter = inventory.augments[i].level;
                 gold -= cost;
 
                 if (levelBefore != levelAfter)
@@ -254,7 +254,7 @@ public abstract class Character : MonoBehaviour
                 return 1;
             }
         }
-        augments.Add(new Augment() { id = id, count = 1 });
+        if (!inventory.AddTo(new Augment() { id = id, count = 1 })) return -1;
 
         for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
         {
@@ -288,11 +288,11 @@ public abstract class Character : MonoBehaviour
     public int GetAugmentLevel(int id)
     {
         int level = 0;
-        for (int i = 0; i < augments.Count; i++)
+        for (int i = 0; i < inventory.augments.Count; i++)
         {
-            if (augments[i].id == id)
+            if (inventory.augments[i].id == id)
             {
-                level = augments[i].level;
+                level = inventory.augments[i].level;
                 break;
             }
         }
