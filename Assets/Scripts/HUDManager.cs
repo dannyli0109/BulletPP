@@ -393,6 +393,11 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    public void UpdateAugmentMaxSizeUI()
+    {
+        headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
+    }
+
 
     public void PopulateAugmentListUI()
     {
@@ -401,7 +406,7 @@ public class HUDManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
+        UpdateAugmentMaxSizeUI();
 
         AugmentManager augmentManager = AugmentManager.current;
         for (int i = 0; i < player.inventory.augments.Count; i++)

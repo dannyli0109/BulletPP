@@ -26,7 +26,7 @@ public class AugmentHUD : MonoBehaviour
 
         description += "\n<b>Right click to sell</b>";
 
-        tooltipTrigger.header = name + " Lv." + (level + 1); ;
+        tooltipTrigger.header = name + " Lv." + (level + 1);
         tooltipTrigger.content = description;
         icon.sprite = augmentManager.augmentDatas[id].iconSprite;
         outline.effectColor = augmentManager.colors[augmentManager.augmentDatas[id].rarity];
