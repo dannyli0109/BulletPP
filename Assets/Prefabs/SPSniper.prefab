@@ -1213,7 +1213,6 @@ GameObject:
   - component: {fileID: 5077297002888340785}
   - component: {fileID: 5077297002888340787}
   - component: {fileID: 5077297002888340748}
-  - component: {fileID: 8926595440588915455}
   - component: {fileID: 8489136819912132288}
   - component: {fileID: 154262675789851583}
   m_Layer: 12
@@ -1236,6 +1235,7 @@ Transform:
   m_Children:
   - {fileID: 5077297004155915614}
   - {fileID: 5077297002881308744}
+  - {fileID: 2488194348105036323}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1357,7 +1357,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4927039, y: 1.883677, z: 0.42724657}
+  m_Size: {x: 0.65, y: 1.883677, z: 0.65}
   m_Center: {x: -0.008182287, y: 0.8918593, z: -0.03272891}
 --- !u!54 &5077297002888340748
 Rigidbody:
@@ -1375,19 +1375,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!135 &8926595440588915455
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5077297002888340751}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.3
-  m_Center: {x: 0, y: 1.32, z: 0}
 --- !u!195 &8489136819912132288
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1634,6 +1621,7 @@ MonoBehaviour:
   desiredRange: 16
   smoothingRange: 4
   finalDestination: {x: 0, y: 0, z: 0}
+  EnemyAvoidanceAmount: 1
   gunPoint: {fileID: 5077297003452681729}
 --- !u!1 &5077297002888583459
 GameObject:
@@ -3392,3 +3380,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+--- !u!1 &8124353636444102554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2488194348105036323}
+  - component: {fileID: 1646323878806977558}
+  m_Layer: 0
+  m_Name: EnemySensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2488194348105036323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124353636444102554}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5077297002888340784}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1646323878806977558
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124353636444102554}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

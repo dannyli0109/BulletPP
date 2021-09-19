@@ -32,8 +32,10 @@ public class SpellQueueEnemy : Enemy
    public Vector3 finalDestination;
     Vector3 nextDestination;
 
-    Vector3 lastKnownPos;
-    float timeStuck;
+  protected  Vector3 lastKnownPos;
+    protected float timeStuck;
+
+    public float EnemyAvoidanceAmount;
     #endregion
 
     public override void Start()
@@ -149,59 +151,36 @@ public class SpellQueueEnemy : Enemy
     }
 
     public virtual void HandleMoving()
-
     {
-
-      //  Debug.Log("To Move()");
-
         agent.speed = speed;
 
         if(lastKnownPos== transform.position)
-
         {
-
             timeStuck += Time.deltaTime;
 
             if (timeStuck < 0.3f)
-
             {
-
                 timeStuck = 0;
 
                 finalDestination = target.transform.position;
-
             }
-
         }
-
         // too close move back
-
         else if (InRange(tooClose))
-
         {
-
             Vector3 normalAwayFromPlayer =Vector3.Normalize( transform.position - target.transform.position);
 
-            finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);
-
-           
+            finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);        
 
         }
 
         // if line of sight and close enough get a random place
-
         else if((InLineOfSight(60)|| InRange(closeEnoughtDodge )|| InRange(tooFarToSeePlayer)))
-
         {
-
             float distanceFromFinal = Vector3.Distance(transform.position, finalDestination);
 
             if (distanceFromFinal < smoothingRange)
-
             {
-
-
-
             Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
 
             finalDestination = target.transform.position + normalAwayFromPlayer * 2;
@@ -217,25 +196,15 @@ public class SpellQueueEnemy : Enemy
             }
 
         }
-
         else
-
         {
-
             finalDestination = target.transform.position;
-
         }
 
-        Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
-
+        //Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
         agent?.SetDestination(finalDestination);
 
-
-
-       // Debug.Log("dist "+ Vector3.Distance(transform.position, finalDestination));
-
         lastKnownPos = transform.position;
-
     }
 
     protected override void UpdateAnimation()
@@ -274,6 +243,19 @@ public class SpellQueueEnemy : Enemy
     public override void OnDestroy()
     {
         base.OnDestroy();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.layer== 12)
+        {
+            Debug.Log("enemy");
+            Vector3 normal = other.gameObject.transform.position - transform.position;
+
+            Debug.DrawLine(transform.position, transform.position + normal * 5,Color.blue,0.1f);
+            finalDestination += normal * enemyAvoidAmount * Time.deltaTime;
+
+        }
     }
 
     public void ShootBullets(int amount, float initialAngle, float angle, float speed, float size)

@@ -149,7 +149,7 @@ public class Player : Character
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
 
-        if(movement.x!=0|| movement.y != 0)
+         if(movement.x!=0|| movement.y != 0)
         {
             lastMovementDirection = movement;
             rocketExitPoint.LookAt(transform);

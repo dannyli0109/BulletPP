@@ -81,6 +81,11 @@ public class MapGeneration : MonoBehaviour
     #region Encounter
     public List<GameObject> enemiesTypes;
     public List<GameObject> sniperTypes;
+    public List<GameObject> swarmEnemiesType;
+
+    public int minSwarmSpawnAmount;
+    public int maxSwarmSpawnAmount;
+
     public float yEnemyHeight;
     public Vector2 enemyRandOffset;
 
@@ -480,14 +485,37 @@ public class MapGeneration : MonoBehaviour
             }
             for (int i = 0; i <numberOfWaves[0]; i++)
             {
-                Debug.Log("Add" + i);
-                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count+ sniperTypes.Count);
+               // Debug.Log("Add" + i);
+                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count+ sniperTypes.Count+ swarmEnemiesType.Count);
                 if(totalRoomDiffculty < singleEnemyCutOff)
                 {
                     holdingRandomEnemType = 0;
                 }
 
-                if (holdingRandomEnemType >= enemiesTypes.Count)
+                if(holdingRandomEnemType>= enemiesTypes.Count+ sniperTypes.Count)
+                {
+                    int swarmSpawnAmount = UnityEngine.Random.RandomRange(minSwarmSpawnAmount, maxSwarmSpawnAmount);
+                    for(int j=0; j< swarmSpawnAmount; j++)
+                    {
+
+                    // swarm
+                    if (holdingPossibleEnemySpawnPoints.Count == 0)
+                    {
+                        Debug.Log("Refill");
+                        // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
+                    }
+                    holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
+
+                    Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
+
+                    GameObject holdingGameObject = Instantiate(swarmEnemiesType[holdingRandomEnemType-enemiesTypes.Count-sniperTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
+                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+                    EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+                    Debug.Log("Swarm "+ j+" " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
+                    // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
+                    }
+                }
+                else if (holdingRandomEnemType >= enemiesTypes.Count)
                 {
                     // sniper
                     if (holdingPossibleSniperSpawnPoints.Count == 0)
@@ -571,13 +599,36 @@ public class MapGeneration : MonoBehaviour
                 for (int i = 0; i < numberOfWaves[currentWave]; i++)
                 {
                     Debug.Log("Add" + i);
-                    int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count);
+                    int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
                     if (totalRoomDiffculty < singleEnemyCutOff)
                     {
                         holdingRandomEnemType = 0;
                     }
 
-                    if (holdingRandomEnemType >= enemiesTypes.Count)
+                    if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
+                    {
+                        int swarmSpawnAmount = UnityEngine.Random.RandomRange(minSwarmSpawnAmount, maxSwarmSpawnAmount);
+                        for (int j = 0; j < swarmSpawnAmount; j++)
+                        {
+
+                            // swarm
+                            if (holdingPossibleEnemySpawnPoints.Count == 0)
+                            {
+                                Debug.Log("Refill");
+                                // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
+                            }
+                            holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
+
+                            Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
+
+                            GameObject holdingGameObject = Instantiate(swarmEnemiesType[holdingRandomEnemType - enemiesTypes.Count - sniperTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
+                            holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+                            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+                            Debug.Log("Swarm " + j + " " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
+                            // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
+                        }
+                    }
+                   else if (holdingRandomEnemType >= enemiesTypes.Count)
                     {
                         // sniper
                         if (holdingPossibleSniperSpawnPoints.Count == 0)
