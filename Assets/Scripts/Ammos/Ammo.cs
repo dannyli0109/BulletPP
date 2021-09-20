@@ -32,9 +32,20 @@ public abstract class Ammo : PooledItem
     public Vector3 acceleration;
 
     protected Vector3 currentAcceleration;
+
+    public bool fromFreshReload;
     public virtual float GetDamage()
     {
-        return damage;
+        if (fromFreshReload)
+        {
+            Debug.Log("fresh ammo");
+            return damage * owner.stats.damageMultiplier.value* owner.stats.extraDamageAfterReload.value;
+        }
+        else
+        {
+            return damage * owner.stats.damageMultiplier.value;
+
+        }
     }
     public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
     {

@@ -80,6 +80,9 @@ public class CharacterStats
 
     public CharacterStat reloadOnDash;
     public CharacterStat shootRocketOnDash;
+
+    public CharacterStat personalSpace;
+    public CharacterStat extraDamageAfterReload;
 }
 
 public class ModifiedStat
@@ -103,6 +106,7 @@ public abstract class Character : MonoBehaviour
     public GameObject rocketPrefab;
     public GameObject bouncingBladePrefab;
     public GameObject laserPrefab;
+    public AOEDamage aoePrefab;
     public Transform bulletContainer;
 
     public float hp;
@@ -161,6 +165,7 @@ public abstract class Character : MonoBehaviour
                         hp -= ammo.GetDamage();
                     }
                     currentImmunityFrame = stats.immunityFromDamage.value;
+                    ResolveOnTakenDamageEffects();
                 }
                 else
                 {
@@ -369,5 +374,22 @@ public abstract class Character : MonoBehaviour
     public virtual void OnDestroy()
     {
         EventManager.current.onAmmoHit -= OnAmmoHit;
+    }
+
+    private void ResolveOnTakenDamageEffects()
+    {
+        if (stats.personalSpace.value > 1)
+        {
+            CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
+        }
+    }
+
+   public void CreatePlayerAOE(Vector2 xz)
+    {
+        Debug.Log("AOE");
+        Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
+
+        aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 12);
     }
 }

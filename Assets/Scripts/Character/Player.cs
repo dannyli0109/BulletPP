@@ -39,6 +39,7 @@ public class Player : Character
     float angle;
     Vector2 movement;
 
+    bool freshReload;
     public override void Start()
     {
         EventManager.current.receiveGold += ReceiveGold;
@@ -202,7 +203,7 @@ public class Player : Character
                     }
                 }
             }
-
+            freshReload = false;
             /*
             if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
             {
@@ -293,6 +294,10 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
                 currentBulletClip--;
+                if (freshReload)
+                {
+                    ammoComponent.fromFreshReload = true;
+                }
                 return true;
             }
         }
@@ -310,6 +315,10 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
                 currentRocketClip--;
+                if (freshReload)
+                {
+                    ammoComponent.fromFreshReload = true;
+                }
                 return true;
             }
         }
@@ -327,6 +336,10 @@ public class Player : Character
                 Vector3 forward = bulletContainer.forward;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
                 currentGrenadeClip--;
+                if (freshReload)
+                {
+                    ammoComponent.fromFreshReload = true;
+                }
                 return true;
             }
         }
@@ -343,6 +356,10 @@ public class Player : Character
             ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value);
             laser.transform.SetParent(null);
             currentLaserClip--;
+            if (freshReload)
+            {
+                ammoComponent.fromFreshReload = true;
+            }
             return true;
         }
         return false;
@@ -359,6 +376,10 @@ public class Player : Character
             ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value);
             blade.transform.SetParent(null);
             currentBouncingBladeClip--;
+            if (freshReload)
+            {
+                ammoComponent.fromFreshReload = true;
+            }
             return true;
         }
         return false;
@@ -409,8 +430,12 @@ public class Player : Character
                 currentLaserClip = (int)laserStats.maxClip.value;
                 //currentBouncingBladeClip = (int)bouncingBladeStats.maxClip.value;
                 reloading = false;
+                if (stats.extraDamageAfterReload.value > 1)
+                {
+                    freshReload = true;
+                }
 
-               // Debug.Log("Bullet " + currentBulletClip + " " + (int)bulletStats.maxClip.value + " grenade " + currentGrenadeClip + " " + (int)grenadeStats.maxClip.value + " rocket  " + currentRocketClip + " " + (int)rocketStats.maxClip.value + " current laser " + currentLaserClip + " " + (int)laserStats.maxClip.value + " blades " + currentBouncingBladeClip + " " + (int)bouncingBladeStats.maxClip.value);
+                // Debug.Log("Bullet " + currentBulletClip + " " + (int)bulletStats.maxClip.value + " grenade " + currentGrenadeClip + " " + (int)grenadeStats.maxClip.value + " rocket  " + currentRocketClip + " " + (int)rocketStats.maxClip.value + " current laser " + currentLaserClip + " " + (int)laserStats.maxClip.value + " blades " + currentBouncingBladeClip + " " + (int)bouncingBladeStats.maxClip.value);
             }
         }
     }
@@ -422,6 +447,10 @@ public class Player : Character
         currentGrenadeClip = (int)Mathf.Clamp(currentGrenadeClip + 1, 0, grenadeStats.maxClip.value);
         currentRocketClip = (int)Mathf.Clamp(currentRocketClip + 1, 0, rocketStats.maxClip.value);
         currentLaserClip = (int)Mathf.Clamp(currentLaserClip + 1, 0, laserStats.maxClip.value);
+        if (stats.extraDamageAfterReload.value > 1)
+        {
+            freshReload = true;
+        }
     }
 
     void UpdateAnimation()
@@ -455,6 +484,11 @@ public class Player : Character
                 Vector3 forward = lastMovementDirection;
                 ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
             }
+        }
+
+        if (stats.personalSpace.value > 1)
+        {
+            CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
         }
     }
 
