@@ -91,7 +91,7 @@ public class MapGeneration : MonoBehaviour
 
     public bool inCombat;
 
-    public List< Enemy> EnemiesInEncounter;
+    public List<Enemy> EnemiesInEncounter;
     public List<int> numberOfWaves;
     int currentWave;
     public float waveWaitingTime;
@@ -147,9 +147,13 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
+        if (CheckIfMapCompleted())
+        {
+            thisBTSManager.LoadWinGameScene();
+        }
         if (inCombat)
         {
-            UpdateEncounter();
+            UpdateEncounter(rooms[currentRoomInside]);
         }
     }
 
@@ -166,7 +170,7 @@ public class MapGeneration : MonoBehaviour
             {
                 if (startingRoomDoorLayouts[startingRoomID].needUpperRoom )
                 {
-                    rooms.Add(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(0, 1),rooms[roomsBeingProcessed].length+1, -1, roomsBeingProcessed, -1, -1));
+                    rooms.Add(new Room(rooms[roomsBeingProcessed].offsetPos + new Vector2(0, 1),rooms[roomsBeingProcessed].length + 1, -1, roomsBeingProcessed, -1, -1));
                     rooms[roomsBeingProcessed].upperRoomRef = rooms.Count - 1;
                 }
                 if (startingRoomDoorLayouts[startingRoomID].needLowerRoom)
@@ -232,7 +236,7 @@ public class MapGeneration : MonoBehaviour
         }
         reconnectWalls();
        // Debug.Log(AllRooms.Count);
-            GameObject holdingObject = null;
+        GameObject holdingObject = null;
         for (int i = 0; i < rooms.Count; i++)
         {
             if (i == 0)
@@ -441,250 +445,207 @@ public class MapGeneration : MonoBehaviour
         }
     }
 
+    public void SpawnSwarms(Room room, int swarmIndex)
+    {
+        List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
+        int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
+        for (int j = 0; j < swarmSpawnAmount; j++)
+        {
+
+            // swarm
+            if (holdingPossibleEnemySpawnPoints.Count == 0)
+            {
+                Debug.Log("Refill");
+                // holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
+            }
+            int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
+
+            Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
+
+            GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], holdingPosition, enemiesTypes[0].transform.rotation);
+            holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+            // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
+        }
+    }
+
+    public void SpawnSniper(Room room, int sniperIndex)
+    {
+        // sniper
+        List<Transform> holdingPossibleSniperSpawnPoints = room.thisPrefabInfo.sniperSpawnPoint;
+        if (holdingPossibleSniperSpawnPoints.Count == 0)
+        {
+            Debug.Log("refill");
+            //  holdingPossibleSniperSpawnPoints = room.thisPrefabInfo.sniperSpawnPoint;
+        }
+        int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleSniperSpawnPoints.Count);
+
+        Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
+        holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
+        GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+        //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
+    }
+
+    public void SpawnNormalEnemy(Room room, int enemyIndex)
+    {
+        List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
+        // not sniper
+        if (holdingPossibleEnemySpawnPoints.Count == 0)
+        {
+            Debug.Log("Refill");
+            // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
+        }
+        int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
+
+        Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
+        if (totalRoomDiffculty < singleEnemyCutOff)
+        {
+            enemyIndex = 0;
+        }
+
+        GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+        // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
+    }
+
+    public void StartEncounter(Room room)
+    {
+        beginEnounter?.Invoke();
+        currentWave = 0;
+        numberOfWaves = new List<int>();
+        if (playerTarget.RecentlyTakenDamage > 0)
+        {
+            playerTarget.RecentlyTakenDamage--;
+        }
+        // lock doors
+        inCombat = true;
+
+        //Debug.Log((totalRoomDiffucluty / 3) + " " + totalRoomDiffucluty / 2);
+        int holdingRand = (int)UnityEngine.Random.Range((int)(totalRoomDiffculty / 3), (int)(totalRoomDiffculty / 2));
+        holdingRand++;
+        //  Debug.Log(holdingRand);
+        if (totalRoomDiffculty < singleEnemyCutOff)
+        {
+            holdingRand = 1;
+        }
+        if (totalRoomDiffculty > secondWaveCutOff)
+        {
+            holdingRand = holdingRand / 2;
+            numberOfWaves.Add(holdingRand + 1);
+        }
+
+        numberOfWaves.Add(holdingRand);
+
+        GameManager.current.ChangeStateImmdeiate(GameState.Game);
+
+        for (int i = 0; i < numberOfWaves[0]; i++)
+        {
+            int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
+            if (totalRoomDiffculty < singleEnemyCutOff)
+            {
+                holdingRandomEnemType = 0;
+            }
+
+            if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
+            {
+                int swarmIndex = holdingRandomEnemType - enemiesTypes.Count - sniperTypes.Count;
+                SpawnSwarms(room, swarmIndex);
+            }
+            else if (holdingRandomEnemType >= enemiesTypes.Count)
+            {
+                int sniperIndex = holdingRandomEnemType - enemiesTypes.Count;
+                SpawnSniper(room, sniperIndex);
+            }
+            else
+            {
+                int enemyIndex = holdingRandomEnemType;
+                SpawnNormalEnemy(room, enemyIndex);
+            }
+
+        }
+    }
+
     public void CheckToStartEncounter()
     {
         if (!rooms[currentRoomInside].completed && currentRoomInside != 0)
         {
-            beginEnounter?.Invoke();
-            currentWave = 0;
-            numberOfWaves = new List<int>();
-            if (playerTarget.RecentlyTakenDamage > 0)
-            {
-            playerTarget.RecentlyTakenDamage--; 
-
-            }
-            // lock doors
-            inCombat = true;
-
-            //Debug.Log((totalRoomDiffucluty / 3) + " " + totalRoomDiffucluty / 2);
-            int holdingRand = (int)UnityEngine.Random.Range((totalRoomDiffculty/3), totalRoomDiffculty/2);
-            holdingRand++;
-          //  Debug.Log(holdingRand);
-            if (totalRoomDiffculty< singleEnemyCutOff)
-            {
-                holdingRand = 1;
-            }
-            if(totalRoomDiffculty> secondWaveCutOff)
-            {
-                holdingRand = holdingRand / 2;
-                numberOfWaves.Add(holdingRand+1);
-            }
-
-            numberOfWaves.Add(holdingRand);
-
-            GameManager.current.ChangeStateImmdeiate(GameState.Game);
-
-            int holdingSpawnInt=0;
-
-            List<Transform> holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-            List<Transform> holdingPossibleSniperSpawnPoints = rooms[currentRoomInside].thisPrefabInfo.sniperSpawnPoint;
-            if (numberOfWaves[0] > 1)
-            {
-                Debug.Log("Size " + numberOfWaves[0]);
-
-            }
-            for (int i = 0; i <numberOfWaves[0]; i++)
-            {
-               // Debug.Log("Add" + i);
-                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count+ sniperTypes.Count+ swarmEnemiesType.Count);
-                if(totalRoomDiffculty < singleEnemyCutOff)
-                {
-                    holdingRandomEnemType = 0;
-                }
-
-                if(holdingRandomEnemType>= enemiesTypes.Count+ sniperTypes.Count)
-                {
-                    int swarmSpawnAmount = UnityEngine.Random.RandomRange(minSwarmSpawnAmount, maxSwarmSpawnAmount);
-                    for(int j=0; j< swarmSpawnAmount; j++)
-                    {
-
-                    // swarm
-                    if (holdingPossibleEnemySpawnPoints.Count == 0)
-                    {
-                        Debug.Log("Refill");
-                        // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-                    }
-                    holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
-
-                    Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
-
-                    GameObject holdingGameObject = Instantiate(swarmEnemiesType[holdingRandomEnemType-enemiesTypes.Count-sniperTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-                    EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-                    Debug.Log("Swarm "+ j+" " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
-                    // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
-                    }
-                }
-                else if (holdingRandomEnemType >= enemiesTypes.Count)
-                {
-                    // sniper
-                    if (holdingPossibleSniperSpawnPoints.Count == 0)
-                    {
-                        Debug.Log("refill");
-                      //  holdingPossibleSniperSpawnPoints = rooms[currentRoomInside].thisPrefabInfo.sniperSpawnPoint;
-                    }
-                    holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleSniperSpawnPoints.Count);
-
-                    Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
-                    holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
-                    GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType - enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-                    EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-
-                    Debug.Log("sniper " + holdingSpawnInt + "  " + holdingPossibleSniperSpawnPoints.Count);
-                  //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
-                }
-                else
-                {
-                    // not sniper
-                    if (holdingPossibleEnemySpawnPoints.Count == 0)
-                    {
-                        Debug.Log("Refill");
-                       // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-                    }
-                    holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
-
-                    Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
-                    if (totalRoomDiffculty < singleEnemyCutOff)
-                    {
-                        holdingRandomEnemType = 0;
-                    }
-
-                    GameObject holdingGameObject = Instantiate(enemiesTypes[holdingRandomEnemType], holdingPosition, enemiesTypes[0].transform.rotation);
-                    holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-                    EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-                    Debug.Log("not sniper " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
-                   // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
-                }
-                
-            }
-
+            StartEncounter(rooms[currentRoomInside]);
         }
+    }
+
+    public Vector3 ClampCameraVectorToCameraBoundsOfCurrentRoom(Room room, Vector3 input)
+    {
+        float holdingX= Mathf.Clamp(input.x, room.offsetPos.x * roomMultiplyValue.x + room.thisPrefabInfo.cameraBoundryMinX, room.offsetPos.x * roomMultiplyValue.x + room.thisPrefabInfo.cameraBoundryMaxX);
+        float holdingZ = Mathf.Clamp(input.z, room.offsetPos.y * roomMultiplyValue.y + room.thisPrefabInfo.cameraBoundryMinZ, room.offsetPos.y * roomMultiplyValue.y + room.thisPrefabInfo.cameraBoundryMaxZ);
+
+        Vector3 holdingOutPut = new Vector3(
+            holdingX,
+            0,
+            holdingZ
+        );
+        return holdingOutPut;
     }
 
     public Vector3 ClampCameraVectorToCameraBoundsOfCurrentRoom(Vector3 input)
     {
-        Vector3 holdingOutPut = input;
-
-        float holdingX= Mathf.Clamp(input.x, rooms[currentRoomInside].offsetPos.x* roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX);
-        float holdingZ = Mathf.Clamp(input.z, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX);
-
-        holdingOutPut = new Vector3(
-            Mathf.Clamp(input.x, rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinX, 
-            rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxX), 
-            0, 
-            Mathf.Clamp(input.z, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMinZ, 
-            rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.cameraBoundryMaxZ));
-
-        return holdingOutPut;
+        return ClampCameraVectorToCameraBoundsOfCurrentRoom(rooms[currentRoomInside], input);
     }
 
-    public void UpdateEncounter()
+    public void UpdateRoom(Room room)
     {
-        if (roomClear)
+        if (currentWaveWaitingTime > waveWaitingTime)
         {
-            if (currentWaveWaitingTime > waveWaitingTime)
+            roomClear = false;
+
+            for (int i = 0; i < numberOfWaves[currentWave]; i++)
             {
-                roomClear = false;
-
-                int holdingSpawnInt = 0;
-
-                List<Transform> holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-                List<Transform> holdingPossibleSniperSpawnPoints = rooms[currentRoomInside].thisPrefabInfo.sniperSpawnPoint;
-                if (numberOfWaves[currentWave] > 1)
+                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
+                if (totalRoomDiffculty < singleEnemyCutOff)
                 {
-                    Debug.Log("Size " + numberOfWaves[0]);
-
-                }
-                for (int i = 0; i < numberOfWaves[currentWave]; i++)
-                {
-                    Debug.Log("Add" + i);
-                    int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
-                    if (totalRoomDiffculty < singleEnemyCutOff)
-                    {
-                        holdingRandomEnemType = 0;
-                    }
-
-                    if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
-                    {
-                        int swarmSpawnAmount = UnityEngine.Random.RandomRange(minSwarmSpawnAmount, maxSwarmSpawnAmount);
-                        for (int j = 0; j < swarmSpawnAmount; j++)
-                        {
-
-                            // swarm
-                            if (holdingPossibleEnemySpawnPoints.Count == 0)
-                            {
-                                Debug.Log("Refill");
-                                // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-                            }
-                            holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
-
-                            Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
-
-                            GameObject holdingGameObject = Instantiate(swarmEnemiesType[holdingRandomEnemType - enemiesTypes.Count - sniperTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                            holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-                            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-                            Debug.Log("Swarm " + j + " " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
-                            // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
-                        }
-                    }
-                   else if (holdingRandomEnemType >= enemiesTypes.Count)
-                    {
-                        // sniper
-                        if (holdingPossibleSniperSpawnPoints.Count == 0)
-                        {
-                            Debug.Log("refill");
-                            //  holdingPossibleSniperSpawnPoints = rooms[currentRoomInside].thisPrefabInfo.sniperSpawnPoint;
-                        }
-                        holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleSniperSpawnPoints.Count);
-
-                        Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
-                        holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
-                        GameObject holdingGameObject = Instantiate(sniperTypes[holdingRandomEnemType - enemiesTypes.Count], holdingPosition, enemiesTypes[0].transform.rotation);
-                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-                        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-
-                        Debug.Log("sniper " + holdingSpawnInt + "  " + holdingPossibleSniperSpawnPoints.Count);
-                        //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
-                    }
-                    else
-                    {
-                        // not sniper
-                        if (holdingPossibleEnemySpawnPoints.Count == 0)
-                        {
-                            Debug.Log("Refill");
-                            // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-                        }
-                        holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
-
-                        Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
-                        if (totalRoomDiffculty < singleEnemyCutOff)
-                        {
-                            holdingRandomEnemType = 0;
-                        }
-
-                        GameObject holdingGameObject = Instantiate(enemiesTypes[holdingRandomEnemType], holdingPosition, enemiesTypes[0].transform.rotation);
-                        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-                        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-                        Debug.Log("not sniper " + holdingSpawnInt + "  " + holdingPossibleEnemySpawnPoints.Count);
-                        // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
-                    }
-
+                    holdingRandomEnemType = 0;
                 }
 
+                if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
+                {
+                    int swarmIndex = holdingRandomEnemType - enemiesTypes.Count - sniperTypes.Count;
+                    SpawnSwarms(room, swarmIndex);
+                }
+                else if (holdingRandomEnemType >= enemiesTypes.Count)
+                {
+                    int sniperIndex = holdingRandomEnemType - enemiesTypes.Count;
+                    SpawnSniper(room, sniperIndex);
+                }
+                else
+                {
+                    int enemyIndex = holdingRandomEnemType;
+                    SpawnNormalEnemy(room, enemyIndex);
+                }
             }
-            else
-            {
-                currentWaveWaitingTime += Time.deltaTime;
-            }
+
         }
         else
         {
+            currentWaveWaitingTime += Time.deltaTime;
+        }
+    }
+
+    public void UpdateEncounter(Room room)
+    {
+        if (roomClear)
+        {
+            UpdateRoom(room);
+        }
+        else
+        {
+            // next wave
             if (EnemiesInEncounter.Count <= 0)
             {
                 currentWave++;
 
-               // Debug.Log(currentWave+" "+numberOfWaves.Count);
+                Debug.Log("current wave: " + currentWave + " " + numberOfWaves.Count);
                 if (currentWave < numberOfWaves.Count)
                 {
                     Debug.Log("Current wave");
@@ -696,8 +657,7 @@ public class MapGeneration : MonoBehaviour
                 {
                     totalRoomDiffculty += roomFinishMultiplier;
                     inCombat = false;
-                    rooms[currentRoomInside].completed = true;
-                    CheckIfMapCompleted();
+                    room.completed = true;
                     refreshMiniMapUI();
                     if (currentRoomInside != 0 && GameManager.current.GetState() != GameState.Casual)
                     {
@@ -736,17 +696,17 @@ public class MapGeneration : MonoBehaviour
         }
     }
 
-    void CheckIfMapCompleted()
+    bool CheckIfMapCompleted()
     {
         for(int i =0; i < rooms.Count; i++)
         {
             if (!rooms[i].completed)
             {
-                return;
+                return false;
             }
 
         }
-        thisBTSManager.LoadWinGameScene();
+        return true;
     }
 
     public void ReceiveDoorInput(Direction directionInput)
@@ -808,7 +768,7 @@ public class MapGeneration : MonoBehaviour
 
     public void TryToSpawnHealthPickup(Vector3 pos)
     {
-        float holdingRandom = UnityEngine.Random.RandomRange(0, 100);
+        float holdingRandom = UnityEngine.Random.Range(0, 100);
 
         if (holdingRandom < chanceOfSpawnOutOfOneHundredHealthPickup +  playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)
         {
@@ -820,7 +780,8 @@ public class MapGeneration : MonoBehaviour
 
     public void refreshMiniMapUI()
     {
-    int holdingPos = 1;
+        if (currentRoomInside >= rooms.Count) return;
+        int holdingPos = 1;
         //miniMapRooms[0].transform.position = miniMapStartingPos;
         if (rooms[currentRoomInside].completed)
         {

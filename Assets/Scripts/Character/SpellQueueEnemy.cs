@@ -30,9 +30,9 @@ public class SpellQueueEnemy : Enemy
     public float smoothingRange;
 
    public Vector3 finalDestination;
-    Vector3 nextDestination;
+   protected Vector3 nextDestination;
 
-  protected  Vector3 lastKnownPos;
+    protected  Vector3 lastKnownPos;
     protected float timeStuck;
 
     public float EnemyAvoidanceAmount;
@@ -181,7 +181,7 @@ public class SpellQueueEnemy : Enemy
 
             if (distanceFromFinal < smoothingRange)
             {
-            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
+            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(0, 5), 0, UnityEngine.Random.Range(0, 5)));
 
             finalDestination = target.transform.position + normalAwayFromPlayer * 2;
 

@@ -7,13 +7,9 @@ public class SpellQueueSwarm : SpellQueueEnemy
 {
     float currentAngle;
 
-    public Vector3 nextDestination;
-
     public float coolDownTime;
 
     public float swarmSegmentDist;
-
-    public AOEDamage aoePrefab;
 
     public override void Start()
     {

@@ -12,8 +12,6 @@ public class SpellQueueRunner : SpellQueueEnemy
     public float ExplodingTime;
     float currentExplodingTime;
 
-    public AOEDamage aoePrefab;
-
     public override void Start()
     {
         base.Start();

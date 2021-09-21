@@ -9,6 +9,7 @@ public class CameraFollowing : MonoBehaviour
     public Transform target;
 
     public MapGeneration mapGenerationScript;
+    public Playground playground;
     public Player playerScript;
 
     public float gunPointDistMutliplier;
@@ -32,16 +33,19 @@ public class CameraFollowing : MonoBehaviour
 
        // Debug.Log(holdingDist);
 
+        if (mapGenerationScript)
+        {
+            Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier*(holdingDist/maxGunPointDist)));
+            desiredPos = mapGenerationScript.ClampCameraVectorToCameraBoundsOfCurrentRoom(desiredPos);
+            cameraHolder.transform.position = Vector3.Lerp(cameraHolder.transform.position, desiredPos, cameraLerpAmount);
+        }
+        else if (playground)
+        {
+            Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier * (holdingDist / maxGunPointDist)));
+            desiredPos = playground.mapGeneration.ClampCameraVectorToCameraBoundsOfCurrentRoom(playground.room, desiredPos);
+            cameraHolder.transform.position = Vector3.Lerp(cameraHolder.transform.position, desiredPos, cameraLerpAmount);
+        }
 
 
-
-
-        Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier*(holdingDist/maxGunPointDist)));
-
-
-         desiredPos = mapGenerationScript.ClampCameraVectorToCameraBoundsOfCurrentRoom(desiredPos);
-
-
-        cameraHolder.transform.position = Vector3.Lerp(cameraHolder.transform.position, desiredPos, cameraLerpAmount);
     }
 }

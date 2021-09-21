@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomDoorCensor : MonoBehaviour
 {
-   public MapGeneration mapGenerationScipt;
+    public MapGeneration mapGenerationScipt;
     public Direction thisDirection;
 
     void Start()
@@ -19,10 +19,9 @@ public class RoomDoorCensor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-      if(  other.gameObject.layer == LayerMask.NameToLayer("Character"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Character"))
         {
             mapGenerationScipt.ReceiveDoorInput(thisDirection);
-
         }
     }
 }
