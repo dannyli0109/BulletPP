@@ -179,7 +179,7 @@ public class Player : Character
         {
             timeSinceFired = 0;
             // shoot the main one in the middle
-            if (ShootAmmos(0))
+            if (ShootAmmos(stats.projectileSpread.value))
             {
                 SoundManager.PlaySound(SoundType.Gunshot, bulletContainer.position, 1.0f);
             }
@@ -388,11 +388,11 @@ public class Player : Character
     bool ShootAmmos(float angle)
     {
         bool shot = false;
-        if (ShootBullet(angle)) shot = true;
-        if (ShootGrenade(angle)) shot = true;
-        if (ShootRocket(angle)) shot = true;
-        if (ShootLaser(angle)) shot = true;
-        if (ShootBouncingBlade(angle)) shot = true;
+        if (ShootBullet(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
+        if (ShootGrenade(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
+        if (ShootRocket(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
+        if (ShootLaser(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
+        if (ShootBouncingBlade(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
         return shot;
     }
 

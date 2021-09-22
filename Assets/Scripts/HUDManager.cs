@@ -85,7 +85,6 @@ public class HUDManager : MonoBehaviour
 
     public bool updatingDPS = false;
 
-
     void Awake()
     {
         current = this;
