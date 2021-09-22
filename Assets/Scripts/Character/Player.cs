@@ -36,6 +36,9 @@ public class Player : Character
 
     public Transform gunpointForAiming;
 
+    public TrailRenderer trailRenderer;
+    public float trailDuration;
+    public float trailTime;
     float angle;
     Vector2 movement;
 
@@ -160,8 +163,15 @@ public class Player : Character
     void HandleDashing()
     {
         currentTimeBetweenDashes -= Time.deltaTime;
+        trailTime += Time.deltaTime;
+        if (trailTime > trailDuration)
+        {
+            trailRenderer.emitting = false;
+        }
         if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes<=0)
         {
+            trailTime = 0;
+            trailRenderer.emitting = true;
             currentTimeBetweenDashes = stats.timeBetweenDashs.value;
             currentImmunityFrame = stats.immunityFromDashing.value;
             transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);

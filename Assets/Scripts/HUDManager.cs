@@ -417,7 +417,6 @@ public class HUDManager : MonoBehaviour
             augmentHUD.Populate(player.inventory.augments[i].id, player.inventory.augments[i].level, player.inventory.augments[i].count);
             augmentUI.transform.SetParent(augmentListUIContainer.transform);
             augmentUI.transform.localScale = new Vector3(1, 1, 1);
-
             augmentHUD.sellAugmentTrigger.Init(player, i);
         }
     }
