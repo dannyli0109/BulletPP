@@ -13,6 +13,12 @@ public class BTSManager : MonoBehaviour
 
     public Animator transition;
     public float transitionTime = 1.0f;
+
+    public GameObject pauseScreen;
+    bool Paused;
+
+    GameState lastGameState;
+
     void Start()
     {
         transition.speed = transition.speed = 1.0f / transitionTime;
@@ -20,7 +26,24 @@ public class BTSManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.current.GetState() == GameState.Shop) return;
+            if (Paused)
+            {
+                Paused = false;
+                pauseScreen.SetActive(false);
+                GameManager.current.ChangeStateImmdeiate(lastGameState);
+            }
+            else
+            {
+                Paused = true;
+                pauseScreen.SetActive(true);
+                lastGameState = GameManager.current.GetState();
+                GameManager.current.ChangeStateImmdeiate(GameState.Pause);
+            }
+
+        }
     }
 
     public void LoadFirstRoomScene()

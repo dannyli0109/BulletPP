@@ -69,7 +69,15 @@ public class SpellQueueSwarm : SpellQueueEnemy
 
     public override void Update()
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional() || GameManager.current.GetState() == GameState.Pause)
+        {
+            agent.enabled = false;
+            return;
+        }
+        else
+        {
+            agent.enabled = true;
+        }
 
         if (hp <= 0)
         {

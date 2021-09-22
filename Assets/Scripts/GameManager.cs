@@ -7,6 +7,7 @@ public enum GameState
     Game,
     Shop,
     Casual,
+    Transitional,
     Pause
 }
 
@@ -55,9 +56,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool GamePausing()
+    public bool GameTransitional()
     {
-        return gameState == GameState.Shop || gameState == GameState.Pause;
+        return gameState == GameState.Shop || gameState == GameState.Transitional;
     }
 
     public GameState GetState()

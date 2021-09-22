@@ -1608,6 +1608,14 @@ MonoBehaviour:
       baseValue: 0
     extraExplosionRange:
       baseValue: 0
+    reloadOnDash:
+      baseValue: 0
+    shootRocketOnDash:
+      baseValue: 0
+    personalSpace:
+      baseValue: 0
+    extraDamageAfterReload:
+      baseValue: 0
   bulletStats:
     damage:
       baseValue: 1
@@ -1725,6 +1733,7 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 1109022956828929431}
   hp: 0
   gold: 1
@@ -1733,10 +1742,11 @@ MonoBehaviour:
   currentImmunityFrame: 0
   currentBouncingBladeClip: 0
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
+  rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 0}
-  finalDestination: {x: 0, y: 0, z: 0}
-  nextDestination: {x: 0, y: 0, z: 0}
-  smoothingRange: 0.1
+  oldfinalDestination: {x: 0, y: 0, z: 0}
+  oldnextDestination: {x: 0, y: 0, z: 0}
+  oldsmoothingRange: 0
   speed: 2
   desiredFurthestRange: 7
   favouredRange: 5
@@ -1866,7 +1876,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.45
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 1

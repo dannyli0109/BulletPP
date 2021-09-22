@@ -44,7 +44,7 @@ public class AugmentManager : MonoBehaviour
     public void Update()
     {
 
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         laserSightLineRenderer.gameObject.SetActive(false);
         for (int i = 0; i < character.inventory.augments.Count; i++)
         {

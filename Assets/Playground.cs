@@ -19,7 +19,7 @@ public class Playground : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.current.GetState() == GameState.Shop || GameManager.current.GetState() == GameState.Pause)
+        if (GameManager.current.GetState() == GameState.Shop || GameManager.current.GetState() == GameState.Transitional)
         {
             shouldStart = true;
             return;

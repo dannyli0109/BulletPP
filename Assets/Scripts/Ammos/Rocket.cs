@@ -20,7 +20,8 @@ public class Rocket : Ammo
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) ReturnToPool();
+        if (GameManager.current.GetState() == GameState.Pause) return;
+        if (GameManager.current.GameTransitional()) ReturnToPool();
         bornTime += Time.deltaTime;
         if (bornTime >= owner.rocketStats.travelTime.value)
         {
@@ -37,6 +38,7 @@ public class Rocket : Ammo
     }
     private void FixedUpdate()
     {
+        if (GameManager.current.GetState() == GameState.Pause) return;
         currentSpeed += owner.rocketStats.acceleration.value * Time.fixedDeltaTime;
 
         if (owner.rocketStats.heatSeeking.value > 0)
@@ -62,7 +64,7 @@ public class Rocket : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         HandleAmmoHit(other);
         EventManager.current.OnAmmoDestroy(gameObject);
     }

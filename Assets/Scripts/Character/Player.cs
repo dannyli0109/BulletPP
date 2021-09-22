@@ -58,11 +58,11 @@ public class Player : Character
         if (hp <= 0)
         {
             Debug.Log("Player Load lose");
-            GameManager.current.ChangeStateImmdeiate(GameState.Pause);
+            GameManager.current.ChangeStateImmdeiate(GameState.Transitional);
             thisBTSManager.LoadLoseGameScene();
            
         }
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         HandleRotation();
         HandleMovement();
         HandleShooting();
@@ -74,7 +74,7 @@ public class Player : Character
 
     private void FixedUpdate()
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         MoveCharacter();
     }
 
@@ -509,7 +509,7 @@ public class Player : Character
 
     public override void OnDestroy()
     {
-        GameManager.current.ChangeStateImmdeiate(GameState.Pause);
+        GameManager.current.ChangeStateImmdeiate(GameState.Transitional);
         base.OnDestroy();
     }
 

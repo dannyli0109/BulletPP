@@ -18,14 +18,15 @@ public class BouncingBlade : Ammo
         currentDamage = owner.bouncingBladeStats.damage.value;
     }
     private void FixedUpdate()
-    {      
+    {
+        if (GameManager.current.GetState() == GameState.Pause) return;
         currentSpeed = Mathf.Clamp(currentSpeed -= Time.deltaTime, owner.bouncingBladeStats.speed.value, currentSpeed);
         transform.position += transform.forward * currentSpeed * Time.fixedDeltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         if (owner)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
@@ -67,8 +68,9 @@ public class BouncingBlade : Ammo
 
     void Update()
     {
+        if (GameManager.current.GetState() == GameState.Pause) return;
         handleAnimating();
-        if (GameManager.current.GamePausing())
+        if (GameManager.current.GameTransitional())
         {
             owner.RegainBouncingBlade();
             Destroy(gameObject);

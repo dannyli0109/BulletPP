@@ -120,7 +120,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.095651925, b: 0, a: 1}
+      key0: {r: 0, g: 0.84622765, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -171,11 +171,13 @@ MonoBehaviour:
   hitParticlePrefab: {fileID: 0}
   ammoTip: {fileID: 5391152290708459912}
   overTimeDamage: 0
+  facingOtherWay: 0
   timesBounced: 0
   damage: 0
   size: 0
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
+  fromFreshReload: 0
   thisLineRenderer: {fileID: 2165268159094606968}
   ourCollider: {fileID: 842587620518295890}
   lengthDecreaseSpeed: 14

@@ -13,7 +13,8 @@ public class Bullet : Ammo
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) { ReturnToPool(); }
+        if (GameManager.current.GetState() == GameState.Pause) return;
+        if (GameManager.current.GameTransitional()) { ReturnToPool(); }
         bornTime += Time.deltaTime;
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
@@ -28,6 +29,7 @@ public class Bullet : Ammo
 
     private void FixedUpdate()
     {
+        if (GameManager.current.GetState() == GameState.Pause) return;
         velocity += acceleration * Time.fixedDeltaTime;
         transform.position += velocity * Time.fixedDeltaTime;
         acceleration = new Vector3(0, 0, 0);
@@ -44,7 +46,7 @@ public class Bullet : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
 
         HandleAmmoHit(other);
         EventManager.current.OnAmmoDestroy(gameObject);      

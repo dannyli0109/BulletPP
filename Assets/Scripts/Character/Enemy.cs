@@ -69,7 +69,7 @@ public class Enemy : Character
     public override void Update()
     {
         Debug.Log("enemy update");
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         HandleMovement();
         base.Update();
         if (!target) return;
