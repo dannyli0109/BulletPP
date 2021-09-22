@@ -15,6 +15,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager current;
+    [SerializeField]
     private GameState gameState = GameState.Shop;
     public Shop shop;
     public Animator transition;

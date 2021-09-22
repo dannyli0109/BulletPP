@@ -19,25 +19,26 @@ public class Playground : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.current.GetState() == GameState.Shop || GameManager.current.GetState() == GameState.Transitional)
+        if (
+                GameManager.current.GetState() == GameState.Shop || 
+                GameManager.current.GetState() == GameState.Pause
+            )
         {
             shouldStart = true;
             return;
         }
 
-        if (shouldStart)
+        if ((shouldStart || GameManager.current.GetState() == GameState.Casual) && mapGeneration.EnemiesInEncounter.Count == 0)
         {
             mapGeneration.StartEncounter(room);
             shouldStart = false;
+            GameManager.current.ChangeStateImmdeiate(GameState.Game);
         }
 
         if (mapGeneration.inCombat)
         {
             mapGeneration.UpdateEncounter(room);
         }
-
-
-
     }
 
     public void Init()
