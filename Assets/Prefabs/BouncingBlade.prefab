@@ -1465,10 +1465,12 @@ MonoBehaviour:
   size: 0
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
+  fromFreshReload: 0
+  ImpactForce: 0
   currentSpeed: 0
   slowDownSpeed: 2
   currentDamage: 0
-  spinAmount: 60
+  spinAmount: 70
   blade: {fileID: 7666508484941664020}
 --- !u!135 &6216010191726539468
 SphereCollider:

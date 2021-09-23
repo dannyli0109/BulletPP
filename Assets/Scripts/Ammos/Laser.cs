@@ -96,6 +96,12 @@ public class Laser : Ammo
        return damage * Time.deltaTime;
    }
 
+    public override float GetImpactForce()
+    {
+        //Debug.Log("laser impact");
+        return ImpactForce * Time.deltaTime;
+    }
+
     //public override void Init(Character owner, float angle)
     //{
     //    this.owner = owner;

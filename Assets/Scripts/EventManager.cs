@@ -12,15 +12,15 @@ public class EventManager : MonoBehaviour
         current = this;
     }
 
-    public event Action<Ammo, GameObject> onAmmoHit;
+    public event Action<Ammo, GameObject, Vector2> onAmmoHit;
 
     public event Action<float,Character, GameObject> onLaserHit;
 
     public event Action<float> receiveGold;
 
-    public void OnAmmoHit(Ammo ammo, GameObject obj)
+    public void OnAmmoHit(Ammo ammo, GameObject obj,Vector2 impact)
     {
-        onAmmoHit?.Invoke(ammo, obj);
+        onAmmoHit?.Invoke(ammo, obj,impact);
     }
 
     public void OnLaserHit(float damage, Character owner, GameObject obj)

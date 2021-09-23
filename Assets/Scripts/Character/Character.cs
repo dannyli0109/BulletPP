@@ -146,11 +146,12 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    protected void OnAmmoHit(Ammo ammo, GameObject gameObject)
+    protected void OnAmmoHit(Ammo ammo, GameObject gameObject, Vector2 ImpactForce)
     {
         //Debug.Log(ammo);
         if (this.gameObject == gameObject)
         {
+            Debug.Log(ImpactForce + " force");
             if (ammo.owner != this)
             {
                 if (currentImmunityFrame <= 0)
@@ -166,6 +167,8 @@ public abstract class Character : MonoBehaviour
                     }
                     currentImmunityFrame = stats.immunityFromDamage.value;
                     ResolveOnTakenDamageEffects();
+                    transform.position = transform.position+ new Vector3(ImpactForce.x, 0, ImpactForce.y);
+                    //
                 }
                 else
                 {

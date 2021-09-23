@@ -90,8 +90,10 @@ MonoBehaviour:
   size: 0
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
+  fromFreshReload: 0
+  ImpactForce: 0.3
   currentSpeed: 0
-  slowDownSpeed: 2
+  slowDownSpeed: 0.3
 --- !u!65 &4082053318812833439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103,8 +105,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.07, y: 0.07, z: 0.07}
-  m_Center: {x: 0, y: 0, z: -0.02}
+  m_Size: {x: 0.15, y: 0.15, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0.005}
 --- !u!54 &3404106700143374025
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -375,15 +377,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5836842721391416635, guid: 80d1170f4f6fad34087bc992b7567ab3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5836842721391416635, guid: 80d1170f4f6fad34087bc992b7567ab3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5836842721391416635, guid: 80d1170f4f6fad34087bc992b7567ab3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d1170f4f6fad34087bc992b7567ab3, type: 3}
