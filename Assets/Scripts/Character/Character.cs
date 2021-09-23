@@ -163,7 +163,6 @@ public abstract class Character : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(this.gameObject +" "+ (ammo.GetDamage()));
                         hp -= ammo.GetDamage();
                     }
                     currentImmunityFrame = stats.immunityFromDamage.value;
