@@ -37,8 +37,10 @@ public class Player : Character
     public Transform gunpointForAiming;
 
     public TrailRenderer trailRenderer;
-    public float trailDuration;
+    public float dashDuration;
     public float trailTime;
+    public bool isDashing;
+    Vector2 dashDirection;
     float angle;
     Vector2 movement;
 
@@ -66,11 +68,14 @@ public class Player : Character
            
         }
         if (GameManager.current.GameTransitional()) return;
-        HandleRotation();
-        HandleMovement();
-        HandleShooting();
-        UpdateAnimation();
+        if (!isDashing)
+        {
+            HandleRotation();
+            HandleMovement();
+            HandleShooting();
+        }
         HandleDashing();
+        UpdateAnimation();
         HandleReload();
         currentImmunityFrame -= Time.deltaTime;
     }
@@ -164,21 +169,31 @@ public class Player : Character
     {
         currentTimeBetweenDashes -= Time.deltaTime;
         trailTime += Time.deltaTime;
-        if (trailTime > trailDuration)
+        if (trailTime > dashDuration)
         {
             trailRenderer.emitting = false;
+            isDashing = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes<=0)
+        if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes<=0 && movement.magnitude > 0.01)
         {
+            animator.SetTrigger("Roll");
+            isDashing = true;
             trailTime = 0;
             trailRenderer.emitting = true;
             currentTimeBetweenDashes = stats.timeBetweenDashs.value;
             currentImmunityFrame = stats.immunityFromDashing.value;
             transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
-            characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
+
+            dashDirection = movement;
+            transform.localRotation = Quaternion.LookRotation(new Vector3(dashDirection.x, 0, dashDirection.y));
+            angle = transform.localRotation.eulerAngles.y;
+            // characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
             rocketExitPoint.position = transform.position;
             ResolveDashEffects();
         }
+
+        //animator.SetBool("Roll", isDashing);
+
     }
 
     void HandleShooting()
@@ -398,11 +413,11 @@ public class Player : Character
     bool ShootAmmos(float angle)
     {
         bool shot = false;
-        if (ShootBullet(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
-        if (ShootGrenade(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
-        if (ShootRocket(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
-        if (ShootLaser(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
-        if (ShootBouncingBlade(UnityEngine.Random.RandomRange(-angle, angle))) shot = true;
+        if (ShootBullet(UnityEngine.Random.Range(-angle, angle))) shot = true;
+        if (ShootGrenade(UnityEngine.Random.Range(-angle, angle))) shot = true;
+        if (ShootRocket(UnityEngine.Random.Range(-angle, angle))) shot = true;
+        if (ShootLaser(UnityEngine.Random.Range(-angle, angle))) shot = true;
+        if (ShootBouncingBlade(UnityEngine.Random.Range(-angle, angle))) shot = true;
         return shot;
     }
 
@@ -507,13 +522,27 @@ public class Player : Character
         rocketExitPoint.position = transform.position;
         transform.position = new Vector3(transform.position.x, 0.12f, transform.position.z);
         Physics.SyncTransforms(); // This is for when the player transform is set. Character controllers have a bug with getting not caring about the new tranform.
-        characterController.Move(
-            new Vector3(
-                movement.x * stats.moveSpeed.value * Time.fixedDeltaTime, 
-                0, 
-                movement.y * stats.moveSpeed.value * Time.fixedDeltaTime
-                )
-            );
+        
+        if (isDashing)
+        {
+            characterController.Move(
+                new Vector3(
+                    dashDirection.x * stats.dashAmount.value * Time.fixedDeltaTime,
+                    0,
+                    dashDirection.y * stats.dashAmount.value * Time.fixedDeltaTime
+                    )
+                );
+        }
+        else
+        {
+            characterController.Move(
+                new Vector3(
+                    movement.x * stats.moveSpeed.value * Time.fixedDeltaTime, 
+                    0, 
+                    movement.y * stats.moveSpeed.value * Time.fixedDeltaTime
+                    )
+                );
+        }
 
     }
 
