@@ -85,9 +85,13 @@ public class HUDManager : MonoBehaviour
 
     public bool updatingDPS = false;
 
+
+    public Sprite emptySlotUISprite;
+
     void Awake()
     {
         current = this;
+        PopulateAugmentListUI(true);
     }
 
     public void ShouldUpdateDPS(bool val)
@@ -397,27 +401,50 @@ public class HUDManager : MonoBehaviour
         headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
     }
 
-
-    public void PopulateAugmentListUI()
+    public void PopulateAugmentListUI(bool inShop)
     {
+
         foreach (Transform child in augmentListUIContainer.transform)
         {
             Destroy(child.gameObject);
+            Debug.Log("Destroy");
         }
 
         UpdateAugmentMaxSizeUI();
 
         AugmentManager augmentManager = AugmentManager.current;
-        for (int i = 0; i < player.inventory.augments.Count; i++)
-        {
-            GameObject augmentUI = Instantiate(augmentUIPrefab);
-            AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
 
-            augmentHUD.Populate(player.inventory.augments[i].id, player.inventory.augments[i].level, player.inventory.augments[i].count);
-            augmentUI.transform.SetParent(augmentListUIContainer.transform);
-            augmentUI.transform.localScale = new Vector3(1, 1, 1);
-            augmentHUD.sellAugmentTrigger.Init(player, i);
-        }
+
+            for (int i = 0; i < player.inventory.capacity; i++)
+            //player.inventory.augments.Count; i++)
+            {
+                if (i < player.inventory.augments.Count)
+                {
+
+                    GameObject augmentUI = Instantiate(augmentUIPrefab);
+                    AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
+
+                    augmentHUD.Populate(player.inventory.augments[i].id, player.inventory.augments[i].level, player.inventory.augments[i].count);
+                    augmentUI.transform.SetParent(augmentListUIContainer.transform);
+                    augmentUI.transform.localScale = new Vector3(1, 1, 1);
+                    augmentHUD.sellAugmentTrigger.Init(player, i);
+                }
+                else
+                {
+                    if (inShop)
+                    {
+
+                        GameObject augmentUI = Instantiate(augmentUIPrefab);
+                        AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
+
+                        //  augmentHUD.Populate(0, 0, 0);
+                        augmentHUD.PopulateGeneric(emptySlotUISprite);
+                        augmentUI.transform.SetParent(augmentListUIContainer.transform);
+                        augmentUI.transform.localScale = new Vector3(1, 1, 1);
+                        augmentHUD.sellAugmentTrigger.Init(player, i);
+                    }
+                }
+            }
     }
 
     public void PopulateSynergyListUI()

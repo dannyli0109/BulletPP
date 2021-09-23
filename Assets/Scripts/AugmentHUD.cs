@@ -77,4 +77,25 @@ public class AugmentHUD : MonoBehaviour
             }
         }
     }
+
+    public void PopulateGeneric(Sprite image)
+    {
+        AugmentManager augmentManager = AugmentManager.current;
+        string name = "EM";
+
+        string description = "EM";
+
+        tooltipTrigger.header = "Empty slot";
+        tooltipTrigger.content ="Try buying more augments.";
+        icon.sprite = image;
+        outline.effectColor = augmentManager.colors[0];
+
+
+            for (int i = 0; i < expContainer.transform.childCount; i++)
+            {
+                GameObject expObject = expContainer.transform.GetChild(i).gameObject;
+                expObject.SetActive(false);
+
+            }
+    }
 }

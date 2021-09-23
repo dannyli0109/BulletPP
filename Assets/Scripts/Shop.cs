@@ -8,6 +8,8 @@ public class Shop : MonoBehaviour
     public List<AugmentUI> augmentUIs;
     public Character player;
 
+    public HUDManager thisHUDManager;
+
     public List<TextMeshProUGUI> amountText;
 
     public int level = 0;
@@ -151,6 +153,7 @@ public class Shop : MonoBehaviour
         {
             GameManager.current.ChangeState(GameState.Casual);
             player.reloading = true;
+            thisHUDManager.PopulateAugmentListUI(false);
         }
         // gameObject.SetActive(false);
     }

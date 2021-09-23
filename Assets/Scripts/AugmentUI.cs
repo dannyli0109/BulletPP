@@ -39,7 +39,7 @@ public class AugmentUI : MonoBehaviour
         if (state == 1)
         {
             // obtained one that owned but remains the same level
-            HUDManager.PopulateAugmentListUI();
+            HUDManager.PopulateAugmentListUI(true);
             gameObject.SetActive(false);
         }
         else if (state == 2)
@@ -57,7 +57,7 @@ public class AugmentUI : MonoBehaviour
                 augmentManager.OnSynergyAttached(shop.player.synergies[i].id, shop.player.synergies[i].breakPoint);
             }
 
-            HUDManager.PopulateAugmentListUI();
+            HUDManager.PopulateAugmentListUI(true);
             HUDManager.PopulateSynergyListUI();
             gameObject.SetActive(false);
         }
@@ -75,7 +75,7 @@ public class AugmentUI : MonoBehaviour
                 augmentManager.OnSynergyAttached(shop.player.synergies[i].id, shop.player.synergies[i].breakPoint);
             }
 
-            HUDManager.PopulateAugmentListUI();
+            HUDManager.PopulateAugmentListUI(true);
             gameObject.SetActive(false);
         }
         shop.UpdateText();

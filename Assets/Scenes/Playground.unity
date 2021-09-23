@@ -764,6 +764,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3964088967861427725, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6680669847592378827, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -775,6 +779,10 @@ PrefabInstance:
     - target: {fileID: 6680669848137463560, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: m_Name
       value: PLAYER
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463560, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463602, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: m_LocalPosition.x
@@ -912,6 +920,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1760548603}
+    - target: {fileID: 8276625777134001027, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
 --- !u!1 &501761708
@@ -1318,6 +1330,11 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &652904837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 998473951561502433, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+  m_PrefabInstance: {fileID: 1234712608}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &688058865
 GameObject:
   m_ObjectHideFlags: 0
@@ -3227,6 +3244,10 @@ PrefabInstance:
       propertyPath: bouncingBladeSprites.Array.data[0]
       value: 
       objectReference: {fileID: 1768531823}
+    - target: {fileID: 1337051501429413004, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: emptySlotUISprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4444835017ea21a408d2713f290fbc0a, type: 3}
     - target: {fileID: 1337051501429413005, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3403,6 +3424,10 @@ PrefabInstance:
       propertyPath: addAugmentSlotEvent
       value: 
       objectReference: {fileID: 11400000, guid: 3d824f1acf9e575408ac781272274929, type: 2}
+    - target: {fileID: 6110135436100784873, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: Visual
+      value: 
+      objectReference: {fileID: 652904837}
     - target: {fileID: 8376561006009929501, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -5720,6 +5745,10 @@ PrefabInstance:
       propertyPath: amountText.Array.data[2]
       value: 
       objectReference: {fileID: 441428660}
+    - target: {fileID: 1891872735620922685, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
+      propertyPath: thisHUDManager
+      value: 
+      objectReference: {fileID: 483425283}
     - target: {fileID: 1891872735797210718, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

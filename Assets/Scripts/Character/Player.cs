@@ -134,6 +134,7 @@ public class Player : Character
             dir.y = 0;
             transform.localRotation = Quaternion.LookRotation(dir);
             angle = transform.localRotation.eulerAngles.y;
+           // animator.SetBool("dance", true);
             
 
             //float distance = Vector3.Distance(hit.point, bulletContainer.position);
@@ -194,6 +195,7 @@ public class Player : Character
                 SoundManager.PlaySound(SoundType.Gunshot, bulletContainer.position, 1.0f);
             }
 
+          //  animator.SetTrigger("ShootTrigger");
             for (int i = 0; i < (int)AmmoType.Count; i++)
             {
                 AmmoStats ammoStat = GetAmmoStats(i);
