@@ -1432,7 +1432,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 1.883677, z: 0.65}
+  m_Size: {x: 0.7, y: 1.883677, z: 0.7}
   m_Center: {x: -0.008182287, y: 0.8918593, z: -0.03272891}
 --- !u!54 &5899302560263135400
 Rigidbody:
@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     maxHp:
-      baseValue: 25
+      baseValue: 48
     moveSpeed:
       baseValue: 1
     reloadTime:
@@ -1518,6 +1518,10 @@ MonoBehaviour:
     reloadOnDash:
       baseValue: 0
     shootRocketOnDash:
+      baseValue: 0
+    personalSpace:
+      baseValue: 0
+    extraDamageAfterReload:
       baseValue: 0
   bulletStats:
     damage:
@@ -1636,8 +1640,9 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 5899302560793758629}
-  hp: 40
+  hp: 48
   gold: 2
   timeSinceFired: 0
   reloading: 0

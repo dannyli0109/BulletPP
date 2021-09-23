@@ -34,6 +34,7 @@ public abstract class Ammo : PooledItem
     protected Vector3 currentAcceleration;
 
     public bool fromFreshReload;
+
     public virtual float GetDamage()
     {
         if (fromFreshReload)
@@ -47,6 +48,7 @@ public abstract class Ammo : PooledItem
 
         }
     }
+
     public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
     {
         this.owner = owner;

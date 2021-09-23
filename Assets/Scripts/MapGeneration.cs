@@ -115,9 +115,13 @@ public class MapGeneration : MonoBehaviour
     #endregion
 
     #region difficulty
+    [Header("Difficulty")]
     public float totalRoomDiffculty;
     public float singleEnemyCutOff;
     public float secondWaveCutOff;
+
+    public List<float> additionalWaveCutOff;// for each if you have that much 
+
     public float roomFinishMultiplier;
     public float difficultyNoDamageMultiplier;
 
@@ -531,13 +535,23 @@ public class MapGeneration : MonoBehaviour
         {
             holdingRand = 1;
         }
-        if (totalRoomDiffculty > secondWaveCutOff)
-        {
-            holdingRand = holdingRand / 2;
-            numberOfWaves.Add(holdingRand + 1);
-        }
 
-        numberOfWaves.Add(holdingRand);
+       int holdingNumberOfWaves = 1;
+
+        for (int i = 0; i < additionalWaveCutOff.Count; i++)
+        {
+            if (totalRoomDiffculty > additionalWaveCutOff[i])
+            {
+                holdingNumberOfWaves++;
+            }
+
+        }
+    
+            holdingRand = holdingRand / holdingNumberOfWaves;
+        for(int i =0; i< holdingNumberOfWaves; i++)
+        {
+            numberOfWaves.Add(holdingRand );
+        }
 
         GameManager.current.ChangeStateImmdeiate(GameState.Game);
 

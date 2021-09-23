@@ -77,6 +77,7 @@ public class CharacterStats
     public CharacterStat extraBounces; // for things that bounce atleast once
     public CharacterStat damageOnBounce;
     public CharacterStat extraExplosionRange;
+    public CharacterStat projectileSpread;
 
     public CharacterStat reloadOnDash;
     public CharacterStat shootRocketOnDash;

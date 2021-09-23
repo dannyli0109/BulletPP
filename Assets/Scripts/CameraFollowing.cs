@@ -18,7 +18,7 @@ public class CameraFollowing : MonoBehaviour
     void FixedUpdate()
     {
         if (!target) return;
-
+        if (GameManager.current.GetState() != GameState.Casual&& GameManager.current.GetState() != GameState.Game) return;
 
 
         Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);

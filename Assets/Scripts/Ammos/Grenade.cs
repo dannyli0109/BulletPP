@@ -13,6 +13,7 @@ public class Grenade : Ammo
     }
     private void FixedUpdate()
     {
+        if (GameManager.current.GetState() == GameState.Pause) return;
         //transform.position += transform.forward * owner.grenadeStats.speed.value * Time.fixedDeltaTime;
         transform.position += transform.forward * currentSpeed * Time.fixedDeltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed -= Time.deltaTime, owner.grenadeStats.speed.value, currentSpeed);
@@ -20,14 +21,15 @@ public class Grenade : Ammo
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         HandleAmmoHit(other);
         EventManager.current.OnAmmoDestroy(gameObject);
     }
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) ReturnToPool();
+        if (GameManager.current.GetState() == GameState.Pause) return;
+        if (GameManager.current.GameTransitional()) ReturnToPool();
         currentSpeed = Mathf.Clamp(currentSpeed - slowDownSpeed * Time.deltaTime, owner.grenadeStats.speed.value, currentSpeed);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.grenadeStats.travelTime.value)

@@ -1258,7 +1258,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7370cf9701ae4c43b3fb14f313d1b3c, type: 2}
+  - {fileID: 2100000, guid: 70880a3c5dcffd74e9e597ead22f797a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1357,7 +1357,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 1.883677, z: 0.65}
+  m_Size: {x: 0.7, y: 1.883677, z: 0.7}
   m_Center: {x: -0.008182287, y: 0.8918593, z: -0.03272891}
 --- !u!54 &5077297002888340748
 Rigidbody:
@@ -1443,6 +1443,10 @@ MonoBehaviour:
     reloadOnDash:
       baseValue: 0
     shootRocketOnDash:
+      baseValue: 0
+    personalSpace:
+      baseValue: 0
+    extraDamageAfterReload:
       baseValue: 0
   bulletStats:
     damage:
@@ -1561,6 +1565,7 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 5077297003452681729}
   hp: 20
   gold: 1

@@ -62,11 +62,26 @@ public class Shop : MonoBehaviour
 
     public void UpdateHoldingAmount(int augmentIndex, int amoutTextIndex)
     {
+        AugmentManager augmentManager = AugmentManager.current;
+
         int holdingAmount = amountOfAugment(augmentIndex);
         if (holdingAmount > 0)
         {
             amountText[amoutTextIndex].gameObject.SetActive(true);
-            amountText[amoutTextIndex].text = holdingAmount.ToString();
+            if (holdingAmount >= 8)
+            {
+                amountText[amoutTextIndex].text = augmentManager.augmentDatas[augmentIndex].title + " + +";
+            }
+            else if(holdingAmount==2)
+            {
+                amountText[amoutTextIndex].text = augmentManager.augmentDatas[augmentIndex].title + " +";
+
+            }
+            else
+            {
+            amountText[amoutTextIndex].text = (holdingAmount+1).ToString();
+
+            }
         }
         else
         {

@@ -32,27 +32,24 @@ public class Laser : Ammo
 
         EventManager.current.onAmmoDestroy += OnLaserDestroy;
     }
-    private void FixedUpdate()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
 
         HandleAmmoHit(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (GameManager.current.GamePausing()) return;
+        if (GameManager.current.GameTransitional()) return;
         //Debug.Log("laser");
         HandleAmmoHit(other);
     }
 
     void Update()
     {
-        if (GameManager.current.GamePausing()) Destroy(gameObject);
+        if (GameManager.current.GetState() == GameState.Pause) return;
+        if (GameManager.current.GameTransitional()) Destroy(gameObject);
         bornTime += Time.deltaTime;
         if (bornTime >= owner.laserStats.travelTime.value)
         {

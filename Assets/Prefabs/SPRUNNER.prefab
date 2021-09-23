@@ -1911,7 +1911,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 1.883677, z: 0.65}
+  m_Size: {x: 0.7, y: 1.883677, z: 0.7}
   m_Center: {x: -0.008182287, y: 0.8918593, z: -0.03272891}
 --- !u!54 &6599741860285544931
 Rigidbody:
@@ -1965,7 +1965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     maxHp:
-      baseValue: 20
+      baseValue: 24
     moveSpeed:
       baseValue: 0
     reloadTime:
@@ -1997,6 +1997,10 @@ MonoBehaviour:
     reloadOnDash:
       baseValue: 0
     shootRocketOnDash:
+      baseValue: 0
+    personalSpace:
+      baseValue: 0
+    extraDamageAfterReload:
       baseValue: 0
   bulletStats:
     damage:
@@ -2115,8 +2119,9 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
   bulletContainer: {fileID: 6599741859725775598}
-  hp: 20
+  hp: 24
   gold: 1
   timeSinceFired: 0
   reloading: 0
@@ -2128,7 +2133,7 @@ MonoBehaviour:
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
   oldsmoothingRange: 0
-  speed: 4
+  speed: 4.5
   desiredFurthestRange: 0
   favouredRange: 0
   closestRange: 0
@@ -2167,7 +2172,7 @@ MonoBehaviour:
   viewAngle: 60
   rotationSpeed: 4
   ammoPool: {fileID: 0}
-  setAcceleration: 8
+  setAcceleration: 16
   tooFarToSeePlayer: 18
   tooFarToShoot: 0
   tooClose: 3
@@ -2177,7 +2182,6 @@ MonoBehaviour:
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 1
   ExplodingTime: 1.5
-  aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
 --- !u!1 &6599741860285810124
 GameObject:
   m_ObjectHideFlags: 0
