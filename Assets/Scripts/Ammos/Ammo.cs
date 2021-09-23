@@ -35,6 +35,8 @@ public abstract class Ammo : PooledItem
 
     public bool fromFreshReload;
 
+    public float ImpactForce;
+
     public virtual float GetDamage()
     {
         if (fromFreshReload)
@@ -95,18 +97,24 @@ public abstract class Ammo : PooledItem
         return false;
     }
 
+    public virtual float GetImpactForce()
+    {
+        return ImpactForce;
+    }
+
     protected void HandleAmmoHit(Collider other)
     {
+        Vector2 holdingForce = new Vector2(transform.forward.x, transform.forward.z)*GetImpactForce();
         if (owner)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
                 // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this, other.gameObject);
+                EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                EventManager.current.OnAmmoHit(this, other.gameObject);
+                EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
                 HUDManager.current.damage += GetDamage();
                 
                 if (GetType().ToString() == "Bullet")

@@ -12,6 +12,8 @@ public class AOEDamage : MonoBehaviour
     public CircleMesh circle;
     float time;
 
+    public float impactForce;
+
     public void Init(float radius, float damage, LayerMask layer)
     {
         this.radius = radius;
@@ -36,6 +38,11 @@ public class AOEDamage : MonoBehaviour
             Character character = c.GetComponent<Character>();
             if (character)
             {
+                Debug.Log("explode");
+                Vector3 normal = Vector3.Normalize(character.gameObject.transform.position - transform.position);
+                Vector2 holdingForce = new Vector2(normal.x, normal.z) * impactForce;
+                Debug.Log(holdingForce);
+                character.gameObject.transform.position = character.gameObject.transform.position + new Vector3(holdingForce.x, 0, holdingForce.y);
                 character.hp -= damage;
             }
         }

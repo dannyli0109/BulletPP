@@ -46,6 +46,7 @@ public class BouncingBlade : Ammo
 
     private void OnTriggerStay(Collider other)
     {
+        Vector2 holdingForce = new Vector2(transform.forward.x, transform.forward.z) * 2;
         //HandleAmmoHit(other);
         // Debug.Log(Time.deltaTime);
         if (owner)
@@ -53,13 +54,13 @@ public class BouncingBlade : Ammo
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
                 // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this, other.gameObject);
+                EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
                // EventManager.current.OnLaserHit(owner.bouncingBladeStats.damage.value * Time.deltaTime, owner, other.gameObject);
 
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                EventManager.current.OnAmmoHit(this, other.gameObject);
+                EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
                
             }
         }
@@ -127,6 +128,12 @@ public class BouncingBlade : Ammo
     private void OnDestroy()
     {
         EventManager.current.onAmmoDestroy -= OnBouncingBladeDestroy;
+    }
+
+    public override float GetImpactForce()
+    {
+        //Debug.Log("laser impact");
+        return ImpactForce * Time.deltaTime;
     }
 
     //public override void Init(Character owner, float angle)

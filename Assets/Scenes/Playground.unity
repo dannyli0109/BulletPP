@@ -854,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: grenadeStats.speed.baseValue
-      value: 12
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: laserStats.travelTime.baseValue
@@ -883,6 +883,26 @@ PrefabInstance:
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: trailDuration
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: grenadeStats.bounceAdditionSpeed.baseValue
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: rocketStats.speed.baseValue
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: rocketStats.acceleration.baseValue
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: grenadeStats.damage.baseValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: rocketStats.radius.baseValue
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848201933449, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: cam
