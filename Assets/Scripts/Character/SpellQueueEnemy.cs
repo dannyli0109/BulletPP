@@ -16,6 +16,7 @@ public class SpellQueueEnemy : Enemy
     public float rotationSpeed;
     public AmmoPool ammoPool;
 
+
     #region MoveStats
     [Header("Move Stats")]
 

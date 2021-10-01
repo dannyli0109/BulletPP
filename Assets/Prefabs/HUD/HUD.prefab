@@ -162,7 +162,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 5
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 4
+  m_fontStyle: 5
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 1234712611}
   - component: {fileID: 1234712612}
   - component: {fileID: 1295753033}
+  - component: {fileID: 2083631495}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -637,6 +638,7 @@ MonoBehaviour:
   laserDamage: 0
   bouncingBladeDamage: 0
   updatingDPS: 0
+  emptySlotUISprite: {fileID: 21300000, guid: 4444835017ea21a408d2713f290fbc0a, type: 3}
 --- !u!114 &1234712611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +713,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1337051501429413004}
         m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
-        m_MethodName: PopulateAugmentListUI
+        m_MethodName: RefreshPlayerStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -724,6 +726,46 @@ MonoBehaviour:
       - m_Target: {fileID: 1337051501429413004}
         m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
         m_MethodName: PopulateSynergyListUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1337051501429413004}
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+        m_MethodName: PopulateAugmentListUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2083631495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337051501429413009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c95b98eb6e83594ea78c735b18f0c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 3d824f1acf9e575408ac781272274929, type: 2}
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1337051501429413004}
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+        m_MethodName: UpdateAugmentMaxSizeUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2629,10 +2671,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4168762093764131937, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6110135435362011904, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6110135435362011904, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
+      propertyPath: addAugmentSlotEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 3d824f1acf9e575408ac781272274929, type: 2}
+    - target: {fileID: 6110135435362011904, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
+      propertyPath: Visual
+      value: 
+      objectReference: {fileID: 998473951561502433}
     - target: {fileID: 9185144339417509406, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2662,5 +2716,10 @@ PrefabInstance:
 --- !u!224 &3605239321835238895 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3605239320561429510, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
+  m_PrefabInstance: {fileID: 1545066985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &998473951561502433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 998473950421456648, guid: defd068bb7da19143b5c22cb8d6dd550, type: 3}
   m_PrefabInstance: {fileID: 1545066985}
   m_PrefabAsset: {fileID: 0}

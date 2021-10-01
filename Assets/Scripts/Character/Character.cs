@@ -151,7 +151,7 @@ public abstract class Character : MonoBehaviour
         //Debug.Log(ammo);
         if (this.gameObject == gameObject)
         {
-            Debug.Log(ImpactForce + " force");
+           // Debug.Log(ImpactForce + " force");
             if (ammo.owner != this)
             {
                 if (currentImmunityFrame <= 0)

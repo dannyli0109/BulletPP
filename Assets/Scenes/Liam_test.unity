@@ -4759,6 +4759,10 @@ PrefabInstance:
       propertyPath: addAugmentSlotEvent
       value: 
       objectReference: {fileID: 11400000, guid: 3d824f1acf9e575408ac781272274929, type: 2}
+    - target: {fileID: 6110135436100784873, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
+      propertyPath: thisHUDManager
+      value: 
+      objectReference: {fileID: 483425283}
     - target: {fileID: 8376561006009929501, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -5724,7 +5728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: enemiesTypes.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: swarmEnemiesType.Array.size
@@ -5777,11 +5781,11 @@ PrefabInstance:
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: enemiesTypes.Array.data[4]
       value: 
-      objectReference: {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
+      objectReference: {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: enemiesTypes.Array.data[0]
       value: 
-      objectReference: {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
+      objectReference: {fileID: 2875370378184938783, guid: fb734a36ec5010a4ebcaee3f6861fd22, type: 3}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: enemiesTypes.Array.data[5]
       value: 
@@ -5821,6 +5825,10 @@ PrefabInstance:
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
@@ -8076,6 +8084,10 @@ PrefabInstance:
       propertyPath: amountText.Array.data[2]
       value: 
       objectReference: {fileID: 441428660}
+    - target: {fileID: 1891872735620922685, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
+      propertyPath: thisHUDManager
+      value: 
+      objectReference: {fileID: 483425283}
     - target: {fileID: 1891872735797210718, guid: d4f599e045bf58c4b90069918a69d984, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

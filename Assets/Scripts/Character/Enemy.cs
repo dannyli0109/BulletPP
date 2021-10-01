@@ -57,6 +57,8 @@ public class Enemy : Character
     public GameObject target;
     public NavMeshAgent agent;
 
+    public MapGeneration mapGenerationScript;
+
     protected float angle;
     public override void Start()
     {

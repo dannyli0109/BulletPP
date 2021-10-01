@@ -145,7 +145,7 @@ public class MapGeneration : MonoBehaviour
     {
         GenerateMap();
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
-        refreshMiniMapUI();
+        RefreshMiniMapUI();
         playerTarget.transform.position = startingPos;
     }
 
@@ -473,6 +473,18 @@ public class MapGeneration : MonoBehaviour
         }
     }
 
+    public void SpawnSwarms(Vector3 setPos, int swarmIndex)
+    {
+        int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
+        for (int j = 0; j < swarmSpawnAmount; j++)
+        {
+            GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
+            holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+            // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
+        }
+    }
+
     public void SpawnSniper(Room room, int sniperIndex)
     {
         // sniper
@@ -512,7 +524,7 @@ public class MapGeneration : MonoBehaviour
         GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
         EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
-        // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
+        holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
     }
 
     public void StartEncounter(Room room)
@@ -544,9 +556,7 @@ public class MapGeneration : MonoBehaviour
             {
                 holdingNumberOfWaves++;
             }
-
         }
-    
             holdingRand = holdingRand / holdingNumberOfWaves;
         for(int i =0; i< holdingNumberOfWaves; i++)
         {
@@ -672,7 +682,7 @@ public class MapGeneration : MonoBehaviour
                     totalRoomDiffculty += roomFinishMultiplier;
                     inCombat = false;
                     room.completed = true;
-                    refreshMiniMapUI();
+                    RefreshMiniMapUI();
                     if (currentRoomInside != 0 && GameManager.current.GetState() != GameState.Casual)
                     {
                         finishEnounter?.Invoke();
@@ -764,7 +774,7 @@ public class MapGeneration : MonoBehaviour
         }
 
             CheckToStartEncounter();
-            refreshMiniMapUI();
+            RefreshMiniMapUI();
             //Debug.Log(directionInput);
         }
     }
@@ -795,7 +805,7 @@ public class MapGeneration : MonoBehaviour
         }
     }
 
-    public void refreshMiniMapUI()
+    public void RefreshMiniMapUI()
     {
         if (currentRoomInside >= rooms.Count) return;
         int holdingPos = 1;
@@ -881,5 +891,12 @@ public class MapGeneration : MonoBehaviour
         {
             miniMapRightRoom.SetActive(false);
         }
+    }
+
+    public Vector3 ReturnNormalEnemyPosInRoom()
+    {
+        // room.thisPrefabInfo.enemySpawnPoint
+        int holdingSpawnInt = UnityEngine.Random.Range(0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint.Count);
+        return  new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].position.x, yEnemyHeight, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].position.y);
     }
 }

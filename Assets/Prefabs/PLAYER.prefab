@@ -4923,9 +4923,9 @@ MonoBehaviour:
       baseValue: 0
   grenadeStats:
     damage:
-      baseValue: 0.8
+      baseValue: 1
     speed:
-      baseValue: 12
+      baseValue: 18
     size:
       baseValue: 2
     critChance:
@@ -4941,12 +4941,12 @@ MonoBehaviour:
     additionalAmmo:
       baseValue: 0
     bounceAdditionSpeed:
-      baseValue: 6
+      baseValue: 12
   rocketStats:
     damage:
       baseValue: 2.25
     speed:
-      baseValue: 1
+      baseValue: 6
     size:
       baseValue: 2
     critChance:
@@ -4962,9 +4962,9 @@ MonoBehaviour:
     additionalAmmo:
       baseValue: 0
     acceleration:
-      baseValue: 15
+      baseValue: 18
     radius:
-      baseValue: 1
+      baseValue: 1.5
     heatSeeking:
       baseValue: 0
   bouncingBladeStats:
@@ -7144,7 +7144,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8276625777134001027}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
   m_Name: 

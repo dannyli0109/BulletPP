@@ -1,12 +1,13 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpellQueueRunner : SpellQueueEnemy
+public class SpellQueueSummoner : SpellQueueEnemy
 {
     float currentAngle;
+    bool usingLaser;
+    public Transform gunPoint;
 
     bool exploding;
     public float ExplodingTime;
@@ -60,10 +61,20 @@ public class SpellQueueRunner : SpellQueueEnemy
         spellTime = new List<float>();
 
         spellQueue.Add(() => {
-            // ShootBullets(2, 0, transform.forward, 180, 3.5f, 3);
-            doNothing();
+            mapGenerationScript.SpawnSwarms(transform.position, 0);
+            teleport();
         });
-        spellTime.Add(5.0f);
+        spellTime.Add(3.5f);
+
+        spellQueue.Add(() => {
+            ToggleLaser(true);
+        });
+        spellTime.Add(0.7f);
+
+        spellQueue.Add(() => {
+            ToggleLaser(false);
+        });
+        spellTime.Add(2.5f);
 
         index = 0;
     }
@@ -99,6 +110,7 @@ public class SpellQueueRunner : SpellQueueEnemy
         }
 
         UpdateAnimation();
+        UpdatelaserSight();
 
         timeSinceFired += Time.deltaTime;
     }
@@ -107,18 +119,6 @@ public class SpellQueueRunner : SpellQueueEnemy
     {
         agent.speed = speed;
 
-        // too close move back
-        if (InRange(tooClose))
-        {
-            Debug.Log("exploding");
-            exploding = true;
-            agent.speed = 0;
-        }
-        else
-        {
-            finalDestination = target.transform.position;
-        }
-        Debug.DrawLine(transform.position, finalDestination, Color.red, 0.1f);
         if (hp > 0)
         {
             agent?.SetDestination(finalDestination);
@@ -128,11 +128,11 @@ public class SpellQueueRunner : SpellQueueEnemy
 
     public void CreateAOE()
     {
-        Debug.Log("AOE");
+      //  Debug.Log("AOE");
         Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
         AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
 
-       aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 12|1<<11);
+        aoeDamage.Init(rocketStats.radius.value, rocketStats.damage.value, 1 << 12 | 1 << 11);
 
     }
 
@@ -141,12 +141,43 @@ public class SpellQueueRunner : SpellQueueEnemy
 
     }
 
+    public void teleport()
+    {
+        Debug.Log("teleport");
+        transform.position = mapGenerationScript.ReturnNormalEnemyPosInRoom();
+    }
+
+    public void ToggleLaser(bool on)
+    {
+        Debug.Log("toggle laser");
+        usingLaser = on;
+    }
+
+    public void UpdatelaserSight()
+    {
+        thisLineRenderer.useWorldSpace = true;
+        if (usingLaser)
+        {
+            Vector3 lookDir = (gunPoint.forward) * 36;
+            thisLineRenderer.SetPosition(0, gunPoint.position);
+            thisLineRenderer.SetPosition(1, gunPoint.position + lookDir);
+        }
+        else
+        {
+            // Debug.Log("off");
+            Vector3 lookDir = (gunPoint.forward) * 12;
+            thisLineRenderer.SetPosition(0, gunPoint.position);
+            thisLineRenderer.SetPosition(1, gunPoint.position);
+        }
+
+    }
+
     public void handleExploding()
     {
 
-      //  Debug.Log(currentExplodingTime);
+        //  Debug.Log(currentExplodingTime);
         currentExplodingTime += Time.deltaTime;
-        if(currentExplodingTime> ExplodingTime)
+        if (currentExplodingTime > ExplodingTime)
         {
             EventManager.current.ReceiveGold(gold);
             Destroy(gameObject);
@@ -175,21 +206,19 @@ public class SpellQueueRunner : SpellQueueEnemy
         float tx = velocity.x;
         float ty = velocity.z;
 
-        Vector2 movemntRotated;
-        movemntRotated.x = (cos * tx) - (sin * ty);
-        movemntRotated.y = (sin * tx) + (cos * ty);
-
-        // movemntRotated = new Vector2(tx, ty);
-        movemntRotated = movemntRotated.normalized;
-
-        animator.SetFloat("x", movemntRotated.x);
-        animator.SetFloat("y", movemntRotated.y);
+       // Vector2 movemntRotated;
+       // movemntRotated.x = (cos * tx) - (sin * ty);
+       // movemntRotated.y = (sin * tx) + (cos * ty);
+       //
+       // // movemntRotated = new Vector2(tx, ty);
+       // movemntRotated = movemntRotated.normalized;
+      //
+      //  animator.SetFloat("x", movemntRotated.x);
+      //  animator.SetFloat("y", movemntRotated.y);
     }
 
     public override void OnDestroy()
     {
-        CreateAOE();
         base.OnDestroy();
     }
-
 }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7128933462229582434
 Transform:
   m_ObjectHideFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   rooms: []
   wallReConnectChanceOfHundred: 25
   roomMultiplyValue: {x: 60, y: 60}
-  startingPos: {x: 0, y: 0, z: -32}
+  startingPos: {x: 0, y: 0, z: 0}
   chanceOfHundredToSpawnNewRoom:
   - 90
   - 30
@@ -119,9 +119,12 @@ MonoBehaviour:
   - {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
   - {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
   - {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
-  - {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
   sniperTypes:
   - {fileID: 5077297002888340751, guid: 2fe8c023552f8f247a78be833f0d26a7, type: 3}
+  swarmEnemiesType:
+  - {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
+  minSwarmSpawnAmount: 2
+  maxSwarmSpawnAmount: 5
   yEnemyHeight: 0
   enemyRandOffset: {x: 2, y: 1}
   inCombat: 0
@@ -142,6 +145,7 @@ MonoBehaviour:
   totalRoomDiffculty: 0
   singleEnemyCutOff: 2
   secondWaveCutOff: 12
+  additionalWaveCutOff: []
   roomFinishMultiplier: 2
   difficultyNoDamageMultiplier: 0.5
   chanceOfSpawnOutOfOneHundredHealthPickup: 30
