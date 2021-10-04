@@ -1412,6 +1412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PLAYER
       objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463560, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463602, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1527,6 +1531,14 @@ PrefabInstance:
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: stats.projectileSpread.baseValue
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: deskBulletPrefab
+      value: 
+      objectReference: {fileID: 4417698256760681585, guid: e81685eb3006e6a4798061de5c30ce06, type: 3}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: stats.deskBulletStatPercentage.baseValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848201933449, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: cam

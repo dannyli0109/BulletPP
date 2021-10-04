@@ -2602,6 +2602,8 @@ MonoBehaviour:
       baseValue: 0
     projectileSpread:
       baseValue: 0
+    knockBackMultiplier:
+      baseValue: 1.6
     reloadOnDash:
       baseValue: 0
     shootRocketOnDash:
@@ -2609,6 +2611,10 @@ MonoBehaviour:
     personalSpace:
       baseValue: 0
     extraDamageAfterReload:
+      baseValue: 0
+    bulletPiercing:
+      baseValue: 0
+    deskBulletStatPercentage:
       baseValue: 0
   bulletStats:
     damage:
@@ -2727,6 +2733,7 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  deskBulletPrefab: {fileID: 0}
   aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 2875370376564030993}
   hp: 0

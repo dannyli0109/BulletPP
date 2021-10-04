@@ -1440,6 +1440,10 @@ MonoBehaviour:
       baseValue: 0
     extraExplosionRange:
       baseValue: 0
+    projectileSpread:
+      baseValue: 0
+    knockBackMultiplier:
+      baseValue: 0.6
     reloadOnDash:
       baseValue: 0
     shootRocketOnDash:
@@ -1447,6 +1451,10 @@ MonoBehaviour:
     personalSpace:
       baseValue: 0
     extraDamageAfterReload:
+      baseValue: 0
+    bulletPiercing:
+      baseValue: 0
+    deskBulletStatPercentage:
       baseValue: 0
   bulletStats:
     damage:
@@ -1565,6 +1573,7 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  deskBulletPrefab: {fileID: 0}
   aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 5077297003452681729}
   hp: 20
@@ -1611,6 +1620,7 @@ MonoBehaviour:
   DEBUG: 0
   target: {fileID: 0}
   agent: {fileID: 8489136819912132288}
+  mapGenerationScript: {fileID: 0}
   spellTime: []
   index: 0
   minCooldown: 2

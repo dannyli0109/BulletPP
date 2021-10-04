@@ -65,7 +65,7 @@ public class Player : Character
             Debug.Log("Player Load lose");
             GameManager.current.ChangeStateImmdeiate(GameState.Transitional);
             thisBTSManager.LoadLoseGameScene();
-           
+
         }
         if (GameManager.current.GameTransitional()) return;
         if (!isDashing)
@@ -86,7 +86,7 @@ public class Player : Character
         MoveCharacter();
     }
 
-  public override void CheckOnDamageTrigger()
+    public override void CheckOnDamageTrigger()
     {
         RecentlyTakenDamage++;
     }
@@ -139,8 +139,8 @@ public class Player : Character
             dir.y = 0;
             transform.localRotation = Quaternion.LookRotation(dir);
             angle = transform.localRotation.eulerAngles.y;
-           // animator.SetBool("dance", true);
-            
+            // animator.SetBool("dance", true);
+
 
             //float distance = Vector3.Distance(hit.point, bulletContainer.position);
 
@@ -159,7 +159,7 @@ public class Player : Character
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
 
-         if(movement.x!=0|| movement.y != 0)
+        if (movement.x != 0 || movement.y != 0)
         {
             lastMovementDirection = movement;
             rocketExitPoint.LookAt(transform);
@@ -175,7 +175,7 @@ public class Player : Character
             trailRenderer.emitting = false;
             isDashing = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes<=0 && movement.magnitude > 0.01)
+        if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes <= 0 && movement.magnitude > 0.01)
         {
             animator.SetTrigger("Roll");
             isDashing = true;
@@ -210,7 +210,7 @@ public class Player : Character
                 SoundManager.PlaySound(SoundType.Gunshot, bulletContainer.position, 1.0f);
             }
 
-          //  animator.SetTrigger("ShootTrigger");
+            //  animator.SetTrigger("ShootTrigger");
             for (int i = 0; i < (int)AmmoType.Count; i++)
             {
                 AmmoStats ammoStat = GetAmmoStats(i);
@@ -256,7 +256,7 @@ public class Player : Character
     {
         if (other.gameObject.layer == 17)
         {
-           // Debug.Log("health");
+            // Debug.Log("health");
             hp++;
             other.gameObject.transform.parent.gameObject.SetActive(false);
 
@@ -314,12 +314,14 @@ public class Player : Character
     {
         if (currentBulletClip > 0)
         {
-            Bullet bullet;
-            if (ammoPool.bulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation))
+            if (stats.deskBulletStatPercentage.value > 0 && 7 < UnityEngine.Random.RandomRange(0, 10))
             {
-                Ammo ammoComponent = bullet.GetComponent<Ammo>();
+                Debug.Log("desk");
+                GameObject desk = Instantiate(deskBulletPrefab, bulletContainer);
+                Ammo ammoComponent = desk.GetComponent<Ammo>();
                 Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value*stats.deskBulletStatPercentage.value, stats.damageMultiplier.value * bulletStats.damage.value * stats.deskBulletStatPercentage.value, bulletStats.size.value);
+                desk.transform.SetParent(null);
                 currentBulletClip--;
                 if (freshReload)
                 {
@@ -327,8 +329,34 @@ public class Player : Character
                 }
                 return true;
             }
+            else
+            {
+                Bullet bullet;
+                if (ammoPool.bulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation))
+                {
+                    Ammo ammoComponent = bullet.GetComponent<Ammo>();
+                    Vector3 forward = bulletContainer.forward;
+                    ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                    currentBulletClip--;
+
+                    if (stats.bulletPiercing.value > 0)
+                    {
+                        bullet.piercing = true;
+                    }
+
+                    if (stats.bulletPiercing.value > 0)
+                    {
+                        bullet.piercing = true;
+                    }
+                    if (freshReload)
+                    {
+                        ammoComponent.fromFreshReload = true;
+                    }
+                    return true;
+                }
+            }
         }
-        return false;
+            return false;
     }
 
     bool ShootRocket(float angle)

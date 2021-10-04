@@ -5,7 +5,8 @@ using UnityEngine.VFX;
 
 public class Bullet : Ammo
 {
-    
+    public bool piercing;
+    public bool isADesk;
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
@@ -18,7 +19,14 @@ public class Bullet : Ammo
         bornTime += Time.deltaTime;
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
+            if (isADesk)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
             ReturnToPool();
+            }
         }
 
         if (timesBounced < owner.bulletStats.amountOfBounces.value)
@@ -49,7 +57,18 @@ public class Bullet : Ammo
         if (GameManager.current.GameTransitional()) return;
 
         HandleAmmoHit(other);
-        EventManager.current.OnAmmoDestroy(gameObject);      
+
+        if (piercing&& other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            if (isADesk)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                EventManager.current.OnAmmoDestroy(gameObject);
+            }
+        }
     }
 
     private void OnDestroy()

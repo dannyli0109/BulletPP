@@ -78,12 +78,14 @@ public class CharacterStats
     public CharacterStat damageOnBounce;
     public CharacterStat extraExplosionRange;
     public CharacterStat projectileSpread;
+    public CharacterStat knockBackMultiplier; // when receiving 
 
     public CharacterStat reloadOnDash;
     public CharacterStat shootRocketOnDash;
-
     public CharacterStat personalSpace;
     public CharacterStat extraDamageAfterReload;
+    public CharacterStat bulletPiercing;
+    public CharacterStat deskBulletStatPercentage; // needs to be over 1
 }
 
 public class ModifiedStat
@@ -107,6 +109,7 @@ public abstract class Character : MonoBehaviour
     public GameObject rocketPrefab;
     public GameObject bouncingBladePrefab;
     public GameObject laserPrefab;
+    public GameObject deskBulletPrefab;
     public AOEDamage aoePrefab;
     public Transform bulletContainer;
 
@@ -167,7 +170,7 @@ public abstract class Character : MonoBehaviour
                     }
                     currentImmunityFrame = stats.immunityFromDamage.value;
                     ResolveOnTakenDamageEffects();
-                    transform.position = transform.position+ new Vector3(ImpactForce.x, 0, ImpactForce.y);
+                    transform.position = transform.position+ new Vector3(ImpactForce.x, 0, ImpactForce.y)* stats.knockBackMultiplier.value;
                     //
                 }
                 else
@@ -372,7 +375,6 @@ public abstract class Character : MonoBehaviour
         }
         modifiedStats.Clear();
     }
-
 
     public virtual void OnDestroy()
     {
