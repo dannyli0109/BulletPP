@@ -105,12 +105,15 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
+    <Compile Include="Assets\Scripts\Aguments\BouncingBullet.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueEnemy.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\Scripts\ParticleHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Aguments\MultiBullet.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueSwarm.cs" />
     <Compile Include="Assets\Scripts\AOEDamage.cs" />
+    <Compile Include="Assets\Scripts\Ammos\AugmentAmmo.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\SoundManager.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
@@ -200,9 +203,6 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
-    <Compile Include="Assets\Scripts\Ammos\AugmentAmmo.cs" />
-    <Compile Include="Assets\Scripts\Aguments\MultiBullet.cs" />
-    <Compile Include="Assets\Scripts\Aguments\BouncingBullet.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />
