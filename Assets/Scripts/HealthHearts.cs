@@ -11,11 +11,14 @@ public class HealthHearts : MonoBehaviour
     public float xOffset;
     float LastKnownHealth;
 
-    public Color damageColour;
+    public Color HeartdamageColour;
 
-    public Color currentColour;
+    public Color HeartcurrentColour;
 
     public float colourReduceAmount;
+
+    public Image onHurtScreenGlow;
+    public Color onHurtScreenGlowColour;
 
 
   void Start()
@@ -27,16 +30,23 @@ public class HealthHearts : MonoBehaviour
     {
         if(LastKnownHealth > character.hp)
         {
-            currentColour = damageColour;
+            HeartcurrentColour = HeartdamageColour;
+            onHurtScreenGlow.color = onHurtScreenGlowColour;
         }
 
-        if(currentColour!= new Color(255, 255, 255))
+        if(HeartcurrentColour!= new Color(255, 255, 255))
         {
           //  Debug.Log("decrease");
-            currentColour.b += Time.deltaTime * colourReduceAmount;
-            currentColour.g += Time.deltaTime * colourReduceAmount;
-            currentColour.r += Time.deltaTime * colourReduceAmount;
-           // currentColour.a = 255;
+            HeartcurrentColour.b += Time.deltaTime * colourReduceAmount;
+            HeartcurrentColour.g += Time.deltaTime * colourReduceAmount;
+            HeartcurrentColour.r += Time.deltaTime * colourReduceAmount;
+            HeartcurrentColour.a = 255;
+        }
+
+        if (onHurtScreenGlow.color.a > 0)
+        {
+            Color holdingColour = new Color(onHurtScreenGlow.color.r, onHurtScreenGlow.color.g, onHurtScreenGlow.color.b, onHurtScreenGlow.color.a - Time.deltaTime * colourReduceAmount);
+            onHurtScreenGlow.color = holdingColour;
         }
 
         float holdingXOffset = -(character.hp) * xOffset / 2;
@@ -45,7 +55,7 @@ public class HealthHearts : MonoBehaviour
             if (i < character.hp)
             {
                 healthHearts[i].gameObject.SetActive(true);
-                healthHearts[i].color = currentColour;
+                healthHearts[i].color = HeartcurrentColour;
                 healthHearts[i].gameObject.transform.position = defaultPos.position + new Vector3(holdingXOffset + i * xOffset, 0, 0);
             }
             else

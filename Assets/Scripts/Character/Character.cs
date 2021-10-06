@@ -169,7 +169,7 @@ public abstract class Character : MonoBehaviour
                         hp -= ammo.GetDamage();
                     }
                     currentImmunityFrame = stats.immunityFromDamage.value;
-                    ResolveOnTakenDamageEffects();
+                    ResolveOnTakenDamageEffects(ImpactForce);
                     transform.position = transform.position+ new Vector3(ImpactForce.x, 0, ImpactForce.y)* stats.knockBackMultiplier.value;
                     //
                 }
@@ -381,7 +381,7 @@ public abstract class Character : MonoBehaviour
         EventManager.current.onAmmoHit -= OnAmmoHit;
     }
 
-    private void ResolveOnTakenDamageEffects()
+  public virtual void ResolveOnTakenDamageEffects( Vector3 direction)
     {
         if (stats.personalSpace.value > 1)
         {

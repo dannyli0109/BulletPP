@@ -44,6 +44,10 @@ public class Player : Character
     float angle;
     Vector2 movement;
 
+    #region scripts
+  public  CameraFollowing cameraFollowingScript;
+    #endregion
+
     bool freshReload;
     public override void Start()
     {
@@ -614,6 +618,16 @@ public class Player : Character
 
             gold += augmentManager.costs[augmentManager.augmentDatas[augment.id].rarity] * (augment.level + 1);
             sellAugment?.Invoke();
+        }
+    }
+
+    public override void ResolveOnTakenDamageEffects(Vector3 direction)
+    {
+        cameraFollowingScript.MoveCameraInDirection(direction);
+
+        if (stats.personalSpace.value > 1)
+        {
+            CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
         }
     }
 }

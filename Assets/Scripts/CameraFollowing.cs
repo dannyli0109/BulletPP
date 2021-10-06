@@ -15,6 +15,8 @@ public class CameraFollowing : MonoBehaviour
     public float gunPointDistMutliplier;
     public float maxGunPointDist;
 
+    public float MoveCameraMultiplier; // used by MoveCameraInDirection
+
     void FixedUpdate()
     {
         if (!target) return;
@@ -47,5 +49,11 @@ public class CameraFollowing : MonoBehaviour
         }
 
 
+    }
+
+    public void MoveCameraInDirection(Vector3 input)
+    {
+        Debug.Log("move");
+        cameraHolder.position = cameraHolder.position + input * MoveCameraMultiplier;
     }
 }
