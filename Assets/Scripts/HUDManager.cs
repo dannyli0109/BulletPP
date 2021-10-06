@@ -91,6 +91,11 @@ public class HUDManager : MonoBehaviour
     void Awake()
     {
         current = this;
+    }
+
+
+    private void Start()
+    {
         PopulateAugmentListUI(true);
     }
 
@@ -120,7 +125,7 @@ public class HUDManager : MonoBehaviour
     {
         playerGoldUI.richText = true;
         playerGoldUI.text = "$: " + player.gold;
-        UpdatePlayerAmmoUI();
+        //UpdatePlayerAmmoUI();
         //UpdateDPSGUI();
     }
 
@@ -381,70 +386,68 @@ public class HUDManager : MonoBehaviour
 
     public void RefreshPlayerStats()
     {
-        AugmentManager augmentManager = AugmentManager.current;
+        //AugmentManager augmentManager = AugmentManager.current;
 
-        player.RemoveAllModifiers();
+        //player.RemoveAllModifiers();
 
-        for (int i = 0; i < player.inventory.augments.Count; i++)
-        {
-            augmentManager.OnAugmentAttached(player.inventory.augments[i].id, player.inventory.augments[i].level);
-        }
+        //for (int i = 0; i < player.inventory.augments.Count; i++)
+        //{
+        //    augmentManager.OnAugmentAttached(player.inventory.augments[i].id, player.inventory.augments[i].level);
+        //}
 
-        for (int i = 0; i < player.synergies.Count; i++)
-        {
-            augmentManager.OnSynergyAttached(player.synergies[i].id, player.synergies[i].breakPoint);
-        }
+        //for (int i = 0; i < player.synergies.Count; i++)
+        //{
+        //    augmentManager.OnSynergyAttached(player.synergies[i].id, player.synergies[i].breakPoint);
+        //}
     }
 
     public void UpdateAugmentMaxSizeUI()
     {
-        headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
+        //headerTextGUI.text = "Augments " + player.inventory.augments.Count.ToString() + "/" + player.inventory.capacity.ToString();
     }
 
     public void PopulateAugmentListUI(bool inShop)
     {
-
+        Debug.Log("Trigger");
         foreach (Transform child in augmentListUIContainer.transform)
         {
             Destroy(child.gameObject);
-            Debug.Log("Destroy");
         }
 
-        UpdateAugmentMaxSizeUI();
+        //UpdateAugmentMaxSizeUI();
 
-        AugmentManager augmentManager = AugmentManager.current;
+        //AugmentManager augmentManager = AugmentManager.current;
 
 
-            for (int i = 0; i < player.inventory.capacity; i++)
-            //player.inventory.augments.Count; i++)
+        for (int i = 0; i < player.inventory.capacity; i++)
+        {
+            if (i < player.inventory.augments.Count)
             {
-                if (i < player.inventory.augments.Count)
+
+                GameObject augmentUI = Instantiate(augmentUIPrefab);
+                AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
+
+                augmentHUD.Populate(player.inventory.augments[i].id);
+                augmentUI.transform.SetParent(augmentListUIContainer.transform);
+                augmentUI.transform.localScale = new Vector3(1, 1, 1);
+                augmentHUD.sellAugmentTrigger.Init(player, i);
+            }
+            else
+            {
+                if (inShop)
                 {
 
                     GameObject augmentUI = Instantiate(augmentUIPrefab);
                     AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
 
-                    augmentHUD.Populate(player.inventory.augments[i].id, player.inventory.augments[i].level, player.inventory.augments[i].count);
+                    //  augmentHUD.Populate(0, 0, 0);
+                    augmentHUD.PopulateGeneric(emptySlotUISprite);
                     augmentUI.transform.SetParent(augmentListUIContainer.transform);
                     augmentUI.transform.localScale = new Vector3(1, 1, 1);
                     augmentHUD.sellAugmentTrigger.Init(player, i);
                 }
-                else
-                {
-                    if (inShop)
-                    {
-
-                        GameObject augmentUI = Instantiate(augmentUIPrefab);
-                        AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
-
-                        //  augmentHUD.Populate(0, 0, 0);
-                        augmentHUD.PopulateGeneric(emptySlotUISprite);
-                        augmentUI.transform.SetParent(augmentListUIContainer.transform);
-                        augmentUI.transform.localScale = new Vector3(1, 1, 1);
-                        augmentHUD.sellAugmentTrigger.Init(player, i);
-                    }
-                }
             }
+        }
     }
 
     public void PopulateSynergyListUI()

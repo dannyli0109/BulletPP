@@ -18,7 +18,6 @@ public class Shop : MonoBehaviour
         new List<float>() { 0.5f, 0.35f, 0.1f, 0.05f, 0.0f },
         new List<float>() { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f },
         new List<float>() { 0.2f, 0.3f, 0.3f, 0.2f, 0.0f },
-        // new List<float>() { 0.2f, 0.25f, 0.30f, 0.2f, 0.05f },
         new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
     };
 
@@ -38,7 +37,7 @@ public class Shop : MonoBehaviour
         AugmentManager augmentManager = AugmentManager.current;
 
         for (int i = 0; i < augmentUIs.Count; i++)
-        { 
+        {
             if (augmentIds.Count == 0) augmentIds = augmentManager.GetAugmentIdList();
 
             int rarity = GetRandomRarity();
@@ -53,6 +52,7 @@ public class Shop : MonoBehaviour
             }
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
+            Debug.Log(augmentIndex);
 
             UpdateHoldingAmount(augmentIndex, i);
 
@@ -64,31 +64,31 @@ public class Shop : MonoBehaviour
 
     public void UpdateHoldingAmount(int augmentIndex, int amoutTextIndex)
     {
-        AugmentManager augmentManager = AugmentManager.current;
+        //AugmentManager augmentManager = AugmentManager.current;
 
-        int holdingAmount = amountOfAugment(augmentIndex);
-        if (holdingAmount > 0)
-        {
-            amountText[amoutTextIndex].gameObject.SetActive(true);
-            if (holdingAmount >= 8)
-            {
-                amountText[amoutTextIndex].text = augmentManager.augmentDatas[augmentIndex].title + " + +";
-            }
-            else if(holdingAmount==2)
-            {
-                amountText[amoutTextIndex].text = augmentManager.augmentDatas[augmentIndex].title + " +";
+        //int holdingAmount = amountOfAugment(augmentIndex);
+        //if (holdingAmount > 0)
+        //{
+        //    amountText[amoutTextIndex].gameObject.SetActive(true);
+        //    if (holdingAmount >= 8)
+        //    {
+        //        amountText[amoutTextIndex].text = augmentManager.augmentDatas[augmentIndex].title + " + +";
+        //    }
+        //    else if(holdingAmount==2)
+        //    {
+        //        amountText[amoutTextIndex].text = augmentManager.augmentDatas[augmentIndex].title + " +";
 
-            }
-            else
-            {
-            amountText[amoutTextIndex].text = (holdingAmount+1).ToString();
+        //    }
+        //    else
+        //    {
+        //    amountText[amoutTextIndex].text = (holdingAmount+1).ToString();
 
-            }
-        }
-        else
-        {
-            amountText[amoutTextIndex].gameObject.SetActive(false);
-        }
+        //    }
+        //}
+        //else
+        //{
+        //    amountText[amoutTextIndex].gameObject.SetActive(false);
+        //}
     }
 
     public int GetRandomRarity()
@@ -125,14 +125,14 @@ public class Shop : MonoBehaviour
 
     int amountOfAugment(int input)
     {
-       for(int i=0; i< player.inventory.augments.Count; i++)
-        {
-            if (player.inventory.augments[i].id == input)
-            {
-                return player.inventory.augments[i].count;
-            }
-        }
-            return -1;
+       //for(int i=0; i< player.inventory.augments.Count; i++)
+       // {
+       //     if (player.inventory.augments[i].id == input)
+       //     {
+       //         return player.inventory.augments[i].count;
+       //     }
+       // }
+        return -1;
     }
 
     public void ReRoll()
@@ -149,12 +149,12 @@ public class Shop : MonoBehaviour
 
     public void Continue()
     {
-        if (HasBoughtAnAugemnt())
-        {
+        //if (HasBoughtAnAugemnt())
+        //{
             GameManager.current.ChangeState(GameState.Casual);
             player.reloading = true;
             thisHUDManager.PopulateAugmentListUI(false);
-        }
+        //}
         // gameObject.SetActive(false);
     }
 }

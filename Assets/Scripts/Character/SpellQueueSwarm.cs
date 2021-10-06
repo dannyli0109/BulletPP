@@ -19,7 +19,6 @@ public class SpellQueueSwarm : SpellQueueEnemy
     public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
     {
         base.Init(target, cam, ammoPool);
-        this.ammoPool = ammoPool;
 
         InitSpellQueue();
 

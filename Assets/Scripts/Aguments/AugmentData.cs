@@ -12,17 +12,8 @@ public class AugmentData : ScriptableObject
 
     public int rarity;
 
-    public List<SynergyData> synergies;
-
-    public string iconPath;
-
     [TextArea(5, 20)]
     public List<string> descriptions;
-
-    [TextArea(5, 20)]
-    public List<string> codes;
-
-    public List<Eva> evaluators;
 
     public Sprite iconSprite;
 

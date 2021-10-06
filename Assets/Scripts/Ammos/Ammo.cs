@@ -30,12 +30,14 @@ public abstract class Ammo : PooledItem
     public float size;
     public Vector3 velocity;
     public Vector3 acceleration;
+    protected float speed;
 
     protected Vector3 currentAcceleration;
 
     public bool fromFreshReload;
 
     public float ImpactForce;
+    protected int bounces;
 
     public virtual float GetDamage()
     {
@@ -51,12 +53,14 @@ public abstract class Ammo : PooledItem
         }
     }
 
-    public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
+    public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
     {
         this.owner = owner;
         this.damage = damage;
         this.acceleration = acceleration;
         this.size = size;
+        this.bounces = bounces;
+        this.speed = speed;
         transform.forward = forward;
         bornTime = 0;
         timesBounced = 0;
@@ -64,12 +68,17 @@ public abstract class Ammo : PooledItem
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
         Vector3 offsetVector = new Vector3(transform.forward.x * offset, transform.forward.y * offset, transform.forward.z * offset);
         transform.localPosition += offsetVector;
-        this.velocity = transform.forward * speed;
+        velocity = transform.forward * speed;
     }
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
     {
-        Init(owner, forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size);
+        Init(owner, forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size, 0);
+    }
+
+    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces)
+    {
+        Init(owner, forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size, bounces);
     }
 
     protected void SpawnHitParticle(float size)
@@ -84,13 +93,14 @@ public abstract class Ammo : PooledItem
     protected bool BounceOffAmmo()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.5f, (1 << 10)|(1<<12)))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, size / 2.0f, (1 << 10)|(1<<12)))
         {
             HandleAmmoHit(hit.collider);
             SpawnHitParticle(owner.grenadeStats.size.value);
             Vector3 normal = new Vector3(hit.normal.x, 0, hit.normal.z);
             Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, normal);
             gameObject.transform.forward = reflectionDir;
+            velocity = transform.forward * speed;
             timesBounced++;
             return true;
         }
@@ -104,7 +114,7 @@ public abstract class Ammo : PooledItem
 
     protected void HandleAmmoHit(Collider other)
     {
-        Vector2 holdingForce = new Vector2(transform.forward.x, transform.forward.z)*GetImpactForce();
+        Vector2 holdingForce = new Vector2(transform.forward.x, transform.forward.z) * GetImpactForce();
         if (owner)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))

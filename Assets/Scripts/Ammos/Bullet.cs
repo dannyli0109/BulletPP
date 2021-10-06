@@ -5,8 +5,6 @@ using UnityEngine.VFX;
 
 public class Bullet : Ammo
 {
-    public bool piercing;
-    public bool isADesk;
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
@@ -19,18 +17,12 @@ public class Bullet : Ammo
         bornTime += Time.deltaTime;
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
-            if (isADesk)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
             ReturnToPool();
-            }
         }
 
-        if (timesBounced < owner.bulletStats.amountOfBounces.value)
+        if (timesBounced < bounces)
         {
+            Debug.Log("Try to bounce");
             BounceOffAmmo();
         }
     }
@@ -57,40 +49,22 @@ public class Bullet : Ammo
         if (GameManager.current.GameTransitional()) return;
 
         HandleAmmoHit(other);
-
-        if (piercing&& other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        {
-            if (isADesk)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                EventManager.current.OnAmmoDestroy(gameObject);
-            }
-        }
+        EventManager.current.OnAmmoDestroy(gameObject);
+        //if (piercing && other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        //{
+        //    if (isADesk)
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //    else
+        //    {
+        //        EventManager.current.OnAmmoDestroy(gameObject);
+        //    }
+        //}
     }
 
     private void OnDestroy()
     {
         EventManager.current.onAmmoDestroy -= OnBulletDestroy;
     }
-
-    //public override float GetDamage()
-    //{
-    //    //return owner.bulletStats.damage.value * owner.stats.damageMultiplier.value;
-    //    return damage;
-    //}
-
-    //public override void Init(Character owner, float damage, float size, Vector3 velocity, Vector3 acceleration)
-    //{
-    //    this.owner = owner;
-    //    this.damage = damage;
-    //    this.velocity = velocity;
-    //    this.acceleration = acceleration;
-    //    transform.SetParent(null);
-    //    transform.localScale = new Vector3(size, size, size);
-
-    //    //transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localRotation.eulerAngles.y, 0f));
-    //}
 }

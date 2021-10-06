@@ -45,6 +45,8 @@ public class Player : Character
     Vector2 movement;
 
     bool freshReload;
+
+    int inventoryIndex;
     public override void Start()
     {
         EventManager.current.receiveGold += ReceiveGold;
@@ -54,6 +56,14 @@ public class Player : Character
         currentRocketClip = (int)rocketStats.maxClip.value;
         currentLaserClip = (int)laserStats.maxClip.value;
         currentBouncingBladeClip = 1;
+        inventoryIndex = 0;
+        inventory = new Inventory(10);
+        inventory.AddTo(AugmentManager.current.augments[0]);
+        inventory.AddTo(AugmentManager.current.augments[0]);
+        inventory.AddTo(AugmentManager.current.augments[0]);
+        inventory.AddTo(AugmentManager.current.augments[0]);
+        inventory.AddTo(AugmentManager.current.augments[0]);
+        inventory.AddTo(AugmentManager.current.augments[0]);
         base.Start();
     }
 
@@ -70,13 +80,13 @@ public class Player : Character
         if (GameManager.current.GameTransitional()) return;
         if (!isDashing)
         {
+            HandleReload();
             HandleRotation();
             HandleMovement();
             HandleShooting();
         }
         HandleDashing();
         UpdateAnimation();
-        HandleReload();
         currentImmunityFrame -= Time.deltaTime;
     }
 
@@ -110,18 +120,6 @@ public class Player : Character
 
     void HandleRotation()
     {
-        //Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-        //Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-
-        //positionOnScreen.x = positionOnScreen.x * Screen.width - Screen.width / 2.0f;
-        //positionOnScreen.y = positionOnScreen.y * Screen.height - Screen.height / 2.0f;
-
-        //mouseOnScreen.x = mouseOnScreen.x * Screen.width - Screen.width / 2.0f;
-        //mouseOnScreen.y = mouseOnScreen.y * Screen.height - Screen.height / 2.0f;
-
-        //angle = Util.AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen);
-        //transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
-
         // Cast a ray from screen point
         Vector3 mousePosition = Input.mousePosition;
         //Debug.Log(mousePosition.y);
@@ -131,24 +129,10 @@ public class Player : Character
         // You successfully hit
         if (Physics.Raycast(ray, out hit, 100, 1 << 18))
         {
-            //Debug.Log(hit.collider.gameObject.layer);
-            // Find the direction to move in
-            //Vector3 hitPoint = new Vector3(hit.point.x, bulletContainer.position.y, hit.point.z);
-
             Vector3 dir = hit.point - gunpointForAiming.position;
             dir.y = 0;
             transform.localRotation = Quaternion.LookRotation(dir);
             angle = transform.localRotation.eulerAngles.y;
-            // animator.SetBool("dance", true);
-
-
-            //float distance = Vector3.Distance(hit.point, bulletContainer.position);
-
-            //if (distance > 0.9)
-            //{
-            //    transform.localRotation = Quaternion.LookRotation(dir);
-            //    angle = transform.localRotation.eulerAngles.y;
-            //}
         }
     }
 
@@ -201,54 +185,14 @@ public class Player : Character
     {
         timeSinceFired += Time.deltaTime;
         if (reloading) return;
+        if (inventory.Count == 0) return;
+        if (inventoryIndex >= inventory.Count) return;
         if (Input.GetMouseButtonDown(0) || (timeSinceFired > stats.timeBetweenShots.value && Input.GetMouseButton(0)))
         {
             timeSinceFired = 0;
-            // shoot the main one in the middle
-            if (ShootAmmos(stats.projectileSpread.value))
-            {
-                SoundManager.PlaySound(SoundType.Gunshot, bulletContainer.position, 1.0f);
-            }
-
-            //  animator.SetTrigger("ShootTrigger");
-            for (int i = 0; i < (int)AmmoType.Count; i++)
-            {
-                AmmoStats ammoStat = GetAmmoStats(i);
-                float totalAdditionalAmmos = (ammoStat.additionalAmmo.value + stats.additionalAmmo.value);
-                int bulletsOnOneSide = Mathf.CeilToInt(totalAdditionalAmmos / 2.0f);
-                int count = 0;
-                for (int j = 1; j <= bulletsOnOneSide; j++)
-                {
-                    float angle = -(stats.spreadAngle.value / (float)(bulletsOnOneSide) * (float)j) / 2.0f;
-                    float increment = stats.spreadAngle.value / (float)(bulletsOnOneSide) * (float)j;
-                    for (int k = 0; k < 2; k++)
-                    {
-                        if (count >= totalAdditionalAmmos) break;
-                        angle += k * increment;
-                        Shoot(i, angle);
-                        count++;
-                    }
-                }
-            }
+            // do shooting logic
+            inventory[inventoryIndex++].Shoot(this, bulletContainer);
             freshReload = false;
-            /*
-            if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
-            {
-                GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
-                Ammo ammoComponent = blade.GetComponent<Ammo>();
-                ammoComponent.Init(this, 0);
-                //BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
-                //  bladeComponent.owner = this;
-                currentBouncingBladeClip--;
-            }
-            if (currentLaserClip > 0)
-            {
-                GameObject laser = Instantiate(laserPrefab, bulletContainer);
-                Ammo ammoComponent = laser.GetComponent<Ammo>();
-                ammoComponent.Init(this, angle);
-                currentLaserClip--;
-            }
-            */
         }
     }
 
@@ -312,51 +256,51 @@ public class Player : Character
 
     bool ShootBullet(float angle)
     {
-        if (currentBulletClip > 0)
-        {
-            if (stats.deskBulletStatPercentage.value > 0 && 7 < UnityEngine.Random.RandomRange(0, 10))
-            {
-                Debug.Log("desk");
-                GameObject desk = Instantiate(deskBulletPrefab, bulletContainer);
-                Ammo ammoComponent = desk.GetComponent<Ammo>();
-                Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value*stats.deskBulletStatPercentage.value, stats.damageMultiplier.value * bulletStats.damage.value * stats.deskBulletStatPercentage.value, bulletStats.size.value);
-                desk.transform.SetParent(null);
-                currentBulletClip--;
-                if (freshReload)
-                {
-                    ammoComponent.fromFreshReload = true;
-                }
-                return true;
-            }
-            else
-            {
-                Bullet bullet;
-                if (ammoPool.bulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation))
-                {
-                    Ammo ammoComponent = bullet.GetComponent<Ammo>();
-                    Vector3 forward = bulletContainer.forward;
-                    ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
-                    currentBulletClip--;
+        //if (currentBulletClip > 0)
+        //{
+        //    if (stats.deskBulletStatPercentage.value > 0 && 7 < UnityEngine.Random.RandomRange(0, 10))
+        //    {
+        //        Debug.Log("desk");
+        //        GameObject desk = Instantiate(deskBulletPrefab, bulletContainer);
+        //        Ammo ammoComponent = desk.GetComponent<Ammo>();
+        //        Vector3 forward = bulletContainer.forward;
+        //        ammoComponent.Init(this, forward, angle, bulletStats.speed.value*stats.deskBulletStatPercentage.value, stats.damageMultiplier.value * bulletStats.damage.value * stats.deskBulletStatPercentage.value, bulletStats.size.value);
+        //        desk.transform.SetParent(null);
+        //        currentBulletClip--;
+        //        if (freshReload)
+        //        {
+        //            ammoComponent.fromFreshReload = true;
+        //        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        Bullet bullet;
+        //        if (ammoPool.bulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation))
+        //        {
+        //            Ammo ammoComponent = bullet.GetComponent<Ammo>();
+        //            Vector3 forward = bulletContainer.forward;
+        //            ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+        //            currentBulletClip--;
 
-                    if (stats.bulletPiercing.value > 0)
-                    {
-                        bullet.piercing = true;
-                    }
+        //            if (stats.bulletPiercing.value > 0)
+        //            {
+        //                bullet.piercing = true;
+        //            }
 
-                    if (stats.bulletPiercing.value > 0)
-                    {
-                        bullet.piercing = true;
-                    }
-                    if (freshReload)
-                    {
-                        ammoComponent.fromFreshReload = true;
-                    }
-                    return true;
-                }
-            }
-        }
-            return false;
+        //            if (stats.bulletPiercing.value > 0)
+        //            {
+        //                bullet.piercing = true;
+        //            }
+        //            if (freshReload)
+        //            {
+        //                ammoComponent.fromFreshReload = true;
+        //            }
+        //            return true;
+        //        }
+        //    }
+        //}
+        return false;
     }
 
     bool ShootRocket(float angle)
@@ -453,23 +397,19 @@ public class Player : Character
 
     void HandleReload()
     {
-        if (
-                currentBulletClip == 0 &&
-                currentGrenadeClip == 0 &&
-                currentRocketClip == 0 &&
-                currentLaserClip == 0
-            )
+
+        if (inventoryIndex >= inventory.Count)
         {
             if (Input.GetMouseButtonDown(0) && !reloading)
             {
-                reloading = !reloading; // swap status
+                reloading = true; // swap status
                 currentReloadTime = 0;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.R) && !reloading)
         {
-            reloading = !reloading; // swap status
+            reloading = true;
             currentReloadTime = 0;
         }
 
@@ -479,18 +419,12 @@ public class Player : Character
             if (currentReloadTime >= stats.reloadTime.value)
             {
                 currentReloadTime = 0;
-                currentBulletClip = (int)bulletStats.maxClip.value;
-                currentGrenadeClip = (int)grenadeStats.maxClip.value;
-                currentRocketClip = (int)rocketStats.maxClip.value;
-                currentLaserClip = (int)laserStats.maxClip.value;
-                //currentBouncingBladeClip = (int)bouncingBladeStats.maxClip.value;
+                inventoryIndex = 0;
                 reloading = false;
                 if (stats.extraDamageAfterReload.value > 1)
                 {
                     freshReload = true;
                 }
-
-                // Debug.Log("Bullet " + currentBulletClip + " " + (int)bulletStats.maxClip.value + " grenade " + currentGrenadeClip + " " + (int)grenadeStats.maxClip.value + " rocket  " + currentRocketClip + " " + (int)rocketStats.maxClip.value + " current laser " + currentLaserClip + " " + (int)laserStats.maxClip.value + " blades " + currentBouncingBladeClip + " " + (int)bouncingBladeStats.maxClip.value);
             }
         }
     }
@@ -585,35 +519,38 @@ public class Player : Character
     public void SellAugment(int index)
     {
         if (GameManager.current.GetState() != GameState.Shop) return;
-        Augment augment = inventory.augments[index];
-        AugmentManager augmentManager = AugmentManager.current;
-  
+        Augment augment = inventory[index];
+        //AugmentManager augmentManager = AugmentManager.current;
+
 
         if (inventory.RemoveAt(index))
         {
-            for (int i = 0; i < augmentManager.augmentDatas[augment.id].synergies.Count; i++)
-            {
-                SynergyData synergyData = augmentManager.augmentDatas[augment.id].synergies[i];
-                for (int j = 0; j < synergies.Count; j++)
-                {
-                    if (synergies[j].id == synergyData.id)
-                    {
-                        if (synergies[j].count == 1)
-                        {
-                            synergies.RemoveAt(j);
-                            break;
-                        }
-                        else
-                        {
-                            synergies[j].count--;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            gold += augmentManager.costs[augmentManager.augmentDatas[augment.id].rarity] * (augment.level + 1);
+            gold += augment.cost;
             sellAugment?.Invoke();
         }
+        //    for (int i = 0; i < augmentManager.augmentDatas[augment.id].synergies.Count; i++)
+        //    {
+        //        SynergyData synergyData = augmentManager.augmentDatas[augment.id].synergies[i];
+        //        for (int j = 0; j < synergies.Count; j++)
+        //        {
+        //            if (synergies[j].id == synergyData.id)
+        //            {
+        //                if (synergies[j].count == 1)
+        //                {
+        //                    synergies.RemoveAt(j);
+        //                    break;
+        //                }
+        //                else
+        //                {
+        //                    synergies[j].count--;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    gold += augmentManager.costs[augmentManager.augmentDatas[augment.id].rarity] * (augment.level + 1);
+        //    sellAugment?.Invoke();
+        //}
     }
 }
