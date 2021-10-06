@@ -231,24 +231,6 @@ public class Player : Character
                 }
             }
             freshReload = false;
-            /*
-            if (currentBouncingBladeClip > 0 && bouncingBladeStats.maxClip.value > 0)
-            {
-                GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
-                Ammo ammoComponent = blade.GetComponent<Ammo>();
-                ammoComponent.Init(this, 0);
-                //BouncingBlade bladeComponent = blade.GetComponent<BouncingBlade>();
-                //  bladeComponent.owner = this;
-                currentBouncingBladeClip--;
-            }
-            if (currentLaserClip > 0)
-            {
-                GameObject laser = Instantiate(laserPrefab, bulletContainer);
-                Ammo ammoComponent = laser.GetComponent<Ammo>();
-                ammoComponent.Init(this, angle);
-                currentLaserClip--;
-            }
-            */
         }
     }
 
