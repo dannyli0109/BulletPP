@@ -1,49 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Augment
+public abstract class Augment : ScriptableObject
 {
+    [HideInInspector]
     public int id;
-    public int count;
+    public int rarity;
+    public Sprite augmentIcon;
+    public string augmentName;
+    public int cost;
+    public Color color;
+    [TextArea(5, 10)]
+    public string description;
 
-    public int level
+    public List<Action<Ammo>> OnAttached;
+    public List<Action<Ammo>> OnHit;
+    public List<Action<Ammo>> OnDamage;
+    public List<Action<Ammo>> OnBounce;
+    public List<Action<Ammo>> OnCrit;
+
+    public abstract void Init();
+
+    public void InitEvents()
     {
-        get
-        {
-            int value;
-            if (count < 3)
-            {
-                value = 0;
-            }
-            else if (count < 9)
-            {
-                value = 1;
-            }
-            else
-            {
-                value = 2;
-            }
-            return value;
-        }
+        OnAttached = new List<Action<Ammo>>();
+        OnHit = new List<Action<Ammo>>();
+        OnDamage = new List<Action<Ammo>>();
+        OnBounce = new List<Action<Ammo>>();
+        OnCrit = new List<Action<Ammo>>();
     }
-}
 
-public class Synergy
-{
-    public int id;
-    public int count;
-    public List<int> breakPoints;
-
-    public int breakPoint
+    public void AddOnAttachedEvent(Action<Ammo> action)
     {
-        get
-        {
-            for (int i = breakPoints.Count - 1; i >= 0; i--)
-            {
-                if (count >= breakPoints[i]) return i;
-            }
-            return -1;
-        }
+        OnAttached.Add(action);
     }
+
+    public void AddOnHitEvent(Action<Ammo> action)
+    {
+        OnHit.Add(action);
+    }
+
+    public void AddOnDamageEvent(Action<Ammo> action)
+    {
+        OnDamage.Add(action);
+    }
+
+    public void AddOnBounceEvent(Action<Ammo> action)
+    {
+        OnBounce.Add(action);
+    }
+
+    public void AddOnCritEvent(Action<Ammo> action)
+    {
+        OnCrit.Add(action);
+    }
+
+    public abstract void Shoot(Character character, Transform transform);
 }

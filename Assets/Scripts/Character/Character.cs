@@ -129,7 +129,7 @@ public abstract class Character : MonoBehaviour
     public LineRenderer thisLineRenderer;
     #endregion
 
-    public Inventory inventory = new Inventory(3);
+    public Inventory inventory;
     public List<Synergy> synergies = new List<Synergy>();
     public List<ModifiedStat> modifiedStats = new List<ModifiedStat>();
     public virtual void Start()
@@ -237,78 +237,86 @@ public abstract class Character : MonoBehaviour
 
     public int BuyAugment(int id)
     {
-        
+        //return -1;
         AugmentManager augmentManager = AugmentManager.current;
-        AugmentData augment = augmentManager.augmentDatas[id];
-        float cost = augmentManager.costs[augment.rarity];
-
+        Augment augment = augmentManager.augments[id];
+        float cost = augmentManager.augments[id].cost;
         if (gold < cost)
         {
             return -1;
         }
-        for (int i = 0; i < inventory.augments.Count; i++)
-        {
-            if (inventory.augments[i].id == id)
-            {
-                if (inventory.augments[i].count >= 9)
-                {
-                    return -1;
-                }
 
-                int levelBefore = inventory.augments[i].level;
-                inventory.augments[i].count += 1;
-                int levelAfter = inventory.augments[i].level;
-                gold -= cost;
-
-                if (levelBefore != levelAfter)
-                {
-                    return 3;
-                }
-                return 1;
-            }
-        }
-        if (!inventory.AddTo(new Augment() { id = id, count = 1 })) return -1;
-
-        for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
-        {
-            SynergyData synergyData = augmentManager.augmentDatas[id].synergies[i];
-
-            bool existingSyngy = false;
-            for (int j = 0; j < synergies.Count; j++)
-            {
-                if (synergies[j].id == synergyData.id)
-                {
-                    synergies[j].count++;
-                    existingSyngy = true;
-                    break;
-                }
-            }
-            if (!existingSyngy)
-            {
-                synergies.Add(new Synergy()
-                {
-                    id = synergyData.id,
-                    count = 1,
-                    breakPoints = synergyData.breakpoints
-                });
-            }
-        }
-        // when obtain new augment, also update synergy list
+        if (!inventory.AddTo(augment)) return -1;
         gold -= cost;
-        return 2;
+        return 1;
+
+        //if (gold < cost)
+        //{
+        //    return -1;
+        //}
+        //for (int i = 0; i < inventory.augments.Count; i++)
+        //{
+        //    if (inventory.augments[i].id == id)
+        //    {
+        //        if (inventory.augments[i].count >= 9)
+        //        {
+        //            return -1;
+        //        }
+
+        //        int levelBefore = inventory.augments[i].level;
+        //        inventory.augments[i].count += 1;
+        //        int levelAfter = inventory.augments[i].level;
+        //        gold -= cost;
+
+        //        if (levelBefore != levelAfter)
+        //        {
+        //            return 3;
+        //        }
+        //        return 1;
+        //    }
+        //}
+        //if (!inventory.AddTo(new AugmentOld() { id = id, count = 1 })) return -1;
+
+        //for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
+        //{
+        //    SynergyData synergyData = augmentManager.augmentDatas[id].synergies[i];
+
+        //    bool existingSyngy = false;
+        //    for (int j = 0; j < synergies.Count; j++)
+        //    {
+        //        if (synergies[j].id == synergyData.id)
+        //        {
+        //            synergies[j].count++;
+        //            existingSyngy = true;
+        //            break;
+        //        }
+        //    }
+        //    if (!existingSyngy)
+        //    {
+        //        synergies.Add(new Synergy()
+        //        {
+        //            id = synergyData.id,
+        //            count = 1,
+        //            breakPoints = synergyData.breakpoints
+        //        });
+        //    }
+        //}
+        //// when obtain new augment, also update synergy list
+        //gold -= cost;
+        //return 2;
     }
 
     public int GetAugmentLevel(int id)
     {
         int level = 0;
-        for (int i = 0; i < inventory.augments.Count; i++)
-        {
-            if (inventory.augments[i].id == id)
-            {
-                level = inventory.augments[i].level;
-                break;
-            }
-        }
+        //for (int i = 0; i < inventory.augments.Count; i++)
+        //{
+        //    if (inventory.augments[i].id == id)
+        //    {
+        //        level = inventory.augments[i].level;
+        //        break;
+        //    }
+        //}
         return level;
     }
 

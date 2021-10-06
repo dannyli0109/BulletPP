@@ -14,7 +14,7 @@ public class SpellQueueEnemy : Enemy
 
     protected Decision decision;
     public float rotationSpeed;
-    public AmmoPool ammoPool;
+    //public AmmoPool ammoPool;
 
 
     #region MoveStats
@@ -49,7 +49,6 @@ public class SpellQueueEnemy : Enemy
     public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
     {
         base.Init(target, cam, ammoPool);
-        this.ammoPool = ammoPool;
         InitSpellQueue();
 
         decision = new Decision()
@@ -311,9 +310,10 @@ public class SpellQueueEnemy : Enemy
     void ShootBullet(Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
     {
         Bullet bullet;
+        AmmoPool ammoPool = AmmoPool.current;
         ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
         Ammo ammoComponent = bullet.GetComponent<Ammo>();
-        ammoComponent.Init(this, forward, angle, offset, speed, acceleration, damage, size);
+        ammoComponent.Init(this, forward, angle, offset, speed, acceleration, damage, size, 0);
     }
 
     public bool InLineOfSight(float viewAngle)

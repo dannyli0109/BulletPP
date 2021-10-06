@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3974154749495942470}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -9.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6380439006657279977}
@@ -204,16 +204,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46484fe58b7e39498cf314f7b7d6938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  augmentDatas: []
-  synergyDatas: []
-  rarityLevels: 5
-  costs: 010000000200000003000000040000000a000000
-  colors:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.12, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.44, b: 0.87, a: 1}
-  - {r: 0.64, g: 0.21, b: 0.93, a: 1}
-  - {r: 1, g: 0.5, b: 0, a: 1}
-  character: {fileID: 0}
-  gunPoint: {fileID: 0}
-  laserSightLineRenderer: {fileID: 6795329957938145661}
+  augments:
+  - {fileID: 11400000, guid: 165a7deed2c7887459b27e1683d47905, type: 2}

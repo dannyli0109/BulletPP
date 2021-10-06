@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\AmmoPool.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
+    <Compile Include="Assets\Scripts\Interfaces.cs" />
     <Compile Include="Assets\AddAugmentSlotHUD.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
     <Compile Include="Assets\Scripts\Parser\Env.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\SynergyHUD.cs" />
+    <Compile Include="Assets\Scripts\Aguments\StandardBullet.cs" />
     <Compile Include="Assets\Scripts\CameraFollowing.cs" />
     <Compile Include="Assets\Scripts\RoomDoorCensor.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
@@ -103,16 +105,19 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
+    <Compile Include="Assets\Scripts\Aguments\BouncingBullet.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueEnemy.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\Scripts\ParticleHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Aguments\MultiBullet.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueSwarm.cs" />
     <Compile Include="Assets\Scripts\AOEDamage.cs" />
+    <Compile Include="Assets\Scripts\Ammos\AugmentAmmo.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\SoundManager.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
-    <Compile Include="Assets\Scripts\Aguments\Augment.cs" />
+    <Compile Include="Assets\Scripts\Aguments\AugmentOld.cs" />
     <Compile Include="Assets\Scripts\RoomPrefabInformation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
@@ -127,6 +132,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\CharacterStat.cs" />
     <Compile Include="Assets\Scripts\Character\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Aguments\Augment.cs" />
     <Compile Include="Assets\DoorController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
@@ -149,6 +155,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueSniper.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Scripts\Character\SpellQueueSummoner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\RoomController.cs" />
@@ -196,7 +203,10 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Character\SpellQueueSummoner.cs" />
+=======
+>>>>>>> Danny
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />
