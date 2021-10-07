@@ -52,7 +52,7 @@ public class Shop : MonoBehaviour
             }
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
-            Debug.Log(augmentIndex);
+           // Debug.Log(augmentIndex);
 
             UpdateHoldingAmount(augmentIndex, i);
 

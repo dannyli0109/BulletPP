@@ -342,6 +342,7 @@ public class Enemy : Character
 
     public override void OnDestroy()
     {
+        EventManager.current.EnemyDeath(gameObject.transform.position);
         base.OnDestroy();
     }
 

@@ -28,7 +28,7 @@ public class Playground : MonoBehaviour
             return;
         }
 
-        if ((shouldStart || GameManager.current.GetState() == GameState.Casual) && mapGeneration.EnemiesInEncounter.Count == 0)
+        if ((shouldStart || GameManager.current.GetState() == GameState.Casual) && mapGeneration.EnemiesInEncounter == 0)
         {
             mapGeneration.StartEncounter(room);
             shouldStart = false;

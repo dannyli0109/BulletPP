@@ -91,12 +91,14 @@ public class MapGeneration : MonoBehaviour
 
     public bool inCombat;
 
-    public List<Enemy> EnemiesInEncounter;
+    public int EnemiesInEncounter;
     public List<int> numberOfWaves;
     int currentWave;
     public float waveWaitingTime;
     public float currentWaveWaitingTime;
     bool roomClear;
+
+    Vector2 holdingLastEnemy;
     #endregion
 
     #region MiniMap
@@ -143,6 +145,7 @@ public class MapGeneration : MonoBehaviour
     public AmmoPool ammoPool;
     void Start()
     {
+        EventManager.current.enemyDeath += ReceiveEnemyDeath;
         GenerateMap();
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         RefreshMiniMapUI();
@@ -468,7 +471,7 @@ public class MapGeneration : MonoBehaviour
 
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], holdingPosition, enemiesTypes[0].transform.rotation);
             holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+            EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
     }
@@ -480,7 +483,7 @@ public class MapGeneration : MonoBehaviour
         {
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
             holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+            EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
     }
@@ -500,7 +503,7 @@ public class MapGeneration : MonoBehaviour
         holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+        EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
 
@@ -523,7 +526,7 @@ public class MapGeneration : MonoBehaviour
 
         GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+        EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
     }
 
@@ -665,15 +668,15 @@ public class MapGeneration : MonoBehaviour
         else
         {
             // next wave
-            if (EnemiesInEncounter.Count <= 0)
+            if (EnemiesInEncounter <= 0)
             {
-                currentWave++;
+                TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
 
-                Debug.Log("current wave: " + currentWave + " " + numberOfWaves.Count);
+                currentWave++;
                 if (currentWave < numberOfWaves.Count)
                 {
                     Debug.Log("Current wave");
-          
+
                     roomClear = true;
                     currentWaveWaitingTime = 0;
                 }
@@ -691,35 +694,7 @@ public class MapGeneration : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                Vector2 holdingLastEnemy = new Vector2(0,0);
-                for (int i = 0; i < EnemiesInEncounter.Count; i++)
-                {
-                    if (EnemiesInEncounter[i].hp <= 0)
-                    {
-                        holdingLastEnemy = new Vector2(EnemiesInEncounter[i].transform.position.x, EnemiesInEncounter[i].transform.position.z);
-                        EnemiesInEncounter.RemoveAt(i);
-                    }
-                    else if (EnemiesInEncounter[i] == null)
-                    {
-                        Debug.Log("doesn't exist");
-                        EnemiesInEncounter.RemoveAt(i);
-                    }
-                    else if (EnemiesInEncounter[i].gameObject == null)
-                    {
-                        EnemiesInEncounter.RemoveAt(i);
-                    }
-                }
 
-                if(EnemiesInEncounter.Count <= 0)
-                {
-                   // Debug.Log("health");
-
-                    TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
-                   
-                }
-            }
         }
     }
 
@@ -799,7 +774,7 @@ public class MapGeneration : MonoBehaviour
 
         if (holdingRandom < chanceOfSpawnOutOfOneHundredHealthPickup +  playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)
         {
-            Debug.Log("Spawn " + (chanceOfSpawnOutOfOneHundredHealthPickup + playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)+ "  " + playerTarget.RecentlyTakenDamage);
+          //  Debug.Log("Spawn " + (chanceOfSpawnOutOfOneHundredHealthPickup + playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)+ "  " + playerTarget.RecentlyTakenDamage);
             healthPickUpObject.SetActive(true);
             healthPickUpObject.transform.position = pos;
         }
@@ -898,5 +873,12 @@ public class MapGeneration : MonoBehaviour
         // room.thisPrefabInfo.enemySpawnPoint
         int holdingSpawnInt = UnityEngine.Random.Range(0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint.Count);
         return  new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].position.x, yEnemyHeight, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].position.y);
+    }
+
+    public void ReceiveEnemyDeath(Vector3 pos)
+    {
+        Debug.Log("receive enemy death");
+        holdingLastEnemy = pos;
+        EnemiesInEncounter--;
     }
 }

@@ -18,6 +18,8 @@ public class EventManager : MonoBehaviour
 
     public event Action<float> receiveGold;
 
+    public event Action<Vector3> enemyDeath;
+
     public void OnAmmoHit(Ammo ammo, GameObject obj,Vector2 impact)
     {
         onAmmoHit?.Invoke(ammo, obj,impact);
@@ -31,6 +33,11 @@ public class EventManager : MonoBehaviour
     public void ReceiveGold(float Amount)
     {
         receiveGold?.Invoke(Amount);
+    }
+
+    public void EnemyDeath(Vector3 pos)
+    {
+        enemyDeath?.Invoke(pos);
     }
 
     public event Action<GameObject> onAmmoDestroy;

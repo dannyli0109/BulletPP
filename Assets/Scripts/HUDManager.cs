@@ -408,7 +408,7 @@ public class HUDManager : MonoBehaviour
 
     public void PopulateAugmentListUI(bool inShop)
     {
-        Debug.Log("Trigger");
+      //  Debug.Log("Trigger");
         foreach (Transform child in augmentListUIContainer.transform)
         {
             Destroy(child.gameObject);
