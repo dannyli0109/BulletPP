@@ -9,6 +9,7 @@ public class AugmentUI : MonoBehaviour
     public TextMeshProUGUI title;
     public TextMeshProUGUI descriptions;
     public TextMeshProUGUI rarity;
+    public Image icon;
     public GameObject synergyContainer;
     public GameObject synergyUIPrefab;
     public TextMeshProUGUI cost;
@@ -122,6 +123,7 @@ public class AugmentUI : MonoBehaviour
             rarity.color = augmentManager.colors[augmentManager.augments[id].rarity];
             cost.text = "$ " + augmentManager.augments[id].cost;
             outline.effectColor = augmentManager.augments[id].color;
+            icon.sprite = augmentManager.augments[id].augmentIcon;
 
         }
 

@@ -40,6 +40,12 @@ public class Player : Character
     public float dashDuration;
     public float trailTime;
     public bool isDashing;
+
+    public float magX;
+    public float magY;
+    public float cameraShakeTime;
+    public AnimationCurve curve;
+
     Vector2 dashDirection;
     float angle;
     Vector2 movement;
@@ -560,11 +566,14 @@ public class Player : Character
 
     public override void ResolveOnTakenDamageEffects(Vector3 direction)
     {
-        cameraFollowingScript.MoveCameraInDirection(direction);
 
-        if (stats.personalSpace.value > 1)
-        {
-            CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
-        }
+        //cameraFollowingScript.MoveCameraInDirection(direction);
+
+        //if (stats.personalSpace.value > 1)
+        //{
+        //CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
+        //}
+
+        CameraShake.current.Shake(magX, magY, cameraShakeTime, curve);
     }
 }

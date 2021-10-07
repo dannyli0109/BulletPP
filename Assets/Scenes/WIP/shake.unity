@@ -7591,10 +7591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1627472068302470034, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_Name
-      value: OnHurtScreenGlow
-      objectReference: {fileID: 0}
     - target: {fileID: 2184959537996862893, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7643,10 +7639,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Holder (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2184959537996862894, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
       propertyPath: target
       value: 
@@ -7659,34 +7651,6 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1949125668}
-    - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: MoveCameraMultiplier
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671622707189826073, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_Color.r
-      value: 0.754717
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671622707189826073, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1459594
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671622707189826073, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_Color.b
-      value: 0.1459594
-      objectReference: {fileID: 0}
-    - target: {fileID: 2671622707189826073, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5341916290347146114, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5341916290347146114, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 800
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
 --- !u!4 &1760548603 stripped
