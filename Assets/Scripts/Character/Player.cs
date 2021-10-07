@@ -56,7 +56,6 @@ public class Player : Character
 
     bool freshReload;
 
-    int inventoryIndex;
     public override void Start()
     {
         EventManager.current.receiveGold += ReceiveGold;
@@ -201,7 +200,9 @@ public class Player : Character
         {
             timeSinceFired = 0;
             // do shooting logic
-            inventory[inventoryIndex++].Shoot(this, bulletContainer);
+            inventory[inventoryIndex].index = inventoryIndex;
+            inventory[inventoryIndex].Shoot(this, bulletContainer);
+            inventoryIndex++;
             freshReload = false;
         }
     }

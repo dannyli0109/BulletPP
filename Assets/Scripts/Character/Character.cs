@@ -130,6 +130,7 @@ public abstract class Character : MonoBehaviour
     #endregion
 
     public Inventory inventory;
+    public int inventoryIndex;
     public List<Synergy> synergies = new List<Synergy>();
     public List<ModifiedStat> modifiedStats = new List<ModifiedStat>();
     public virtual void Start()

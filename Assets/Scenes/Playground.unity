@@ -485,6 +485,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8376561005565211270, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
   m_PrefabInstance: {fileID: 1234712608}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &398197131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2671622707189826073, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
+  m_PrefabInstance: {fileID: 1760548601}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &441964639
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +651,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6121173571912579358, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: onHurtScreenGlow
+      value: 
+      objectReference: {fileID: 398197131}
     - target: {fileID: 6680669847592378827, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3640,6 +3655,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: e8dce78c583ab204b85acbfbeac63d09, type: 2}
     - target: {fileID: 6380439006657279983, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_Name
       value: AugmentManager

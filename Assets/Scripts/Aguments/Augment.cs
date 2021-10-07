@@ -14,6 +14,8 @@ public abstract class Augment : ScriptableObject
     public Color color;
     [TextArea(5, 10)]
     public string description;
+    [HideInInspector]
+    public int index;
 
     public List<Action<Ammo>> OnAttached;
     public List<Action<Ammo>> OnHit;
@@ -58,4 +60,5 @@ public abstract class Augment : ScriptableObject
     }
 
     public abstract void Shoot(Character character, Transform transform);
+
 }
