@@ -992,9 +992,11 @@ MonoBehaviour:
   character: {fileID: 6680669848137463607}
   defaultPos: {fileID: 6799073913986932883}
   xOffset: 0.3
-  damageColour: {r: 0.6792453, g: 0.007991122, b: 0, a: 1}
-  currentColour: {r: 1, g: 1, b: 1, a: 1}
+  HeartdamageColour: {r: 0.8018868, g: 0.02647741, b: 0.02647741, a: 1}
+  HeartcurrentColour: {r: 0, g: 0, b: 0, a: 0}
   colourReduceAmount: 2
+  onHurtScreenGlow: {fileID: 0}
+  onHurtScreenGlowColour: {r: 0.6886792, g: 0.10720008, b: 0.10720008, a: 0.62352943}
 --- !u!1 &945507281785928451
 GameObject:
   m_ObjectHideFlags: 0
@@ -4865,7 +4867,7 @@ MonoBehaviour:
     maxHp:
       baseValue: 6
     moveSpeed:
-      baseValue: 6
+      baseValue: 9
     reloadTime:
       baseValue: 1.15
     timeBetweenShots:
@@ -4893,6 +4895,8 @@ MonoBehaviour:
     extraExplosionRange:
       baseValue: 0
     projectileSpread:
+      baseValue: 3
+    knockBackMultiplier:
       baseValue: 0
     reloadOnDash:
       baseValue: 0
@@ -4902,11 +4906,15 @@ MonoBehaviour:
       baseValue: 0
     extraDamageAfterReload:
       baseValue: 1
+    bulletPiercing:
+      baseValue: 0
+    deskBulletStatPercentage:
+      baseValue: 0
   bulletStats:
     damage:
-      baseValue: 1
+      baseValue: 2
     speed:
-      baseValue: 15
+      baseValue: 20
     size:
       baseValue: 2
     critChance:
@@ -4925,7 +4933,7 @@ MonoBehaviour:
     damage:
       baseValue: 1
     speed:
-      baseValue: 18
+      baseValue: 16
     size:
       baseValue: 2
     critChance:
@@ -4946,7 +4954,7 @@ MonoBehaviour:
     damage:
       baseValue: 2.25
     speed:
-      baseValue: 6
+      baseValue: 2
     size:
       baseValue: 2
     critChance:
@@ -4962,7 +4970,7 @@ MonoBehaviour:
     additionalAmmo:
       baseValue: 0
     acceleration:
-      baseValue: 18
+      baseValue: 30
     radius:
       baseValue: 1.5
     heatSeeking:
@@ -4992,7 +5000,7 @@ MonoBehaviour:
       baseValue: 0.2
   laserStats:
     damage:
-      baseValue: 3
+      baseValue: 4
     speed:
       baseValue: 1
     size:
@@ -5019,6 +5027,7 @@ MonoBehaviour:
   rocketPrefab: {fileID: 3104575154846419193, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
   bouncingBladePrefab: {fileID: 2811498742082463121, guid: be55d5d6ca6424743b53edfd82df290c, type: 3}
   laserPrefab: {fileID: 270783261835920936, guid: 353c87f3496ae194f829f7689963ca6a, type: 3}
+  deskBulletPrefab: {fileID: 4417698256760681585, guid: e81685eb3006e6a4798061de5c30ce06, type: 3}
   aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
   bulletContainer: {fileID: 240791816331796829}
   hp: 0
@@ -5047,6 +5056,34 @@ MonoBehaviour:
   dashDuration: 0.5
   trailTime: 0
   isDashing: 0
+  magX: 0.3
+  magY: 0.3
+  cameraShakeTime: 0.1
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  cameraFollowingScript: {fileID: 0}
 --- !u!96 &64359846
 TrailRenderer:
   serializedVersion: 2
