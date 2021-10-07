@@ -15,6 +15,10 @@ public class AmmoPool : MonoBehaviour
     public Pool<Bullet> bouncingBulletPool;
     public int bouncingBulletCount;
 
+    public PiercingAmmo piercingAmmoPrefab;
+    public Pool<PiercingAmmo> piercingAmmoPool;
+    public int piercingAmmoCount;
+
     public Bullet multiBulletPrefab;
     public Pool<Bullet> multiBulletPool;
     public int multiBulletCount;
@@ -41,6 +45,9 @@ public class AmmoPool : MonoBehaviour
 
         bouncingBulletPool = new Pool<Bullet>(bouncingBulletPrefab, bouncingBulletCount);
         foreach (Bullet bouncingBullet in bouncingBulletPool.available) bouncingBullet.gameObject.transform.SetParent(transform);
+
+        piercingAmmoPool = new Pool<PiercingAmmo>(piercingAmmoPrefab, piercingAmmoCount);
+        foreach (PiercingAmmo piercingAmmo in piercingAmmoPool.available) piercingAmmo.gameObject.transform.SetParent(transform);
 
         multiBulletPool = new Pool<Bullet>(multiBulletPrefab, multiBulletCount);
         foreach (Bullet multiBullet in multiBulletPool.available) multiBullet.gameObject.transform.SetParent(transform);

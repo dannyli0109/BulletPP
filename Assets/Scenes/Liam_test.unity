@@ -918,6 +918,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pools
       objectReference: {fileID: 0}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: piercingAmmoPrefab
+      value: 
+      objectReference: {fileID: 5443079235833499694, guid: 953e56dd9e22bfe42b369a2de2a3a850, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: piercingAmmoCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: multiBulletPrefab
+      value: 
+      objectReference: {fileID: 4017013871196866315, guid: 5a013fe726515984193a7b943f834c75, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: multiBulletCount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
 --- !u!114 &265243478 stripped
@@ -5822,11 +5838,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: roomFinishMultiplier
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: difficultyNoDamageMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: totalRoomDiffculty
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
@@ -5890,6 +5910,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: character
       value: 
       objectReference: {fileID: 1949125668}
@@ -5897,6 +5921,14 @@ PrefabInstance:
       propertyPath: gunPoint
       value: 
       objectReference: {fileID: 1895491253}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: bbb65fcb07e650a448f30e517d688337, type: 2}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 48be6ed7b40121646b67294a7f0fa4f0, type: 2}
     - target: {fileID: 6380439006657279983, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_Name
       value: AugmentManager
@@ -7774,7 +7806,7 @@ PrefabInstance:
       objectReference: {fileID: 1949125668}
     - target: {fileID: 2184959538372637876, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
       propertyPath: MoveCameraMultiplier
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2671622707189826073, guid: aceda3c2fd48c184286ccdb21eaad343, type: 3}
       propertyPath: m_Color.r
