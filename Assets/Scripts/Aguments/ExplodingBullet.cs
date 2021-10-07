@@ -16,7 +16,7 @@ public class ExplodingBullet : Augment
     public override void Shoot(Character character, Transform transform)
     {
         AmmoPool ammoPool = AmmoPool.current;
-       Rocket rocket;
+        Rocket rocket;
         if (ammoPool.rocketPool.TryInstantiate(out rocket, transform.position, transform.rotation))
         {
             Debug.Log("explode");

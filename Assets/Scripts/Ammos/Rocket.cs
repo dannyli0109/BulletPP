@@ -5,6 +5,11 @@ using UnityEngine;
 public class Rocket : Ammo
 {
     public AOEDamage aoePrefab;
+
+    public float magX;
+    public float magY;
+    public float shakeTime;
+    public AnimationCurve curve;
     float currentSpeed;
     void Start()
     {
@@ -91,6 +96,14 @@ public class Rocket : Ammo
         {
             aoeDamage.Init(owner.rocketStats.radius.value, owner.rocketStats.damage.value, 1 << 11);
         }
+
+        float distance = Vector3.Distance(owner.transform.position, transform.position);
+        float portion = 1.0f;
+        if (distance != 0)
+        {
+            portion = 1 / distance;
+        }
+        CameraShake.current.Shake(magX * portion, magY * portion, shakeTime, curve);
     }
 
     private void OnDestroy()
