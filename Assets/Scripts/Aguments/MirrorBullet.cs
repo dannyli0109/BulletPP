@@ -14,7 +14,6 @@ public class MirrorBullet : Augment
     {
         if (index <= 0) return;
         character.inventory[index - 1].index = index - 1;
-        if (index - 1 <= 0) return;
         character.inventory[index - 1].Shoot(character, transform);
     }
 }

@@ -17,6 +17,7 @@ public class MultiBullet : Augment
 
     public override void Shoot(Character character, Transform transform)
     {
+        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
         float initialAngle = -angles / 2.0f;
         float angleIncrements;
 

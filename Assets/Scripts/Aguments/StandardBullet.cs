@@ -15,6 +15,7 @@ public class StandardBullet : Augment
 
     public override void Shoot(Character character, Transform transform)
     {
+        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
         AmmoPool ammoPool = AmmoPool.current;
         Bullet bullet;
         if (ammoPool.bulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
