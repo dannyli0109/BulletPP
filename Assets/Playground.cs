@@ -46,7 +46,7 @@ public class Playground : MonoBehaviour
         GameObject roomObject = Instantiate(roomPrefab, mapGeneration.startingPos, Quaternion.identity);
         room = new Room(new Vector2(0, 0), 0, -1, -1, -1, -1);
         room.thisPrefabInfo = roomObject.GetComponent<RoomPrefabInformation>();
-        player.transform.position = mapGeneration.startingPos;
+        player.transform.position = new Vector3(0, 1.12f, 9.0f);
         transform.position = mapGeneration.startingPos;
         GameManager.current.ChangeState(GameState.Shop);
         mapGeneration.currentRoomInside = 1;

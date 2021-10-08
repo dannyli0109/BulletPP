@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6742485254360139936}
   - component: {fileID: 6352519955538650626}
   - component: {fileID: 8204072558736304038}
+  - component: {fileID: 6979744570010046792}
   m_Layer: 0
   m_Name: Terminal 1
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178219058792505281}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -43.25, y: 1.5, z: 7}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
@@ -59,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 0ee49b311f1084a41857b7782533bd36, type: 3}
+  - {fileID: 2100000, guid: ab0014c63e315e442a384ceaad1bf219, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6979744570010046792
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178219058792505281}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.8224006, y: 2.2980707, z: 4.2724566}
+  m_Center: {x: 0, y: 0.0000017881392, z: 0}
