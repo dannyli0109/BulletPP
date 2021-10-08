@@ -17,6 +17,9 @@ public class SpellQueueEnemy : Enemy
     //public AmmoPool ammoPool;
 
 
+    public bool notUsingAnimation;
+
+
     #region MoveStats
     [Header("Move Stats")]
 
@@ -149,6 +152,7 @@ public class SpellQueueEnemy : Enemy
             HandleMoving();
         }
 
+
         UpdateAnimation();
         timeSinceFired += Time.deltaTime;
     }
@@ -222,6 +226,8 @@ public class SpellQueueEnemy : Enemy
         float tx = velocity.x;
         float ty = velocity.z;
 
+        if (!notUsingAnimation)
+        {
         Vector2 movemntRotated;
         movemntRotated.x = (cos * tx) - (sin * ty);
         movemntRotated.y = (sin * tx) + (cos * ty);
@@ -231,6 +237,7 @@ public class SpellQueueEnemy : Enemy
 
         animator.SetFloat("x", movemntRotated.x);
         animator.SetFloat("y", movemntRotated.y);
+        }
     }
 
     public override void OnDestroy()

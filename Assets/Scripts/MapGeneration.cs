@@ -491,11 +491,6 @@ public class MapGeneration : MonoBehaviour
     {
         // sniper
         List<Transform> holdingPossibleSniperSpawnPoints = room.thisPrefabInfo.sniperSpawnPoint;
-        if (holdingPossibleSniperSpawnPoints.Count == 0)
-        {
-            Debug.Log("refill");
-            //  holdingPossibleSniperSpawnPoints = room.thisPrefabInfo.sniperSpawnPoint;
-        }
         int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleSniperSpawnPoints.Count);
 
         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
