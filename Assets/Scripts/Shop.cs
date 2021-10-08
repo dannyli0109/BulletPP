@@ -29,6 +29,7 @@ public class Shop : MonoBehaviour
     {
         AugmentManager augmentManager = AugmentManager.current;
         augmentIds = augmentManager.GetAugmentIdList();
+        level = 3;
         Refresh();
     }
 

@@ -53,7 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 4017013871196866315, guid: 960b2b48a1758334e8ca60c6f9364350, type: 3}
     - target: {fileID: 8318605735942815986, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
       propertyPath: multiBulletCount
-      value: 20
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318605735942815986, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: piercingAmmoPrefab
+      value: 
+      objectReference: {fileID: 5443079235833499694, guid: 953e56dd9e22bfe42b369a2de2a3a850, type: 3}
+    - target: {fileID: 8318605735942815986, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
+      propertyPath: piercingAmmoCount
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8318605735942815987, guid: 1f7cf02c88f2735439d9d7d1e9df82fd, type: 3}
       propertyPath: m_LocalPosition.x

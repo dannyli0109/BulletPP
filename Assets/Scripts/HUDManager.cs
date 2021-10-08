@@ -434,18 +434,14 @@ public class HUDManager : MonoBehaviour
             }
             else
             {
-                if (inShop)
-                {
+                GameObject augmentUI = Instantiate(augmentUIPrefab);
+                AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
 
-                    GameObject augmentUI = Instantiate(augmentUIPrefab);
-                    AugmentHUD augmentHUD = augmentUI.transform.GetComponent<AugmentHUD>();
-
-                    //  augmentHUD.Populate(0, 0, 0);
-                    augmentHUD.PopulateGeneric(emptySlotUISprite);
-                    augmentUI.transform.SetParent(augmentListUIContainer.transform);
-                    augmentUI.transform.localScale = new Vector3(1, 1, 1);
-                    augmentHUD.sellAugmentTrigger.Init(player, i);
-                }
+                //  augmentHUD.Populate(0, 0, 0);
+                augmentHUD.PopulateGeneric(emptySlotUISprite);
+                augmentUI.transform.SetParent(augmentListUIContainer.transform);
+                augmentUI.transform.localScale = new Vector3(1, 1, 1);
+                augmentHUD.sellAugmentTrigger.Init(player, i);
             }
         }
     }

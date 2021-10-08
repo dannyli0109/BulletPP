@@ -15,6 +15,8 @@ public class ExplodingBullet : Augment
 
     public override void Shoot(Character character, Transform transform)
     {
+        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
+
         AmmoPool ammoPool = AmmoPool.current;
         Rocket rocket;
         if (ammoPool.rocketPool.TryInstantiate(out rocket, transform.position, transform.rotation))
