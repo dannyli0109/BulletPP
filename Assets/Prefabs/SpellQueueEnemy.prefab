@@ -1629,7 +1629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     maxHp:
-      baseValue: 36
+      baseValue: 48
     moveSpeed:
       baseValue: 0
     reloadTime:
@@ -1794,7 +1794,7 @@ MonoBehaviour:
   deskBulletPrefab: {fileID: 0}
   aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 1109022956828929431}
-  hp: 36
+  hp: 48
   gold: 1
   timeSinceFired: 0
   reloading: 0
@@ -1803,6 +1803,7 @@ MonoBehaviour:
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
   rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 0}
+  inventoryIndex: 0
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
   oldsmoothingRange: 0
@@ -1845,7 +1846,6 @@ MonoBehaviour:
   maxCooldown: 3
   viewAngle: 60
   rotationSpeed: 6
-  ammoPool: {fileID: 0}
   setAcceleration: 18
   tooFarToSeePlayer: 22
   tooFarToShoot: 18

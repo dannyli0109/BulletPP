@@ -22,7 +22,7 @@ public class Bullet : Ammo
 
         if (timesBounced < bounces)
         {
-            Debug.Log("Try to bounce");
+          //  Debug.Log("Try to bounce");
             BounceOffAmmo();
         }
     }

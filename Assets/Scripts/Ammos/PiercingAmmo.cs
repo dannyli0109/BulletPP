@@ -42,12 +42,12 @@ public class PiercingAmmo : Ammo
         if (GameManager.current.GameTransitional()) return;
 
         HandleAmmoHit(other);
-       // EventManager.current.OnAmmoDestroy(gameObject);
+        // EventManager.current.OnAmmoDestroy(gameObject);
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            Debug.Log("wall hit");
-                EventManager.current.OnAmmoDestroy(gameObject);         
+            //  Debug.Log("wall hit");
+            EventManager.current.OnAmmoDestroy(gameObject);
         }
     }
 

@@ -19,7 +19,7 @@ public class ExplodingBullet : Augment
         Rocket rocket;
         if (ammoPool.rocketPool.TryInstantiate(out rocket, transform.position, transform.rotation))
         {
-            Debug.Log("explode");
+           // Debug.Log("explode");
             Rocket rocketComponent = rocket.GetComponent<Rocket>();
             Vector3 forward = transform.forward;
             rocketComponent.Init(character, forward, 0, speed, damage, size);
