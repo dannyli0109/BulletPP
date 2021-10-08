@@ -35,11 +35,11 @@ public class BouncingBullet : Augment
         for (int i = 0; i < amountOfBullets; i++)
         {
             Bullet bullet;
-            Debug.Log("Try instantiated");
+            //Debug.Log("Try instantiated");
 
             if (ammoPool.bouncingBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
-                Debug.Log("instantiated");
+               // Debug.Log("instantiated");
                 Bullet bulletComponent = bullet.GetComponent<Bullet>();
                 Vector3 forward = transform.forward;
                 bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, numberOfBounces);

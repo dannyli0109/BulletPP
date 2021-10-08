@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     maxHp:
-      baseValue: 48
+      baseValue: 64
     moveSpeed:
       baseValue: 1
     reloadTime:
@@ -1515,6 +1515,10 @@ MonoBehaviour:
       baseValue: 0
     extraExplosionRange:
       baseValue: 0
+    projectileSpread:
+      baseValue: 0
+    knockBackMultiplier:
+      baseValue: 0
     reloadOnDash:
       baseValue: 0
     shootRocketOnDash:
@@ -1522,6 +1526,10 @@ MonoBehaviour:
     personalSpace:
       baseValue: 0
     extraDamageAfterReload:
+      baseValue: 0
+    bulletPiercing:
+      baseValue: 0
+    deskBulletStatPercentage:
       baseValue: 0
   bulletStats:
     damage:
@@ -1640,9 +1648,10 @@ MonoBehaviour:
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
+  deskBulletPrefab: {fileID: 0}
   aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 5899302560793758629}
-  hp: 48
+  hp: 64
   gold: 2
   timeSinceFired: 0
   reloading: 0
@@ -1651,6 +1660,7 @@ MonoBehaviour:
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 5899302560793758629}
   rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 0}
+  inventoryIndex: 0
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
   oldsmoothingRange: 0
@@ -1686,13 +1696,13 @@ MonoBehaviour:
   DEBUG: 0
   target: {fileID: 0}
   agent: {fileID: 7090880371026592612}
+  mapGenerationScript: {fileID: 0}
   spellTime: []
   index: 0
   minCooldown: 1
   maxCooldown: 3
   viewAngle: 60
   rotationSpeed: 1
-  ammoPool: {fileID: 0}
   setAcceleration: 3
   tooFarToSeePlayer: 18
   tooFarToShoot: 16

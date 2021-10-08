@@ -79,6 +79,7 @@ public class MapGeneration : MonoBehaviour
     #endregion
 
     #region Encounter
+    [Header("Encounter")]
     public List<GameObject> enemiesTypes;
     public List<GameObject> sniperTypes;
     public List<GameObject> swarmEnemiesType;
@@ -91,12 +92,16 @@ public class MapGeneration : MonoBehaviour
 
     public bool inCombat;
 
-    public List<Enemy> EnemiesInEncounter;
-    public List<int> numberOfWaves;
-    int currentWave;
-    public float waveWaitingTime;
+    public int EnemiesInEncounter;
+    public List<List<int>> EnemyWaves;  // how many waves // how many enemies in wave // what the enemy is.
+    public int currentWave;
+    public int posInWaves;
+    public float betweenWaveWaitingTime;
+    public float betweenEnemyWaitingTime;
     public float currentWaveWaitingTime;
     bool roomClear;
+
+    Vector2 holdingLastEnemy;
     #endregion
 
     #region MiniMap
@@ -141,8 +146,10 @@ public class MapGeneration : MonoBehaviour
     public GameEvent finishEnounter;
 
     public AmmoPool ammoPool;
+
     void Start()
     {
+        EventManager.current.enemyDeath += ReceiveEnemyDeath;
         GenerateMap();
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         RefreshMiniMapUI();
@@ -457,18 +464,13 @@ public class MapGeneration : MonoBehaviour
         {
 
             // swarm
-            if (holdingPossibleEnemySpawnPoints.Count == 0)
-            {
-                Debug.Log("Refill");
-                // holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
-            }
             int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
 
             Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
 
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], holdingPosition, enemiesTypes[0].transform.rotation);
             holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+            EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
     }
@@ -480,7 +482,7 @@ public class MapGeneration : MonoBehaviour
         {
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
             holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-            EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+            EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
     }
@@ -500,7 +502,7 @@ public class MapGeneration : MonoBehaviour
         holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+        EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
 
@@ -523,73 +525,8 @@ public class MapGeneration : MonoBehaviour
 
         GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
-        EnemiesInEncounter.Add(holdingGameObject.GetComponent<Enemy>());
+        EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
-    }
-
-    public void StartEncounter(Room room)
-    {
-        beginEnounter?.Invoke();
-        currentWave = 0;
-        numberOfWaves = new List<int>();
-        if (playerTarget.RecentlyTakenDamage > 0)
-        {
-            playerTarget.RecentlyTakenDamage--;
-        }
-        // lock doors
-        inCombat = true;
-
-        //Debug.Log((totalRoomDiffucluty / 3) + " " + totalRoomDiffucluty / 2);
-        int holdingRand = (int)UnityEngine.Random.Range((int)(totalRoomDiffculty / 3), (int)(totalRoomDiffculty / 2));
-        holdingRand++;
-        //  Debug.Log(holdingRand);
-        if (totalRoomDiffculty < singleEnemyCutOff)
-        {
-            holdingRand = 1;
-        }
-
-       int holdingNumberOfWaves = 1;
-
-        for (int i = 0; i < additionalWaveCutOff.Count; i++)
-        {
-            if (totalRoomDiffculty > additionalWaveCutOff[i])
-            {
-                holdingNumberOfWaves++;
-            }
-        }
-            holdingRand = holdingRand / holdingNumberOfWaves;
-        for(int i =0; i< holdingNumberOfWaves; i++)
-        {
-            numberOfWaves.Add(holdingRand );
-        }
-
-        GameManager.current.ChangeStateImmdeiate(GameState.Game);
-
-        for (int i = 0; i < numberOfWaves[0]; i++)
-        {
-            int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
-            if (totalRoomDiffculty < singleEnemyCutOff)
-            {
-                holdingRandomEnemType = 0;
-            }
-
-            if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
-            {
-                int swarmIndex = holdingRandomEnemType - enemiesTypes.Count - sniperTypes.Count;
-                SpawnSwarms(room, swarmIndex);
-            }
-            else if (holdingRandomEnemType >= enemiesTypes.Count)
-            {
-                int sniperIndex = holdingRandomEnemType - enemiesTypes.Count;
-                SpawnSniper(room, sniperIndex);
-            }
-            else
-            {
-                int enemyIndex = holdingRandomEnemType;
-                SpawnNormalEnemy(room, enemyIndex);
-            }
-
-        }
     }
 
     public void CheckToStartEncounter()
@@ -620,39 +557,15 @@ public class MapGeneration : MonoBehaviour
 
     public void UpdateRoom(Room room)
     {
-        if (currentWaveWaitingTime > waveWaitingTime)
+        if (currentWaveWaitingTime < 0)
         {
             roomClear = false;
-
-            for (int i = 0; i < numberOfWaves[currentWave]; i++)
-            {
-                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
-                if (totalRoomDiffculty < singleEnemyCutOff)
-                {
-                    holdingRandomEnemType = 0;
-                }
-
-                if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
-                {
-                    int swarmIndex = holdingRandomEnemType - enemiesTypes.Count - sniperTypes.Count;
-                    SpawnSwarms(room, swarmIndex);
-                }
-                else if (holdingRandomEnemType >= enemiesTypes.Count)
-                {
-                    int sniperIndex = holdingRandomEnemType - enemiesTypes.Count;
-                    SpawnSniper(room, sniperIndex);
-                }
-                else
-                {
-                    int enemyIndex = holdingRandomEnemType;
-                    SpawnNormalEnemy(room, enemyIndex);
-                }
-            }
+            posInWaves = 0;
 
         }
         else
         {
-            currentWaveWaitingTime += Time.deltaTime;
+            currentWaveWaitingTime -= Time.deltaTime;
         }
     }
 
@@ -664,18 +577,46 @@ public class MapGeneration : MonoBehaviour
         }
         else
         {
-            // next wave
-            if (EnemiesInEncounter.Count <= 0)
+            if (EnemyWaves[currentWave].Count > posInWaves)
             {
-                currentWave++;
+                if (currentWaveWaitingTime < 0)
+                {
+                    if (EnemyWaves[currentWave][posInWaves] >= enemiesTypes.Count + sniperTypes.Count)
+                    {
+                        int swarmIndex = EnemyWaves[currentWave][posInWaves] - enemiesTypes.Count - sniperTypes.Count;
+                        SpawnSwarms(room, swarmIndex);
+                    }
+                    else if (EnemyWaves[currentWave][posInWaves] >= enemiesTypes.Count)
+                    {
+                        int sniperIndex = EnemyWaves[currentWave][posInWaves] - enemiesTypes.Count;
+                        SpawnSniper(room, sniperIndex);
+                    }
+                    else
+                    {
+                        int enemyIndex = EnemyWaves[currentWave][posInWaves];
+                        SpawnNormalEnemy(room, enemyIndex);
+                    }
+                    posInWaves++;
+                    currentWaveWaitingTime = betweenEnemyWaitingTime;
+                    Debug.Log("spawn");
+                }
+                else
+                {
+                    currentWaveWaitingTime -= Time.deltaTime;
+                }
+            }
+            // next wave
+            else if (EnemiesInEncounter <= 0)
+            {
+                TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
 
-                Debug.Log("current wave: " + currentWave + " " + numberOfWaves.Count);
-                if (currentWave < numberOfWaves.Count)
+                currentWave++;
+                if (currentWave < EnemyWaves.Count)
                 {
                     Debug.Log("Current wave");
-          
+
                     roomClear = true;
-                    currentWaveWaitingTime = 0;
+                    currentWaveWaitingTime = betweenWaveWaitingTime;
                 }
                 else
                 {
@@ -691,36 +632,65 @@ public class MapGeneration : MonoBehaviour
                     }
                 }
             }
-            else
+        }
+    }
+
+    public void StartEncounter(Room room)
+    {
+        beginEnounter?.Invoke();
+
+        currentWave = 0;
+        EnemyWaves = new List<List<int>>();
+        if (playerTarget.RecentlyTakenDamage > 0)
+        {
+            playerTarget.RecentlyTakenDamage--;
+        }
+        // lock doors
+        inCombat = true;
+
+        int holdingAmountOfEnemies = (int)UnityEngine.Random.Range((int)(totalRoomDiffculty / 3), (int)(totalRoomDiffculty / 2));
+        holdingAmountOfEnemies++;
+
+        if (totalRoomDiffculty < singleEnemyCutOff)
+        {
+            holdingAmountOfEnemies = 1;
+        }
+
+       int holdingNumberOfWaves = 1;
+
+        for (int i = 0; i < additionalWaveCutOff.Count; i++)
+        {
+            if (totalRoomDiffculty > additionalWaveCutOff[i])
             {
-                Vector2 holdingLastEnemy = new Vector2(0,0);
-                for (int i = 0; i < EnemiesInEncounter.Count; i++)
-                {
-                    if (EnemiesInEncounter[i].hp <= 0)
-                    {
-                        holdingLastEnemy = new Vector2(EnemiesInEncounter[i].transform.position.x, EnemiesInEncounter[i].transform.position.z);
-                        EnemiesInEncounter.RemoveAt(i);
-                    }
-                    else if (EnemiesInEncounter[i] == null)
-                    {
-                        Debug.Log("doesn't exist");
-                        EnemiesInEncounter.RemoveAt(i);
-                    }
-                    else if (EnemiesInEncounter[i].gameObject == null)
-                    {
-                        EnemiesInEncounter.RemoveAt(i);
-                    }
-                }
-
-                if(EnemiesInEncounter.Count <= 0)
-                {
-                   // Debug.Log("health");
-
-                    TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
-                   
-                }
+                holdingNumberOfWaves++;
             }
         }
+            holdingAmountOfEnemies = holdingAmountOfEnemies / holdingNumberOfWaves;
+        for (int i = 0; i < holdingNumberOfWaves; i++)
+        {
+            List<int> holdingNewWave = new List<int>();
+            EnemyWaves.Add(holdingNewWave);
+
+            for (int p = 0; p < holdingAmountOfEnemies; p++)
+            {
+                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
+                if (totalRoomDiffculty < singleEnemyCutOff)
+                {
+                    holdingRandomEnemType = 0;
+                }
+
+                holdingNewWave.Add(holdingRandomEnemType);
+            }
+        }
+
+        GameManager.current.ChangeStateImmdeiate(GameState.Game);
+
+        Debug.Log("Number of waves " + EnemyWaves.Count);
+        for(int i=0; i< EnemyWaves.Count; i++)
+        {
+            Debug.Log(i +" Waves has " + EnemyWaves[i].Count);
+        }
+        posInWaves = 0;
     }
 
     bool CheckIfMapCompleted()
@@ -755,21 +725,21 @@ public class MapGeneration : MonoBehaviour
                 needToSetPos = true;
                 desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.position.z);
                 playerTarget.transform.position = desiredSetPos;
-                    Debug.Log(desiredSetPos);
+                  //  Debug.Log(desiredSetPos);
                     break;
             case Direction.Left:
                 currentRoomInside = rooms[currentRoomInside].leftRoomRef;
                 needToSetPos = true;
                 desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y,rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.position.z);
                 playerTarget.transform.position = desiredSetPos;
-                    Debug.Log(desiredSetPos);
+                   // Debug.Log(desiredSetPos);
                     break;
             case Direction.Right:
                 currentRoomInside = rooms[currentRoomInside].rightRoomRef;
                 needToSetPos = true;
                 desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y,  rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.position.z);
                 playerTarget.transform.position = desiredSetPos;
-                    Debug.Log(desiredSetPos);
+                   // Debug.Log(desiredSetPos);
                     break;
         }
 
@@ -799,7 +769,7 @@ public class MapGeneration : MonoBehaviour
 
         if (holdingRandom < chanceOfSpawnOutOfOneHundredHealthPickup +  playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)
         {
-            Debug.Log("Spawn " + (chanceOfSpawnOutOfOneHundredHealthPickup + playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)+ "  " + playerTarget.RecentlyTakenDamage);
+          //  Debug.Log("Spawn " + (chanceOfSpawnOutOfOneHundredHealthPickup + playerTarget.RecentlyTakenDamage * damagedChanceToSpawnHealthPickup)+ "  " + playerTarget.RecentlyTakenDamage);
             healthPickUpObject.SetActive(true);
             healthPickUpObject.transform.position = pos;
         }
@@ -898,5 +868,12 @@ public class MapGeneration : MonoBehaviour
         // room.thisPrefabInfo.enemySpawnPoint
         int holdingSpawnInt = UnityEngine.Random.Range(0, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint.Count);
         return  new Vector3(rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].position.x, yEnemyHeight, rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint[holdingSpawnInt].position.y);
+    }
+
+    public void ReceiveEnemyDeath(Vector3 pos)
+    {
+       // Debug.Log("receive enemy death");
+        holdingLastEnemy = pos;
+        EnemiesInEncounter--;
     }
 }

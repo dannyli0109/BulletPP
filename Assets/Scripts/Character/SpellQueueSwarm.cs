@@ -86,8 +86,11 @@ public class SpellQueueSwarm : SpellQueueEnemy
 
         agent.speed = 0;
         decision.MakeDecision();
-        HandleMoving();
 
+        if (hp > 0)
+        {
+            HandleMoving();
+        }
 
         UpdateAnimation();
 

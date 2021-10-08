@@ -145,23 +145,17 @@ public class SpellQueueEnemy : Enemy
         decision.MakeDecision();
 
         if (hp > 0)
-
         {
-
-        HandleMoving();
-
-
+            HandleMoving();
         }
 
         UpdateAnimation();
-
         timeSinceFired += Time.deltaTime;
     }
 
     public virtual void HandleMoving()
     {
         agent.speed = speed;
-
         if(lastKnownPos== transform.position)
         {
             timeStuck += Time.deltaTime;
@@ -169,7 +163,6 @@ public class SpellQueueEnemy : Enemy
             if (timeStuck < 0.3f)
             {
                 timeStuck = 0;
-
                 finalDestination = target.transform.position;
             }
         }
@@ -177,9 +170,7 @@ public class SpellQueueEnemy : Enemy
         else if (InRange(tooClose))
         {
             Vector3 normalAwayFromPlayer =Vector3.Normalize( transform.position - target.transform.position);
-
             finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);        
-
         }
 
         // if line of sight and close enough get a random place
@@ -189,18 +180,12 @@ public class SpellQueueEnemy : Enemy
 
             if (distanceFromFinal < smoothingRange)
             {
-            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(0, 5), 0, UnityEngine.Random.Range(0, 5)));
+                Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(0, 5), 0, UnityEngine.Random.Range(0, 5)));
 
-            finalDestination = target.transform.position + normalAwayFromPlayer * 2;
-
+                finalDestination = target.transform.position + normalAwayFromPlayer * 2;
             }
-
             else
-
             {
-
-            //    Debug.Log("nah " + distanceFromFinal);
-
             }
 
         }
@@ -257,7 +242,7 @@ public class SpellQueueEnemy : Enemy
     {
         if(other.gameObject.layer== 12)
         {
-            Debug.Log("enemy");
+            //Debug.Log("enemy");
             Vector3 normal = other.gameObject.transform.position - transform.position;
 
             Debug.DrawLine(transform.position, transform.position + normal * 5,Color.blue,0.1f);
