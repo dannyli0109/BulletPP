@@ -16,9 +16,7 @@ public class SpellQueueEnemy : Enemy
     public float rotationSpeed;
     //public AmmoPool ammoPool;
 
-
     public bool notUsingAnimation;
-
 
     #region MoveStats
     [Header("Move Stats")]
@@ -199,7 +197,11 @@ public class SpellQueueEnemy : Enemy
         }
 
         //Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
+        if (hp > 0)
+        {
         agent?.SetDestination(finalDestination);
+
+        }
 
         lastKnownPos = transform.position;
     }
@@ -247,15 +249,15 @@ public class SpellQueueEnemy : Enemy
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer== 12)
-        {
-            //Debug.Log("enemy");
-            Vector3 normal = other.gameObject.transform.position - transform.position;
-
-            Debug.DrawLine(transform.position, transform.position + normal * 5,Color.blue,0.1f);
-            finalDestination += normal * enemyAvoidAmount * Time.deltaTime;
-
-        }
+     //   if(other.gameObject.layer== 12)
+     //   {
+     //       //Debug.Log("enemy");
+     //       Vector3 normal = other.gameObject.transform.position - transform.position;
+     //
+     //       Debug.DrawLine(transform.position, transform.position + normal * 5,Color.blue,0.1f);
+     //       finalDestination += normal * enemyAvoidAmount * Time.deltaTime;
+     //
+     //   }
     }
 
     public void ShootBullets(int amount, float initialAngle, float angle, float speed, float size)

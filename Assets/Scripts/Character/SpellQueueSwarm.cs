@@ -11,9 +11,17 @@ public class SpellQueueSwarm : SpellQueueEnemy
 
     public float swarmSegmentDist;
 
+    bool wait=true;
+    public float randomAdditionalSpeed;
+
     public override void Start()
     {
+        speed += UnityEngine.Random.RandomRange(0, randomAdditionalSpeed);
         base.Start();
+        Vector3 normalToNext = Vector3.Normalize(finalDestination - transform.position);
+
+        RefreshNextDestination();
+        coolDownTime = 2;
     }
 
     public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
@@ -102,6 +110,11 @@ public class SpellQueueSwarm : SpellQueueEnemy
         if (coolDownTime <= 0)
         {
             finalDestination = target.transform.position;
+            if (wait)
+            {
+                RefreshNextDestination();
+                wait = false;
+            }
         }
         else
         {
@@ -115,40 +128,35 @@ public class SpellQueueSwarm : SpellQueueEnemy
         if (lastKnownPos == transform.position)
         {
             timeStuck += Time.deltaTime;
-
-            if (timeStuck < 0.3f)
+           // Debug.Log(lastKnownPos + "  " + transform.position);
+            if (timeStuck < 0.7f)
             {
                 timeStuck = 0;
-
-                nextDestination = finalDestination;
+                RefreshNextDestination();
             }
         }
         // too close move back
-        else if (InRange(tooClose))
+         if (InRange(tooClose))
         {
+            timeStuck = 0;
             if (coolDownTime <= 0)
             {
+                Debug.Log("bite");
+               // CreateAOE();
+                coolDownTime = 1.0f;
 
-            Debug.Log("bite");
-            CreateAOE();
-            coolDownTime = 5.0f;
+                Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
 
-            Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
-
-            finalDestination = target.transform.position + normalAwayFromPlayer * desiredRange;
+                finalDestination = target.transform.position + normalAwayFromPlayer * desiredRange;
             }
             nextDestination = finalDestination;
         }
         else
         {
-            if(distanceFromNext< smoothingRange)
+            timeStuck = 0;
+            if (distanceFromNext < smoothingRange)
             {
-                //Debug.Log(" new path");
-                Vector3 normalToNext = Vector3.Normalize(finalDestination - transform.position);
-
-                nextDestination = transform.position + normalToNext * swarmSegmentDist + new Vector3(UnityEngine.Random.RandomRange(-1, 1), 0, UnityEngine.Random.RandomRange(-1, 1));
-                Debug.DrawLine(transform.position, nextDestination, Color.cyan, 0.1f);
-
+                RefreshNextDestination();
             }
         }
 
@@ -156,7 +164,31 @@ public class SpellQueueSwarm : SpellQueueEnemy
         agent?.SetDestination(nextDestination);
 
         lastKnownPos = transform.position;
-        Debug.DrawLine(transform.position, finalDestination, Color.red, 0.1f);
+        Debug.DrawLine(transform.position, nextDestination, Color.red, 0.1f);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == 12)
+        {
+           Debug.Log("swarm touching");
+          
+            Vector3 normal = other.gameObject.transform.position - transform.position;
+           
+            nextDestination += normal * enemyAvoidAmount * Time.deltaTime;
+            Debug.DrawLine(transform.position, transform.position + normal * 5, Color.blue, 0.1f);
+
+        }
+    }
+
+    void RefreshNextDestination()
+    {
+        //Debug.Log(" new path");
+        finalDestination = target.transform.position;
+        Vector3 normalToNext = Vector3.Normalize(finalDestination - transform.position);
+
+        nextDestination = transform.position + normalToNext * swarmSegmentDist + new Vector3(UnityEngine.Random.RandomRange(-1, 1), 0, UnityEngine.Random.RandomRange(-1, 1));
+    //    Debug.DrawLine(transform.position, nextDestination, Color.cyan, 0.1f);
     }
 
     public void doNothing()

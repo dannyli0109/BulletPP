@@ -477,14 +477,11 @@ public class MapGeneration : MonoBehaviour
 
     public void SpawnSwarms(Vector3 setPos, int swarmIndex)
     {
-        int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
-        for (int j = 0; j < swarmSpawnAmount; j++)
-        {
+
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
             holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
-        }
     }
 
     public void SpawnSniper(Room room, int sniperIndex)
@@ -593,7 +590,7 @@ public class MapGeneration : MonoBehaviour
                     }
                     posInWaves++;
                     currentWaveWaitingTime = betweenEnemyWaitingTime;
-                    Debug.Log("spawn");
+                  //  Debug.Log("spawn");
                 }
                 else
                 {
@@ -673,8 +670,22 @@ public class MapGeneration : MonoBehaviour
                 {
                     holdingRandomEnemType = 0;
                 }
-
+                
+                if (holdingRandomEnemType>enemiesTypes.Count+ sniperTypes.Count)
+                {
+                    int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
+                    for (int s=0; s< swarmSpawnAmount; s++)
+                    {
+                        holdingNewWave.Add(holdingRandomEnemType);
+                    }
+                }
+                else
+                {
                 holdingNewWave.Add(holdingRandomEnemType);
+
+                }
+                    
+
             }
         }
 
