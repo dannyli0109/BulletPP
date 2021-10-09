@@ -140,17 +140,15 @@ public class SpellQueueEnemy : Enemy
             EventManager.current.ReceiveGold(gold);
             Destroy(gameObject);
         }
-
-        agent.speed = 0;
-        decision.MakeDecision();
-
-        if (hp > 0)
+        else
         {
+            agent.speed = 0;
+            decision.MakeDecision();
             HandleMoving();
+            UpdateAnimation();
+            timeSinceFired += Time.deltaTime;
         }
 
-        UpdateAnimation();
-        timeSinceFired += Time.deltaTime;
     }
 
     public virtual void HandleMoving()

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7128933462229582434
 Transform:
   m_ObjectHideFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   rooms: []
   wallReConnectChanceOfHundred: 25
   roomMultiplyValue: {x: 60, y: 60}
-  startingPos: {x: 0, y: 0, z: 0}
+  startingPos: {x: 0, y: 0, z: -35}
   chanceOfHundredToSpawnNewRoom:
   - 90
   - 30
@@ -72,9 +72,7 @@ MonoBehaviour:
   startingRooms:
   - {fileID: 3947602865523708899, guid: 6223b074dd8c4784b9d384e37117be98, type: 3}
   allDoorRoom:
-  - {fileID: 8713667842214811878, guid: 6a3baf9e942e2b348b63c631a54bbd30, type: 3}
-  - {fileID: 8800733369545872879, guid: 5c04123bf73d2e743b2c64c776c024d2, type: 3}
-  - {fileID: 6226753198333860991, guid: 15303d770ab7e864e8c23ee4cedda707, type: 3}
+  - {fileID: 2127361013889182940, guid: 3dc6838b1dd0a8a40aa6696c784493ca, type: 3}
   upRoom:
   - {fileID: 8395571390937848587, guid: 740a39b0c0e0a8b4dac24b4aabc2fc74, type: 3}
   downRoom:
@@ -119,18 +117,25 @@ MonoBehaviour:
   - {fileID: 1109022956268930713, guid: b46f53504db9a24488f7eef42ad6fdb0, type: 3}
   - {fileID: 5899302560263135403, guid: 4b58d74269c656e499979994e4bc3790, type: 3}
   - {fileID: 6599741860285544928, guid: d71cd2c6cd1c4c446bed27f0f66943cd, type: 3}
+  - {fileID: 2875370378184938783, guid: fb734a36ec5010a4ebcaee3f6861fd22, type: 3}
   sniperTypes:
   - {fileID: 5077297002888340751, guid: 2fe8c023552f8f247a78be833f0d26a7, type: 3}
   swarmEnemiesType:
+  - {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
+  - {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
+  - {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
+  - {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
   - {fileID: 7872071981610588988, guid: decad7e5803995443b6137f4ac8406ec, type: 3}
   minSwarmSpawnAmount: 2
   maxSwarmSpawnAmount: 5
   yEnemyHeight: 0
   enemyRandOffset: {x: 2, y: 1}
   inCombat: 0
-  EnemiesInEncounter: []
-  numberOfWaves: 
-  waveWaitingTime: 3
+  EnemiesInEncounter: 0
+  currentWave: 0
+  posInWaves: 0
+  betweenWaveWaitingTime: 1.5
+  betweenEnemyWaitingTime: 0.6
   currentWaveWaitingTime: 0
   miniMapCenterRoom: {fileID: 0}
   miniMapUpperRoom: {fileID: 0}
@@ -145,9 +150,11 @@ MonoBehaviour:
   totalRoomDiffculty: 0
   singleEnemyCutOff: 2
   secondWaveCutOff: 12
-  additionalWaveCutOff: []
-  roomFinishMultiplier: 2
-  difficultyNoDamageMultiplier: 0.5
+  additionalWaveCutOff:
+  - 12
+  - 24
+  roomFinishMultiplier: 4
+  difficultyNoDamageMultiplier: 1
   chanceOfSpawnOutOfOneHundredHealthPickup: 30
   damagedChanceToSpawnHealthPickup: 10
   healthPickUpObject: {fileID: 0}

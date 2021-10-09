@@ -69,12 +69,14 @@
     <Compile Include="Assets\Scripts\AugmentUI.cs" />
     <Compile Include="Assets\Scripts\DecisionTree\Decision.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
+    <Compile Include="Assets\Map.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\SynergyHUD.cs" />
     <Compile Include="Assets\Scripts\Aguments\StandardBullet.cs" />
     <Compile Include="Assets\Scripts\CameraFollowing.cs" />
     <Compile Include="Assets\Scripts\RoomDoorCensor.cs" />
+    <Compile Include="Assets\Scripts\Aguments\ExplodingBullet.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
     <Compile Include="Assets\Scripts\FlexibleGridLayout.cs" />
     <Compile Include="Assets\Tooltip.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Aguments\AugmentData.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVParser.cs" />
+    <Compile Include="Assets\Scripts\Ammos\PiercingAmmo.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueRunner.cs" />
     <Compile Include="Assets\Scripts\HealthHearts.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -165,6 +168,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\CircleMesh.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scripts\Aguments\PiercingBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
@@ -205,9 +209,6 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
-    <Compile Include="Assets\Scripts\Aguments\ExplodingBullet.cs" />
-    <Compile Include="Assets\Scripts\Ammos\PiercingAmmo.cs" />
-    <Compile Include="Assets\Scripts\Aguments\PiercingBullet.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />
