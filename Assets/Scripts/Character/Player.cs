@@ -429,14 +429,19 @@ public class Player : Character
             currentReloadTime += Time.deltaTime;
             if (currentReloadTime >= stats.reloadTime.value)
             {
-                currentReloadTime = 0;
-                inventoryIndex = 0;
-                reloading = false;
-                if (stats.extraDamageAfterReload.value > 1)
-                {
-                    freshReload = true;
-                }
+                Reload();
             }
+        }
+    }
+
+    public void Reload()
+    {
+        currentReloadTime = 0;
+        inventoryIndex = 0;
+        reloading = false;
+        if (stats.extraDamageAfterReload.value > 1)
+        {
+            freshReload = true;
         }
     }
 
