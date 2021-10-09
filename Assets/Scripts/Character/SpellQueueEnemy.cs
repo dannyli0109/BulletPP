@@ -16,6 +16,7 @@ public class SpellQueueEnemy : Enemy
     public float rotationSpeed;
     //public AmmoPool ammoPool;
 
+    public bool notUsingAnimation;
 
     #region MoveStats
     [Header("Move Stats")]
@@ -145,10 +146,9 @@ public class SpellQueueEnemy : Enemy
             agent.speed = 0;
             decision.MakeDecision();
             HandleMoving();
-            UpdateAnimation();
             timeSinceFired += Time.deltaTime;
         }
-
+        UpdateAnimation();
     }
 
     public virtual void HandleMoving()
@@ -193,7 +193,11 @@ public class SpellQueueEnemy : Enemy
         }
 
         //Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
+        if (hp > 0)
+        {
         agent?.SetDestination(finalDestination);
+
+        }
 
         lastKnownPos = transform.position;
     }
@@ -220,6 +224,8 @@ public class SpellQueueEnemy : Enemy
         float tx = velocity.x;
         float ty = velocity.z;
 
+        if (!notUsingAnimation)
+        {
         Vector2 movemntRotated;
         movemntRotated.x = (cos * tx) - (sin * ty);
         movemntRotated.y = (sin * tx) + (cos * ty);
@@ -229,6 +235,7 @@ public class SpellQueueEnemy : Enemy
 
         animator.SetFloat("x", movemntRotated.x);
         animator.SetFloat("y", movemntRotated.y);
+        }
     }
 
     public override void OnDestroy()
@@ -238,15 +245,15 @@ public class SpellQueueEnemy : Enemy
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer== 12)
-        {
-            //Debug.Log("enemy");
-            Vector3 normal = other.gameObject.transform.position - transform.position;
-
-            Debug.DrawLine(transform.position, transform.position + normal * 5,Color.blue,0.1f);
-            finalDestination += normal * enemyAvoidAmount * Time.deltaTime;
-
-        }
+     //   if(other.gameObject.layer== 12)
+     //   {
+     //       //Debug.Log("enemy");
+     //       Vector3 normal = other.gameObject.transform.position - transform.position;
+     //
+     //       Debug.DrawLine(transform.position, transform.position + normal * 5,Color.blue,0.1f);
+     //       finalDestination += normal * enemyAvoidAmount * Time.deltaTime;
+     //
+     //   }
     }
 
     public void ShootBullets(int amount, float initialAngle, float angle, float speed, float size)

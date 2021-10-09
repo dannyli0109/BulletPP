@@ -137,7 +137,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 1.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7872071980038870351
 GameObject:
@@ -2605,7 +2605,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.883677, z: 0.6}
+  m_Size: {x: 0.7, y: 1.883677, z: 0.6}
   m_Center: {x: -0.008182287, y: 0.8918593, z: -0.03272891}
 --- !u!54 &7872071981610588991
 Rigidbody:
@@ -2815,7 +2815,7 @@ MonoBehaviour:
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
   oldsmoothingRange: 0
-  speed: 4
+  speed: 1.5
   desiredFurthestRange: 0
   favouredRange: 0
   closestRange: 0
@@ -2853,18 +2853,20 @@ MonoBehaviour:
   minCooldown: 1
   maxCooldown: 3
   viewAngle: 60
-  rotationSpeed: 30
-  setAcceleration: 10
+  rotationSpeed: 45
+  notUsingAnimation: 0
+  setAcceleration: 20
   tooFarToSeePlayer: 20
   tooFarToShoot: 10
-  tooClose: 0.4
+  tooClose: 0.7
   closeEnoughtDodge: 3
-  desiredRange: 6
-  smoothingRange: 0.2
+  desiredRange: 4
+  smoothingRange: 1
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 0.1
   coolDownTime: 0
-  swarmSegmentDist: 0.7
+  swarmSegmentDist: 4
+  randomAdditionalSpeed: 3
 --- !u!195 &6811238751959365875
 NavMeshAgent:
   m_ObjectHideFlags: 0
