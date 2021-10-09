@@ -491,7 +491,7 @@ public class MapGeneration : MonoBehaviour
         int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleSniperSpawnPoints.Count);
 
         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
-        holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
+        //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
         EnemiesInEncounter++;
@@ -578,8 +578,10 @@ public class MapGeneration : MonoBehaviour
                         int swarmIndex = EnemyWaves[currentWave][posInWaves] - enemiesTypes.Count - sniperTypes.Count;
                         SpawnSwarms(room, swarmIndex);
                     }
-                    else if (EnemyWaves[currentWave][posInWaves] >= enemiesTypes.Count)
+                    else if (EnemyWaves[currentWave][posInWaves] >= enemiesTypes.Count && EnemyWaves[currentWave][posInWaves] < enemiesTypes.Count + sniperTypes.Count)
                     {
+                        Debug.Log(EnemyWaves[currentWave][posInWaves]);
+                        Debug.Log(enemiesTypes.Count);
                         int sniperIndex = EnemyWaves[currentWave][posInWaves] - enemiesTypes.Count;
                         SpawnSniper(room, sniperIndex);
                     }
@@ -665,13 +667,15 @@ public class MapGeneration : MonoBehaviour
 
             for (int p = 0; p < holdingAmountOfEnemies; p++)
             {
+                // [0 - 9)
                 int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
                 if (totalRoomDiffculty < singleEnemyCutOff)
                 {
                     holdingRandomEnemType = 0;
                 }
                 
-                if (holdingRandomEnemType >= enemiesTypes.Count+ sniperTypes.Count)
+                // 
+                if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
                 {
                     int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
                     for (int s=0; s< swarmSpawnAmount; s++)
@@ -679,7 +683,7 @@ public class MapGeneration : MonoBehaviour
                         holdingNewWave.Add(holdingRandomEnemType);
                     }
                 }
-                else
+                else if (holdingRandomEnemType < enemiesTypes.Count + sniperTypes.Count)
                 {
                     holdingNewWave.Add(holdingRandomEnemType);
 
