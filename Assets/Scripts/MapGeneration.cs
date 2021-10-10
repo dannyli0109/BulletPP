@@ -99,7 +99,7 @@ public class MapGeneration : MonoBehaviour
     public float betweenWaveWaitingTime;
     public float betweenEnemyWaitingTime;
     public float currentWaveWaitingTime;
-    bool roomClear;
+    public bool roomClear;
 
     Vector2 holdingLastEnemy;
     #endregion
@@ -469,7 +469,7 @@ public class MapGeneration : MonoBehaviour
             Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
 
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
@@ -479,7 +479,7 @@ public class MapGeneration : MonoBehaviour
     {
 
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -493,7 +493,7 @@ public class MapGeneration : MonoBehaviour
         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
         //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
         EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -502,11 +502,7 @@ public class MapGeneration : MonoBehaviour
     {
         List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
         // not sniper
-        if (holdingPossibleEnemySpawnPoints.Count == 0)
-        {
-            Debug.Log("Refill");
-            // holdingPossibleEnemySpawnPoints = rooms[currentRoomInside].thisPrefabInfo.enemySpawnPoint;
-        }
+
         int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
 
         Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
@@ -516,7 +512,7 @@ public class MapGeneration : MonoBehaviour
         }
 
         GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget.gameObject, camTarget, ammoPool);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
         EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
     }
@@ -882,8 +878,8 @@ public class MapGeneration : MonoBehaviour
 
     public void ReceiveEnemyDeath(Vector3 pos)
     {
-       // Debug.Log("receive enemy death");
         holdingLastEnemy = pos;
         EnemiesInEncounter--;
+        Debug.Log(EnemiesInEncounter);
     }
 }

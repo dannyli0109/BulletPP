@@ -54,7 +54,7 @@ public class Enemy : Character
     public bool DEBUG;
     #endregion
 
-    public GameObject target;
+    public Player target;
     public NavMeshAgent agent;
 
     public MapGeneration mapGenerationScript;
@@ -346,7 +346,7 @@ public class Enemy : Character
         base.OnDestroy();
     }
 
-    public virtual void Init(GameObject target, Transform cam, AmmoPool ammoPool)
+    public virtual void Init(Player target, Transform cam, AmmoPool ammoPool)
     {
         this.target = target;
         transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = cam;

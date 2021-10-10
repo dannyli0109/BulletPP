@@ -15,12 +15,10 @@ public class SpellQueueEnemy : Enemy
     protected Decision decision;
     public float rotationSpeed;
     //public AmmoPool ammoPool;
-
     public bool notUsingAnimation;
 
     #region MoveStats
     [Header("Move Stats")]
-
     public float setAcceleration;
 
     public float tooFarToSeePlayer; // wander
@@ -38,6 +36,7 @@ public class SpellQueueEnemy : Enemy
     protected float timeStuck;
 
     public float EnemyAvoidanceAmount;
+    public bool Stopped;
     #endregion
 
     public override void Start()
@@ -47,7 +46,7 @@ public class SpellQueueEnemy : Enemy
         agent.acceleration = setAcceleration;
     }
 
-    public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
+    public override void Init(Player target, Transform cam, AmmoPool ammoPool)
     {
         base.Init(target, cam, ammoPool);
         InitSpellQueue();
@@ -87,35 +86,41 @@ public class SpellQueueEnemy : Enemy
         spellQueue = new List<Action>();
         spellTime = new List<float>();
 
-        float holdingRand = UnityEngine.Random.Range(2, 4);
-        spellQueue.Add(
-            () =>
-            {
-                ShootBullets((int)holdingRand, 0, transform.forward, 60, bulletStats.speed.baseValue, 2);
-            }
-        );
+         spellTime.Add(2.0f);
+        //stop
+        spellQueue.Add( () => { ToggleStop(true); });
+        spellTime.Add(0.5f);
+        //fire
+        for (int i = 0; i < 3; i++)
+        {
+            spellQueue.Add(
+                () => { ShootBullets(1, 0, 0, bulletStats.speed.baseValue, 1.5f); }
+            );
+
+            spellTime.Add(0.3f);
+        }
+        //unstop
+        spellQueue.Add(() => { ToggleStop(false); });
+        spellTime.Add(0.2f);
+        //wait
+        spellTime.Add(3.0f);
+        //stop
+        spellQueue.Add(() => { ToggleStop(true); });
+        spellTime.Add(0.5f);
+        //fire
+        for (int i = 0; i < 3; i++)
+        {
+            spellQueue.Add(
+                () => { ShootBullets(1, 0, 0, bulletStats.speed.baseValue, 1.5f); }
+            );
+
+            spellTime.Add(0.3f);
+        }
+        //unstop
+        spellQueue.Add(() => { ToggleStop(false); });
+        spellTime.Add(0.2f);
+        //wait
         spellTime.Add(2.0f);
-
-       holdingRand = UnityEngine.Random.Range(2, 4);
-        for (int i = 0; i < holdingRand; i++)
-        {
-            spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, bulletStats.speed.baseValue, 3); }
-            );
-
-            spellTime.Add(0.2f);
-        }
-        spellTime.Add(1.5f);
-        holdingRand = UnityEngine.Random.Range(2, 4);
-        for (int i = 0; i < holdingRand; i++)
-        {
-            spellQueue.Add(
-                () => { ShootBullets(1, 0, 0, bulletStats.speed.baseValue, 3); }
-            );
-
-            spellTime.Add(0.2f);
-        }
-        spellTime.Add(2f);
         index = 0;
     }
 
@@ -149,11 +154,13 @@ public class SpellQueueEnemy : Enemy
             timeSinceFired += Time.deltaTime;
         }
         UpdateAnimation();
+        UpdateRotation();
     }
 
     public virtual void HandleMoving()
-    {
-        agent.speed = speed;
+    {    
+       // finalDestination = target.gameObject.transform.position;
+        //stuck
         if(lastKnownPos== transform.position)
         {
             timeStuck += Time.deltaTime;
@@ -164,15 +171,16 @@ public class SpellQueueEnemy : Enemy
                 finalDestination = target.transform.position;
             }
         }
+
         // too close move back
-        else if (InRange(tooClose))
+         if (InRange(tooClose))
         {
+            ToggleStop(false);
             Vector3 normalAwayFromPlayer =Vector3.Normalize( transform.position - target.transform.position);
             finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);        
         }
-
         // if line of sight and close enough get a random place
-        else if((InLineOfSight(60)|| InRange(closeEnoughtDodge )|| InRange(tooFarToSeePlayer)))
+        else if((InLineOfSight(60)||(( InRange(closeEnoughtDodge) && !InRange(tooFarToSeePlayer)))))
         {
             float distanceFromFinal = Vector3.Distance(transform.position, finalDestination);
 
@@ -191,31 +199,31 @@ public class SpellQueueEnemy : Enemy
         {
             finalDestination = target.transform.position;
         }
+        agent.speed = speed;
 
-        //Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
+
+        if (Stopped)
+        {
+            agent.speed = 0;
+        }
+        else
+        {
+            agent.speed = speed;
+        }
+
+
         if (hp > 0)
         {
-        agent?.SetDestination(finalDestination);
-
+            agent?.SetDestination(finalDestination);
         }
 
         lastKnownPos = transform.position;
+
+        Debug.DrawLine(transform.position, finalDestination,Color.red, 0.1f);
     }
 
     protected override void UpdateAnimation()
     {
-        Vector2 current = new Vector2(transform.position.x, transform.position.z);
-        Vector2 targetPos = new Vector2(target.transform.position.x, target.transform.position.z);
-        //angle = Util.AngleBetweenTwoPoints(targetPos, current) + 90;
-
-        //Vector3.MoveTowards(transform.localEulerAngles, new Vector3(0f, angle, 0f), 1);
-        /// transform.localRotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
-
-        Vector3 holdingAngle = target.transform.position - transform.position;
-        holdingAngle.y = 0; // keep the direction strictly horizontal
-        Quaternion rotation = Quaternion.LookRotation(holdingAngle);
-        // slerp to the desired rotation over time
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
         float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
         float cos = Mathf.Cos(angle * Mathf.Deg2Rad);
@@ -238,6 +246,18 @@ public class SpellQueueEnemy : Enemy
         }
     }
 
+    protected void UpdateRotation()
+    {
+        Vector3 targetPos = target.transform.position + target.ReturnPossibleNewPosition(12, transform.position);
+
+        Vector3 holdingAngle = targetPos - transform.position;
+        holdingAngle.y = 0; // keep the direction strictly horizontal
+        Quaternion rotation = Quaternion.LookRotation(holdingAngle);
+        // slerp to the desired rotation over time
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        Debug.DrawLine(transform.position, target.transform.position + target.ReturnPossibleNewPosition(bulletStats.speed.value, transform.position));
+    }
+
     public override void OnDestroy()
     {
         base.OnDestroy();
@@ -254,6 +274,11 @@ public class SpellQueueEnemy : Enemy
      //       finalDestination += normal * enemyAvoidAmount * Time.deltaTime;
      //
      //   }
+    }
+
+    public void ToggleStop(bool input)
+    {
+        Stopped = input;
     }
 
     public void ShootBullets(int amount, float initialAngle, float angle, float speed, float size)
@@ -322,7 +347,8 @@ public class SpellQueueEnemy : Enemy
 
     public bool InRange(float range)
     {
-        return Vector3.Distance(transform.position, target.transform.position) <= range;
+        return Vector3.Distance(transform.position, finalDestination) <= range;
+        // return Vector3.Distance(transform.position, target.transform.position) <= range;
     }
 
     public Decision DecideToMove(float range)

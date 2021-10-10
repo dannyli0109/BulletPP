@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using System;
+﻿using UnityEngine;
 
 public class Player : Character
 {
@@ -50,14 +46,21 @@ public class Player : Character
     float angle;
     Vector2 movement;
 
+   public Vector3[] lastKnownPos;
+   float currentLastKnownPosTimer;
+
     #region scripts
-  public  CameraFollowing cameraFollowingScript;
+    public CameraFollowing cameraFollowingScript;
     #endregion
 
     bool freshReload;
 
     public override void Start()
     {
+        for (int i = 0; i < lastKnownPos.Length - 1; i++)
+        {
+            lastKnownPos[i] = transform.position;
+        }
         EventManager.current.receiveGold += ReceiveGold;
 
         currentBulletClip = (int)bulletStats.maxClip.value;
@@ -97,6 +100,8 @@ public class Player : Character
         HandleDashing();
         UpdateAnimation();
         currentImmunityFrame -= Time.deltaTime;
+
+        Debug.DrawLine(transform.position, transform.position+(ReturnPossibleNewPosition(12, new Vector3())));
     }
 
     private void FixedUpdate()
@@ -127,6 +132,42 @@ public class Player : Character
         return Vector3.zero;
     }
 
+    public Vector3 ReturnPossibleNewPosition(float projectileSpeed,Vector3 ShooterPos)
+    {
+        Vector3 combinedLastKnownPos = new Vector3();
+        for(int i=0; i< lastKnownPos.Length; i++)
+        {
+            combinedLastKnownPos += lastKnownPos[i];
+        }
+        combinedLastKnownPos= combinedLastKnownPos / lastKnownPos.Length;
+
+        // sloppy, doesn't recheck
+        float holdingDistance = Vector3.Distance(transform.position, ShooterPos); // dist from shooter
+        float holdOverTime = (holdingDistance / projectileSpeed) * stats.moveSpeed.value; // how far player can get
+
+      //  Vector3 holdingNormal = Vector3.Normalize((combinedLastKnownPos)); //direction based on last movement
+
+        
+        return combinedLastKnownPos * holdOverTime;
+    }
+
+    public void UpdateLastKnownPos(Vector3 input)
+    {
+        if (currentLastKnownPosTimer <= 0)
+        {
+        for (int i = 0; i < lastKnownPos.Length-1; i++)
+        {
+            lastKnownPos[lastKnownPos.Length - 1 - i] = lastKnownPos[lastKnownPos.Length - 2 - i];
+        }
+        lastKnownPos[0] = input;
+            currentLastKnownPosTimer += 0.1f;
+        }
+        else
+        {
+            currentLastKnownPosTimer -= Time.deltaTime;
+        }
+    }
+
     void HandleRotation()
     {
         // Cast a ray from screen point
@@ -147,7 +188,7 @@ public class Player : Character
 
     void HandleMovement()
     {
-
+   
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
@@ -512,6 +553,7 @@ public class Player : Character
                     dashDirection.y * stats.dashAmount.value * Time.fixedDeltaTime
                     )
                 );
+            UpdateLastKnownPos((new Vector3(dashDirection.x * stats.dashAmount.value * Time.fixedDeltaTime,0,dashDirection.y * stats.dashAmount.value * Time.fixedDeltaTime)));
         }
         else
         {
@@ -522,7 +564,9 @@ public class Player : Character
                     movement.y * stats.moveSpeed.value * Time.fixedDeltaTime
                     )
                 );
+            UpdateLastKnownPos(new Vector3(movement.x * stats.moveSpeed.value * Time.fixedDeltaTime,0,movement.y * stats.moveSpeed.value * Time.fixedDeltaTime));
         }
+
 
     }
 

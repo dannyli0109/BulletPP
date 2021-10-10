@@ -450,7 +450,7 @@ MonoBehaviour:
     damage:
       baseValue: 1
     speed:
-      baseValue: 6
+      baseValue: 9
     size:
       baseValue: 3
     critChance:
@@ -579,7 +579,7 @@ MonoBehaviour:
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
   oldsmoothingRange: 0
-  speed: 4.5
+  speed: 2.5
   desiredFurthestRange: 0
   favouredRange: 0
   closestRange: 0
@@ -617,17 +617,18 @@ MonoBehaviour:
   minCooldown: 2
   maxCooldown: 3
   viewAngle: 60
-  rotationSpeed: 6
+  rotationSpeed: 3
   notUsingAnimation: 1
-  setAcceleration: 18
+  setAcceleration: 12
   tooFarToSeePlayer: 22
   tooFarToShoot: 18
-  tooClose: 3
-  closeEnoughtDodge: 12
-  desiredRange: 9
-  smoothingRange: 0.5
+  tooClose: 5
+  closeEnoughtDodge: 15
+  desiredRange: 12
+  smoothingRange: 1
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 4
+  Stopped: 0
 --- !u!136 &5603622888897905038
 CapsuleCollider:
   m_ObjectHideFlags: 0

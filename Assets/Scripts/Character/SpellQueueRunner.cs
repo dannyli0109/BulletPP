@@ -17,7 +17,7 @@ public class SpellQueueRunner : SpellQueueEnemy
         base.Start();
     }
 
-    public override void Init(GameObject target, Transform cam, AmmoPool ammoPool)
+    public override void Init(Player target, Transform cam, AmmoPool ammoPool)
     {
         base.Init(target, cam, ammoPool);
 
