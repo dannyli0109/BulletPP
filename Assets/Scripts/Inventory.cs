@@ -16,6 +16,10 @@ public class Inventory
     public Augment this[int index]
     {
         get => augments[index];
+        set
+        {
+            augments[index] = value;
+        }
     }
 
     public int Count

@@ -7,16 +7,17 @@ using UnityEngine.UI;
 public class AugmentUI : MonoBehaviour
 {
     public TextMeshProUGUI title;
-    public TextMeshProUGUI descriptions;
+    //public TextMeshProUGUI descriptions;
+    public TooltipTrigger tooltipTrigger;
     public TextMeshProUGUI rarity;
     public Image icon;
-    public GameObject synergyContainer;
-    public GameObject synergyUIPrefab;
     public TextMeshProUGUI cost;
     public Image background;
     public Outline outline;
     public Shop shop;
-    public HUDManager HUDManager;
+    public HUDManager hudManager;
+
+    public GameEvent buyAugment;
     int id;
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class AugmentUI : MonoBehaviour
         if (state == -1) return;
         shop.level = 3;
         gameObject.SetActive(false);
-        HUDManager.PopulateAugmentListUI(true);
+        buyAugment?.Invoke();
         shop.UpdateText();
         //shop.augmentIds = augmentManager.GetAugmentIdList();
 
@@ -117,8 +118,8 @@ public class AugmentUI : MonoBehaviour
             //}
 
             title.text = augmentManager.augments[id].augmentName;
-            descriptions.richText = true;
-            descriptions.text = augmentManager.augments[id].description;
+            tooltipTrigger.header = augmentManager.augments[id].augmentName;
+            tooltipTrigger.content = augmentManager.augments[id].description;
             rarity.text = augmentManager.rarityTexts[augmentManager.augments[id].rarity];
             rarity.color = augmentManager.colors[augmentManager.augments[id].rarity];
             cost.text = "$ " + augmentManager.augments[id].cost;
@@ -127,22 +128,5 @@ public class AugmentUI : MonoBehaviour
 
         }
 
-        //for (int i = 0; i < augmentManager.augmentDatas[id].synergies.Count; i++)
-        //{
-        //    GameObject synergyUI = Instantiate(synergyUIPrefab);
-        //    int synergyId = augmentManager.augmentDatas[id].synergies[i].id;
-        //    int breakPoint = -1;
-        //    for (int j = 0; j < shop.player.synergies.Count; j++)
-        //    {
-        //        if (shop.player.synergies[j].id == synergyId)
-        //        {
-        //            breakPoint = shop.player.synergies[j].breakPoint;
-        //            break;
-        //        }
-        //    }
-        //    synergyUI.GetComponent<SynergyUI>().Populate(synergyId, breakPoint);
-        //    synergyUI.transform.SetParent(synergyContainer.transform);
-        //    synergyUI.transform.localScale = new Vector3(1, 1, 1);
-        //}
     }
 }
