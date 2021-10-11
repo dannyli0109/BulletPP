@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
+public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Canvas canvas;
     private RectTransform rectTransform;
@@ -46,6 +46,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         this.id = -1;
         this.index = index;
+        outline.gameObject.SetActive(true);
         icon.gameObject.SetActive(false);
         sellAugmentTrigger.disabled = true;
         tooltipTrigger.content = "Empty slot";
@@ -96,5 +97,15 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
                 inventoryHUD.Populate();
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 }
