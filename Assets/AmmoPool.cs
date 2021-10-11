@@ -19,6 +19,10 @@ public class AmmoPool : MonoBehaviour
     public Pool<PiercingAmmo> piercingAmmoPool;
     public int piercingAmmoCount;
 
+    public Shrapnel shrapnelAmmoPrefab;
+    public Pool<Shrapnel> shrapnelAmmoPool;
+    public int shrapnelAmmoCount;
+
     public Bullet multiBulletPrefab;
     public Pool<Bullet> multiBulletPool;
     public int multiBulletCount;
@@ -48,6 +52,9 @@ public class AmmoPool : MonoBehaviour
 
         piercingAmmoPool = new Pool<PiercingAmmo>(piercingAmmoPrefab, piercingAmmoCount);
         foreach (PiercingAmmo piercingAmmo in piercingAmmoPool.available) piercingAmmo.gameObject.transform.SetParent(transform);
+
+        shrapnelAmmoPool = new Pool<Shrapnel>(shrapnelAmmoPrefab, shrapnelAmmoCount);
+        foreach (Shrapnel shrapnelAmmo in shrapnelAmmoPool.available) shrapnelAmmo.gameObject.transform.SetParent(transform);
 
         multiBulletPool = new Pool<Bullet>(multiBulletPrefab, multiBulletCount);
         foreach (Bullet multiBullet in multiBulletPool.available) multiBullet.gameObject.transform.SetParent(transform);

@@ -33,6 +33,12 @@ public class BulletStats : AmmoStats
 }
 
 [Serializable]
+public class ShrapnelStats : AmmoStats
+{
+
+}
+
+[Serializable]
 public class BouncingBladeStats : AmmoStats
 {
     public CharacterStat bounceAdditionSpeed;
@@ -100,6 +106,7 @@ public abstract class Character : MonoBehaviour
     public BulletStats bulletStats;
     public GrenadeStats grenadeStats;
     public RocketStats rocketStats;
+    public ShrapnelStats shrapnelStats;
     public BouncingBladeStats bouncingBladeStats;
     public LaserStats laserStats;
 
