@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class GameData : ScriptableObject
 {
-    public List<AugmentData> augmentDatas;
+    public List<AugmentDataOld> augmentDatas;
     public List<SynergyData> synergyDatas;
 }

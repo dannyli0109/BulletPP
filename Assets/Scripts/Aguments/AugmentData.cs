@@ -1,26 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
-
-[CreateAssetMenu(fileName = "New Augment")]
-public class AugmentData : ScriptableObject
+public abstract class AugmentData : ScriptableObject
 {
+    [HideInInspector]
     public int id;
-    public string title;
+    [HideInInspector]
+    public int index;
 
     public int rarity;
+    public Sprite augmentIcon;
+    public string augmentName;
+    [TextArea(5, 10)]
+    public string description;
+    public int cost;
+    public Color color;
 
-    [TextArea(5, 20)]
-    public List<string> descriptions;
+    public float damage;
+    public float speed;
+    public float size;
+    public float angles;
+    public int amountOfBullets;
+    public float lifeTime;
 
-    public Sprite iconSprite;
+    public abstract Augment Create();
 
-    void Reset()
-    {
-        //Output the message to the Console
-        id = Resources.LoadAll("Data/Augments", typeof(AugmentData)).Length;
-    }
 
 }

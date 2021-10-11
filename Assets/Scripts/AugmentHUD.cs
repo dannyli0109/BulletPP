@@ -17,16 +17,16 @@ public class AugmentHUD : MonoBehaviour
 
     public void Populate(int id)
     {
-        AugmentManager augmentManager = AugmentManager.current;
-        string name = augmentManager.augments[id].augmentName;
-        string description = "<b>Selling Price: " + augmentManager.augments[id].cost + "</b>" + "\n";
-        description += augmentManager.augments[id].description;
-        description += "\n<b>Right click to sell</b>";
+        //AugmentManager augmentManager = AugmentManager.current;
+        //string name = augmentManager.augments[id].augmentName;
+        //string description = "<b>Selling Price: " + augmentManager.augments[id].cost + "</b>" + "\n";
+        //description += augmentManager.augments[id].description;
+        //description += "\n<b>Right click to sell</b>";
 
-        tooltipTrigger.header = name;
-        tooltipTrigger.content = description;
-        icon.sprite = augmentManager.augments[id].augmentIcon;
-        outline.effectColor = augmentManager.augments[id].color;
+        //tooltipTrigger.header = name;
+        //tooltipTrigger.content = description;
+        //icon.sprite = augmentManager.augments[id].augmentIcon;
+        //outline.effectColor = augmentManager.augments[id].color;
         ////levelText.text = "Lv." + (level + 1);
 
 
@@ -77,19 +77,19 @@ public class AugmentHUD : MonoBehaviour
 
     public void PopulateGeneric(Sprite image)
     {
-        AugmentManager augmentManager = AugmentManager.current;
+        //AugmentManager augmentManager = AugmentManager.current;
 
-        tooltipTrigger.header = "Empty slot";
-        tooltipTrigger.content = "Try buying more augments.";
-        icon.sprite = image;
-        outline.effectColor = augmentManager.colors[0];
+        //tooltipTrigger.header = "Empty slot";
+        //tooltipTrigger.content = "Try buying more augments.";
+        //icon.sprite = image;
+        //outline.effectColor = augmentManager.colors[0];
 
 
-        for (int i = 0; i < expContainer.transform.childCount; i++)
-        {
-            GameObject expObject = expContainer.transform.GetChild(i).gameObject;
-            expObject.SetActive(false);
+        //for (int i = 0; i < expContainer.transform.childCount; i++)
+        //{
+        //    GameObject expObject = expContainer.transform.GetChild(i).gameObject;
+        //    expObject.SetActive(false);
 
-        }
+        //}
     }
 }

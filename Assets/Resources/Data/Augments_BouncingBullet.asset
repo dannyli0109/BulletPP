@@ -9,22 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60f79ce5e2e56164789c55f1cb261a29, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d29d7168bb200f4d92199705374fc3a, type: 3}
   m_Name: Augments_BouncingBullet
   m_EditorClassIdentifier: 
-  id: 3
+  id: 4
+  index: 0
   rarity: 0
   augmentIcon: {fileID: 21300000, guid: 5b013d7d0691e7f41aebd48207985d0a, type: 3}
   augmentName: Bouncing Bullet
-  cost: 2
-  color: {r: 1, g: 0.9214484, b: 0, a: 1}
-  description: 'Shoot a bullet that deals 6 damages
+  description: 'Shoot 1 bullet that deals 6 damages
 
     Bounces 2 times'
-  index: 7
+  cost: 0
+  color: {r: 0.9716981, g: 0.8335114, b: 0.068752214, a: 1}
   damage: 6
   speed: 15
   size: 2
   angles: 0
   amountOfBullets: 1
+  lifeTime: 2
   numberOfBounces: 2

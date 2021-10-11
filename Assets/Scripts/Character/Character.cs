@@ -247,12 +247,12 @@ public abstract class Character : MonoBehaviour
     {
         //return -1;
         AugmentManager augmentManager = AugmentManager.current;
-        Augment augment = augmentManager.augments[id];
         float cost = augmentManager.augments[id].cost;
         if (gold < cost)
         {
             return -1;
         }
+        Augment augment = augmentManager.augments[id].Create();
 
         if (!inventory.AddTo(augment)) return -1;
         gold -= cost;

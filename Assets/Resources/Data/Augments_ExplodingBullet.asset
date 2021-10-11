@@ -9,17 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f24774820d2164b4dbf40d5a2f0b28ea, type: 3}
+  m_Script: {fileID: 11500000, guid: da5842d11dc06a044bdfabfa8740db10, type: 3}
   m_Name: Augments_ExplodingBullet
   m_EditorClassIdentifier: 
-  id: 4
+  id: 1
+  index: 0
   rarity: 0
   augmentIcon: {fileID: 21300000, guid: 19707efe58d299f41a6a983718981e92, type: 3}
-  augmentName: Exploding Bullet
+  augmentName: Explosive Bullet
+  description: Shoot 1 bullet that deals 6 damage on hit to a area
   cost: 2
-  color: {r: 0, g: 0.449816, b: 1, a: 1}
-  description: Shoot a bullet that Explodes
-  index: 6
+  color: {r: 0, g: 0.3471055, b: 1, a: 1}
   damage: 6
   speed: 12
   size: 2
+  angles: 60
+  amountOfBullets: 1
+  lifeTime: 2
+  explosiveRadius: 5

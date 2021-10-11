@@ -16,7 +16,7 @@ using OfficeOpenXml;
 public class AugmentManager : MonoBehaviour
 {
     public static AugmentManager current;
-    public List<Augment> augments;
+    public List<AugmentData> augments;
 
     //public List<AugmentData> augmentDatas;
     //public List<SynergyData> synergyDatas;
@@ -53,12 +53,11 @@ public class AugmentManager : MonoBehaviour
         current = this;
         for (int i = 0; i < augments.Count; i++)
         {
-            augments[i].Init();
             augments[i].id = i;
         }
         //Init();
     }
-    public static List<Augment> GetAugments()
+    public static List<AugmentData> GetAugments()
     {
         return current.augments;
     }

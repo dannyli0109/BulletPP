@@ -70,12 +70,12 @@ public class Player : Character
         currentBouncingBladeClip = 1;
         inventoryIndex = 0;
         inventory = new Inventory(10);
-        inventory.AddTo(AugmentManager.current.augments[0]);
-        inventory.AddTo(AugmentManager.current.augments[0]);
-        inventory.AddTo(AugmentManager.current.augments[0]);
-        inventory.AddTo(AugmentManager.current.augments[0]);
-        inventory.AddTo(AugmentManager.current.augments[0]);
-        inventory.AddTo(AugmentManager.current.augments[0]);
+        inventory.AddTo(AugmentManager.current.augments[0].Create());
+        inventory.AddTo(AugmentManager.current.augments[0].Create());
+        inventory.AddTo(AugmentManager.current.augments[0].Create());
+        inventory.AddTo(AugmentManager.current.augments[0].Create());
+        inventory.AddTo(AugmentManager.current.augments[0].Create());
+        inventory.AddTo(AugmentManager.current.augments[0].Create());
         base.Start();
     }
 

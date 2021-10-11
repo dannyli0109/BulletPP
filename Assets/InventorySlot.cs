@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     [SerializeField] private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     public Image icon;
     public Image outline;
-    public int id;
+    public bool empty;
     public int index;
     public InventoryHUD inventoryHUD;
     public SellAugmentTrigger sellAugmentTrigger;
@@ -30,21 +30,21 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         
     }
 
-    public void Pululate(int id, int index)
+    public void Pululate(int index)
     {
-        this.id = id;
+        empty = false;
         this.index = index;
         icon.gameObject.SetActive(true);
-        icon.sprite = AugmentManager.current.augments[id].augmentIcon;
+        icon.sprite = inventoryHUD.player.inventory[index].augmentIcon;
         sellAugmentTrigger.Init(inventoryHUD.player, index);
         sellAugmentTrigger.disabled = false;
-        tooltipTrigger.header = AugmentManager.current.augments[id].augmentName;
-        tooltipTrigger.content = AugmentManager.current.augments[id].description;
+        tooltipTrigger.header = inventoryHUD.player.inventory[index].augmentName;
+        tooltipTrigger.content = inventoryHUD.player.inventory[index].description;
     }
 
     public void PululateEmpty(int index)
     {
-        this.id = -1;
+        empty = true;
         this.index = index;
         outline.gameObject.SetActive(true);
         icon.gameObject.SetActive(false);
@@ -86,7 +86,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
         if (slot)
         {
-            if (slot.id != -1)
+            if (!empty)
             {
                 //inventoryHUD.player.inventory[]
                 Augment formAugment = inventoryHUD.player.inventory[index];
@@ -99,13 +99,4 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 }

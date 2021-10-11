@@ -55,7 +55,7 @@ public class AugmentManagerEditor : Editor
 }
 
 
-[CustomEditor(typeof(AugmentData), true)]
+[CustomEditor(typeof(AugmentDataOld), true)]
 public class AugmentDataEditor : Editor
 {
 

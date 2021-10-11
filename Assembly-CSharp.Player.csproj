@@ -65,6 +65,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
     <Compile Include="Assets\Scripts\Parser\Env.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
+    <Compile Include="Assets\Scripts\Ammos\Shrapnel.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueTank.cs" />
     <Compile Include="Assets\Scripts\AugmentUI.cs" />
     <Compile Include="Assets\Scripts\DecisionTree\Decision.cs" />
@@ -73,10 +74,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\SynergyHUD.cs" />
-    <Compile Include="Assets\Scripts\Aguments\StandardBullet.cs" />
     <Compile Include="Assets\Scripts\CameraFollowing.cs" />
     <Compile Include="Assets\Scripts\RoomDoorCensor.cs" />
-    <Compile Include="Assets\Scripts\Aguments\ExplodingBullet.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
     <Compile Include="Assets\Scripts\FlexibleGridLayout.cs" />
     <Compile Include="Assets\Tooltip.cs" />
@@ -86,7 +85,7 @@
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\HealthPickup.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
-    <Compile Include="Assets\Scripts\Aguments\SynergyData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\_old\SynergyData.cs" />
     <Compile Include="Assets\Scripts\Ammos\BouncingBlade.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
     <Compile Include="Assets\InventoryHUD.cs" />
@@ -104,25 +103,23 @@
     <Compile Include="Assets\Scripts\Billboard.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-    <Compile Include="Assets\Scripts\Aguments\MirrorBullet.cs" />
     <Compile Include="Assets\SynergyUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
-    <Compile Include="Assets\Scripts\Aguments\BouncingBullet.cs" />
+    <Compile Include="Assets\Scripts\Aguments\BouncingBullet\BouncingBullet.cs" />
     <Compile Include="Assets\AmmoUI.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueEnemy.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\Scripts\ParticleHandler.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Aguments\MultiBullet.cs" />
     <Compile Include="Assets\Scripts\Character\SpellQueueSwarm.cs" />
     <Compile Include="Assets\Scripts\AOEDamage.cs" />
     <Compile Include="Assets\Scripts\Ammos\AugmentAmmo.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\SoundManager.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
-    <Compile Include="Assets\Scripts\Aguments\AugmentOld.cs" />
+    <Compile Include="Assets\Scripts\Aguments\_old\AugmentOld.cs" />
     <Compile Include="Assets\Scripts\RoomPrefabInformation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
@@ -170,7 +167,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\CircleMesh.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\Aguments\PiercingBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
@@ -212,8 +208,18 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
-    <Compile Include="Assets\Scripts\Ammos\Shrapnel.cs" />
-    <Compile Include="Assets\Scripts\Aguments\ShrapnelShotAugment.cs" />
+    <Compile Include="Assets\Scripts\Aguments\_old\AugmentDataOld.cs" />
+    <Compile Include="Assets\Scripts\Aguments\ExplodingBullet\ExplodingBulletData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\MirrorBullet\MirrorBulletData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\BouncingBullet\BouncingBulletData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\StandardBullet\MultiBulletData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\PiercingBullet\PiercingBulletData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\ShrapnelShot\ShrapnelShotData.cs" />
+    <Compile Include="Assets\Scripts\Aguments\ExplodingBullet\ExplodingBullet.cs" />
+    <Compile Include="Assets\Scripts\Aguments\MirrorBullet\MirrorBullet.cs" />
+    <Compile Include="Assets\Scripts\Aguments\StandardBullet\MultiBullet.cs" />
+    <Compile Include="Assets\Scripts\Aguments\PiercingBullet\PiercingBullet.cs" />
+    <Compile Include="Assets\Scripts\Aguments\ShrapnelShot\ShrapnelShot.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8608840e7f5693f4d87208c33c21a085, type: 3}
+  m_Name: Augments_PiercingBullet
+  m_EditorClassIdentifier: 
+  id: 3
+  index: 0
+  rarity: 0
+  augmentIcon: {fileID: 21300000, guid: 51696d468f7fe674d8dfcf21b28e2a61, type: 3}
+  augmentName: Piercing Bullet
+  description: 'Shoot 1 bullet that deals 5 damages
+
+    Pierce through enemy'
+  cost: 2
+  color: {r: 0.5201199, g: 0.22467959, b: 0.9339623, a: 1}
+  damage: 5
+  speed: 18
+  size: 2
+  angles: 0
+  amountOfBullets: 1
+  lifeTime: 2
