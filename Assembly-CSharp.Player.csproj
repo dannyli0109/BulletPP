@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Aguments\SynergyData.cs" />
     <Compile Include="Assets\Scripts\Ammos\BouncingBlade.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
+    <Compile Include="Assets\InventoryHUD.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
     <Compile Include="Assets\Scripts\Parser\Tokenizer.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
+    <Compile Include="Assets\InventorySlot.cs" />
     <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
@@ -210,8 +212,8 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
-    <Compile Include="Assets\InventoryHUD.cs" />
-    <Compile Include="Assets\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\Ammos\Shrapnel.cs" />
+    <Compile Include="Assets\Scripts\Aguments\ShrapnelShotAugment.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />
