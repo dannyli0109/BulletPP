@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Augment
 {
     public int id;
-    public int index;
     public int rarity;
     public Sprite augmentIcon;
     public string augmentName;
@@ -43,6 +42,7 @@ public abstract class Augment
     {
         get;
     }
+    public abstract void OnAttached(Character character, int index);
 
-    public abstract void Shoot(Character character, Transform transform);
+    public abstract void Shoot(Character character, Transform transform, int index);
 }

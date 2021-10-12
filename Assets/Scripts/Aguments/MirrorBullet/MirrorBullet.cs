@@ -17,10 +17,14 @@ public class MirrorBullet : Augment
         }
     }
 
-    public override void Shoot(Character character, Transform transform)
+    public override void OnAttached(Character character, int index)
+    {
+        
+    }
+
+    public override void Shoot(Character character, Transform transform, int index)
     {
         if (index <= 0) return;
-        character.inventory[index - 1].index = index - 1;
-        character.inventory[index - 1].Shoot(character, transform);
+        character.inventory[index - 1].Shoot(character, transform, index - 1);
     }
 }

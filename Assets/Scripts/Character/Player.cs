@@ -70,12 +70,12 @@ public class Player : Character
         currentBouncingBladeClip = 1;
         inventoryIndex = 0;
         inventory = new Inventory(10);
-        inventory.AddTo(AugmentManager.current.augments[0].Create());
-        inventory.AddTo(AugmentManager.current.augments[0].Create());
-        inventory.AddTo(AugmentManager.current.augments[0].Create());
-        inventory.AddTo(AugmentManager.current.augments[0].Create());
-        inventory.AddTo(AugmentManager.current.augments[0].Create());
-        inventory.AddTo(AugmentManager.current.augments[0].Create());
+        inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
+        inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
+        inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
+        inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
+        inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
+        inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
         base.Start();
     }
 
@@ -241,8 +241,7 @@ public class Player : Character
         {
             timeSinceFired = 0;
             // do shooting logic
-            inventory[inventoryIndex].index = inventoryIndex;
-            inventory[inventoryIndex].Shoot(this, bulletContainer);
+            inventory[inventoryIndex].Shoot(this, bulletContainer, inventoryIndex);
             inventoryIndex++;
             freshReload = false;
         }

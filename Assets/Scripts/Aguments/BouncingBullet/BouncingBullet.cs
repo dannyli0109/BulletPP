@@ -19,7 +19,12 @@ public class BouncingBullet : Augment
         }
     }
 
-    public override void Shoot(Character character, Transform transform)
+    public override void OnAttached(Character character, int index)
+    {
+        
+    }
+
+    public override void Shoot(Character character, Transform transform, int index)
     {
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
 
@@ -40,7 +45,6 @@ public class BouncingBullet : Augment
         for (int i = 0; i < amountOfBullets; i++)
         {
             Bullet bullet;
-            //Debug.Log("Try instantiated  
 
             if (ammoPool.bouncingBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {

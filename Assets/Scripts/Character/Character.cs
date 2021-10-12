@@ -254,7 +254,7 @@ public abstract class Character : MonoBehaviour
         }
         Augment augment = augmentManager.augments[id].Create();
 
-        if (!inventory.AddTo(augment)) return -1;
+        if (!inventory.AddTo(augment, this)) return -1;
         gold -= cost;
         return 1;
 

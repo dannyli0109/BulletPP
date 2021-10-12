@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 2184959538372637874}
   - component: {fileID: 2184959538372637875}
   - component: {fileID: 2184959538372637876}
+  - component: {fileID: 1760548604}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -336,6 +337,14 @@ MonoBehaviour:
   gunPointDistMutliplier: 2.5
   maxGunPointDist: 450
   MoveCameraMultiplier: 6
+--- !u!81 &1760548604
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184959538372637878}
+  m_Enabled: 1
 --- !u!1 &2184959539088835888
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +355,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2184959539088835791}
   - component: {fileID: 2184959539088835790}
-  - component: {fileID: 2184959539088835788}
   - component: {fileID: 2184959539088835789}
   m_Layer: 0
   m_Name: UI Camera
@@ -412,14 +420,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2184959539088835788
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2184959539088835888}
-  m_Enabled: 1
 --- !u!114 &2184959539088835789
 MonoBehaviour:
   m_ObjectHideFlags: 0

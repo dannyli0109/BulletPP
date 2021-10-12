@@ -27,10 +27,11 @@ public class Inventory
         get => augments.Count;
     }
 
-    public bool AddTo(Augment augment)
+    public bool AddTo(Augment augment, Character character)
     {
         if (augments.Count >= capacity) return false;
         augments.Add(augment);
+        augments[augments.Count - 1].OnAttached(character, augments.Count - 1);
         return true;
     }
 

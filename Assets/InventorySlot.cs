@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
+
 
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
@@ -16,6 +18,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public InventoryHUD inventoryHUD;
     public SellAugmentTrigger sellAugmentTrigger;
     public TooltipTrigger tooltipTrigger;
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI amountText;
     Vector2 anchorPosition;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +31,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     // Update is called once per frame
     void Update()
     {
-        
+        damageText.text = inventoryHUD.player.inventory[index].damage.ToString();
+        amountText.text = inventoryHUD.player.inventory[index].amountOfBullets.ToString();
     }
 
     public void Pululate(int index)

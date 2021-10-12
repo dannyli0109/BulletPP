@@ -17,7 +17,12 @@ public class ShrapnelShot : Augment
         }
     }
 
-    public override void Shoot(Character character, Transform transform)
+    public override void OnAttached(Character character, int index)
+    {
+        
+    }
+
+    public override void Shoot(Character character, Transform transform, int index)
     {
         int holdingShrapnel = 0;
         for (int i = 0; i < character.inventory.Count; i++)
