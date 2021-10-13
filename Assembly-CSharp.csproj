@@ -225,6 +225,8 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
+    <Compile Include="Assets\Scripts\BossEncounter.cs" />
+    <Compile Include="Assets\Scripts\Character\BossEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />
@@ -920,6 +922,10 @@
       <Project>{33499D3C-6ADA-CE1E-8E38-42230C9450A6}</Project>
       <Name>Unity.ProBuilder</Name>
     </ProjectReference>
+    <ProjectReference Include="FMODUnity.csproj">
+      <Project>{ABE2FF18-F7AA-D99C-1840-FE756A589A81}</Project>
+      <Name>FMODUnity</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Burst.Editor.csproj">
       <Project>{D9A49662-E133-D35A-1324-68D5134DED06}</Project>
       <Name>Unity.Burst.Editor</Name>
@@ -931,6 +937,10 @@
     <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
       <Project>{547C26F0-4EA4-4042-E6D4-5E8DFB8641D0}</Project>
       <Name>Unity.ProBuilder.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnityResonance.csproj">
+      <Project>{AA53C4C7-B92C-8D03-C8C0-84AB44880979}</Project>
+      <Name>FMODUnityResonance</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
       <Project>{235ACA51-F020-B931-F706-C21467108026}</Project>
@@ -979,6 +989,10 @@
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{4151CC37-A32D-8FEF-2B18-CCADE74C7CBA}</Project>
       <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnityResonanceEditor.csproj">
+      <Project>{275D4DF2-83AC-7AF5-F953-9AF6785B8A66}</Project>
+      <Name>FMODUnityResonanceEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.csproj">
       <Project>{AF18ACA7-9833-A062-56AC-0FA8F264C3B8}</Project>
@@ -1031,18 +1045,6 @@
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{6A118FE5-CECA-284A-2633-7A1F462B017E}</Project>
       <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="FMODUnity.csproj">
-      <Project>{ABE2FF18-F7AA-D99C-1840-FE756A589A81}</Project>
-      <Name>FMODUnity</Name>
-    </ProjectReference>
-    <ProjectReference Include="FMODUnityResonance.csproj">
-      <Project>{AA53C4C7-B92C-8D03-C8C0-84AB44880979}</Project>
-      <Name>FMODUnityResonance</Name>
-    </ProjectReference>
-    <ProjectReference Include="FMODUnityResonanceEditor.csproj">
-      <Project>{275D4DF2-83AC-7AF5-F953-9AF6785B8A66}</Project>
-      <Name>FMODUnityResonanceEditor</Name>
     </ProjectReference>
     <ProjectReference Include="FMODUnityEditor.csproj">
       <Project>{62677FA5-A59C-8BF5-5B5D-CEF64E469A00}</Project>

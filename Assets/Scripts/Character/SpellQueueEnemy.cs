@@ -153,8 +153,6 @@ public class SpellQueueEnemy : Enemy
                 dying = true;
                 currentWaitTime = 2.5f;
             }
-            
-         
         }
         else
         {
@@ -163,9 +161,9 @@ public class SpellQueueEnemy : Enemy
             timeSinceFired += Time.deltaTime;
         }
 
-        if(dying&& currentWaitTime <= 0)
+        if(dying && currentWaitTime <= 0)
         {
-             EventManager.current.ReceiveGold(gold);
+            EventManager.current.ReceiveGold(gold);
             Destroy(gameObject);
         }
         else

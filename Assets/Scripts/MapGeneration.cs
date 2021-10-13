@@ -149,11 +149,17 @@ public class MapGeneration : MonoBehaviour
 
     void Start()
     {
-        EventManager.current.enemyDeath += ReceiveEnemyDeath;
+        InitEvents();
         GenerateMap();
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         RefreshMiniMapUI();
         playerTarget.transform.position = startingPos;
+    }
+
+    public void InitEvents()
+    {
+        EventManager.current.enemyDeath += ReceiveEnemyDeath;
+
     }
 
     private void Update()
@@ -684,8 +690,6 @@ public class MapGeneration : MonoBehaviour
                     holdingNewWave.Add(holdingRandomEnemType);
 
                 }
-                    
-
             }
         }
 

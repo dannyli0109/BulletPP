@@ -10,6 +10,7 @@ public class CameraFollowing : MonoBehaviour
 
     public MapGeneration mapGenerationScript;
     public Playground playground;
+    public BossEncounter bossEncounter;
     public Player playerScript;
 
     public float gunPointDistMutliplier;
@@ -45,6 +46,12 @@ public class CameraFollowing : MonoBehaviour
         {
             Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier * (holdingDist / maxGunPointDist)));
             desiredPos = playground.mapGeneration.ClampCameraVectorToCameraBoundsOfCurrentRoom(playground.room, desiredPos);
+            cameraHolder.transform.position = Vector3.Lerp(cameraHolder.transform.position, desiredPos, cameraLerpAmount);
+        }
+        else if (bossEncounter)
+        {
+            Vector3 desiredPos = new Vector3(target.position.x, 0, target.position.z) + (playerScript.bulletContainer.transform.forward * (gunPointDistMutliplier * (holdingDist / maxGunPointDist)));
+            desiredPos = bossEncounter.mapGeneration.ClampCameraVectorToCameraBoundsOfCurrentRoom(bossEncounter.room, desiredPos);
             cameraHolder.transform.position = Vector3.Lerp(cameraHolder.transform.position, desiredPos, cameraLerpAmount);
         }
 

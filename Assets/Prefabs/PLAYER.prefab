@@ -4976,6 +4976,25 @@ MonoBehaviour:
       baseValue: 1.5
     heatSeeking:
       baseValue: 0
+  shrapnelStats:
+    damage:
+      baseValue: 0
+    speed:
+      baseValue: 0
+    size:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    travelTime:
+      baseValue: 1
+    fireRate:
+      baseValue: 0
+    amountOfBounces:
+      baseValue: 0
+    maxClip:
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
   bouncingBladeStats:
     damage:
       baseValue: 2
@@ -5032,7 +5051,7 @@ MonoBehaviour:
   aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
   bulletContainer: {fileID: 240791816331796829}
   hp: 0
-  gold: 0
+  gold: 99
   timeSinceFired: 0
   reloading: 0
   currentImmunityFrame: 0
@@ -5055,7 +5074,7 @@ MonoBehaviour:
   sellAugment: {fileID: 11400000, guid: 4441624397332cf4d887e62c3b70e424, type: 2}
   gunpointForAiming: {fileID: 26421841}
   trailRenderer: {fileID: 64359846}
-  dashDuration: 0.5
+  dashDuration: 0.3
   trailTime: 0
   isDashing: 0
   magX: 0.3

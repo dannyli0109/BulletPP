@@ -6,8 +6,8 @@ public class Playground : MonoBehaviour
 {
     public GameObject roomPrefab;
     public Player player;
-    public MapGeneration mapGeneration;
     public Room room;
+    public MapGeneration mapGeneration;
 
     bool shouldStart = true;
 
@@ -19,21 +19,23 @@ public class Playground : MonoBehaviour
 
     private void Update()
     {
-        if (
-                GameManager.current.GetState() == GameState.Shop || 
-                GameManager.current.GetState() == GameState.Pause
-            )
+        if (GameManager.current.GetState() == GameState.Shop)
         {
             shouldStart = true;
             return;
         }
 
-        if ((shouldStart || GameManager.current.GetState() == GameState.Casual) && mapGeneration.EnemiesInEncounter == 0)
+        if (shouldStart && GameManager.current.GetState() == GameState.Casual)
         {
             mapGeneration.StartEncounter(room);
             shouldStart = false;
-            GameManager.current.ChangeStateImmdeiate(GameState.Game);
+            mapGeneration.inCombat = true;
         }
+
+        //if (mapGeneration.inCombat && GameManager.current.GetState() == GameState.Game)
+        //{
+        //    mapGeneration.UpdateEncounter(room);
+        //}
 
         if (mapGeneration.inCombat)
         {
@@ -50,5 +52,6 @@ public class Playground : MonoBehaviour
         transform.position = mapGeneration.startingPos;
         GameManager.current.ChangeState(GameState.Shop);
         mapGeneration.currentRoomInside = 1;
+        mapGeneration.InitEvents();
     }
 }
