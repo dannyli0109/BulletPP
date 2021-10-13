@@ -26,13 +26,17 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        empty = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        damageText.text = inventoryHUD.player.inventory[index].damage.ToString();
-        amountText.text = inventoryHUD.player.inventory[index].amountOfBullets.ToString();
+        if (!empty)
+        {
+            damageText.text = inventoryHUD.player.inventory[index].damage.ToString();
+            amountText.text = inventoryHUD.player.inventory[index].amountOfBullets.ToString();
+        }
     }
 
     public void Pululate(int index)
