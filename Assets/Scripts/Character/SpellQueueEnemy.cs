@@ -39,6 +39,9 @@ public class SpellQueueEnemy : Enemy
     public bool Stopped;
     #endregion
 
+    float currentWaitTime;
+    bool dying;
+
     public override void Start()
     {
         base.Start();
@@ -141,18 +144,35 @@ public class SpellQueueEnemy : Enemy
             agent.enabled = true;
         }
 
+            agent.speed = 0;
         if (hp <= 0)
         {
-            EventManager.current.ReceiveGold(gold);
-            Destroy(gameObject);
+            if (!dying)
+            {
+                animator.SetTrigger("Dying");
+                dying = true;
+                currentWaitTime = 2.5f;
+            }
+            
+         
         }
         else
         {
-            agent.speed = 0;
             decision.MakeDecision();
             HandleMoving();
             timeSinceFired += Time.deltaTime;
         }
+
+        if(dying&& currentWaitTime <= 0)
+        {
+             EventManager.current.ReceiveGold(gold);
+            Destroy(gameObject);
+        }
+        else
+        {
+            currentWaitTime -= Time.deltaTime;
+        }
+
         UpdateAnimation();
         UpdateRotation();
     }
@@ -180,7 +200,7 @@ public class SpellQueueEnemy : Enemy
             finalDestination = target.transform.position + (normalAwayFromPlayer * desiredRange);        
         }
         // if line of sight and close enough get a random place
-        else if((InLineOfSight(60)||(( InRange(closeEnoughtDodge) && !InRange(tooFarToSeePlayer)))))
+        else if((InLineOfSight(60)&&(( InRange(closeEnoughtDodge) || !InRange(tooFarToSeePlayer)))))
         {
             float distanceFromFinal = Vector3.Distance(transform.position, finalDestination);
 
@@ -200,11 +220,13 @@ public class SpellQueueEnemy : Enemy
             finalDestination = target.transform.position;
         }
         agent.speed = speed;
+        animator.SetFloat("moveSpeed", 5);
 
 
         if (Stopped)
         {
             agent.speed = 0;
+            animator.SetFloat("moveSpeed", -1);
         }
         else
         {
