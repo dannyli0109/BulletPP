@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 2184959538372637874}
   - component: {fileID: 2184959538372637875}
   - component: {fileID: 2184959538372637876}
-  - component: {fileID: 1760548604}
+  - component: {fileID: 166075588300163762}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -337,14 +337,20 @@ MonoBehaviour:
   gunPointDistMutliplier: 2.5
   maxGunPointDist: 450
   MoveCameraMultiplier: 6
---- !u!81 &1760548604
-AudioListener:
+--- !u!114 &166075588300163762
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2184959538372637878}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &2184959539088835888
 GameObject:
   m_ObjectHideFlags: 0

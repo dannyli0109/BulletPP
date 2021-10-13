@@ -557,6 +557,12 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
+    <Reference Include="FMODUnityResonanceEditor">
+      <HintPath>Library\ScriptAssemblies\FMODUnityResonanceEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnityEditor">
+      <HintPath>Library\ScriptAssemblies\FMODUnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="EPPlus">
       <HintPath>Assets\Packages\EPPlus.5.7.3\lib\net45\EPPlus.dll</HintPath>
     </Reference>
@@ -1009,6 +1015,14 @@
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{6A118FE5-CECA-284A-2633-7A1F462B017E}</Project>
       <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnity.csproj">
+      <Project>{ABE2FF18-F7AA-D99C-1840-FE756A589A81}</Project>
+      <Name>FMODUnity</Name>
+    </ProjectReference>
+    <ProjectReference Include="FMODUnityResonance.csproj">
+      <Project>{AA53C4C7-B92C-8D03-C8C0-84AB44880979}</Project>
+      <Name>FMODUnityResonance</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
