@@ -53,7 +53,6 @@ public class Shop : MonoBehaviour
             }
             int randIndex = Random.Range(0, augmentIndices.Count);
             int augmentIndex = augmentIndices[randIndex];
-           // Debug.Log(augmentIndex);
 
             UpdateHoldingAmount(augmentIndex, i);
 
@@ -138,7 +137,7 @@ public class Shop : MonoBehaviour
 
     public void ReRoll()
     {
-        if (HasBoughtAnAugemnt())
+        if (player.inventory.Count > 0)
         {
             if (player.gold >= 2)
             {
@@ -146,16 +145,17 @@ public class Shop : MonoBehaviour
                 Refresh();
             }
         }
+        
     }
 
     public void Continue()
     {
-        //if (HasBoughtAnAugemnt())
-        //{
+
+        if (player.inventory.Count > 0)
+        {
             GameManager.current.ChangeState(GameState.Casual);
             player.reloading = true;
             thisHUDManager.PopulateAugmentListUI(false);
-        //}
-        // gameObject.SetActive(false);
+        }
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Interfaces.cs" />
     <Compile Include="Assets\AddAugmentSlotHUD.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
+    <Compile Include="Assets\Scripts\Aguments\SpreadingDevice\SpreadingDevice.cs" />
     <Compile Include="Assets\Scripts\Parser\Env.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
     <Compile Include="Assets\Scripts\Ammos\Shrapnel.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Assets\Scripts\Billboard.cs" />
     <Compile Include="Assets\Scripts\Character\Player.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Aguments\SpreadingDevice\SpreadingDeviceData.cs" />
     <Compile Include="Assets\SynergyUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
@@ -222,8 +224,7 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
-    <Compile Include="Assets\Scripts\Aguments\SpreadingDevice\SpreadingDevice.cs" />
-    <Compile Include="Assets\Scripts\Aguments\SpreadingDevice\SpreadingDeviceData.cs" />
+    <Compile Include="Assets\CursorController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />
