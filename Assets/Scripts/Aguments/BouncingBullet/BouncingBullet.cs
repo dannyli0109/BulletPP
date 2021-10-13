@@ -34,6 +34,7 @@ public class BouncingBullet : Augment
         if (amountOfBullets == 1)
         {
             angleIncrements = 0;
+            initialAngle = 0;
         }
         else
         {
