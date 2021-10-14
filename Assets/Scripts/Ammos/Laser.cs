@@ -32,6 +32,8 @@ public class Laser : Ammo
 
         EventManager.current.onAmmoDestroy += OnLaserDestroy;
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (GameManager.current.GameTransitional()) return;
@@ -61,20 +63,28 @@ public class Laser : Ammo
             }
         }
         //transform.rotation = Quaternion.RotateTowards(owner.bulletContainer.transform.rotation, Quaternion.LookRotation(randomOffsetDirection), randomOffSet);
-            Vector3 lookDir = (owner.bulletContainer.forward) * currentLaserLength;
-            lookDir = Quaternion.AngleAxis(-randomOffSet, Vector3.up) * lookDir;
+
+        float laserLength = currentLaserLength;
+        RaycastHit hitInfo;
+        if (Physics.Raycast(owner.bulletContainer.position, owner.bulletContainer.forward, out hitInfo, currentLaserLength, 1 << 10))
+        {
+            laserLength = hitInfo.distance;
+        }
+
+        Vector3 lookDir = (owner.bulletContainer.forward) * laserLength;
+        //lookDir = Quaternion.AngleAxis(-randomOffSet, Vector3.up) * lookDir;
 
         this.gameObject.transform.forward = owner.bulletContainer.forward;
         this.gameObject.transform.localScale = new Vector3(1, 1, 1);
 
-            thisLineRenderer.SetPosition(0, owner.bulletContainer.position);
-            thisLineRenderer.SetPosition(1, owner.bulletContainer.position + lookDir);
+        thisLineRenderer.SetPosition(0, owner.bulletContainer.position);
+        thisLineRenderer.SetPosition(1, owner.bulletContainer.position + lookDir);
 
-            thisLineRenderer.startWidth = currentLaserWidth;
-            thisLineRenderer.endWidth = currentLaserWidth * 1.3f;
+        thisLineRenderer.startWidth = currentLaserWidth;
+        thisLineRenderer.endWidth = currentLaserWidth;
 
-            transform.position = owner.bulletContainer.position + (lookDir / 2);
-            ourCollider.GetComponent<BoxCollider>().size = new Vector3(currentLaserWidth, 1, currentLaserLength);
+        transform.position = owner.bulletContainer.position + (lookDir / 2);
+        ourCollider.GetComponent<BoxCollider>().size = new Vector3(currentLaserWidth, 1, laserLength);
     }
 
     private void OnLaserDestroy(GameObject gameObject)
@@ -93,7 +103,7 @@ public class Laser : Ammo
    public override float GetDamage()
    {
         //Debug.Log(owner.laserStats.damage.value * owner.stats.damageMultiplier.value * Time.deltaTime);
-       return damage * Time.deltaTime;
+       return damage;
    }
 
     public override float GetImpactForce()

@@ -21,7 +21,9 @@ public class BossEncounter : MonoBehaviour
         player.transform.position = new Vector3(20, 0, -12);
 
         GameObject holdingGameObject = Instantiate(bossPrefab, new Vector3(20, 0, 0), Quaternion.identity);
-        holdingGameObject.GetComponent<Enemy>().Init(player, camTarget, ammoPool);
+        BossEnemy enemy = holdingGameObject.GetComponent<BossEnemy>();
+        enemy.Init(player, camTarget, ammoPool);
+        enemy.mapGenerationScript = mapGeneration;
     }
 
     // Update is called once per frame

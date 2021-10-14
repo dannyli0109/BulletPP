@@ -504,6 +504,22 @@ public class MapGeneration : MonoBehaviour
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
 
+    public void SpawnSniper(Vector3 setPos, int sniperIndex)
+    {
+        // sniper
+        //List<Transform> holdingPossibleSniperSpawnPoints = room.thisPrefabInfo.sniperSpawnPoint;
+        //int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleSniperSpawnPoints.Count);
+
+        //Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
+        //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
+        GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], setPos, enemiesTypes[0].transform.rotation);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
+        EnemiesInEncounter++;
+        //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
+    }
+
+
+
     public void SpawnNormalEnemy(Room room, int enemyIndex)
     {
         List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;

@@ -1476,7 +1476,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7370cf9701ae4c43b3fb14f313d1b3c, type: 2}
+  - {fileID: 2100000, guid: 70880a3c5dcffd74e9e597ead22f797a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1502,7 +1502,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.01
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1515,15 +1515,6 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1684,7 +1675,7 @@ MonoBehaviour:
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 0
+      baseValue: 6
     fireRate:
       baseValue: 0
     amountOfBounces:
@@ -1783,33 +1774,33 @@ MonoBehaviour:
       baseValue: 0
   laserStats:
     damage:
-      baseValue: 0
+      baseValue: 2
     speed:
       baseValue: 0
     size:
-      baseValue: 0
+      baseValue: 1
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 0
+      baseValue: 2
     fireRate:
       baseValue: 0
     amountOfBounces:
       baseValue: 0
     maxClip:
-      baseValue: 0
+      baseValue: 1
     additionalAmmo:
       baseValue: 0
     maxLaserLength:
-      baseValue: 0
+      baseValue: 30
     maxLaserWidth:
-      baseValue: 0
+      baseValue: 0.5
   animator: {fileID: 1109022956259654619}
   bulletPrefab: {fileID: 0}
   grenadePrefab: {fileID: 0}
   rocketPrefab: {fileID: 0}
   bouncingBladePrefab: {fileID: 0}
-  laserPrefab: {fileID: 0}
+  laserPrefab: {fileID: 270783261835920936, guid: d1a37f4092427da41ac7e74703241185, type: 3}
   deskBulletPrefab: {fileID: 0}
   aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 1109022956828929431}
@@ -1821,7 +1812,7 @@ MonoBehaviour:
   currentBouncingBladeClip: 0
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
   rocketExitPoint: {fileID: 0}
-  thisLineRenderer: {fileID: 0}
+  thisLineRenderer: {fileID: 1109022956268930727}
   inventoryIndex: 0
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
@@ -1863,8 +1854,8 @@ MonoBehaviour:
   index: 0
   minCooldown: 1
   maxCooldown: 3
-  viewAngle: 60
-  rotationSpeed: 6
+  viewAngle: 180
+  rotationSpeed: 3
   notUsingAnimation: 0
   setAcceleration: 18
   tooFarToSeePlayer: 22
@@ -1876,6 +1867,12 @@ MonoBehaviour:
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 0
   Stopped: 0
+  min: {x: -22, y: -26}
+  max: {x: 24, y: 6}
+  amounts: 20
+  skillOneRepeatTime: 3
+  maxAmountOfSnipers: 3
+  usingLaser: 0
 --- !u!1 &1109022956269157045
 GameObject:
   m_ObjectHideFlags: 0
