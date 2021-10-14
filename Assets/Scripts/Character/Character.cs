@@ -183,7 +183,7 @@ public abstract class Character : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("near miss");
+                  //  Debug.Log("near miss");
                 }
                // EventManager.current.OnAmmoDestroy(ammo.gameObject);
             }

@@ -151,7 +151,7 @@ public class SpellQueueEnemy : Enemy
             {
                 animator.SetTrigger("Dying");
                 dying = true;
-                currentWaitTime = 2.5f;
+                currentWaitTime = 2.0f;
             }
         }
         else
