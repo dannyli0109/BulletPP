@@ -8,6 +8,7 @@ public class Room
 {
     public Vector2 offsetPos;
     public int length = 0;
+   public bool bossRoom;
 
     public RoomPrefabInformation thisPrefabInfo;
 

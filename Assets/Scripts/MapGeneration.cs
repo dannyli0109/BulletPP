@@ -45,6 +45,8 @@ public class MapGeneration : MonoBehaviour
     public int startingRoomID;
     public List<StartingRoom> startingRoomDoorLayouts;
 
+    public GameObject bossRoom;
+
     public List<GameObject> startingRooms;
     public List<GameObject> allDoorRoom;
 
@@ -83,6 +85,7 @@ public class MapGeneration : MonoBehaviour
     public List<GameObject> enemiesTypes;
     public List<GameObject> sniperTypes;
     public List<GameObject> swarmEnemiesType;
+    public GameObject bossEnemy;
 
     public int minSwarmSpawnAmount;
     public int maxSwarmSpawnAmount;
@@ -115,6 +118,7 @@ public class MapGeneration : MonoBehaviour
     public Vector2 miniMapRoomMultiplier;
 
     public Color completedMiniMapRoomColour;
+    public Color bossRoomMiniMapRoomColour;
     public Color CurrentMiniMapRoomColour;
     public Color DefaultMiniMapRoomColour;
     #endregion
@@ -252,125 +256,152 @@ public class MapGeneration : MonoBehaviour
             roomsBeingProcessed++;
         }
         reconnectWalls();
-       // Debug.Log(AllRooms.Count);
+
+       int holdingBossRoomPos = 0;
+        for (int i = 1; i < rooms.Count; i++)
+        {
+            if (rooms[i].upperRoomRef == -1)
+            {
+              if(rooms[i].offsetPos.y> rooms[holdingBossRoomPos].offsetPos.y)
+                {
+                    holdingBossRoomPos = i;
+                }
+           
+            }
+        }
+      rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length + 1, -1, holdingBossRoomPos, -1, -1));
+      rooms[holdingBossRoomPos].upperRoomRef = rooms.Count - 1;
+      rooms[rooms.Count - 1].bossRoom = true;
+      Debug.Log("Trying to add boss room " + holdingBossRoomPos);
+
+
+
         GameObject holdingObject = null;
         for (int i = 0; i < rooms.Count; i++)
         {
             if (i == 0)
             {
-                holdingObject= Instantiate(startingRooms[startingRoomID], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), startingRooms[startingRoomID].transform.rotation);
+                holdingObject = Instantiate(startingRooms[startingRoomID], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), startingRooms[startingRoomID].transform.rotation);
             }
             else
             {
-               // Debug.Log(i + "  |  " + AllRooms[i].offsetPos + " | " + AllRooms[i].Length + " | " + AllRooms[i].upperRoomRef + " | " + AllRooms[i].lowerRoomRef + " | " + AllRooms[i].leftRoomRef + " | " + AllRooms[i].rightRoomRef);
-                if (rooms[i].upperRoomRef != -1)
+                if (rooms[i].bossRoom)
                 {
-                    if (rooms[i].lowerRoomRef != -1)
+                    Debug.Log("boss room");
+                    holdingObject = Instantiate(bossRoom, new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), bossRoom.transform.rotation);
+                }
+                else
+                {
+                    // Debug.Log(i + "  |  " + AllRooms[i].offsetPos + " | " + AllRooms[i].Length + " | " + AllRooms[i].upperRoomRef + " | " + AllRooms[i].lowerRoomRef + " | " + AllRooms[i].leftRoomRef + " | " + AllRooms[i].rightRoomRef);
+                    if (rooms[i].upperRoomRef != -1)
+                    {
+                        if (rooms[i].lowerRoomRef != -1)
+                        {
+                            if (rooms[i].leftRoomRef != -1)
+                            {
+                                if (rooms[i].rightRoomRef != -1)
+                                {
+                                    int holding = UnityEngine.Random.Range(0, allDoorRoom.Count);
+                                    holdingObject = Instantiate(allDoorRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), allDoorRoom[holding].transform.rotation);
+                                }
+                                else
+                                {
+                                    int holding = UnityEngine.Random.Range(0, upDownLeftRoom.Count);
+                                    holdingObject = Instantiate(upDownLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownLeftRoom[holding].transform.rotation); ;
+
+                                }
+                            }
+                            else if (rooms[i].rightRoomRef != -1)
+                            {
+                                int holding = UnityEngine.Random.Range(0, upDownRightRoom.Count);
+                                holdingObject = Instantiate(upDownRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownRightRoom[holding].transform.rotation);
+
+                            }
+                            else
+                            {
+                                int holding = UnityEngine.Random.Range(0, upDownRoom.Count);
+                                holdingObject = Instantiate(upDownRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownRoom[holding].transform.rotation);
+
+                            }
+                        }
+                        else if (rooms[i].leftRoomRef != -1)
+                        {
+                            if (rooms[i].rightRoomRef != -1)
+                            {
+                                int holding = UnityEngine.Random.Range(0, upLeftRightRoom.Count);
+                                holdingObject = Instantiate(upLeftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upLeftRightRoom[holding].transform.rotation);
+
+                            }
+                            else
+                            {
+                                int holding = UnityEngine.Random.Range(0, upLeftRoom.Count);
+                                holdingObject = Instantiate(upLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upLeftRoom[holding].transform.rotation);
+
+                            }
+                        }
+                        else if (rooms[i].rightRoomRef != -1)
+                        {
+                            int holding = UnityEngine.Random.Range(0, upRightRoom.Count);
+                            holdingObject = Instantiate(upRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upRightRoom[holding].transform.rotation);
+
+                        }
+                        else
+                        {
+                            int holding = UnityEngine.Random.Range(0, upRoom.Count);
+                            holdingObject = Instantiate(upRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upRoom[holding].transform.rotation);
+
+                        }
+                    }
+                    else if (rooms[i].lowerRoomRef != -1)
                     {
                         if (rooms[i].leftRoomRef != -1)
                         {
                             if (rooms[i].rightRoomRef != -1)
                             {
-                                int holding = UnityEngine.Random.Range(0, allDoorRoom.Count);
-                                holdingObject = Instantiate(allDoorRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), allDoorRoom[holding].transform.rotation);                             
+                                int holding = UnityEngine.Random.Range(0, downLeftRightRoom.Count);
+                                holdingObject = Instantiate(downLeftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downLeftRightRoom[holding].transform.rotation);
+
                             }
                             else
                             {
-                                int holding = UnityEngine.Random.Range(0, upDownLeftRoom.Count);
-                                holdingObject = Instantiate(upDownLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownLeftRoom[holding].transform.rotation); ;
-                              
+                                int holding = UnityEngine.Random.Range(0, downLeftRoom.Count);
+                                holdingObject = Instantiate(downLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downLeftRoom[holding].transform.rotation);
+
                             }
                         }
                         else if (rooms[i].rightRoomRef != -1)
                         {
-                            int holding = UnityEngine.Random.Range(0, upDownRightRoom.Count);
-                            holdingObject = Instantiate(upDownRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownRightRoom[holding].transform.rotation);
-                         
+                            int holding = UnityEngine.Random.Range(0, downRightRoom.Count);
+                            holdingObject = Instantiate(downRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downRightRoom[holding].transform.rotation);
+
                         }
                         else
                         {
-                            int holding = UnityEngine.Random.Range(0, upDownRoom.Count);
-                            holdingObject = Instantiate(upDownRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upDownRoom[holding].transform.rotation);
-                          
+                            int holding = UnityEngine.Random.Range(0, downRoom.Count);
+                            holdingObject = Instantiate(downRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downRoom[holding].transform.rotation);
+
                         }
                     }
                     else if (rooms[i].leftRoomRef != -1)
                     {
                         if (rooms[i].rightRoomRef != -1)
                         {
-                            int holding = UnityEngine.Random.Range(0, upLeftRightRoom.Count);
-                            holdingObject = Instantiate(upLeftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upLeftRightRoom[holding].transform.rotation);
-                           
+                            int holding = UnityEngine.Random.Range(0, leftRightRoom.Count);
+                            holdingObject = Instantiate(leftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), leftRightRoom[holding].transform.rotation);
+
                         }
                         else
                         {
-                            int holding = UnityEngine.Random.Range(0, upLeftRoom.Count);
-                            holdingObject = Instantiate(upLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upLeftRoom[holding].transform.rotation);
-                         
+                            int holding = UnityEngine.Random.Range(0, leftRoom.Count);
+                            holdingObject = Instantiate(leftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), leftRoom[holding].transform.rotation);
+
                         }
-                    }
-                    else if (rooms[i].rightRoomRef != -1)
-                    {
-                        int holding = UnityEngine.Random.Range(0, upRightRoom.Count);
-                        holdingObject = Instantiate(upRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upRightRoom[holding].transform.rotation);
-                     
                     }
                     else
                     {
-                        int holding = UnityEngine.Random.Range(0, upRoom.Count);
-                        holdingObject = Instantiate(upRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), upRoom[holding].transform.rotation);
-                      
+                        int holding = UnityEngine.Random.Range(0, rightRoom.Count);
+                        holdingObject = Instantiate(rightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), rightRoom[holding].transform.rotation);
                     }
-                }
-                else if (rooms[i].lowerRoomRef != -1)
-                {
-                    if (rooms[i].leftRoomRef != -1)
-                    {
-                        if (rooms[i].rightRoomRef != -1)
-                        {
-                            int holding = UnityEngine.Random.Range(0, downLeftRightRoom.Count);
-                            holdingObject = Instantiate(downLeftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downLeftRightRoom[holding].transform.rotation);
-                          
-                        }
-                        else
-                        {
-                            int holding = UnityEngine.Random.Range(0, downLeftRoom.Count);
-                            holdingObject = Instantiate(downLeftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downLeftRoom[holding].transform.rotation);
-                          
-                        }
-                    }
-                    else if (rooms[i].rightRoomRef != -1)
-                    {
-                        int holding = UnityEngine.Random.Range(0, downRightRoom.Count);
-                        holdingObject = Instantiate(downRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downRightRoom[holding].transform.rotation);
-                     
-                    }
-                    else
-                    {
-                        int holding = UnityEngine.Random.Range(0, downRoom.Count);
-                        holdingObject = Instantiate(downRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), downRoom[holding].transform.rotation);
-                  
-                    }
-                }
-                else if (rooms[i].leftRoomRef != -1)
-                {
-                    if (rooms[i].rightRoomRef != -1)
-                    {
-                        int holding = UnityEngine.Random.Range(0, leftRightRoom.Count);
-                        holdingObject = Instantiate(leftRightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), leftRightRoom[holding].transform.rotation);
-                     
-                    }
-                    else
-                    {
-                        int holding = UnityEngine.Random.Range(0, leftRoom.Count);
-                        holdingObject = Instantiate(leftRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), leftRoom[holding].transform.rotation);
-                    
-                    }
-                }
-                else
-                {
-                    int holding = UnityEngine.Random.Range(0, rightRoom.Count);
-                    holdingObject = Instantiate(rightRoom[holding], new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), rightRoom[holding].transform.rotation);
                 }
             }
 
@@ -518,8 +549,6 @@ public class MapGeneration : MonoBehaviour
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
 
-
-
     public void SpawnNormalEnemy(Room room, int enemyIndex)
     {
         List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
@@ -537,6 +566,21 @@ public class MapGeneration : MonoBehaviour
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
         EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
+    }
+
+    public void SpawnBossEnemy(Room room)
+    {
+        List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
+
+        int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
+
+        Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
+
+        GameObject holdingGameObject = Instantiate(bossEnemy, holdingPosition, enemiesTypes[0].transform.rotation);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
+        EnemiesInEncounter++;
+        holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
+        //bossEnemy
     }
 
     public void CheckToStartEncounter()
@@ -649,76 +693,90 @@ public class MapGeneration : MonoBehaviour
 
     public void StartEncounter(Room room)
     {
-        beginEnounter?.Invoke();
-
-        currentWave = 0;
-        EnemyWaves = new List<List<int>>();
-        if (playerTarget.RecentlyTakenDamage > 0)
+        if (room.bossRoom)
         {
-            playerTarget.RecentlyTakenDamage--;
+            beginEnounter?.Invoke();
+
+            // lock doors
+            inCombat = true;
+
+            GameManager.current.ChangeStateImmdeiate(GameState.Game);
+
+            SpawnBossEnemy(rooms[currentRoomInside]);
+
         }
-        // lock doors
-        inCombat = true;
-
-        int holdingAmountOfEnemies = (int)UnityEngine.Random.Range((int)(totalRoomDiffculty / 3), (int)(totalRoomDiffculty / 2));
-        holdingAmountOfEnemies++;
-
-        if (totalRoomDiffculty < singleEnemyCutOff)
+        else
         {
-            holdingAmountOfEnemies = 1;
-        }
+            beginEnounter?.Invoke();
 
-       int holdingNumberOfWaves = 1;
-
-        for (int i = 0; i < additionalWaveCutOff.Count; i++)
-        {
-            if (totalRoomDiffculty > additionalWaveCutOff[i])
+            currentWave = 0;
+            EnemyWaves = new List<List<int>>();
+            if (playerTarget.RecentlyTakenDamage > 0)
             {
-                holdingNumberOfWaves++;
+                playerTarget.RecentlyTakenDamage--;
             }
-        }
-            holdingAmountOfEnemies = holdingAmountOfEnemies / holdingNumberOfWaves;
-        for (int i = 0; i < holdingNumberOfWaves; i++)
-        {
-            List<int> holdingNewWave = new List<int>();
-            EnemyWaves.Add(holdingNewWave);
+            // lock doors
+            inCombat = true;
 
-            for (int p = 0; p < holdingAmountOfEnemies; p++)
+            int holdingAmountOfEnemies = (int)UnityEngine.Random.Range((int)(totalRoomDiffculty / 3), (int)(totalRoomDiffculty / 2));
+            holdingAmountOfEnemies++;
+
+            if (totalRoomDiffculty < singleEnemyCutOff)
             {
-                // [0 - 9)
-                int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
-                if (totalRoomDiffculty < singleEnemyCutOff)
+                holdingAmountOfEnemies = 1;
+            }
+
+            int holdingNumberOfWaves = 1;
+
+            for (int i = 0; i < additionalWaveCutOff.Count; i++)
+            {
+                if (totalRoomDiffculty > additionalWaveCutOff[i])
                 {
-                    holdingRandomEnemType = 0;
+                    holdingNumberOfWaves++;
                 }
-                
-                // 
-                if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
+            }
+            holdingAmountOfEnemies = holdingAmountOfEnemies / holdingNumberOfWaves;
+            for (int i = 0; i < holdingNumberOfWaves; i++)
+            {
+                List<int> holdingNewWave = new List<int>();
+                EnemyWaves.Add(holdingNewWave);
+
+                for (int p = 0; p < holdingAmountOfEnemies; p++)
                 {
-                    int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
-                    for (int s=0; s< swarmSpawnAmount; s++)
+                    // [0 - 9)
+                    int holdingRandomEnemType = UnityEngine.Random.Range(0, enemiesTypes.Count + sniperTypes.Count + swarmEnemiesType.Count);
+                    if (totalRoomDiffculty < singleEnemyCutOff)
+                    {
+                        holdingRandomEnemType = 0;
+                    }
+
+                    // 
+                    if (holdingRandomEnemType >= enemiesTypes.Count + sniperTypes.Count)
+                    {
+                        int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
+                        for (int s = 0; s < swarmSpawnAmount; s++)
+                        {
+                            holdingNewWave.Add(holdingRandomEnemType);
+                        }
+                    }
+                    else if (holdingRandomEnemType < enemiesTypes.Count + sniperTypes.Count)
                     {
                         holdingNewWave.Add(holdingRandomEnemType);
+
                     }
                 }
-                else if (holdingRandomEnemType < enemiesTypes.Count + sniperTypes.Count)
-                {
-                    holdingNewWave.Add(holdingRandomEnemType);
-
-                }
             }
-        }
 
-        GameManager.current.ChangeStateImmdeiate(GameState.Game);
+            GameManager.current.ChangeStateImmdeiate(GameState.Game);
 
-        Debug.Log("Number of waves " + EnemyWaves.Count);
-        for(int i=0; i< EnemyWaves.Count; i++)
-        {
-            Debug.Log(i +" Waves has " + EnemyWaves[i].Count);
+            Debug.Log("Number of waves " + EnemyWaves.Count);
+            for (int i = 0; i < EnemyWaves.Count; i++)
+            {
+                Debug.Log(i + " Waves has " + EnemyWaves[i].Count);
+            }
+            posInWaves = 0;
         }
-        posInWaves = 0;
     }
-
     bool CheckIfMapCompleted()
     {
         for(int i =0; i < rooms.Count; i++)
@@ -823,6 +881,10 @@ public class MapGeneration : MonoBehaviour
             {
                 miniMapUpperRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
             }
+            else if (rooms[rooms[currentRoomInside].upperRoomRef].bossRoom)
+            {
+                miniMapUpperRoom.GetComponent<Image>().color = bossRoomMiniMapRoomColour;
+            }
             else
             {
                 miniMapUpperRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
@@ -840,6 +902,10 @@ public class MapGeneration : MonoBehaviour
             if (rooms[rooms[currentRoomInside].lowerRoomRef].completed)
             {
                 miniMapLowerRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
+            }
+            else if (rooms[rooms[currentRoomInside].lowerRoomRef].bossRoom)
+            {
+                miniMapLowerRoom.GetComponent<Image>().color = bossRoomMiniMapRoomColour;
             }
             else
             {
@@ -859,6 +925,10 @@ public class MapGeneration : MonoBehaviour
             {
                 miniMapLeftRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
             }
+            else if (rooms[rooms[currentRoomInside].leftRoomRef].bossRoom)
+            {
+                miniMapLeftRoom.GetComponent<Image>().color = bossRoomMiniMapRoomColour;
+            }
             else
             {
                 miniMapLeftRoom.GetComponent<Image>().color = DefaultMiniMapRoomColour;
@@ -876,6 +946,10 @@ public class MapGeneration : MonoBehaviour
             if (rooms[rooms[currentRoomInside].rightRoomRef].completed)
             {
                 miniMapRightRoom.GetComponent<Image>().color = completedMiniMapRoomColour;
+            }
+            else if (rooms[rooms[currentRoomInside].rightRoomRef].bossRoom)
+            {
+                miniMapRightRoom.GetComponent<Image>().color = bossRoomMiniMapRoomColour;
             }
             else
             {
