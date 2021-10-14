@@ -14,19 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8
   index: 0
-  rarity: 0
+  rarity: 2
   augmentIcon: {fileID: 21300000, guid: cd0bd7a98f20739499812060cf3dc777, type: 3}
   augmentName: Spreading Device
   description: 'When obtained: Increase 2 random ammo amount by 1.
 
     Shoot 1 bullet
     that deals 1 damage.'
-  cost: 4
+  cost: 3
   color: {r: 1, g: 0.5411765, b: 0, a: 1}
   damage: 1
   speed: 15
   size: 2
   angles: 30
+  offset: 0
   amountOfBullets: 1
   lifeTime: 2
   bulletIncrement: 1

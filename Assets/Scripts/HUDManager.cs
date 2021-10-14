@@ -180,7 +180,7 @@ public class HUDManager : MonoBehaviour
             }
             else
             {
-                ammoUI.ammoImages[i].color = player.inventory[i].color;
+                ammoUI.ammoImages[i].color = player.inventory[i].GetColor(player, i);
             }
         }
 

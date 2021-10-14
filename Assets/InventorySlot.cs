@@ -8,9 +8,10 @@ using TMPro;
 
 public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas shopCanvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    private Canvas canvas;
     public Image icon;
     public Image outline;
     public bool empty;
@@ -20,12 +21,16 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public TooltipTrigger tooltipTrigger;
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI amountText;
+    public GameObject damageContainer;
+    public GameObject amountContainer;
+    public Outline imageOutline;
     Vector2 anchorPosition;
     // Start is called before the first frame update
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        canvas = GetComponent<Canvas>();
         empty = true;
     }
 
@@ -34,8 +39,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         if (!empty)
         {
-            damageText.text = inventoryHUD.player.inventory[index].damage.ToString();
-            amountText.text = inventoryHUD.player.inventory[index].amountOfBullets.ToString();
+            damageText.text = inventoryHUD.player.inventory[index].GetDamage(inventoryHUD.player, index).ToString();
+            amountText.text = inventoryHUD.player.inventory[index].GetAmounts(inventoryHUD.player, index).ToString();
         }
     }
 
@@ -49,6 +54,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         sellAugmentTrigger.disabled = false;
         tooltipTrigger.header = inventoryHUD.player.inventory[index].augmentName;
         tooltipTrigger.content = inventoryHUD.player.inventory[index].description;
+        imageOutline.effectColor = inventoryHUD.player.inventory[index].GetColor(inventoryHUD.player, index);
     }
 
     public void PululateEmpty(int index)
@@ -58,6 +64,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         outline.gameObject.SetActive(true);
         icon.gameObject.SetActive(false);
         sellAugmentTrigger.disabled = true;
+        tooltipTrigger.header = "";
         tooltipTrigger.content = "Empty slot";
     }
 
@@ -68,23 +75,47 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //transform.SetAsLastSibling();
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = 999;
         canvasGroup.alpha = 0.5f;
         canvasGroup.blocksRaycasts = false;
         anchorPosition = icon.rectTransform.anchoredPosition;
+        TooltipSystem.current.gameObject.SetActive(false);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("OnEndDrag");
+        canvas.overrideSorting = false;
+        //canvas.sortingOrder = 999;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         icon.rectTransform.anchoredPosition = anchorPosition;
+        TooltipSystem.current.gameObject.SetActive(true);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("OnDrag");
-        icon.rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        icon.rectTransform.anchoredPosition += eventData.delta / shopCanvas.scaleFactor;
+        InventorySlot slot = eventData.pointerDrag.GetComponent<InventorySlot>();
+
+        if (slot)
+        {
+            if (!empty)
+            {
+                Debug.Log("swapping");
+                Debug.Log("from: " + index + " to: " + slot.index);
+                //inventoryHUD.player.inventory[]
+                Augment formAugment = inventoryHUD.player.inventory[index];
+                Augment toAugment = inventoryHUD.player.inventory[slot.index];
+
+                inventoryHUD.player.inventory[index] = toAugment;
+                inventoryHUD.player.inventory[slot.index] = formAugment;
+                inventoryHUD.Populate();
+            }
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -98,6 +129,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             if (!empty)
             {
                 //inventoryHUD.player.inventory[]
+                Debug.Log("from: " + index + " to: " + slot.index);
                 Augment formAugment = inventoryHUD.player.inventory[index];
                 Augment toAugment = inventoryHUD.player.inventory[slot.index];
 

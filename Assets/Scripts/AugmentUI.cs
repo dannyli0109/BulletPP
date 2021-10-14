@@ -36,7 +36,7 @@ public class AugmentUI : MonoBehaviour
         //AugmentManager augmentManager = AugmentManager.current;
         int state = shop.player.BuyAugment(id);
         if (state == -1) return;
-        shop.level = 3;
+        //shop.level = 3;
         gameObject.SetActive(false);
         buyAugment?.Invoke();
         shop.UpdateText();

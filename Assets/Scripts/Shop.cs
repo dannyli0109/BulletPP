@@ -12,10 +12,10 @@ public class Shop : MonoBehaviour
 
     public List<TextMeshProUGUI> amountText;
 
-    public int level = 0;
+    private int level = 0;
     public List<List<float>> percents = new List<List<float>>() {
         new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
-        new List<float>() { 0.5f, 0.35f, 0.1f, 0.05f, 0.0f },
+        new List<float>() { 0.5f, 0.3f, 0.1f, 0.05f, 0.05f },
         new List<float>() { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f },
         new List<float>() { 0.2f, 0.3f, 0.3f, 0.2f, 0.0f },
         new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
@@ -29,7 +29,7 @@ public class Shop : MonoBehaviour
     {
         AugmentManager augmentManager = AugmentManager.current;
         augmentIds = augmentManager.GetAugmentIdList();
-        level = 3;
+        level = 1;
         Refresh();
     }
 
