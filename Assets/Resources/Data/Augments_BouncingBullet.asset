@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   index: 0
-  rarity: 0
+  rarity: 1
   augmentIcon: {fileID: 21300000, guid: 5b013d7d0691e7f41aebd48207985d0a, type: 3}
   augmentName: Bouncing Bullet
   description: 'Shoot 1 bullet that deals 6 damages
 
     Bounces 2 times'
-  cost: 0
+  cost: 2
   color: {r: 0.9716981, g: 0.8335114, b: 0.068752214, a: 1}
   damage: 6
   speed: 15
   size: 2
   angles: 0
+  offset: 0
   amountOfBullets: 1
   lifeTime: 2
   numberOfBounces: 2

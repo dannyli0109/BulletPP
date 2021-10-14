@@ -3612,7 +3612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: augments.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: augments.Array.data[4]
@@ -7510,6 +7510,7 @@ MonoBehaviour:
   room:
     offsetPos: {x: 0, y: 0}
     length: 0
+    bossRoom: 0
     thisPrefabInfo: {fileID: 0}
     upperRoomRef: 0
     lowerRoomRef: 0

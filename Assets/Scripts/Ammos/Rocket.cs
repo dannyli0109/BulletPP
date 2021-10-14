@@ -17,7 +17,7 @@ public class Rocket : Ammo
         EventManager.current.onAmmoDestroy += OnRocketDestroy;
     }
 
-    public override void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
+    public override void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
     {
         base.Init(owner, forward, angle, offset, speed, acceleration, damage, size, bounces);
         currentSpeed = owner.rocketStats.speed.value;

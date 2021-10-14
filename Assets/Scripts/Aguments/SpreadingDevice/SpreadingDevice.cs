@@ -21,6 +21,26 @@ public class SpreadingDevice : Augment
         }
     }
 
+    public override int GetAmounts(Character character, int index)
+    {
+        return amountOfBullets;
+    }
+
+    public override Color GetColor(Character character, int index)
+    {
+        return color;
+    }
+
+    public override float GetDamage(Character character, int index)
+    {
+        return damage;
+    }
+
+    public override int GetId(Character character, int index)
+    {
+        return id;
+    }
+
     public override void OnAttached(Character character, int index)
     {
         if (character.inventory.Count <= 1) return;
@@ -45,20 +65,20 @@ public class SpreadingDevice : Augment
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
         float initialAngle = -angles / 2.0f;
         float angleIncrements;
-
-        if (amountOfBullets == 1)
+        float amounts = GetAmounts(character, index);
+        if (amounts == 1)
         {
             angleIncrements = 0;
             initialAngle = 0;
         }
         else
         {
-            angleIncrements = angles / (amountOfBullets - 1.0f);
+            angleIncrements = angles / (amounts - 1.0f);
         }
 
 
         AmmoPool ammoPool = AmmoPool.current;
-        for (int i = 0; i < amountOfBullets; i++)
+        for (int i = 0; i < amounts; i++)
         {
             Bullet bullet;
             if (ammoPool.multiBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))

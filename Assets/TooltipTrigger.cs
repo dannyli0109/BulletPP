@@ -8,6 +8,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     public string content;
     public string header;
+   
     public void OnPointerEnter(PointerEventData eventData)
     {
         TooltipSystem.Show(content, header);
@@ -26,4 +27,6 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         TooltipSystem.Hide();
     }
+
+    
 }

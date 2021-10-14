@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da50381ec1c8bfd4da5412e300dbf240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  shopCanvas: {fileID: 0}
   icon: {fileID: 2078581118074078680}
   outline: {fileID: 2274546535859069911}
   empty: 0
@@ -303,6 +303,9 @@ MonoBehaviour:
   tooltipTrigger: {fileID: 3838502715932082694}
   damageText: {fileID: 8808685620442976610}
   amountText: {fileID: 2019674078365680806}
+  damageContainer: {fileID: 2588088952147290191}
+  amountContainer: {fileID: 3821036483027015367}
+  imageOutline: {fileID: 1310909346435136191}
 --- !u!223 &3120365588781977527
 Canvas:
   m_ObjectHideFlags: 0
@@ -661,6 +664,7 @@ GameObject:
   - component: {fileID: 8170584318319788538}
   - component: {fileID: 2112019913713426987}
   - component: {fileID: 2078581118074078680}
+  - component: {fileID: 1310909346435136191}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -727,3 +731,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1310909346435136191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7621897292623222781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1

@@ -22,6 +22,7 @@ public abstract class AugmentData : ScriptableObject
     public float speed;
     public float size;
     public float angles;
+    public float offset;
     public int amountOfBullets;
     public float lifeTime;
 

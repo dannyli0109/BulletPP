@@ -53,7 +53,7 @@ public abstract class Ammo : PooledItem
         }
     }
 
-    public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
+    public virtual void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
     {
         this.owner = owner;
         this.damage = damage;
@@ -66,19 +66,19 @@ public abstract class Ammo : PooledItem
         timesBounced = 0;
         transform.localScale = new Vector3(size, size, size);
         transform.localRotation = Quaternion.Euler(new Vector3(0f, angle + transform.localEulerAngles.y, 0f));
-        Vector3 offsetVector = new Vector3(transform.forward.x * offset, transform.forward.y * offset, transform.forward.z * offset);
+        Vector3 offsetVector = new Vector3(transform.forward.x * offset.x, transform.forward.y * offset.y, transform.forward.z * offset.z);
         transform.localPosition += offsetVector;
         velocity = transform.forward * speed;
     }
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
     {
-        Init(owner, forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size, 0);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, 0);
     }
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces)
     {
-        Init(owner, forward, angle, 0, speed, new Vector3(0, 0, 0), damage, size, bounces);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, bounces);
     }
 
     protected void SpawnHitParticle(float size)

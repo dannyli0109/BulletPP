@@ -9,13 +9,14 @@ public abstract class Augment
     public Sprite augmentIcon;
     public string augmentName;
     public int cost;
-    public Color color;
+    protected Color color;
 
     public float damage;
     public float speed;
     public float size;
     public float lifeTime;
     public float angles;
+    public float offset;
     public int amountOfBullets;
 
     public string originalDesc;
@@ -33,7 +34,9 @@ public abstract class Augment
         size = data.size;
         lifeTime = data.lifeTime;
         angles = data.angles;
+        offset = data.offset;
         amountOfBullets = data.amountOfBullets;
+        augmentName = data.augmentName;
 
         originalDesc = data.description;
     }
@@ -45,4 +48,12 @@ public abstract class Augment
     public abstract void OnAttached(Character character, int index);
 
     public abstract void Shoot(Character character, Transform transform, int index);
+
+    public abstract float GetDamage(Character character, int index);
+
+    public abstract int GetAmounts(Character character, int index);
+
+    public abstract Color GetColor(Character character, int index);
+
+    public abstract int GetId(Character character, int index);
 }
