@@ -584,7 +584,7 @@ public class Player : Character
 
         if (inventory.RemoveAt(index))
         {
-            gold += augment.cost;
+            gold += 1;
             sellAugment?.Invoke();
         }
         //    for (int i = 0; i < augmentManager.augmentDatas[augment.id].synergies.Count; i++)

@@ -53,7 +53,12 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         sellAugmentTrigger.Init(inventoryHUD.player, index);
         sellAugmentTrigger.disabled = false;
         tooltipTrigger.header = inventoryHUD.player.inventory[index].augmentName;
-        tooltipTrigger.content = inventoryHUD.player.inventory[index].description;
+
+        string description = "<b>Selling Price: " + 1 + "</b>" + "\n";
+        description += inventoryHUD.player.inventory[index].description;
+        description += "\n<b>Right click to sell</b>";
+
+        tooltipTrigger.content = description;
         imageOutline.effectColor = inventoryHUD.player.inventory[index].GetColor(inventoryHUD.player, index);
     }
 
