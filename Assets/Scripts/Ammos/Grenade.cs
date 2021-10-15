@@ -61,6 +61,12 @@ public class Grenade : Ammo
         EventManager.current.onAmmoDestroy -= OnGrenadeDestroy;
     }
 
+    public override void PlayImpactSound(Vector3 position)
+    {
+        SoundManager.PlaySound(SoundType.BlasterHit, position, 1);
+
+    }
+
     //public override float GetDamage()
     //{
     //    return owner.grenadeStats.damage.value * owner.stats.damageMultiplier.value;

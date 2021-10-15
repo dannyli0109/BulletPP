@@ -55,4 +55,9 @@ public class PiercingAmmo : Ammo
     {
         EventManager.current.onAmmoDestroy -= OnBulletDestroy;
     }
+
+    public override void PlayImpactSound(Vector3 position)
+    {
+        SoundManager.PlaySound(SoundType.BlasterHit, position, 1);
+    }
 }

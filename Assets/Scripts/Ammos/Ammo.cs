@@ -115,6 +115,7 @@ public abstract class Ammo : PooledItem
     protected void HandleAmmoHit(Collider other)
     {
         Vector2 holdingForce = new Vector2(transform.forward.x, transform.forward.z) * GetImpactForce();
+        //PlayImpactSound(other.gameObject.transform.position);
         if (owner)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
@@ -125,34 +126,36 @@ public abstract class Ammo : PooledItem
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
-                HUDManager.current.damage += GetDamage();
-                
-                if (GetType().ToString() == "Bullet")
-                {
-                    HUDManager.current.bulletDamage += GetDamage();
-                }
+                //HUDManager.current.damage += GetDamage();
 
-                if (GetType().ToString() == "Grenade")
-                {
-                    HUDManager.current.grenadeDamage += GetDamage();
-                }
+                //if (GetType().ToString() == "Bullet")
+                //{
+                //    HUDManager.current.bulletDamage += GetDamage();
+                //}
 
-                if (GetType().ToString() == "Rocket")
-                {
-                    HUDManager.current.rocketDamage += GetDamage();
-                }
+                //if (GetType().ToString() == "Grenade")
+                //{
+                //    HUDManager.current.grenadeDamage += GetDamage();
+                //}
 
-                if (GetType().ToString() == "Laser")
-                {
-                    HUDManager.current.laserDamage += GetDamage();
-                }
+                //if (GetType().ToString() == "Rocket")
+                //{
+                //    HUDManager.current.rocketDamage += GetDamage();
+                //}
+
+                //if (GetType().ToString() == "Laser")
+                //{
+                //    HUDManager.current.laserDamage += GetDamage();
+                //}
 
 
-                if (GetType().ToString() == "BouncingBlade")
-                {
-                    HUDManager.current.bouncingBladeDamage += GetDamage();
-                }
+                //if (GetType().ToString() == "BouncingBlade")
+                //{
+                //    HUDManager.current.bouncingBladeDamage += GetDamage();
+                //}
             }
         }
     }
+
+    public abstract void PlayImpactSound(Vector3 position);
 }

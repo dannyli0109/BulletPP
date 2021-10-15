@@ -136,6 +136,11 @@ public class BouncingBlade : Ammo
         return ImpactForce * Time.deltaTime;
     }
 
+    public override void PlayImpactSound(Vector3 position)
+    {
+        SoundManager.PlaySound(SoundType.BlasterHit, position, 1);
+    }
+
     //public override void Init(Character owner, float angle)
     //{
     //    this.owner = owner;
