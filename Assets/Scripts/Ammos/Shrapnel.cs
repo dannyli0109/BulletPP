@@ -17,7 +17,7 @@ public class Shrapnel : Ammo
         bornTime += Time.deltaTime;
         if (bornTime >= owner.shrapnelStats.travelTime.value)
         {
-            Debug.Log("too old");
+           // Debug.Log("too old");
             ReturnToPool();
         }
 

@@ -168,10 +168,14 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
-       
+        if (currentRoomInside == rooms.Count-1)
+        {
+           // Debug.Log("boss");
+        }
         if (inCombat)
         {
             UpdateEncounter(rooms[currentRoomInside]);
+
         }
     }
 
@@ -266,12 +270,10 @@ public class MapGeneration : MonoBehaviour
            
             }
         }
-      rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length + 1, -1, holdingBossRoomPos, -1, -1));
+      rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length, -1, holdingBossRoomPos, -1, -1));
       rooms[holdingBossRoomPos].upperRoomRef = rooms.Count - 1;
       rooms[rooms.Count - 1].bossRoom = true;
       Debug.Log("Trying to add boss room " + holdingBossRoomPos);
-
-
 
         GameObject holdingObject = null;
         for (int i = 0; i < rooms.Count; i++)
@@ -567,13 +569,14 @@ public class MapGeneration : MonoBehaviour
 
     public void SpawnBossEnemy(Room room)
     {
+        Debug.Log("spawn boss");
         List<Transform> holdingPossibleEnemySpawnPoints = room.thisPrefabInfo.enemySpawnPoint;
 
-        int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
+       // int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
 
-        Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
+        Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[0].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[0].position.z);
 
-        GameObject holdingGameObject = Instantiate(bossEnemy, holdingPosition, enemiesTypes[0].transform.rotation);
+        GameObject holdingGameObject = Instantiate(bossEnemy, holdingPosition, bossEnemy.transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
         EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
@@ -628,6 +631,9 @@ public class MapGeneration : MonoBehaviour
         }
         else
         {
+            if (EnemyWaves.Count > 0)
+            {
+
             if (EnemyWaves[currentWave].Count > posInWaves)
             {
                 if (currentWaveWaitingTime < 0)
@@ -692,6 +698,7 @@ public class MapGeneration : MonoBehaviour
                     }
                 }
             }
+            }
         }
     }
 
@@ -707,6 +714,12 @@ public class MapGeneration : MonoBehaviour
             GameManager.current.ChangeStateImmdeiate(GameState.Game);
 
             SpawnBossEnemy(rooms[currentRoomInside]);
+            EnemyWaves = new List<List<int>>();
+            posInWaves = 3;
+            if (currentRoomInside == rooms.Count - 1)
+            {
+                Debug.Log("here " + currentRoomInside);
+            }
 
         }
         else
@@ -833,6 +846,10 @@ public class MapGeneration : MonoBehaviour
 
             CheckToStartEncounter();
             RefreshMiniMapUI();
+            if(currentRoomInside== rooms.Count - 1)
+            {
+                Debug.Log("here " + currentRoomInside);
+            }
             //Debug.Log(directionInput);
         }
     }
