@@ -168,10 +168,7 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
-        if (CheckIfMapCompleted())
-        {
-            thisBTSManager.LoadWinGameScene();
-        }
+       
         if (inCombat)
         {
             UpdateEncounter(rooms[currentRoomInside]);
@@ -664,27 +661,34 @@ public class MapGeneration : MonoBehaviour
             // next wave
             else if (EnemiesInEncounter <= 0)
             {
-                TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
-
-                currentWave++;
-                if (currentWave < EnemyWaves.Count)
+                if (room.bossRoom)
                 {
-                    Debug.Log("Current wave");
-
-                    roomClear = true;
-                    currentWaveWaitingTime = betweenWaveWaitingTime;
+                        thisBTSManager.LoadWinGameScene();          
                 }
                 else
                 {
-                    totalRoomDiffculty += roomFinishMultiplier;
-                    inCombat = false;
-                    room.completed = true;
-                    RefreshMiniMapUI();
-                    if (currentRoomInside != 0 && GameManager.current.GetState() != GameState.Casual)
+                    TryToSpawnHealthPickup(new Vector3(holdingLastEnemy.x, healthPickUpObject.transform.position.y, holdingLastEnemy.y));
+
+                    currentWave++;
+                    if (currentWave < EnemyWaves.Count)
                     {
-                        finishEnounter?.Invoke();
-                        GameManager.current.ChangeState(GameState.Shop);
-                        GameManager.current.shop.Refresh();
+                        Debug.Log("Current wave");
+
+                        roomClear = true;
+                        currentWaveWaitingTime = betweenWaveWaitingTime;
+                    }
+                    else
+                    {
+                        totalRoomDiffculty += roomFinishMultiplier;
+                        inCombat = false;
+                        room.completed = true;
+                        RefreshMiniMapUI();
+                        if (currentRoomInside != 0 && GameManager.current.GetState() != GameState.Casual)
+                        {
+                            finishEnounter?.Invoke();
+                            GameManager.current.ChangeState(GameState.Shop);
+                            GameManager.current.shop.Refresh();
+                        }
                     }
                 }
             }

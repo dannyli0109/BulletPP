@@ -1515,7 +1515,7 @@ GameObject:
   - component: {fileID: 4385763644729992534}
   - component: {fileID: -7717107844043043369}
   m_Layer: 12
-  m_Name: BossEnemy
+  m_Name: IGNORE ME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1672,7 +1672,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109022956268930713}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 6
@@ -1863,7 +1863,7 @@ MonoBehaviour:
     critChance:
       baseValue: 0
     travelTime:
-      baseValue: 5
+      baseValue: 2
     fireRate:
       baseValue: 0
     amountOfBounces:
@@ -1950,8 +1950,7 @@ MonoBehaviour:
   Stopped: 0
   min: {x: -22, y: -26}
   max: {x: 24, y: 6}
-  amounts: 18
-  projectileSpeed: 14
+  amounts: 20
   skillOneRepeatTime: 3
   maxAmountOfSnipers: 3
   usingLaser: 0
@@ -1969,11 +1968,9 @@ MonoBehaviour:
   - {x: 33, y: 1, z: -20}
   bossHitBox: {fileID: 1109022956268930713}
   savedBossPos: 0
-  bossSpeed: 8
+  bossSpeed: 1
   prefabCover: {fileID: 2805869294665625524, guid: ba3f18946ae71b3429e59dae3e9e08f1, type: 3}
-  belowAmount: {x: 0, y: -4, z: 0}
-  moveHitBoxSpeed: 1
-  holdFirstBossTransform: {x: 0, y: 0, z: 0}
+  belowAmount: {x: 0, y: -5, z: 0}
 --- !u!1 &1109022956269157045
 GameObject:
   m_ObjectHideFlags: 0
