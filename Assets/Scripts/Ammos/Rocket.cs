@@ -111,6 +111,12 @@ public class Rocket : Ammo
         EventManager.current.onAmmoDestroy -= OnRocketDestroy;
     }
 
+    public override void PlayImpactSound(Vector3 position)
+    {
+        SoundManager.PlaySound(SoundType.RocketHit, position, 1);
+
+    }
+
     //public override float GetDamage()
     //{
     //    return owner.rocketStats.damage.value * owner.stats.damageMultiplier.value;

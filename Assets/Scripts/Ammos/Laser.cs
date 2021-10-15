@@ -15,6 +15,7 @@ public class Laser : Ammo
 
     float currentLaserLength;
     float currentLaserWidth;
+    FMOD.Studio.EventInstance soundInstance;
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class Laser : Ammo
     private void OnTriggerEnter(Collider other)
     {
         if (GameManager.current.GameTransitional()) return;
-
+        soundInstance = SoundManager.PlaySound(SoundType.LaserHit, other.gameObject.transform.position, 1);
         HandleAmmoHit(other);
     }
 
@@ -45,6 +46,10 @@ public class Laser : Ammo
     {
         if (GameManager.current.GameTransitional()) return;
         //Debug.Log("laser");
+        if (!SoundManager.current.IsPlaying(soundInstance))
+        {
+            soundInstance.start();
+        }
         HandleAmmoHit(other);
     }
 
@@ -97,6 +102,7 @@ public class Laser : Ammo
 
     private void OnDestroy()
     {
+        soundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         EventManager.current.onAmmoDestroy -= OnLaserDestroy;
     }
 
@@ -110,6 +116,12 @@ public class Laser : Ammo
     {
         //Debug.Log("laser impact");
         return ImpactForce * Time.deltaTime;
+    }
+
+    public override void PlayImpactSound(Vector3 position)
+    {
+        //SoundManager.PlaySound(SoundType.LaserHit, position, 1);
+
     }
 
     //public override void Init(Character owner, float angle)
