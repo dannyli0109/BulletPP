@@ -32,6 +32,8 @@ public class BossEnemy : SpellQueueEnemy
     public float moveHitBoxSpeed;
     public Vector3 holdFirstBossTransform;
 
+    Vector2 middle;
+
     public override void Start()
     {
         base.Start();
@@ -41,10 +43,13 @@ public class BossEnemy : SpellQueueEnemy
         holdFirstBossTransform = this.gameObject.transform.position;
         for (int i=0; i< bossCoverObjects.Length; i++)
         {
+            bossCoverTransforms[i] += holdFirstBossTransform;
             GameObject holdingObject = Instantiate(prefabCover, bossCoverTransforms[i] + belowAmount, prefabCover.transform.rotation);
             bossCoverObjects[i] = holdingObject;
         }
         bossHitBox.transform.position = bossCoverObjects[0].transform.position;
+        middle.x = mapGenerationScript.rooms[mapGenerationScript.currentRoomInside].thisPrefabInfo.middle.position.x;
+        middle.y = mapGenerationScript.rooms[mapGenerationScript.currentRoomInside].thisPrefabInfo.middle.position.z;
     }
 
     public override void Init(Player target, Transform cam, AmmoPool ammoPool)
@@ -58,14 +63,14 @@ public class BossEnemy : SpellQueueEnemy
             action = () => { },
             condition = () =>
             {
-                return InRange(tooFarToShoot);
+                return true;//InRange(tooFarToShoot);
             },
             trueBranch = new Decision()
             {
                 action = () => { },
                 condition = () =>
                 {
-                    return InLineOfSight(60);
+                    return true;//InLineOfSight(60);
                 },
                 trueBranch = ToShoot(),
                 falseBranch = ToMove()
@@ -75,7 +80,7 @@ public class BossEnemy : SpellQueueEnemy
                 action = () => { },
                 condition = () =>
                 {
-                    return InRange(1000);
+                    return true; InRange(1000);
                 },
                 trueBranch = ToMove(),
                 falseBranch = null
@@ -255,30 +260,30 @@ public class BossEnemy : SpellQueueEnemy
             if (direction == 0)
             {
                 // top down
-                posX = holdFirstBossTransform.x + min.x + offsetX * i;
-                posY = holdFirstBossTransform.z + max.y;
+                posX =  min.x + offsetX * i;
+                posY =  max.y;
             }
             else if (direction == 1)
             {
                 // right left
-                posX = holdFirstBossTransform.x + max.x;
-                posY = holdFirstBossTransform.z + min.y + offsetY * i;
+                posX =  max.x;
+                posY =  min.y + offsetY * i;
             }
             else if (direction == 2)
             {
                 // bottom up
-                posX = holdFirstBossTransform.x + min.x + offsetX * i;
-                posY = holdFirstBossTransform.z + min.y;
+                posX =  min.x + offsetX * i;
+                posY =  min.y;
             }
             else
             {
                 // left right
-                posX = holdFirstBossTransform.x + min.x;
-                posY = holdFirstBossTransform.z + min.y + offsetY * i;
+                posX =  min.x;
+                posY =  min.y + offsetY * i;
             }
 
 
-            ShootBullet(new Vector3(posX, bulletContainer.position.y, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, 1);
+            ShootBullet(new Vector3(middle.x, 0, middle.y )+            new Vector3(posX, bulletContainer.position.y, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, 1);
 
         }
     }
@@ -310,6 +315,7 @@ public class BossEnemy : SpellQueueEnemy
 
     public void updateBossHitbox()
     {
+     //   Debug.Log("updating hit box");
         for(int i=0; i<5; i++)
         {
             if(i == savedBossPos)
@@ -340,7 +346,6 @@ public class BossEnemy : SpellQueueEnemy
     {
         usingLaser = false;
     }
-
 
     public void Aiming()
     {

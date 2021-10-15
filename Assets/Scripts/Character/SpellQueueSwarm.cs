@@ -171,7 +171,7 @@ public class SpellQueueSwarm : SpellQueueEnemy
     {
         if (other.gameObject.layer == 12)
         {
-           Debug.Log("swarm touching");
+         //  Debug.Log("swarm touching");
           
             Vector3 normal = other.gameObject.transform.position - transform.position;
            

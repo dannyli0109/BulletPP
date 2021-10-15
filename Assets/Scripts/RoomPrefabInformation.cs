@@ -8,6 +8,7 @@ public class RoomPrefabInformation : MonoBehaviour
     public Transform lowerRoomDoorSpawnOffet;
     public Transform leftRoomDoorSpawnOffet;
     public Transform rightRoomDoorSpawnOffet;
+    public Transform middle;
     // where you enter from in the new room.
 
     public float cameraBoundryMaxX = 7;
