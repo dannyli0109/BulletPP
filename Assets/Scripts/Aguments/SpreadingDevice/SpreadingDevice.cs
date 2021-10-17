@@ -62,7 +62,6 @@ public class SpreadingDevice : Augment
 
     public override void Shoot(Character character, Transform transform, int index)
     {
-        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
         float initialAngle = -angles / 2.0f;
         float angleIncrements;
         float amounts = GetAmounts(character, index);
@@ -76,6 +75,7 @@ public class SpreadingDevice : Augment
             angleIncrements = angles / (amounts - 1.0f);
         }
 
+        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "blaster" }, new List<float>() { amounts });
 
         AmmoPool ammoPool = AmmoPool.current;
         for (int i = 0; i < amounts; i++)

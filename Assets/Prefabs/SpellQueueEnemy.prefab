@@ -1260,6 +1260,7 @@ GameObject:
   - component: {fileID: 1109022956259654619}
   - component: {fileID: 1109022956259654616}
   - component: {fileID: 1109022956259654617}
+  - component: {fileID: 4936609633824764739}
   m_Layer: 12
   m_Name: SK_Character_Robot_01
   m_TagString: Untagged
@@ -1419,6 +1420,21 @@ MonoBehaviour:
   - m_Rig: {fileID: 1109022955893808382}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &4936609633824764739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109022956259654623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33148258ab1f6cc439bb0c24a9d10bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFoot: {fileID: 1109022957370299432}
+  rightFoot: {fileID: 1109022957133982228}
+  soundType: 1
 --- !u!1 &1109022956268930713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1755,25 @@ MonoBehaviour:
       baseValue: 0
     heatSeeking:
       baseValue: 0
+  shrapnelStats:
+    damage:
+      baseValue: 0
+    speed:
+      baseValue: 0
+    size:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    travelTime:
+      baseValue: 0
+    fireRate:
+      baseValue: 0
+    amountOfBounces:
+      baseValue: 0
+    maxClip:
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
   bouncingBladeStats:
     damage:
       baseValue: 0
@@ -1846,6 +1881,7 @@ MonoBehaviour:
   maxCooldown: 3
   viewAngle: 60
   rotationSpeed: 6
+  notUsingAnimation: 0
   setAcceleration: 18
   tooFarToSeePlayer: 22
   tooFarToShoot: 18
@@ -1855,6 +1891,7 @@ MonoBehaviour:
   smoothingRange: 0.5
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 4
+  Stopped: 0
 --- !u!1 &1109022956269157045
 GameObject:
   m_ObjectHideFlags: 0

@@ -70,6 +70,7 @@ public class Player : Character
         currentBouncingBladeClip = 1;
         inventoryIndex = 0;
         inventory = new Inventory(10);
+
         //inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
         //inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
         //inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
@@ -99,6 +100,7 @@ public class Player : Character
         }
         HandleDashing();
         UpdateAnimation();
+
         currentImmunityFrame -= Time.deltaTime;
 
         Debug.DrawLine(transform.position, transform.position+(ReturnPossibleNewPosition(12, new Vector3())));

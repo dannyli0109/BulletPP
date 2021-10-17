@@ -115,7 +115,7 @@ public abstract class Ammo : PooledItem
     protected void HandleAmmoHit(Collider other)
     {
         Vector2 holdingForce = new Vector2(transform.forward.x, transform.forward.z) * GetImpactForce();
-        //PlayImpactSound(other.gameObject.transform.position);
+        PlayImpactSound(other.gameObject.transform.position);
         if (owner)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Character"))

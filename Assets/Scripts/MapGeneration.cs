@@ -172,6 +172,11 @@ public class MapGeneration : MonoBehaviour
         {
            // Debug.Log("boss");
         }
+
+        if (CheckIfMapCompleted())
+        {
+            thisBTSManager.LoadWinGameScene();
+        }
         if (inCombat)
         {
             UpdateEncounter(rooms[currentRoomInside]);
@@ -270,9 +275,9 @@ public class MapGeneration : MonoBehaviour
            
             }
         }
-      rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length, -1, holdingBossRoomPos, -1, -1));
-      rooms[holdingBossRoomPos].upperRoomRef = rooms.Count - 1;
-      rooms[rooms.Count - 1].bossRoom = true;
+      //rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length, -1, holdingBossRoomPos, -1, -1));
+      //rooms[holdingBossRoomPos].upperRoomRef = rooms.Count - 1;
+      //rooms[rooms.Count - 1].bossRoom = true;
       Debug.Log("Trying to add boss room " + holdingBossRoomPos);
 
         GameObject holdingObject = null;
@@ -286,8 +291,8 @@ public class MapGeneration : MonoBehaviour
             {
                 if (rooms[i].bossRoom)
                 {
-                    Debug.Log("boss room");
-                    holdingObject = Instantiate(bossRoom, new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), bossRoom.transform.rotation);
+                    //Debug.Log("boss room");
+                    //holdingObject = Instantiate(bossRoom, new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), bossRoom.transform.rotation);
                 }
                 else
                 {

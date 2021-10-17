@@ -6,6 +6,7 @@ using FMODUnity;
 public enum SoundType
 {
     FootStep,
+    FootStepEnemy,
     Gunshot,
     GunshotEnemy,
     BlasterHit,
@@ -40,6 +41,8 @@ public class SoundManager : MonoBehaviour
         audioMap.Add(SoundType.BlasterHit, "event:/enemy/blaster hit");
         audioMap.Add(SoundType.RocketHit, "event:/enemy/rocket hit");
         audioMap.Add(SoundType.LaserHit, "event:/enemy/laser hit");
+        audioMap.Add(SoundType.FootStep, "event:/player/player foot steps");
+        audioMap.Add(SoundType.FootStepEnemy, "event:/enemy/enemey footsteps");
 
         atmos = CreateInstance(PathToGUID("event:/envioroment/atmos"));
         levelMusic = CreateInstance(PathToGUID("event:/music/level music"));
@@ -55,8 +58,7 @@ public class SoundManager : MonoBehaviour
     {
         if (GameManager.current.GetState() != GameState.Shop)
         {
-            levelMusic.setVolume(volume);
-            atmos.setVolume(volume * 0.5f);
+            levelMusic.setParameterByName("music level", 1f);
             if (!IsPlaying(levelMusic))
             {
                 levelMusic.start();
@@ -64,20 +66,8 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            levelMusic.setVolume(volume * 0.2f);
-            atmos.setVolume(volume * 0.1f);
-
+            levelMusic.setParameterByName("music level", 0.5f);
         }
-
-        //for (int i = 0; i < soundPlaying.Count; i++)
-        //{
-        //    if (!IsPlaying(soundPlaying[i]))
-        //    {
-        //        soundPlaying[i].release();
-        //        soundPlaying.RemoveAt(i);
-        //        i--;
-        //    }
-        //}
     }
 
 
@@ -104,10 +94,31 @@ public class SoundManager : MonoBehaviour
         return instance;
     }
 
+    FMOD.Studio.EventInstance PlayClipAt(string path, Vector3 pos, float volume, List<string> parameters, List<float> values)
+    {
+        var instance = CreateInstance(PathToGUID(path));
+
+        for (int i = 0; i < parameters.Count; i++)
+        {
+            instance.setParameterByName(parameters[i], values[i]);
+        }
+
+        instance.set3DAttributes(RuntimeUtils.To3DAttributes(pos));
+        instance.setVolume(volume);
+        instance.start();
+        instance.release();
+        return instance;
+    }
+
 
     public static FMOD.Studio.EventInstance PlaySound(SoundType sound, Vector3 position, float multiplier)
     {
         return current.PlaySoundInternal(sound, position, multiplier);
+    }
+
+    public static FMOD.Studio.EventInstance PlaySound(SoundType sound, Vector3 position, float multiplier, List<string> parameters, List<float> values)
+    {
+        return current.PlaySoundInternal(sound, position, multiplier, parameters, values);
     }
 
     public bool IsPlaying(FMOD.Studio.EventInstance instance)
@@ -121,6 +132,11 @@ public class SoundManager : MonoBehaviour
     FMOD.Studio.EventInstance PlaySoundInternal(SoundType sound, Vector3 position, float multiplier)
     {
         return PlayClipAt(audioMap[sound], position, volume * multiplier);
+    }
+
+    FMOD.Studio.EventInstance PlaySoundInternal(SoundType sound, Vector3 position, float multiplier, List<string> parameters, List<float> values)
+    {
+        return PlayClipAt(audioMap[sound], position, volume * multiplier, parameters, values);
     }
 
     private void OnDestroy()

@@ -80,7 +80,6 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //transform.SetAsLastSibling();
         canvas.overrideSorting = true;
         canvas.sortingOrder = 999;
         canvasGroup.alpha = 0.5f;
@@ -104,45 +103,73 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         Debug.Log("OnDrag");
         icon.rectTransform.anchoredPosition += eventData.delta / shopCanvas.scaleFactor;
-        InventorySlot slot = eventData.pointerDrag.GetComponent<InventorySlot>();
+        InventorySlot fromSlot = eventData.pointerDrag.GetComponent<InventorySlot>();
 
-        if (slot)
+        if (fromSlot)
         {
-            if (!empty)
-            {
-                Debug.Log("swapping");
-                Debug.Log("from: " + index + " to: " + slot.index);
-                //inventoryHUD.player.inventory[]
-                Augment formAugment = inventoryHUD.player.inventory[index];
-                Augment toAugment = inventoryHUD.player.inventory[slot.index];
-
-                inventoryHUD.player.inventory[index] = toAugment;
-                inventoryHUD.player.inventory[slot.index] = formAugment;
-                inventoryHUD.Populate();
-            }
+            Debug.Log("from: " + fromSlot.index + " to: " + index);
         }
+
+
+        //if (slot)
+        //{
+        //    if (!empty)
+        //    {
+        //        int fromIndex = slot.index;
+        //        int toIndex = index;
+
+        //        Spaw(fromIndex, toIndex);
+        //    }
+        //    else
+        //    {
+        //        int fromIndex = slot.index;
+        //        AppendToEnd(fromIndex);
+        //    }
+        //}
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop");
-
         InventorySlot slot = eventData.pointerDrag.GetComponent<InventorySlot>();
 
         if (slot)
         {
             if (!empty)
             {
-                //inventoryHUD.player.inventory[]
-                Debug.Log("from: " + index + " to: " + slot.index);
-                Augment formAugment = inventoryHUD.player.inventory[index];
-                Augment toAugment = inventoryHUD.player.inventory[slot.index];
+                int fromIndex = slot.index;
+                int toIndex = index;
 
-                inventoryHUD.player.inventory[index] = toAugment;
-                inventoryHUD.player.inventory[slot.index] = formAugment;
-                inventoryHUD.Populate();
+                Swap(fromIndex, toIndex);
+            }
+            else
+            {
+                int fromIndex = slot.index;
+                AppendToEnd(fromIndex);
             }
         }
+    }
+
+    void Swap(int fromIndex, int toIndex)
+    {
+        Augment formAugment = inventoryHUD.player.inventory[fromIndex];
+        Augment toAugment = inventoryHUD.player.inventory[toIndex];
+
+        inventoryHUD.player.inventory[fromIndex] = toAugment;
+        inventoryHUD.player.inventory[toIndex] = formAugment;
+        inventoryHUD.Populate();
+    }
+
+    void AppendToEnd(int fromIndex)
+    {
+        int toIndex = inventoryHUD.player.inventory.Count - 1;
+        Augment formAugment = inventoryHUD.player.inventory[fromIndex];
+
+        for (int i = fromIndex; i < inventoryHUD.player.inventory.Count - 1; i++)
+        {
+            inventoryHUD.player.inventory[i] = inventoryHUD.player.inventory[i + 1];
+        }
+        inventoryHUD.player.inventory[toIndex] = formAugment;
+        inventoryHUD.Populate();
     }
 
 }

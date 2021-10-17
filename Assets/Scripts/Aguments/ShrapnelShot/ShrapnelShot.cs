@@ -77,7 +77,7 @@ public class ShrapnelShot : Augment
         //}
 
         int amounts = GetAmounts(character, index);
-        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
+        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "blaster" }, new List<float>() { amounts });
 
         float initialAngle = -angles / 2.0f;
         float angleIncrements;
