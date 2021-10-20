@@ -90,7 +90,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        //Debug.Log("OnEndDrag");
         canvas.overrideSorting = false;
         //canvas.sortingOrder = 999;
         canvasGroup.alpha = 1f;

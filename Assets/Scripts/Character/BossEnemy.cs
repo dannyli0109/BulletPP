@@ -23,7 +23,7 @@ public class BossEnemy : SpellQueueEnemy
 
     // moving
     public GameObject[] bossCoverObjects;
-    public Vector3[] bossCoverTransforms;
+    public Vector3[] bossCoverSetPos;
     public GameObject bossHitBox;
     public int savedBossPos;
     public float bossSpeed;
@@ -32,17 +32,21 @@ public class BossEnemy : SpellQueueEnemy
     public float moveHitBoxSpeed;
     public Vector3 holdFirstBossTransform;
 
+    public Vector3 holdingCenter;
+
     public override void Start()
     {
         base.Start();
      //   finalDestination = target.transform.position;
         agent.acceleration = setAcceleration;
         amountOfSnipers = 0;
+        holdingCenter = this.transform.position;
         holdFirstBossTransform = this.gameObject.transform.position;
         for (int i=0; i< bossCoverObjects.Length; i++)
         {
-            GameObject holdingObject = Instantiate(prefabCover, bossCoverTransforms[i] + belowAmount, prefabCover.transform.rotation);
-            bossCoverObjects[i] = holdingObject;
+           GameObject holdingObject = Instantiate(prefabCover,mapGenerationScript.rooms[mapGenerationScript.currentRoomInside].thisPrefabInfo.enemySpawnPoint[i+1].position, prefabCover.transform.rotation);
+           bossCoverObjects[i] = holdingObject;
+            bossCoverSetPos[i] = holdingObject.transform.position;
         }
         bossHitBox.transform.position = bossCoverObjects[0].transform.position;
     }
@@ -58,14 +62,16 @@ public class BossEnemy : SpellQueueEnemy
             action = () => { },
             condition = () =>
             {
-                return InRange(tooFarToShoot);
+                return true;
+                //return InRange(tooFarToShoot);
             },
             trueBranch = new Decision()
             {
                 action = () => { },
                 condition = () =>
                 {
-                    return InLineOfSight(60);
+                    return true;
+                    //return InLineOfSight(60);
                 },
                 trueBranch = ToShoot(),
                 falseBranch = ToMove()
@@ -75,7 +81,8 @@ public class BossEnemy : SpellQueueEnemy
                 action = () => { },
                 condition = () =>
                 {
-                    return InRange(1000);
+                    return true;
+                    //return InRange(1000);
                 },
                 trueBranch = ToMove(),
                 falseBranch = null
@@ -85,6 +92,7 @@ public class BossEnemy : SpellQueueEnemy
 
     public override void Update()
     {
+        DebugXY();
         if (GameManager.current.GameTransitional() || GameManager.current.GetState() == GameState.Pause)
         {
             agent.enabled = false;
@@ -232,9 +240,19 @@ public class BossEnemy : SpellQueueEnemy
     public void Skill1()
     {
         Debug.Log("Skill1");
-        //shootDirection = UnityEngine.Random.Range(0, 4);
+      
 
         ShootFromWall(shootDirection);
+    }
+
+    public void DebugXY()
+    {
+        //float offsetX = (max.x - min.x) / (float)amounts;
+        //float offsetY = (max.y - min.y) / (float)amounts;
+        Debug.DrawLine(holdingCenter + new Vector3(min.x, 0, min.y), holdingCenter + new Vector3(max.x, 0, min.y),Color.red,0.1f);
+        Debug.DrawLine(holdingCenter + new Vector3(max.x, 0, min.y), holdingCenter + new Vector3(max.x, 0, max.y), Color.red, 0.1f);
+        Debug.DrawLine(holdingCenter + new Vector3(max.x, 0, max.y), holdingCenter + new Vector3(min.x, 0, max.y), Color.red, 0.1f);
+        Debug.DrawLine(holdingCenter + new Vector3(min.x, 0,max.y), holdingCenter + new Vector3(min.x, 0, min.y), Color.red, 0.1f);
     }
 
     public void ShootFromWall(int direction)
@@ -243,7 +261,6 @@ public class BossEnemy : SpellQueueEnemy
         // form top, right, bottom, left
         int[] dirX = { 0, -1, 0, 1 };
         int[] dirY = { -1, 0, 1, 0 };
-
 
         Debug.Log("doing skill 1");
         float offsetX = (max.x - min.x) / (float)amounts;
@@ -278,7 +295,7 @@ public class BossEnemy : SpellQueueEnemy
             }
 
 
-            ShootBullet(new Vector3(posX, bulletContainer.position.y, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, 1);
+            ShootBullet(new Vector3(posX, bulletContainer.position.y, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
 
         }
     }
@@ -314,12 +331,12 @@ public class BossEnemy : SpellQueueEnemy
         {
             if(i == savedBossPos)
             {
-                bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverTransforms[i]+belowAmount, Time.deltaTime * bossSpeed);
-                bossHitBox.transform.position = Vector3.MoveTowards(bossHitBox.transform.position, bossCoverTransforms[i], Time.deltaTime * bossSpeed);
+                bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i]+belowAmount, Time.deltaTime * bossSpeed);
+                bossHitBox.transform.position = Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
             }
             else
             {
-                bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverTransforms[i], Time.deltaTime * bossSpeed);
+                bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
             }
         }
     
@@ -344,8 +361,6 @@ public class BossEnemy : SpellQueueEnemy
 
     public void Aiming()
     {
-
-
         thisLineRenderer.useWorldSpace = true;
         float laserLength = 36.0f;
         RaycastHit hitInfo;
