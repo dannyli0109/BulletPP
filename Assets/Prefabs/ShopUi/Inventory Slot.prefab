@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopCanvas: {fileID: 0}
   icon: {fileID: 2078581118074078680}
+  iconActive: {fileID: 0}
   outline: {fileID: 2274546535859069911}
   empty: 0
   index: 0
@@ -306,6 +307,8 @@ MonoBehaviour:
   damageContainer: {fileID: 2588088952147290191}
   amountContainer: {fileID: 3821036483027015367}
   imageOutline: {fileID: 1310909346435136191}
+  imageOutlineActive: {fileID: 0}
+  dragIndex: 0
 --- !u!223 &3120365588781977527
 Canvas:
   m_ObjectHideFlags: 0

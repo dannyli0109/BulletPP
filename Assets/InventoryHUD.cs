@@ -6,6 +6,7 @@ public class InventoryHUD : MonoBehaviour
 {
     public Player player;
     public List<InventorySlot> inventorySlots;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +24,12 @@ public class InventoryHUD : MonoBehaviour
     {
         for (int i = 0; i < player.inventory.Count; i++)
         {
-            inventorySlots[i].Pululate(i);
+            inventorySlots[i].Populate(i);
         }
 
         for (int i = player.inventory.Count; i < player.inventory.capacity; i++)
         {
-            inventorySlots[i].PululateEmpty(i);
+            inventorySlots[i].PopulateEmpty(i);
         }
     }
 }

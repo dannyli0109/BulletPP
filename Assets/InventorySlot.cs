@@ -44,7 +44,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
     }
 
-    public void Pululate(int index)
+    public void Populate(int index)
     {
         empty = false;
         this.index = index;
@@ -62,16 +62,18 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         imageOutline.effectColor = inventoryHUD.player.inventory[index].GetColor(inventoryHUD.player, index);
     }
 
-    public void PululateEmpty(int index)
+
+    public void PopulateEmpty(int index)
     {
         empty = true;
         this.index = index;
-        outline.gameObject.SetActive(true);
+        //outline.gameObject.SetActive(true);
         icon.gameObject.SetActive(false);
         sellAugmentTrigger.disabled = true;
         tooltipTrigger.header = "";
         tooltipTrigger.content = "Empty slot";
     }
+
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -95,6 +97,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         //canvas.sortingOrder = 999;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+        icon.gameObject.SetActive(true);
         icon.rectTransform.anchoredPosition = anchorPosition;
         TooltipSystem.current.gameObject.SetActive(true);
     }
@@ -103,29 +106,27 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         Debug.Log("OnDrag");
         icon.rectTransform.anchoredPosition += eventData.delta / shopCanvas.scaleFactor;
-        InventorySlot fromSlot = eventData.pointerDrag.GetComponent<InventorySlot>();
+        //InventorySlot fromSlot = eventData.pointerDrag.GetComponent<InventorySlot>();
+        RaycastResult result = eventData.pointerCurrentRaycast;
 
-        if (fromSlot)
-        {
-            Debug.Log("from: " + fromSlot.index + " to: " + index);
-        }
-
-
-        //if (slot)
+        //if (result.isValid)
         //{
-        //    if (!empty)
+        //    InventorySlot slot = result.gameObject.GetComponent<InventorySlot>();
+        //    if (slot)
         //    {
-        //        int fromIndex = slot.index;
-        //        int toIndex = index;
-
-        //        Spaw(fromIndex, toIndex);
-        //    }
-        //    else
-        //    {
-        //        int fromIndex = slot.index;
-        //        AppendToEnd(fromIndex);
+        //        if (!slot.empty)
+        //        {
+        //            int fromIndex = dragIndex;
+        //            int toIndex = slot.index;
+        //            Debug.Log("from: " + fromIndex + " to: " + toIndex);
+        //            if (fromIndex != toIndex)
+        //            {
+        //                Swap(dragIndex, slot.index);
+        //            }
+        //        }
         //    }
         //}
+
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -147,6 +148,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
                 AppendToEnd(fromIndex);
             }
         }
+
+        //inventoryHUD.PopulateActive();
     }
 
     void Swap(int fromIndex, int toIndex)
