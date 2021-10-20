@@ -168,9 +168,10 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
-        if (currentRoomInside == rooms.Count-1)
+
+        if (rooms[currentRoomInside].bossRoom&& EnemiesInEncounter==0)
         {
-           // Debug.Log("boss");
+            thisBTSManager.LoadWinGameScene();
         }
 
         if (CheckIfMapCompleted())
@@ -275,9 +276,9 @@ public class MapGeneration : MonoBehaviour
            
             }
         }
-      //rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length, -1, holdingBossRoomPos, -1, -1));
-      //rooms[holdingBossRoomPos].upperRoomRef = rooms.Count - 1;
-      //rooms[rooms.Count - 1].bossRoom = true;
+      rooms.Add(new Room(rooms[holdingBossRoomPos].offsetPos + new Vector2(0, 1), rooms[holdingBossRoomPos].length, -1, holdingBossRoomPos, -1, -1));
+      rooms[holdingBossRoomPos].upperRoomRef = rooms.Count - 1;
+      rooms[rooms.Count - 1].bossRoom = true;
       Debug.Log("Trying to add boss room " + holdingBossRoomPos);
 
         GameObject holdingObject = null;
@@ -291,8 +292,8 @@ public class MapGeneration : MonoBehaviour
             {
                 if (rooms[i].bossRoom)
                 {
-                    //Debug.Log("boss room");
-                    //holdingObject = Instantiate(bossRoom, new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), bossRoom.transform.rotation);
+                    Debug.Log("boss room");
+                   holdingObject = Instantiate(bossRoom, new Vector3(roomMultiplyValue.x * rooms[i].offsetPos.x, 0, roomMultiplyValue.y * rooms[i].offsetPos.y), bossRoom.transform.rotation);
                 }
                 else
                 {
@@ -581,6 +582,8 @@ public class MapGeneration : MonoBehaviour
 
         Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[0].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[0].position.z);
 
+      //  Debug.Log("Boss pos "+ holdingPossibleEnemySpawnPoints[0]);
+
         GameObject holdingGameObject = Instantiate(bossEnemy, holdingPosition, bossEnemy.transform.rotation);
         holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool);
         EnemiesInEncounter++;
@@ -799,6 +802,7 @@ public class MapGeneration : MonoBehaviour
             posInWaves = 0;
         }
     }
+
     bool CheckIfMapCompleted()
     {
         for(int i =0; i < rooms.Count; i++)
@@ -851,10 +855,6 @@ public class MapGeneration : MonoBehaviour
 
             CheckToStartEncounter();
             RefreshMiniMapUI();
-            if(currentRoomInside== rooms.Count - 1)
-            {
-                Debug.Log("here " + currentRoomInside);
-            }
             //Debug.Log(directionInput);
         }
     }
@@ -1000,6 +1000,6 @@ public class MapGeneration : MonoBehaviour
     {
         holdingLastEnemy = pos;
         EnemiesInEncounter--;
-        Debug.Log(EnemiesInEncounter);
+        Debug.Log("Enem left: "+EnemiesInEncounter);
     }
 }

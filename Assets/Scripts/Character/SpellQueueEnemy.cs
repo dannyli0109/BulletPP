@@ -59,14 +59,14 @@ public class SpellQueueEnemy : Enemy
             action = () => { },
             condition = () =>
             {
-                return InRange(tooFarToShoot);
+               return InRange(tooFarToShoot);
             },
             trueBranch = new Decision()
             {
                 action = () => { },
                 condition = () =>
                 {
-                    return InLineOfSight(60);
+                   return InLineOfSight(60);
                 },
                 trueBranch = ToShoot(),
                 falseBranch = ToMove()
