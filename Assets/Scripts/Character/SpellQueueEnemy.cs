@@ -49,9 +49,9 @@ public class SpellQueueEnemy : Enemy
         agent.acceleration = setAcceleration;
     }
 
-    public override void Init(Player target, Transform cam, AmmoPool ammoPool)
+    public override void Init(Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
     {
-        base.Init(target, cam, ammoPool);
+        base.Init(target, cam, ammoPool,healthPercentageIncrease,  SpeedPercentageIncrease);
         InitSpellQueue();
 
         decision = new Decision()
