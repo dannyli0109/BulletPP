@@ -23,8 +23,8 @@ public class AmmoPool : MonoBehaviour
     public Pool<Shrapnel> shrapnelAmmoPool;
     public int shrapnelAmmoCount;
 
-    public Bullet multiBulletPrefab;
-    public Pool<Bullet> multiBulletPool;
+    public GenericBullet multiBulletPrefab;
+    public Pool<GenericBullet> multiBulletPool;
     public int multiBulletCount;
 
     public Grenade grenadePrefab;
@@ -56,8 +56,8 @@ public class AmmoPool : MonoBehaviour
         shrapnelAmmoPool = new Pool<Shrapnel>(shrapnelAmmoPrefab, shrapnelAmmoCount);
         foreach (Shrapnel shrapnelAmmo in shrapnelAmmoPool.available) shrapnelAmmo.gameObject.transform.SetParent(transform);
 
-        multiBulletPool = new Pool<Bullet>(multiBulletPrefab, multiBulletCount);
-        foreach (Bullet multiBullet in multiBulletPool.available) multiBullet.gameObject.transform.SetParent(transform);
+        multiBulletPool = new Pool<GenericBullet>(multiBulletPrefab, multiBulletCount);
+        foreach (GenericBullet multiBullet in multiBulletPool.available) multiBullet.gameObject.transform.SetParent(transform);
 
         grenadePool = new Pool<Grenade>(grenadePrefab, grenadeCount);
         foreach (Grenade grenade in grenadePool.available) grenade.gameObject.transform.SetParent(transform);

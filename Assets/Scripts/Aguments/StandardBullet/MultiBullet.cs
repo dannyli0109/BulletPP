@@ -63,14 +63,14 @@ public class MultiBullet : Augment
         AmmoPool ammoPool = AmmoPool.current;
         for (int i = 0; i < amounts; i++)
         {
-            Bullet bullet;
+            GenericBullet bullet;
             if (ammoPool.multiBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                GenericBullet bulletComponent = bullet.GetComponent<GenericBullet>();
                 Vector3 forward = transform.forward;
-                    //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
+                //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
 
-                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, 0);
+                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, 2, true, true, 3) ;
             }
         }
     }

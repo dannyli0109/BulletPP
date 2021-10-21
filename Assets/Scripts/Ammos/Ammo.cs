@@ -36,9 +36,19 @@ public abstract class Ammo : PooledItem
 
     public bool fromFreshReload;
 
+    public AOEDamage aoePrefab;
+
+    public float magX;
+    public float magY;
+    public float shakeTime;
+    public AnimationCurve curve;
+
     public float ImpactForce;
     protected int bounces;
     protected bool pierce;
+    protected bool explode;
+    protected float radius;
+
 
     public virtual float GetDamage()
     {
@@ -54,7 +64,10 @@ public abstract class Ammo : PooledItem
         }
     }
 
-    public virtual void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, int bounces, bool pierce)
+    public virtual void Init(
+        Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, 
+        float damage, float size, int bounces, bool pierce, bool explode, float radius
+        )
     {
         this.owner = owner;
         this.damage = damage;
@@ -63,6 +76,9 @@ public abstract class Ammo : PooledItem
         this.speed = speed;
         this.bounces = bounces;
         this.pierce = pierce;
+        this.explode = explode;
+        this.radius = radius;
+
         transform.forward = forward;
         bornTime = 0;
         timesBounced = 0;
@@ -75,12 +91,12 @@ public abstract class Ammo : PooledItem
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
     {
-        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, 0, false);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, 0, false, false, 0);
     }
 
-    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces, bool pierce)
+    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces, bool pierce, bool explode, float radius)
     {
-        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, bounces, pierce);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, bounces, pierce, explode, radius);
     }
 
     protected void SpawnHitParticle(float size)
@@ -97,6 +113,10 @@ public abstract class Ammo : PooledItem
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, size / 2.0f, (1 << 10)|(1<<12)))
         {
+            if (pierce && hit.collider.gameObject.layer == 12)
+            {
+                return false;
+            }
             HandleAmmoHit(hit.collider);
             SpawnHitParticle(owner.grenadeStats.size.value);
             Vector3 normal = new Vector3(hit.normal.x, 0, hit.normal.z);
@@ -120,43 +140,45 @@ public abstract class Ammo : PooledItem
         PlayImpactSound(other.gameObject.transform.position);
         if (owner)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+            if (explode)
             {
-                // make sure the bullet is not hitting itself
-                EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
+                Explode();
             }
-            else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            else
             {
-                EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
-                //HUDManager.current.damage += GetDamage();
-
-                //if (GetType().ToString() == "Bullet")
-                //{
-                //    HUDManager.current.bulletDamage += GetDamage();
-                //}
-
-                //if (GetType().ToString() == "Grenade")
-                //{
-                //    HUDManager.current.grenadeDamage += GetDamage();
-                //}
-
-                //if (GetType().ToString() == "Rocket")
-                //{
-                //    HUDManager.current.rocketDamage += GetDamage();
-                //}
-
-                //if (GetType().ToString() == "Laser")
-                //{
-                //    HUDManager.current.laserDamage += GetDamage();
-                //}
-
-
-                //if (GetType().ToString() == "BouncingBlade")
-                //{
-                //    HUDManager.current.bouncingBladeDamage += GetDamage();
-                //}
+                if (other.gameObject.layer == LayerMask.NameToLayer("Character"))
+                {
+                    // make sure the bullet is not hitting itself
+                    EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
+                }
+                else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
+                }
             }
         }
+    }
+
+    protected void Explode()
+    {
+        Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
+        if (owner.gameObject.layer == 11)
+        {
+            aoeDamage.Init(radius, damage, 1 << 12);
+        }
+        else
+        {
+            aoeDamage.Init(radius, damage, 1 << 11);
+        }
+
+        float distance = Vector3.Distance(owner.transform.position, transform.position);
+        float portion = 1.0f;
+        if (distance != 0)
+        {
+            portion = 1 / distance;
+        }
+        CameraShake.current.Shake(magX * portion, magY * portion, shakeTime, curve);
     }
 
     public abstract void PlayImpactSound(Vector3 position);

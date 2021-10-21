@@ -70,7 +70,7 @@ public class ExplodingBullet : Augment
             if (ammoPool.rocketPool.TryInstantiate(out rocket, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                rocket.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size);
+                rocket.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, 0, false, true, explosiveRadius);
             }
         }
     }

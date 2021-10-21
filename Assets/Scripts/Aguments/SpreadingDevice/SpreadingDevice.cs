@@ -80,12 +80,11 @@ public class SpreadingDevice : Augment
         AmmoPool ammoPool = AmmoPool.current;
         for (int i = 0; i < amounts; i++)
         {
-            Bullet bullet;
+            GenericBullet bullet;
             if (ammoPool.multiBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
-                Bullet bulletComponent = bullet.GetComponent<Bullet>();
                 Vector3 forward = transform.forward;
-                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size);
             }
         }
     }

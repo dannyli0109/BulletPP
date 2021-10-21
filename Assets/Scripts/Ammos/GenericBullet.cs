@@ -18,6 +18,10 @@ public class GenericBullet : Ammo
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
             ReturnToPool();
+            if (explode)
+            {
+                Explode();
+            }
         }
 
         if (timesBounced < bounces)
@@ -32,7 +36,6 @@ public class GenericBullet : Ammo
         if (GameManager.current.GetState() == GameState.Pause) return;
         velocity += acceleration * Time.fixedDeltaTime;
         transform.position += velocity * Time.fixedDeltaTime;
-        acceleration = new Vector3(0, 0, 0);
     }
 
     private void OnBulletDestroy(GameObject gameObject)
@@ -41,6 +44,10 @@ public class GenericBullet : Ammo
         {
             SpawnHitParticle(owner.bulletStats.size.value);
             ReturnToPool();
+            if (explode)
+            {
+                Explode();
+            }
         }
     }
 
@@ -49,18 +56,19 @@ public class GenericBullet : Ammo
         if (GameManager.current.GameTransitional()) return;
 
         HandleAmmoHit(other);
-        EventManager.current.OnAmmoDestroy(gameObject);
-        //if (piercing && other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        //{
-        //    if (isADesk)
-        //    {
-        //        Destroy(gameObject);
-        //    }
-        //    else
-        //    {
-        //        EventManager.current.OnAmmoDestroy(gameObject);
-        //    }
-        //}
+
+        if (pierce && other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            EventManager.current.OnAmmoDestroy(gameObject);
+        }
+        else if (pierce)
+        {
+            SpawnHitParticle(owner.bulletStats.size.value);
+        }
+        else
+        {
+            EventManager.current.OnAmmoDestroy(gameObject);
+        }
     }
 
     private void OnDestroy()
