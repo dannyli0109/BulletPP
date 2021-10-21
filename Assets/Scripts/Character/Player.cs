@@ -90,7 +90,8 @@ public class Player : Character
             thisBTSManager.LoadLoseGameScene();
 
         }
-        if (GameManager.current.GameTransitional()) return;
+        if (GameManager.current.GameTransitional()) return;  
+
         if (!isDashing)
         {
             HandleReload();

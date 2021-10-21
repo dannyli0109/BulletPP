@@ -22,7 +22,7 @@ public class BossEncounter : MonoBehaviour
 
         GameObject holdingGameObject = Instantiate(bossPrefab, new Vector3(20, 0, 0), Quaternion.identity);
         BossEnemy enemy = holdingGameObject.GetComponent<BossEnemy>();
-        enemy.Init(player, camTarget, ammoPool);
+        enemy.Init(player, camTarget, ammoPool,0,0);
         enemy.mapGenerationScript = mapGeneration;
     }
 

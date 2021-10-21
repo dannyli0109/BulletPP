@@ -13,6 +13,7 @@ public class BossEnemy : SpellQueueEnemy
     public int skillOneRepeatTime;
     int shootDirection;
 
+
     // skill two
     public int maxAmountOfSnipers;
     int amountOfSnipers;
@@ -33,6 +34,12 @@ public class BossEnemy : SpellQueueEnemy
     public Vector3 holdFirstBossTransform;
 
     public Vector3 holdingCenter;
+    public List<float> pointsWhereBossGoesIntoHiding;
+    public float currentHidingTime;
+    public float hidingTime;
+
+    public float subPosedToBeY;
+
 
     public override void Start()
     {
@@ -51,9 +58,9 @@ public class BossEnemy : SpellQueueEnemy
         bossHitBox.transform.position = bossCoverObjects[0].transform.position;
     }
 
-    public override void Init(Player target, Transform cam, AmmoPool ammoPool)
+    public override void Init(Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
     {
-        base.Init(target, cam, ammoPool);
+        base.Init(target, cam, ammoPool,healthPercentageIncrease, SpeedPercentageIncrease);
         EventManager.current.enemyDeath += ReceiveEnemyDeath;
         InitSpellQueue();
 
@@ -103,6 +110,17 @@ public class BossEnemy : SpellQueueEnemy
             agent.enabled = true;
         }
 
+        if (pointsWhereBossGoesIntoHiding.Count > 0)
+        {
+           // Debug.Log("Hp: "+ hp +" next hiding  "+ pointsWhereBossGoesIntoHiding[pointsWhereBossGoesIntoHiding.Count - 1]);
+            if (hp <= pointsWhereBossGoesIntoHiding[pointsWhereBossGoesIntoHiding.Count - 1])
+            {
+                pointsWhereBossGoesIntoHiding.RemoveAt(pointsWhereBossGoesIntoHiding.Count - 1);
+                currentHidingTime = hidingTime;
+                Debug.Log("Hide");
+            }
+        }
+
         if (hp <= 0)
         {
             EventManager.current.ReceiveGold(gold);
@@ -110,8 +128,10 @@ public class BossEnemy : SpellQueueEnemy
         }
         updateBossHitbox();
         agent.speed = 0;
+
         decision.MakeDecision();
-        if (usingLaser)
+
+        if (usingLaser && currentHidingTime <= 0)
         {
             Aiming();
         }
@@ -119,12 +139,21 @@ public class BossEnemy : SpellQueueEnemy
         {
             NotAiming();
         }
-        //HandleMoving();
 
-        //UpdateAnimation();
         UpdateRotation();
 
         timeSinceFired += Time.deltaTime;
+        currentHidingTime -= Time.deltaTime;
+
+        if (currentHidingTime > 0)
+        {
+            subPosedToBeY = Mathf.Clamp(subPosedToBeY - Time.deltaTime * 10, -4, bossCoverSetPos[0].y);
+        }
+        else
+        {
+            subPosedToBeY = Mathf.Clamp(subPosedToBeY + Time.deltaTime * 10, -4, bossCoverSetPos[0].y);
+        }
+            transform.position = new Vector3(transform.position.x, subPosedToBeY, transform.position.z);
     }
 
     public override void HandleMoving()
@@ -327,18 +356,30 @@ public class BossEnemy : SpellQueueEnemy
 
     public void updateBossHitbox()
     {
-        for(int i=0; i<5; i++)
+        for (int i=0; i<5; i++)
         {
             if(i == savedBossPos)
             {
-                bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i]+belowAmount, Time.deltaTime * bossSpeed);
-                bossHitBox.transform.position = Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
+                if (currentHidingTime <= 0)
+                {
+                    bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i] + belowAmount, Time.deltaTime * bossSpeed);
+                    Debug.Log(Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed));
+                   // bossHitBox.transform.position = Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
+                    // subPosedToBeY= boss
+                    Debug.Log(bossHitBox.transform.position);
+                }
+                else
+                {
+                    bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
+                   // bossHitBox.transform.position = Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i]+belowAmount, Time.deltaTime * bossSpeed);
+                }
             }
             else
             {
                 bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
             }
         }
+        //transform.position = new Vector3(transform.position.x, -1, transform.position.z);
     
     }
 
@@ -362,7 +403,7 @@ public class BossEnemy : SpellQueueEnemy
     public void Aiming()
     {
         thisLineRenderer.useWorldSpace = true;
-        float laserLength = 36.0f;
+        float laserLength = 100.0f;
         RaycastHit hitInfo;
         if (Physics.Raycast(bulletContainer.position, bulletContainer.forward, out hitInfo, laserLength, 1 << 10))
         {

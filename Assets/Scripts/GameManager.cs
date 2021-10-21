@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public bool GameTransitional()
     {
-        return gameState == GameState.Shop || gameState == GameState.Transitional;
+        return gameState == GameState.Shop || gameState == GameState.Transitional||gameState==GameState.Pause;
     }
 
     public GameState GetState()
