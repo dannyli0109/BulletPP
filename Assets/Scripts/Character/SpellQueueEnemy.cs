@@ -82,6 +82,9 @@ public class SpellQueueEnemy : Enemy
                 falseBranch = null
             }
         };
+
+        hp = hp * (1 + healthPercentageIncrease);
+        speed = speed * (1 + SpeedPercentageIncrease);
     }
 
     public virtual void InitSpellQueue()

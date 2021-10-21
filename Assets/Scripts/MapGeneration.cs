@@ -168,7 +168,6 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
-
         if (rooms[currentRoomInside].bossRoom&& EnemiesInEncounter==0)
         {
             thisBTSManager.LoadWinGameScene();
@@ -504,14 +503,13 @@ public class MapGeneration : MonoBehaviour
         int swarmSpawnAmount = UnityEngine.Random.Range(minSwarmSpawnAmount, maxSwarmSpawnAmount);
         for (int j = 0; j < swarmSpawnAmount; j++)
         {
-
             // swarm
             int holdingSpawnInt = UnityEngine.Random.Range(0, holdingPossibleEnemySpawnPoints.Count);
 
             Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
 
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool, 0,0);
+            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool, UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
@@ -519,9 +517,8 @@ public class MapGeneration : MonoBehaviour
 
     public void SpawnSwarms(Vector3 setPos, int swarmIndex)
     {
-
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,0, 0);
+            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool, UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -535,7 +532,7 @@ public class MapGeneration : MonoBehaviour
         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
         //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,0,0);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
         EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -549,7 +546,7 @@ public class MapGeneration : MonoBehaviour
         //Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
         //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], setPos, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,0,0);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
         EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -568,7 +565,7 @@ public class MapGeneration : MonoBehaviour
         }
 
         GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,0,0);
+        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f,0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
         EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
     }
@@ -641,7 +638,6 @@ public class MapGeneration : MonoBehaviour
         {
             if (EnemyWaves.Count > 0)
             {
-
             if (EnemyWaves[currentWave].Count > posInWaves)
             {
                 if (currentWaveWaitingTime < 0)
