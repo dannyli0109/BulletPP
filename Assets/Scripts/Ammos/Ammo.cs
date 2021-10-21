@@ -38,6 +38,7 @@ public abstract class Ammo : PooledItem
 
     public float ImpactForce;
     protected int bounces;
+    protected bool pierce;
 
     public virtual float GetDamage()
     {
@@ -53,14 +54,15 @@ public abstract class Ammo : PooledItem
         }
     }
 
-    public virtual void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
+    public virtual void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, int bounces, bool pierce)
     {
         this.owner = owner;
         this.damage = damage;
         this.acceleration = acceleration;
         this.size = size;
-        this.bounces = bounces;
         this.speed = speed;
+        this.bounces = bounces;
+        this.pierce = pierce;
         transform.forward = forward;
         bornTime = 0;
         timesBounced = 0;
@@ -73,12 +75,12 @@ public abstract class Ammo : PooledItem
 
     public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
     {
-        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, 0);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, 0, false);
     }
 
-    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces)
+    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces, bool pierce)
     {
-        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, bounces);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, bounces, pierce);
     }
 
     protected void SpawnHitParticle(float size)
