@@ -40,7 +40,6 @@ public class BossEnemy : SpellQueueEnemy
 
     public float subPosedToBeY;
 
-
     public override void Start()
     {
         base.Start();
@@ -118,6 +117,7 @@ public class BossEnemy : SpellQueueEnemy
                 pointsWhereBossGoesIntoHiding.RemoveAt(pointsWhereBossGoesIntoHiding.Count - 1);
                 currentHidingTime = hidingTime;
                 Debug.Log("Hide");
+                moveBossHitbox();
             }
         }
 
@@ -171,7 +171,6 @@ public class BossEnemy : SpellQueueEnemy
         spellQueue = new List<Action>();
         spellTime = new List<float>();
 
-
         // will only trigger once
         //shootDirection = UnityEngine.Random.Range(0, 4);
 
@@ -210,6 +209,7 @@ public class BossEnemy : SpellQueueEnemy
             spellQueue.Add(moveBossHitbox);
             spellTime.Add(moveHitBoxSpeed);
         }
+
         // skill 2
         {
             spellTime.Add(0);
@@ -245,7 +245,74 @@ public class BossEnemy : SpellQueueEnemy
         {
             spellTime.Add(0);
             spellQueue.Add(ToggleLaserOn);
-            spellTime.Add(1);
+            spellTime.Add(2);
+            spellQueue.Add(ToggleLaserOff);
+            spellTime.Add(0);
+            spellQueue.Add(Skill3);
+        }
+
+        // Boss move
+        {
+            spellTime.Add(moveHitBoxSpeed);
+            spellQueue.Add(moveBossHitbox);
+            spellTime.Add(moveHitBoxSpeed);
+        }
+
+        // skill 1
+        {
+            spellTime.Add(0);
+            spellQueue.Add(RandomIndex);
+            for (int i = 0; i < skillOneRepeatTime; i++)
+            {
+                spellTime.Add(2);
+                spellQueue.Add(Skill1);
+            }
+        }
+
+        // Boss move
+        {
+            spellTime.Add(moveHitBoxSpeed);
+            spellQueue.Add(moveBossHitbox);
+            spellTime.Add(moveHitBoxSpeed);
+        }
+
+
+        // skill 2
+        {
+            spellTime.Add(0);
+            spellQueue.Add(Skill2);
+        }
+
+        // Boss move
+        {
+            spellTime.Add(moveHitBoxSpeed);
+            spellQueue.Add(moveBossHitbox);
+            spellTime.Add(moveHitBoxSpeed);
+        }
+
+        // skill 1
+        {
+            spellTime.Add(0);
+            spellQueue.Add(RandomIndex);
+            for (int i = 0; i < skillOneRepeatTime; i++)
+            {
+                spellTime.Add(2);
+                spellQueue.Add(Skill1);
+            }
+        }
+
+        // Boss move
+        {
+            spellTime.Add(moveHitBoxSpeed);
+            spellQueue.Add(moveBossHitbox);
+            spellTime.Add(moveHitBoxSpeed);
+        }
+
+        // skill 3
+        {
+            spellTime.Add(0);
+            spellQueue.Add(ToggleLaserOn);
+            spellTime.Add(3);
             spellQueue.Add(ToggleLaserOff);
             spellTime.Add(0);
             spellQueue.Add(Skill3);
@@ -268,9 +335,7 @@ public class BossEnemy : SpellQueueEnemy
 
     public void Skill1()
     {
-        Debug.Log("Skill1");
-      
-
+       // Debug.Log("Skill1");  
         ShootFromWall(shootDirection);
     }
 
@@ -279,19 +344,20 @@ public class BossEnemy : SpellQueueEnemy
         //float offsetX = (max.x - min.x) / (float)amounts;
         //float offsetY = (max.y - min.y) / (float)amounts;
         Debug.DrawLine(holdingCenter + new Vector3(min.x, 0, min.y), holdingCenter + new Vector3(max.x, 0, min.y),Color.red,0.1f);
-        Debug.DrawLine(holdingCenter + new Vector3(max.x, 0, min.y), holdingCenter + new Vector3(max.x, 0, max.y), Color.red, 0.1f);
-        Debug.DrawLine(holdingCenter + new Vector3(max.x, 0, max.y), holdingCenter + new Vector3(min.x, 0, max.y), Color.red, 0.1f);
-        Debug.DrawLine(holdingCenter + new Vector3(min.x, 0,max.y), holdingCenter + new Vector3(min.x, 0, min.y), Color.red, 0.1f);
+        Debug.DrawLine(holdingCenter + new Vector3(max.x, 0, min.y), holdingCenter + new Vector3(max.x, 0, max.y), Color.yellow, 0.1f);
+        Debug.DrawLine(holdingCenter + new Vector3(max.x, 0, max.y), holdingCenter + new Vector3(min.x, 0, max.y), Color.blue, 0.1f);
+        Debug.DrawLine(holdingCenter + new Vector3(min.x, 0,max.y), holdingCenter + new Vector3(min.x, 0, min.y), Color.green, 0.1f);
     }
 
     public void ShootFromWall(int direction)
     {
+        //direction = 0;
         // direciton 0, 1, 2, 3
         // form top, right, bottom, left
         int[] dirX = { 0, -1, 0, 1 };
         int[] dirY = { -1, 0, 1, 0 };
 
-        Debug.Log("doing skill 1");
+        Debug.Log("doing skill 1 at "+direction);
         float offsetX = (max.x - min.x) / (float)amounts;
         float offsetY = (max.y - min.y) / (float)amounts;
         for (int i = 0; i < amounts; i++)
@@ -301,30 +367,31 @@ public class BossEnemy : SpellQueueEnemy
             if (direction == 0)
             {
                 // top down
-                posX = holdFirstBossTransform.x + min.x + offsetX * i;
-                posY = holdFirstBossTransform.z + max.y;
+                posX =holdingCenter.x + min.x + offsetX * i;
+                posY = holdingCenter.z + max.y;
             }
             else if (direction == 1)
             {
                 // right left
-                posX = holdFirstBossTransform.x + max.x;
-                posY = holdFirstBossTransform.z + min.y + offsetY * i;
+                posX =holdingCenter.x +max.x;
+                posY = holdingCenter.z + min.y + offsetY * i;
             }
             else if (direction == 2)
             {
                 // bottom up
-                posX = holdFirstBossTransform.x + min.x + offsetX * i;
-                posY = holdFirstBossTransform.z + min.y;
+                posX = holdingCenter.x +min.x + offsetX * i;
+                posY = holdingCenter.z + min.y;
             }
             else
             {
                 // left right
-                posX = holdFirstBossTransform.x + min.x;
-                posY = holdFirstBossTransform.z + min.y + offsetY * i;
+                posX = holdingCenter.x + min.x;
+                posY = holdingCenter.z + min.y + offsetY * i;
             }
 
-
-            ShootBullet(new Vector3(posX, bulletContainer.position.y, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
+            //  ShootBullet(new Vector3(max.x-min.x, 2, min.y), new Vector3(0, 0, 1), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
+            Debug.DrawLine(new Vector3(posX, 1.2f, posY), new Vector3(posX, bulletContainer.position.y, posY) + new Vector3(dirX[direction], 0, dirY[direction]) * 10, Color.cyan, 1.0f);
+           ShootBullet(new Vector3(posX, 1, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
 
         }
     }
@@ -347,11 +414,10 @@ public class BossEnemy : SpellQueueEnemy
 
     public void moveBossHitbox()
     {
-        Debug.Log("hitbox");
+       // Debug.Log("hitbox");
         savedBossPos = UnityEngine.Random.Range(0, 5);
         bossHitBox.transform.position = bossCoverObjects[savedBossPos].transform.position;
       //  bossCoverTransforms[newPos].position;
-
     }
 
     public void updateBossHitbox()
@@ -363,10 +429,10 @@ public class BossEnemy : SpellQueueEnemy
                 if (currentHidingTime <= 0)
                 {
                     bossCoverObjects[i].transform.position = Vector3.MoveTowards(bossCoverObjects[i].transform.position, bossCoverSetPos[i] + belowAmount, Time.deltaTime * bossSpeed);
-                    Debug.Log(Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed));
+                    //Debug.Log(Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed));
                    // bossHitBox.transform.position = Vector3.MoveTowards(bossHitBox.transform.position, bossCoverSetPos[i], Time.deltaTime * bossSpeed);
                     // subPosedToBeY= boss
-                    Debug.Log(bossHitBox.transform.position);
+                   // Debug.Log(bossHitBox.transform.position);
                 }
                 else
                 {
@@ -398,7 +464,6 @@ public class BossEnemy : SpellQueueEnemy
     {
         usingLaser = false;
     }
-
 
     public void Aiming()
     {
