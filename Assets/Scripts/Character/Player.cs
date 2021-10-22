@@ -247,6 +247,12 @@ public class Player : Character
             inventory[inventoryIndex].Shoot(this, bulletContainer, inventoryIndex);
             inventoryIndex++;
             freshReload = false;
+
+            if (inventoryIndex >= inventory.Count)
+            {
+                SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
+
+            }
         }
     }
 
@@ -454,10 +460,12 @@ public class Player : Character
 
         if (inventoryIndex >= inventory.Count)
         {
-            if (Input.GetMouseButtonDown(0) && !reloading)
+            if (Input.GetMouseButton(0) && !reloading)
             {
                 reloading = true; // swap status
                 currentReloadTime = 0;
+                SoundManager.PlaySound(SoundType.Reloading, transform.position, 1);
+
             }
         }
 
@@ -465,6 +473,7 @@ public class Player : Character
         {
             reloading = true;
             currentReloadTime = 0;
+            SoundManager.PlaySound(SoundType.Reloading, transform.position, 1);
         }
 
         if (reloading)

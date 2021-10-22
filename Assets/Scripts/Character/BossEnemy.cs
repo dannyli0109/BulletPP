@@ -391,7 +391,7 @@ public class BossEnemy : SpellQueueEnemy
 
             //  ShootBullet(new Vector3(max.x-min.x, 2, min.y), new Vector3(0, 0, 1), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
             Debug.DrawLine(new Vector3(posX, 1.2f, posY), new Vector3(posX, bulletContainer.position.y, posY) + new Vector3(dirX[direction], 0, dirY[direction]) * 10, Color.cyan, 1.0f);
-           ShootBullet(new Vector3(posX, 1, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
+            ShootBullet(new Vector3(posX, 1, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, 1, 1);
 
         }
     }

@@ -11,7 +11,8 @@ public enum SoundType
     GunshotEnemy,
     BlasterHit,
     RocketHit,
-    LaserHit
+    LaserHit,
+    Reloading
 }
 
 public class SoundManager : MonoBehaviour
@@ -43,6 +44,7 @@ public class SoundManager : MonoBehaviour
         audioMap.Add(SoundType.LaserHit, "event:/enemy/laser hit");
         audioMap.Add(SoundType.FootStep, "event:/player/player foot steps");
         audioMap.Add(SoundType.FootStepEnemy, "event:/enemy/enemey footsteps");
+        audioMap.Add(SoundType.Reloading, "event:/player/reload");
 
         atmos = CreateInstance(PathToGUID("event:/envioroment/atmos"));
         levelMusic = CreateInstance(PathToGUID("event:/music/level music"));

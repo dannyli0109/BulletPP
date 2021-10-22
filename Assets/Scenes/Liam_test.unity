@@ -1508,7 +1508,7 @@ PrefabInstance:
       objectReference: {fileID: 1087196351}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: gold
-      value: 999
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: leftFoot
@@ -2997,7 +2997,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854209530}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -3302,7 +3302,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007638711}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -3925,75 +3925,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!1 &1212095140
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1212095142}
-  - component: {fileID: 1212095141}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1212095141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212095140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1267723168
-      Data2: 1202476945
-      Data3: 1766832278
-      Data4: 72874986
-    Path: event:/player/weapons
-  Event: 
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params:
-  - Name: blaster
-    Value: 0
-  - Name: bounce
-    Value: 0
-  - Name: piercing
-    Value: 0
-  - Name: rocket
-    Value: 0
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!4 &1212095142
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212095140}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 93.189835, y: -6.9300747, z: 245.64848}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1215121463
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4603,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272051036}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -5434,6 +5365,34 @@ PrefabInstance:
       propertyPath: enemiesTypes.Array.data[0]
       value: 
       objectReference: {fileID: 5603622888897905039, guid: 50f9a2ed54528a74fb98158826f4ea89, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: startingRooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 213702988888693236, guid: 4c80b8aefab524d409813fe40de95aff, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 8845377081614589042, guid: a95015c425d54ab48aea49e8362aeedc, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 4447529960280280004, guid: ac3dca03f7f316a4dbc7a51f0d26b39a, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 8039133173693954532, guid: 6bb1595781446b44ca3f133e944187e0, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoom.Array.data[0]
+      value: 
+      objectReference: {fileID: 4797961853419058912, guid: bd37ca5f521bce2458cf184de43845d4, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoom.Array.data[0]
+      value: 
+      objectReference: {fileID: 3287861813211975293, guid: 5135676b98d875b44a3f77fab7ed384d, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoom.Array.data[0]
+      value: 
+      objectReference: {fileID: 2095312105599051044, guid: 0dc0b17898311b04bbe54f6d99c06fd5, type: 3}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)
