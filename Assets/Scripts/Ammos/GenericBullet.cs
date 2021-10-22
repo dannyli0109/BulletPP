@@ -5,9 +5,11 @@ using UnityEngine.VFX;
 
 public class GenericBullet : Ammo
 {
+    private float lastTriggered;
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
+        lastTriggered = 0;
     }
 
     void Update()
@@ -15,6 +17,7 @@ public class GenericBullet : Ammo
         if (GameManager.current.GetState() == GameState.Pause) return;
         if (GameManager.current.GameTransitional()) { ReturnToPool(); }
         bornTime += Time.deltaTime;
+        lastTriggered += Time.deltaTime;
         if (bornTime >= owner.bulletStats.travelTime.value)
         {
             ReturnToPool();
@@ -55,7 +58,11 @@ public class GenericBullet : Ammo
     {
         if (GameManager.current.GameTransitional()) return;
 
-        HandleAmmoHit(other);
+        if (lastTriggered > 0.1f)
+        {
+            HandleAmmoHit(other);
+            lastTriggered = 0;
+        }
 
         if (pierce && other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {

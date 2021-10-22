@@ -119,9 +119,9 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   fromFreshReload: 0
   aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
-  magX: 3
-  magY: 3
-  shakeTime: 1
+  magX: 10
+  magY: 10
+  shakeTime: 0.5
   curve:
     serializedVersion: 2
     m_Curve:
@@ -370,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 2166491812875049394, guid: 91c42e7a4924514438c79b1fa2a73ce7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d62090f18a7f43145ad25135af453dc8, type: 2}
+      objectReference: {fileID: 2100000, guid: 175918bd58e079243883be90a9c8a235, type: 2}
     - target: {fileID: 2416922222923418367, guid: 91c42e7a4924514438c79b1fa2a73ce7, type: 3}
       propertyPath: m_Name
       value: BulletandCasing

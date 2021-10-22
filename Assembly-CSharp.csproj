@@ -1053,6 +1053,14 @@
       <Project>{62677FA5-A59C-8BF5-5B5D-CEF64E469A00}</Project>
       <Name>FMODUnityEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{E4D9A956-48F1-9DA5-E939-0E5209B79547}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{99878C91-98DA-C876-42B0-7E0F442B4525}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

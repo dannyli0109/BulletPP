@@ -19,10 +19,7 @@ public class CameraShake : MonoBehaviour
     }
     public void Shake(float magX, float magY, float time, AnimationCurve curve)
     {
-        if (!shaking)
-        {
-            StartCoroutine(DoShake(magX, magY, time, curve));
-        }
+        StartCoroutine(DoShake(magX, magY, time, curve));
     }
 
 

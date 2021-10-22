@@ -47,7 +47,7 @@ public class MultiBullet : Augment
         float initialAngle = -angles / 2.0f;
         float angleIncrements;
         int amounts = GetAmounts(character, index);
-        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "blaster"}, new List<float>() { amounts });
+        SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "blaster" }, new List<float>() { amounts });
 
         if (amounts == 1)
         {
@@ -70,7 +70,7 @@ public class MultiBullet : Augment
                 Vector3 forward = transform.forward;
                 //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
 
-                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, 2, true, true, 3) ;
+                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, 0, false, false, 0) ;
             }
         }
     }
