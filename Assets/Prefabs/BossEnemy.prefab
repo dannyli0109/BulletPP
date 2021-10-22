@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104319569908491810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.87, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1109022956268930726}
@@ -1386,7 +1386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109022956259654623}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1109022955893808383}
@@ -1679,7 +1679,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.2, y: 1.883677, z: 2.2}
-  m_Center: {x: -0.008182287, y: 0.8918593, z: -0.03272891}
+  m_Center: {x: -0.008182287, y: -0.3, z: -0.03272891}
 --- !u!195 &4385763644729992534
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1716,7 +1716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     maxHp:
-      baseValue: 200
+      baseValue: 240
     moveSpeed:
       baseValue: 0
     reloadTime:
@@ -1870,7 +1870,7 @@ MonoBehaviour:
       baseValue: 0
   laserStats:
     damage:
-      baseValue: 2
+      baseValue: 1
     speed:
       baseValue: 0
     size:
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   deskBulletPrefab: {fileID: 0}
   aoePrefab: {fileID: 0}
   bulletContainer: {fileID: 1109022956828929431}
-  hp: 180
+  hp: 240
   gold: 0
   timeSinceFired: 0
   reloading: 0
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   minCooldown: 1
   maxCooldown: 3
   viewAngle: 180
-  rotationSpeed: 3
+  rotationSpeed: 1.5
   notUsingAnimation: 0
   setAcceleration: 18
   tooFarToSeePlayer: 22
@@ -1986,7 +1986,7 @@ MonoBehaviour:
   savedBossPos: 0
   bossSpeed: 8
   prefabCover: {fileID: 2805869294665625524, guid: ba3f18946ae71b3429e59dae3e9e08f1, type: 3}
-  belowAmount: {x: 0, y: -4, z: 0}
+  belowAmount: {x: 0, y: -5, z: 0}
   moveHitBoxSpeed: 1
   holdFirstBossTransform: {x: 0, y: 0, z: 0}
   holdingCenter: {x: 0, y: 0, z: 0}
@@ -1997,7 +1997,7 @@ MonoBehaviour:
   - 180
   - 200
   currentHidingTime: 0
-  hidingTime: 3
+  hidingTime: 4
   subPosedToBeY: 0
 --- !u!1 &1109022956269157045
 GameObject:

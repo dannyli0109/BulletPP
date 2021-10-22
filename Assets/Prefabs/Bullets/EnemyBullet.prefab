@@ -59,6 +59,16 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   fromFreshReload: 0
+  aoePrefab: {fileID: 0}
+  magX: 0
+  magY: 0
+  shakeTime: 0
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   ImpactForce: 0.2
 --- !u!65 &2353721269995064936
 BoxCollider:
@@ -325,6 +335,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 46de290e22c25f74db6fd6d624953142, type: 2}
+    - target: {fileID: 2166491812875049394, guid: 91c42e7a4924514438c79b1fa2a73ce7, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2416922222923418367, guid: 91c42e7a4924514438c79b1fa2a73ce7, type: 3}
       propertyPath: m_Name
       value: BulletandCasing

@@ -118,7 +118,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   fromFreshReload: 0
-  ImpactForce: 0
   aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
   magX: 3
   magY: 3
@@ -165,6 +164,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  ImpactForce: 0
 --- !u!1 &3643442512730389957
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 825bac6973baf8942815a5a19a7e806c, type: 2}
+    - target: {fileID: 7578070145071225711, guid: 015ff2be22d9be040bef363dc34c77cd, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 015ff2be22d9be040bef363dc34c77cd, type: 3}
 --- !u!4 &1979779979861521155 stripped
