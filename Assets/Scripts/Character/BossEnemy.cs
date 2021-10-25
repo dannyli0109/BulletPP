@@ -210,12 +210,6 @@ public class BossEnemy : SpellQueueEnemy
             }
         }
 
-        // Boss move
-        {
-            spellTime.Add(moveHitBoxSpeed);
-            spellQueue.Add(moveBossHitbox);
-            spellTime.Add(moveHitBoxSpeed);
-        }
 
         // skill 2
         {
@@ -223,12 +217,6 @@ public class BossEnemy : SpellQueueEnemy
             spellQueue.Add(Skill2);
         }
 
-        // Boss move
-        {
-            spellTime.Add(moveHitBoxSpeed);
-         spellQueue.Add(moveBossHitbox);
-            spellTime.Add(moveHitBoxSpeed);
-        }
 
         // skill 1
         {
@@ -258,12 +246,6 @@ public class BossEnemy : SpellQueueEnemy
             spellQueue.Add(Skill3);
         }
 
-        // Boss move
-        {
-            spellTime.Add(moveHitBoxSpeed);
-            spellQueue.Add(moveBossHitbox);
-            spellTime.Add(moveHitBoxSpeed);
-        }
 
         // skill 1
         {
@@ -283,18 +265,10 @@ public class BossEnemy : SpellQueueEnemy
             spellTime.Add(moveHitBoxSpeed);
         }
 
-
         // skill 2
         {
             spellTime.Add(0);
             spellQueue.Add(Skill2);
-        }
-
-        // Boss move
-        {
-            spellTime.Add(moveHitBoxSpeed);
-            spellQueue.Add(moveBossHitbox);
-            spellTime.Add(moveHitBoxSpeed);
         }
 
         // skill 1
@@ -323,13 +297,6 @@ public class BossEnemy : SpellQueueEnemy
             spellQueue.Add(ToggleLaserOff);
             spellTime.Add(0);
             spellQueue.Add(Skill3);
-        }
-
-        // Boss move
-        {
-            spellTime.Add(moveHitBoxSpeed);
-            spellQueue.Add(moveBossHitbox);
-            spellTime.Add(moveHitBoxSpeed);
         }
 
         index = 0;
