@@ -55,11 +55,11 @@ public abstract class Ammo : PooledItem
         if (fromFreshReload)
         {
             Debug.Log("fresh ammo");
-            return damage * owner.stats.damageMultiplier.value* owner.stats.extraDamageAfterReload.value;
+            return damage;
         }
         else
         {
-            return damage * owner.stats.damageMultiplier.value;
+            return damage;
 
         }
     }

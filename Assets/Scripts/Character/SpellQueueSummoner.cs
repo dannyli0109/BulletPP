@@ -63,7 +63,7 @@ public class SpellQueueSummoner : SpellQueueEnemy
             mapGenerationScript.SpawnSwarms(transform.position, 0);
             teleport();
         });
-        spellTime.Add(3.5f);
+        spellTime.Add(3.0f);
 
         spellQueue.Add(() => {
             ToggleLaser(true);
@@ -73,7 +73,19 @@ public class SpellQueueSummoner : SpellQueueEnemy
         spellQueue.Add(() => {
             ToggleLaser(false);
         });
-        spellTime.Add(2.5f);
+        spellTime.Add(0.9f);
+
+        spellTime.Add(3.0f);
+
+        spellQueue.Add(() => {
+            ToggleLaser(true);
+        });
+        spellTime.Add(0.7f);
+
+        spellQueue.Add(() => {
+            ToggleLaser(false);
+        });
+        spellTime.Add(0.9f);
 
         index = 0;
     }
@@ -96,16 +108,12 @@ public class SpellQueueSummoner : SpellQueueEnemy
             Destroy(gameObject);
         }
 
-        agent.speed = 0;
         decision.MakeDecision();
+            HandleMoving();
         if (exploding)
         {
             handleExploding();
-            agent.speed = 0;
-        }
-        else
-        {
-            HandleMoving();
+          
         }
 
         UpdateAnimation();
@@ -157,7 +165,7 @@ public class SpellQueueSummoner : SpellQueueEnemy
         thisLineRenderer.useWorldSpace = true;
         if (usingLaser)
         {
-            Vector3 lookDir = (gunPoint.forward) * 36;
+            Vector3 lookDir = (gunPoint.forward) * 48;
             thisLineRenderer.SetPosition(0, gunPoint.position);
             thisLineRenderer.SetPosition(1, gunPoint.position + lookDir);
         }

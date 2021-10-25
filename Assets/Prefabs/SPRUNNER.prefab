@@ -1574,7 +1574,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'lowerarm_l'\n\tTransform 'UpperArm_L'\n\tTransform
+    'UpperArm_R'\n\tTransform 'Hand_R'\n\tTransform 'Hand_L'\n\tTransform 'lowerarm_r'\n\tTransform
+    'lowerarm_l'\n\tTransform 'UpperArm_L'\n\tTransform 'UpperArm_R'\n\tTransform
+    'Hand_R'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -2088,7 +2093,7 @@ MonoBehaviour:
     acceleration:
       baseValue: 0
     radius:
-      baseValue: 2
+      baseValue: 4
     heatSeeking:
       baseValue: 0
   shrapnelStats:
@@ -2229,6 +2234,13 @@ MonoBehaviour:
   EnemyAvoidanceAmount: 1
   Stopped: 0
   ExplodingTime: 1.5
+  material: {fileID: 2100000, guid: 3d82e7d95ada9f54189c16c4d885cfd0, type: 2}
+  render:
+  - {fileID: 6599741860573983061}
+  - {fileID: 6599741859827309491}
+  - {fileID: 6599741860062879945}
+  mat: {fileID: 0}
+  color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &6599741860285810124
 GameObject:
   m_ObjectHideFlags: 0
