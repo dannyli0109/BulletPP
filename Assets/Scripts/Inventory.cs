@@ -38,7 +38,6 @@ public class Inventory
     public bool RemoveAt(int index)
     {
         if (index >= augments.Count) return false;
-        if (augments.Count == 1) return false;
         augments.RemoveAt(index);
         return true;
     }

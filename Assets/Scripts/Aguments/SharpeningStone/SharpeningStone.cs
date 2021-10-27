@@ -88,7 +88,7 @@ public class SharpeningStone : Augment
             if (ammoPool.multiBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
             }
         }
     }

@@ -20,7 +20,10 @@ public class SellAugmentTrigger : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right && !disabled) {
-            player.SellAugment(index);
+            if (player.gold >= 2 || player.inventory.Count > 1)
+            {
+                player.SellAugment(index);
+            }
         }
     } 
 

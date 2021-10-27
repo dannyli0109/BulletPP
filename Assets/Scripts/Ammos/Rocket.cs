@@ -11,9 +11,9 @@ public class Rocket : Ammo
         EventManager.current.onAmmoDestroy += OnRocketDestroy;
     }
 
-    public override void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, int bounces, bool pierce, bool explode, float radius)
+    public override void Init(Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, float damage, float size, float lifeTime, int bounces, bool pierce, bool explode, float radius, bool homing, float homingRadius)
     {
-        base.Init(owner, forward, angle, offset, speed, acceleration, damage, size, bounces, pierce, explode, radius);
+        base.Init(owner, forward, angle, offset, speed, acceleration, damage, size, lifeTime, bounces, pierce, explode, radius, homing, homingRadius);
         currentSpeed = owner.rocketStats.speed.value;
     }
 

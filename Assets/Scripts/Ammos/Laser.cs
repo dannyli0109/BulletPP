@@ -58,7 +58,7 @@ public class Laser : Ammo
         if (GameManager.current.GetState() == GameState.Pause) return;
         if (GameManager.current.GameTransitional()) Destroy(gameObject);
         bornTime += Time.deltaTime;
-        if (bornTime >= owner.laserStats.travelTime.value)
+        if (bornTime >= lifeTime)
         {
             currentLaserLength -= Time.deltaTime * lengthDecreaseSpeed;
             currentLaserWidth -= Time.deltaTime * widthDecreaseSpeed;

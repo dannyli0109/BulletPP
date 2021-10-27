@@ -70,7 +70,7 @@ public class PiercingBullet : Augment
             if (ammoPool.piercingAmmoPool.TryInstantiate(out piercingAmmo, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                piercingAmmo.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size);
+                piercingAmmo.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
             }
         }
     }
