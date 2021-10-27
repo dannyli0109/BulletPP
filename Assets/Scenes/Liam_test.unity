@@ -1508,7 +1508,7 @@ PrefabInstance:
       objectReference: {fileID: 1087196351}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: gold
-      value: 9
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: leftFoot
@@ -1522,6 +1522,14 @@ PrefabInstance:
       propertyPath: rightFoot
       value: 
       objectReference: {fileID: 567836994}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: grenadeStats.travelTime.baseValue
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680669848137463607, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
+      propertyPath: bulletStats.travelTime.baseValue
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6680669848201933449, guid: de8148dcc85edbb4c9bcce209e35b265, type: 3}
       propertyPath: cam
       value: 

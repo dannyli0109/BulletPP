@@ -12,9 +12,25 @@ public class SpellQueueRunner : SpellQueueEnemy
     public float ExplodingTime;
     float currentExplodingTime;
 
+  public Material material;
+    public MeshRenderer[] render;
+    public Material mat;
+    public Color color;
+
     public override void Start()
     {
-        base.Start();
+         mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        color = material.color;
+        mat.color = color;
+       
+            
+        for (int i = 0; i < render.Length; i++)
+        {
+            render[i].material = mat;
+
+        }
+            base.Start();
+
     }
 
     public override void Init(Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
@@ -87,16 +103,20 @@ public class SpellQueueRunner : SpellQueueEnemy
 
         agent.speed = 0;
         decision.MakeDecision();
+            HandleMoving();
         if (exploding)
         {
-            handleExploding();
-            agent.speed = 0;
-        }
-        else
-        {
-            HandleMoving();
-        }
+            color = new Color(color.r +Time.deltaTime*25, color.g, color.b, color.a);
+            for (int i = 0; i < render.Length; i++)
+            {
+                mat.color = color;
+                render[i].material.color = mat.color;
 
+            }
+            handleExploding();
+           
+        }
+     
         UpdateAnimation();
 
         timeSinceFired += Time.deltaTime;
@@ -111,12 +131,12 @@ public class SpellQueueRunner : SpellQueueEnemy
         {
             Debug.Log("exploding");
             exploding = true;
-            agent.speed = 0;
+         //   agent.speed = 0;
         }
-        else
-        {
+      
+      
             finalDestination = target.transform.position;
-        }
+        
         Debug.DrawLine(transform.position, finalDestination, Color.red, 0.1f);
         if (hp > 0)
         {

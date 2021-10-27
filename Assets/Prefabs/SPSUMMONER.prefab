@@ -2681,6 +2681,25 @@ MonoBehaviour:
       baseValue: 0
     heatSeeking:
       baseValue: 0
+  shrapnelStats:
+    damage:
+      baseValue: 0
+    speed:
+      baseValue: 0
+    size:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    travelTime:
+      baseValue: 0
+    fireRate:
+      baseValue: 0
+    amountOfBounces:
+      baseValue: 0
+    maxClip:
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
   bouncingBladeStats:
     damage:
       baseValue: 0
@@ -2787,7 +2806,8 @@ MonoBehaviour:
   minCooldown: 1
   maxCooldown: 3
   viewAngle: 60
-  rotationSpeed: 5
+  rotationSpeed: 4
+  notUsingAnimation: 0
   setAcceleration: 12
   tooFarToSeePlayer: 32
   tooFarToShoot: 12
@@ -2797,6 +2817,7 @@ MonoBehaviour:
   smoothingRange: 0.5
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 0
+  Stopped: 0
   gunPoint: {fileID: 2875370376564030993}
   ExplodingTime: 0
 --- !u!1 &2875370378223301521
