@@ -56,6 +56,7 @@ public class SharpeningStone : Augment
             int randomAvaliableIndex = Random.Range(0, indices.Count);
             int randomIndex = indices[randomAvaliableIndex];
             character.inventory[randomIndex].damage += damageIncrement;
+            OnDamageChanged(randomIndex);
             indices.RemoveAt(randomAvaliableIndex);
         }
     }

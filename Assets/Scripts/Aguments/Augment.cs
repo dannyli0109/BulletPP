@@ -47,6 +47,16 @@ public abstract class Augment
     }
     public abstract void OnAttached(Character character, int index);
 
+    public void OnDamageChanged(int index)
+    {
+        InventoryHUD.current.AnimateDamageText(index);
+    }
+
+    public void OnAmmoChanged(int index)
+    {
+        InventoryHUD.current.AnimateAmountText(index);
+    }
+
     public abstract void Shoot(Character character, Transform transform, int index);
 
     public abstract float GetDamage(Character character, int index);

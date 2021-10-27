@@ -37,10 +37,12 @@ public class MultiBullet : Augment
         return id;
     }
 
+
     public override void OnAttached(Character character, int index)
     {
         
     }
+
 
     public override void Shoot(Character character, Transform transform, int index)
     {

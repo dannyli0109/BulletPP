@@ -24,6 +24,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public GameObject damageContainer;
     public GameObject amountContainer;
     public Outline imageOutline;
+    public Animator damageTextAnimator;
+    public Animator amountTextAnimator;
     Vector2 anchorPosition;
     // Start is called before the first frame update
     void Start()
@@ -173,6 +175,17 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         }
         inventoryHUD.player.inventory[toIndex] = formAugment;
         inventoryHUD.Populate();
+    }
+
+    public void AnimateDamage()
+    {
+        damageTextAnimator.SetTrigger("statChanges");
+
+    }
+
+    public void AnimateAmount()
+    {
+        amountTextAnimator.SetTrigger("statChanges");
     }
 
 }

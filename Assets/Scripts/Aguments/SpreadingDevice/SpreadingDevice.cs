@@ -56,6 +56,7 @@ public class SpreadingDevice : Augment
             int randomAvaliableIndex = Random.Range(0, indices.Count);
             int randomIndex = indices[randomAvaliableIndex];
             character.inventory[randomIndex].amountOfBullets += bulletIncrement;
+            OnAmmoChanged(randomIndex);
             indices.RemoveAt(randomAvaliableIndex);
         }
     }
