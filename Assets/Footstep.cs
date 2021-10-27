@@ -9,6 +9,7 @@ public class Footstep : MonoBehaviour
     public SoundType soundType;
     public void LeftFootStepCallback(AnimationEvent evt)
     {
+        if (GameManager.current.GetState() != GameState.Game && GameManager.current.GetState() != GameState.Casual) return;
         if (evt.animatorClipInfo.weight > 0.5)
         {
             SoundManager.PlaySound(soundType, leftFoot.position, 1);
@@ -17,6 +18,7 @@ public class Footstep : MonoBehaviour
 
     public void rightFootStepCallback(AnimationEvent evt)
     {
+        if (GameManager.current.GetState() != GameState.Game && GameManager.current.GetState() != GameState.Casual) return;
         if (evt.animatorClipInfo.weight > 0.5)
         {
             SoundManager.PlaySound(soundType, rightFoot.position, 1);
