@@ -177,10 +177,20 @@ public class MapGeneration : MonoBehaviour
         {
             thisBTSManager.LoadWinGameScene();
         }
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if (i != currentRoomInside)
+            {
+                rooms[i].thisPrefabInfo.gameObject.SetActive(false);
+            }
+        }
+
+        rooms[currentRoomInside].thisPrefabInfo.gameObject.SetActive(true);
+
         if (inCombat)
         {
             UpdateEncounter(rooms[currentRoomInside]);
-
         }
     }
 
@@ -816,38 +826,38 @@ public class MapGeneration : MonoBehaviour
     {
         if (!inCombat)
         {
-        switch (directionInput)
-        {
-            case Direction.Upper:
-                currentRoomInside = rooms[currentRoomInside].upperRoomRef;
-                needToSetPos = true;
-                desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.z);
-                   // desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.z);
+            switch (directionInput)
+            {
+                case Direction.Upper:
+                    currentRoomInside = rooms[currentRoomInside].upperRoomRef;
+                    needToSetPos = true;
+                    desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.z);
+                       // desiredSetPos = new Vector3(rooms[currentRoomInside].offsetPos.x * roomMultiplyValue.x + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].offsetPos.y * roomMultiplyValue.y + rooms[currentRoomInside].thisPrefabInfo.lowerRoomDoorSpawnOffet.position.z);
                     playerTarget.transform.position = desiredSetPos;
-                    //Debug.Log(desiredSetPos);
-                break;
-            case Direction.Lower:
-                currentRoomInside = rooms[currentRoomInside].lowerRoomRef;
-                needToSetPos = true;
-                desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.position.z);
-                playerTarget.transform.position = desiredSetPos;
-                  //  Debug.Log(desiredSetPos);
+                        //Debug.Log(desiredSetPos);
                     break;
-            case Direction.Left:
-                currentRoomInside = rooms[currentRoomInside].leftRoomRef;
-                needToSetPos = true;
-                desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y,rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.position.z);
-                playerTarget.transform.position = desiredSetPos;
-                   // Debug.Log(desiredSetPos);
+                case Direction.Lower:
+                    currentRoomInside = rooms[currentRoomInside].lowerRoomRef;
+                    needToSetPos = true;
+                    desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y, rooms[currentRoomInside].thisPrefabInfo.upperRoomDoorSpawnOffet.position.z);
+                    playerTarget.transform.position = desiredSetPos;
+                      //  Debug.Log(desiredSetPos);
                     break;
-            case Direction.Right:
-                currentRoomInside = rooms[currentRoomInside].rightRoomRef;
-                needToSetPos = true;
-                desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y,  rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.position.z);
-                playerTarget.transform.position = desiredSetPos;
-                   // Debug.Log(desiredSetPos);
+                case Direction.Left:
+                    currentRoomInside = rooms[currentRoomInside].leftRoomRef;
+                    needToSetPos = true;
+                    desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y,rooms[currentRoomInside].thisPrefabInfo.rightRoomDoorSpawnOffet.position.z);
+                    playerTarget.transform.position = desiredSetPos;
+                       // Debug.Log(desiredSetPos);
                     break;
-        }
+                case Direction.Right:
+                    currentRoomInside = rooms[currentRoomInside].rightRoomRef;
+                    needToSetPos = true;
+                    desiredSetPos = new Vector3(rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.position.x, playerTarget.transform.position.y,  rooms[currentRoomInside].thisPrefabInfo.leftRoomDoorSpawnOffet.position.z);
+                    playerTarget.transform.position = desiredSetPos;
+                       // Debug.Log(desiredSetPos);
+                    break;
+            }
 
             CheckToStartEncounter();
             RefreshMiniMapUI();
