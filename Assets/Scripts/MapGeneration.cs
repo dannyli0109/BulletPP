@@ -123,6 +123,44 @@ public class MapGeneration : MonoBehaviour
     public Color DefaultMiniMapRoomColour;
     #endregion
 
+    #region BigMap
+    public Vector2 bigMapStartingPos;
+    public Vector2 bigMapRoomMultiplier;
+
+    public GameObject[] bigMapRooms;
+
+    public void RefreshBigMapUI(bool On)
+    {
+        bigMapStartingPos = bigMapRooms[0].transform.position;
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            bigMapRooms[i].SetActive(On);
+            bigMapRooms[i].transform.position = bigMapStartingPos + (rooms[i].offsetPos * bigMapRoomMultiplier);
+            if (currentRoomInside == i)
+            {
+                bigMapRooms[i].GetComponent<Image>().color = CurrentMiniMapRoomColour- new Color(0,0,0,0.25f);
+            }
+            else if (rooms[i].bossRoom)
+            {
+                bigMapRooms[i].GetComponent<Image>().color = bossRoomMiniMapRoomColour - new Color(0, 0, 0, 0.25f);
+            }
+            else if (rooms[i].completed)
+            {
+                bigMapRooms[i].GetComponent<Image>().color = completedMiniMapRoomColour - new Color(0, 0, 0, 0.25f);
+            }
+            else
+            {
+                bigMapRooms[i].GetComponent<Image>().color = DefaultMiniMapRoomColour - new Color(0, 0, 0, 0.25f);
+            }
+
+
+        }
+
+    }
+    
+    #endregion
+
     #region difficulty
     [Header("Difficulty")]
     public float totalRoomDiffculty;
@@ -168,6 +206,16 @@ public class MapGeneration : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            RefreshBigMapUI(true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            RefreshBigMapUI(false);
+        }
+
         if (rooms[currentRoomInside].bossRoom&& EnemiesInEncounter==0)
         {
             thisBTSManager.LoadWinGameScene();
