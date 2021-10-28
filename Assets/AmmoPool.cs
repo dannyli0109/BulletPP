@@ -39,6 +39,9 @@ public class AmmoPool : MonoBehaviour
     public Pool<Bullet> enemyBulletPool;
     public int enemyBulletCount;
 
+    public ExplosionParticle explosionParticlePrefab;
+    public Pool<ExplosionParticle> explosionParticlePool;
+    public int explosionParticleCount;
 
     private void Awake()
     {
@@ -65,8 +68,10 @@ public class AmmoPool : MonoBehaviour
         rocketPool = new Pool<Rocket>(rocketPrefab, rocketCount);
         foreach (Rocket rocket in rocketPool.available) rocket.gameObject.transform.SetParent(transform);
 
-
         enemyBulletPool = new Pool<Bullet>(enemyBulletPrefab, enemyBulletCount);
         foreach (Bullet enemyBullet in enemyBulletPool.available) enemyBullet.gameObject.transform.SetParent(transform);
+
+        explosionParticlePool = new Pool<ExplosionParticle>(explosionParticlePrefab, explosionParticleCount);
+        foreach (ExplosionParticle explosionParticle in explosionParticlePool.available) explosionParticle.gameObject.transform.SetParent(transform);
     }
 }

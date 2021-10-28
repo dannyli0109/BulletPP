@@ -353,13 +353,13 @@ public class SpellQueueEnemy : Enemy
         ammoComponent.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0) ;
     }
 
-    public void ShootBullet(Vector3 position, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
+    public void ShootBullet(Vector3 position, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, float lifeTime)
     {
         Bullet bullet;
         AmmoPool ammoPool = AmmoPool.current;
         ammoPool.enemyBulletPool.TryInstantiate(out bullet, position, Quaternion.identity);
 
-        bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0);
+        bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, lifeTime, 0, false, false, 0, false, 0);
     }
 
     public bool InLineOfSight(float viewAngle)
