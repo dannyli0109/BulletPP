@@ -28,6 +28,7 @@ public abstract class Ammo : PooledItem
 
     public float damage;
     public float size;
+    protected float lifeTime;
     public Vector3 velocity;
     public Vector3 acceleration;
     protected float speed;
@@ -48,7 +49,8 @@ public abstract class Ammo : PooledItem
     protected bool pierce;
     protected bool explode;
     protected float radius;
-
+    protected bool homing;
+    protected float homingRadius;
 
     public virtual float GetDamage()
     {
@@ -65,19 +67,22 @@ public abstract class Ammo : PooledItem
     }
 
     public virtual void Init(
-        Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration, 
-        float damage, float size, int bounces, bool pierce, bool explode, float radius
+            Character owner, Vector3 forward, float angle, Vector3 offset, float speed, Vector3 acceleration,
+            float damage, float size, float lifeTime, int bounces, bool pierce, bool explode, float radius, bool homing, float homingRadius
         )
     {
         this.owner = owner;
         this.damage = damage;
         this.acceleration = acceleration;
         this.size = size;
+        this.lifeTime = lifeTime;
         this.speed = speed;
         this.bounces = bounces;
         this.pierce = pierce;
         this.explode = explode;
         this.radius = radius;
+        this.homing = homing;
+        this.homingRadius = homingRadius;
 
         transform.forward = forward;
         bornTime = 0;
@@ -89,14 +94,14 @@ public abstract class Ammo : PooledItem
         velocity = transform.forward * speed;
     }
 
-    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size)
+    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, float lifeTime)
     {
-        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, 0, false, false, 0);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, lifeTime, 0, false, false, 0, false, 0);
     }
 
-    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, int bounces, bool pierce, bool explode, float radius)
+    public void Init(Character owner, Vector3 forward, float angle, float speed, float damage, float size, float lifeTime, int bounces, bool pierce, bool explode, float radius, bool homing, float homingRadius)
     {
-        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, bounces, pierce, explode, radius);
+        Init(owner, forward, angle, Vector3.zero, speed, new Vector3(0, 0, 0), damage, size, lifeTime, bounces, pierce, explode, radius, homing, homingRadius);
     }
 
     protected void SpawnHitParticle(float size)
@@ -111,7 +116,7 @@ public abstract class Ammo : PooledItem
     protected bool BounceOffAmmo()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, size / 2.0f, (1 << 10)|(1<<12)))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, size, (1 << 10)|(1<<12)))
         {
             if (pierce && hit.collider.gameObject.layer == 12)
             {

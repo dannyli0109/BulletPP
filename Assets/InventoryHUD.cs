@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class InventoryHUD : MonoBehaviour
 {
+    public static InventoryHUD current;
     public Player player;
     public List<InventorySlot> inventorySlots;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        current = this;
+    }
     void Start()
     {
         Populate();
@@ -31,5 +37,15 @@ public class InventoryHUD : MonoBehaviour
         {
             inventorySlots[i].PopulateEmpty(i);
         }
+    }
+
+    public void AnimateDamageText(int index)
+    {
+        inventorySlots[index].AnimateDamage();
+    }
+
+    public void AnimateAmountText(int index)
+    {
+        inventorySlots[index].AnimateAmount();
     }
 }

@@ -56,6 +56,7 @@ public class SpreadingDevice : Augment
             int randomAvaliableIndex = Random.Range(0, indices.Count);
             int randomIndex = indices[randomAvaliableIndex];
             character.inventory[randomIndex].amountOfBullets += bulletIncrement;
+            OnAmmoChanged(randomIndex);
             indices.RemoveAt(randomAvaliableIndex);
         }
     }
@@ -84,7 +85,7 @@ public class SpreadingDevice : Augment
             if (ammoPool.multiBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
             }
         }
     }

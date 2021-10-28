@@ -15,7 +15,7 @@ public class Bullet : Ammo
         if (GameManager.current.GetState() == GameState.Pause) return;
         if (GameManager.current.GameTransitional()) { ReturnToPool(); }
         bornTime += Time.deltaTime;
-        if (bornTime >= owner.bulletStats.travelTime.value)
+        if (bornTime >= lifeTime)
         {
             ReturnToPool();
         }

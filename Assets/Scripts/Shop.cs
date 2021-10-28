@@ -137,11 +137,11 @@ public class Shop : MonoBehaviour
 
     public void ReRoll()
     {
-        if (player.inventory.Count > 0)
+        if (player.inventory.Count > 0 || player.gold > 3)
         {
-            if (player.gold >= 2)
+            if (player.gold >= 1)
             {
-                player.gold -= 2;
+                player.gold -= 1;
                 Refresh();
             }
         }

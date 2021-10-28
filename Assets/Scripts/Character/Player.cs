@@ -61,7 +61,7 @@ public class Player : Character
         {
             lastKnownPos[i] = transform.position;
         }
-        EventManager.current.receiveGold += ReceiveGold;
+        //EventManager.current.receiveGold += ReceiveGold;
 
         currentBulletClip = (int)bulletStats.maxClip.value;
         currentGrenadeClip = (int)grenadeStats.maxClip.value;
@@ -69,7 +69,7 @@ public class Player : Character
         currentLaserClip = (int)laserStats.maxClip.value;
         currentBouncingBladeClip = 1;
         inventoryIndex = 0;
-        inventory = new Inventory(10);
+        inventory = new Inventory(6);
 
         //inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
         //inventory.AddTo(AugmentManager.current.augments[0].Create(), this);
@@ -118,10 +118,10 @@ public class Player : Character
         RecentlyTakenDamage++;
     }
 
-    protected void ReceiveGold(float amount)
-    {
-        gold += amount;
-    }
+    //protected void ReceiveGold(float amount)
+    //{
+    //    gold += amount;
+    //}
 
     public Vector3 GetPlayerPlaneMousePos(Vector3 aPlayerPos)
     {
@@ -372,7 +372,7 @@ public class Player : Character
             {
                 Ammo ammoComponent = rocket.GetComponent<Ammo>();
                 Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value);
+                ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value, 2);
                 currentRocketClip--;
                 if (freshReload)
                 {
@@ -393,7 +393,7 @@ public class Player : Character
             {
                 Ammo ammoComponent = grenade.GetComponent<Ammo>();
                 Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value, 2);
                 currentGrenadeClip--;
                 if (freshReload)
                 {
@@ -412,7 +412,7 @@ public class Player : Character
             GameObject laser = Instantiate(laserPrefab, bulletContainer);
             Ammo ammoComponent = laser.GetComponent<Ammo>();
             Vector3 forward = bulletContainer.forward;
-            ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value);
+            ammoComponent.Init(this, forward, angle, laserStats.speed.value, stats.damageMultiplier.value * laserStats.damage.value, laserStats.size.value, 2);
             laser.transform.SetParent(null);
             currentLaserClip--;
             if (freshReload)
@@ -432,7 +432,7 @@ public class Player : Character
             GameObject blade = Instantiate(bouncingBladePrefab, bulletContainer);
             Ammo ammoComponent = blade.GetComponent<Ammo>();
             Vector3 forward = bulletContainer.forward;
-            ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value);
+            ammoComponent.Init(this, forward, angle, bouncingBladeStats.speed.value, stats.damageMultiplier.value * bouncingBladeStats.damage.value, bouncingBladeStats.size.value, 2);
             blade.transform.SetParent(null);
             currentBouncingBladeClip--;
             if (freshReload)
@@ -539,7 +539,7 @@ public class Player : Character
             {
                 Ammo ammoComponent = rocket.GetComponent<Ammo>();
                 Vector3 forward = lastMovementDirection;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value);
+                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value, 2);
             }
         }
 
@@ -636,5 +636,10 @@ public class Player : Character
         //}
 
         CameraShake.current.Shake(magX, magY, cameraShakeTime, curve);
+    }
+
+    public void ReceiveGold()
+    {
+        gold = 10;
     }
 }

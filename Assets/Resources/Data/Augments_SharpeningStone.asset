@@ -17,11 +17,11 @@ MonoBehaviour:
   rarity: 1
   augmentIcon: {fileID: 21300000, guid: e9211ab3c60c53f4097a4ae369355f03, type: 3}
   augmentName: Sharpening Stone
-  description: 'When obtained: Increase a random ammo damage by 1.
+  description: 'When obtained: Increase 2 random ammo damage by 2.
 
     Shoot 1 bullet
     that deals 1 damage'
-  cost: 2
+  cost: 3
   color: {r: 1, g: 0.5411765, b: 0, a: 1}
   damage: 1
   speed: 15
@@ -30,5 +30,5 @@ MonoBehaviour:
   offset: 0
   amountOfBullets: 1
   lifeTime: 2
-  damageIncrement: 1
-  damageIncrementTimes: 1
+  damageIncrement: 2
+  damageIncrementTimes: 2

@@ -110,10 +110,17 @@ public class HUDManager : MonoBehaviour
 
     void Update()
     {
-        playerGoldUI.richText = true;
-        playerGoldUI.text = "$: " + player.gold;
+        if (GameManager.current.GetState() == GameState.Shop)
+        {
+            playerGoldUI.gameObject.SetActive(true);
+            playerGoldUI.richText = true;
+            playerGoldUI.text = "$: " + player.gold;
+        }
+        else
+        {
+            playerGoldUI.gameObject.SetActive(false);
+        }
         UpdatePlayerAmmoUI();
-        //UpdateDPSGUI();
     }
 
     void UpdateDPSGUI()
@@ -171,22 +178,38 @@ public class HUDManager : MonoBehaviour
 
     public void UpdatePlayerAmmoUI()
     {
-        for (int i = 0; i < player.inventory.Count; i++)
+        if (GameManager.current.GetState() != GameState.Shop)
         {
-            ammoUI.ammoImages[i].transform.gameObject.SetActive(true);
-            if (i < player.inventoryIndex)
+            for (int i = 0; i < player.inventory.Count; i++)
             {
-                ammoUI.ammoImages[i].color = new Color(0.5f, 0.5f, 0.5f);
+                ammoUI.ammoImages[i].transform.gameObject.SetActive(true);
+                if (i < player.inventoryIndex)
+                {
+                    ammoUI.ammoImages[i].color = new Color(0.5f, 0.5f, 0.5f);
+                }
+                else
+                {
+                    ammoUI.ammoImages[i].color = player.inventory[i].GetColor(player, i);
+                }
             }
-            else
+
+            for (int i = player.inventory.Count; i < player.inventory.capacity; i++)
             {
-                ammoUI.ammoImages[i].color = player.inventory[i].GetColor(player, i);
+                ammoUI.ammoImages[i].transform.gameObject.SetActive(false);
             }
         }
-
-        for (int i = player.inventory.Count; i < player.inventory.capacity; i++)
+        else
         {
-            ammoUI.ammoImages[i].transform.gameObject.SetActive(false);
+            for (int i = 0; i < player.inventory.Count; i++)
+            {
+                ammoUI.ammoImages[i].transform.gameObject.SetActive(true);
+                ammoUI.ammoImages[i].color = player.inventory[i].GetColor(player, i);
+            }
+
+            for (int i = player.inventory.Count; i < player.inventory.capacity; i++)
+            {
+                ammoUI.ammoImages[i].transform.gameObject.SetActive(false);
+            }
         }
     }
 

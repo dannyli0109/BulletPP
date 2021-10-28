@@ -146,15 +146,15 @@ public class SpellQueueEnemy : Enemy
         {
             agent.enabled = true;
         }
+        agent.speed = 0;
 
-            agent.speed = 0;
         if (hp <= 0)
         {
             if (!dying)
             {
-                animator.SetTrigger("Dying");
+                animator.SetBool("Dead", true);
                 dying = true;
-                currentWaitTime = 2.0f;
+                currentWaitTime = 1.354f;
             }
         }
         else
@@ -166,7 +166,7 @@ public class SpellQueueEnemy : Enemy
 
         if(dying && currentWaitTime <= 0)
         {
-            EventManager.current.ReceiveGold(gold);
+            //EventManager.current.ReceiveGold(gold);
             Destroy(gameObject);
         }
         else
@@ -220,18 +220,17 @@ public class SpellQueueEnemy : Enemy
         {
             finalDestination = target.transform.position;
         }
-        agent.speed = speed;
-        animator.SetFloat("moveSpeed", 5);
-
 
         if (Stopped)
         {
             agent.speed = 0;
-            animator.SetFloat("moveSpeed", -1);
+            animator.SetBool("Walking", false);
         }
         else
         {
             agent.speed = speed;
+            animator.SetBool("Walking", true);
+
         }
 
 
@@ -257,15 +256,15 @@ public class SpellQueueEnemy : Enemy
 
         if (!notUsingAnimation)
         {
-        Vector2 movemntRotated;
-        movemntRotated.x = (cos * tx) - (sin * ty);
-        movemntRotated.y = (sin * tx) + (cos * ty);
+            Vector2 movemntRotated;
+            movemntRotated.x = (cos * tx) - (sin * ty);
+            movemntRotated.y = (sin * tx) + (cos * ty);
 
-        // movemntRotated = new Vector2(tx, ty);
-        movemntRotated = movemntRotated.normalized;
+            // movemntRotated = new Vector2(tx, ty);
+            movemntRotated = movemntRotated.normalized;
 
-        animator.SetFloat("x", movemntRotated.x);
-        animator.SetFloat("y", movemntRotated.y);
+            animator.SetFloat("x", movemntRotated.x);
+            animator.SetFloat("y", movemntRotated.y);
         }
     }
 
@@ -351,7 +350,7 @@ public class SpellQueueEnemy : Enemy
         AmmoPool ammoPool = AmmoPool.current;
         ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
         Ammo ammoComponent = bullet.GetComponent<Ammo>();
-        ammoComponent.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 0, false, false, 0) ;
+        ammoComponent.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0) ;
     }
 
     public void ShootBullet(Vector3 position, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
@@ -360,7 +359,7 @@ public class SpellQueueEnemy : Enemy
         AmmoPool ammoPool = AmmoPool.current;
         ammoPool.enemyBulletPool.TryInstantiate(out bullet, position, Quaternion.identity);
 
-        bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 0, false, false, 0);
+        bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0);
     }
 
     public bool InLineOfSight(float viewAngle)

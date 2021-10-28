@@ -475,6 +475,6 @@ public class BossEnemy : SpellQueueEnemy
         // shoot laser
         GameObject laser = Instantiate(laserPrefab, bulletContainer.position, bulletContainer.rotation);
         Laser laserComponent = laser.GetComponent<Laser>();
-        laserComponent.Init(this, bulletContainer.forward, 0, 10, 1, 1);
+        laserComponent.Init(this, bulletContainer.forward, 0, 10, 1, 1, 2);
     }
 }

@@ -52,13 +52,16 @@ public class Tooltip : MonoBehaviour
 
         //    layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
         //}
+        RectTransform rt = gameObject.GetComponent<RectTransform>();
+        float width = rt.rect.width;
+        float height = rt.rect.height;
 
-        Vector2 position = Input.mousePosition + new Vector3(50, 50, 0);
+        Vector2 position = Input.mousePosition + new Vector3(0, height / 2 + 50, 0);
 
-        float pivotX = position.x / Screen.width;
-        float pivotY = position.y / Screen.height;
+        //float pivotX = position.x / Screen.width;
+        //float pivotY = position.y / Screen.height;
 
-        rectTransform.pivot = new Vector2(pivotX, pivotY);
+        //rectTransform.pivot = new Vector2(position.x, position.y);
         transform.position = position;
     }
 }
