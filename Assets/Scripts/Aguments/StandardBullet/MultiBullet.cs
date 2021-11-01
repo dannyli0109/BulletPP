@@ -72,8 +72,10 @@ public class MultiBullet : Augment
                 Vector3 forward = transform.forward;
                 //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
 
-                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime, 0, false, false, 0, true, 30);
+                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), speed, new Vector3(0, 0, 0), damage, size, lifeTime, 0, false, character.nextShotIsExploded, 30);
+           
             }
         }
+        character.nextShotIsExploded = -1;
     }
 }

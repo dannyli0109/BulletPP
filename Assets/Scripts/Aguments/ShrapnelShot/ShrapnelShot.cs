@@ -101,9 +101,10 @@ public class ShrapnelShot : Augment
             {
                 Vector3 forward = transform.forward;
 
-                shrapnel.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
+                // shrapnel.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
+                shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), speed, new Vector3(0, 0, 0), damage, size, lifeTime, 0, false, character.nextShotIsExploded, -1);
             }
         }
-
+        character.nextShotIsExploded = -1;
     }
 }
