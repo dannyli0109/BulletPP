@@ -221,16 +221,22 @@ public class SpellQueueEnemy : Enemy
             finalDestination = target.transform.position;
         }
 
+
         if (Stopped)
         {
             agent.speed = 0;
-            animator.SetBool("Walking", false);
+            if (notUsingAnimation)
+            {
+                animator.SetBool("Walking", false);
+            }
         }
         else
         {
             agent.speed = speed;
-            animator.SetBool("Walking", true);
-
+            if (notUsingAnimation)
+            {
+                animator.SetBool("Walking", true);
+            }
         }
 
 
@@ -348,18 +354,22 @@ public class SpellQueueEnemy : Enemy
     {
         Bullet bullet;
         AmmoPool ammoPool = AmmoPool.current;
-        ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
-        Ammo ammoComponent = bullet.GetComponent<Ammo>();
-        ammoComponent.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0) ;
+        bool instantiated = ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
+        if (instantiated)
+        {
+            bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0) ;
+        }
     }
 
     public void ShootBullet(Vector3 position, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, float lifeTime)
     {
         Bullet bullet;
         AmmoPool ammoPool = AmmoPool.current;
-        ammoPool.enemyBulletPool.TryInstantiate(out bullet, position, Quaternion.identity);
-
-        bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, lifeTime, 0, false, false, 0, false, 0);
+        bool instantiated = ammoPool.enemyBulletPool.TryInstantiate(out bullet, position, Quaternion.identity);
+        if (instantiated)
+        {
+            bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, lifeTime, 0, false, false, 0, false, 0);
+        }
     }
 
     public bool InLineOfSight(float viewAngle)

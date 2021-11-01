@@ -1574,12 +1574,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'lowerarm_l'\n\tTransform 'UpperArm_L'\n\tTransform
-    'UpperArm_R'\n\tTransform 'Hand_R'\n\tTransform 'Hand_L'\n\tTransform 'lowerarm_r'\n\tTransform
-    'lowerarm_l'\n\tTransform 'UpperArm_L'\n\tTransform 'UpperArm_R'\n\tTransform
-    'Hand_R'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1602,7 +1597,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d82e7d95ada9f54189c16c4d885cfd0, type: 2}
+  - {fileID: 2100000, guid: 65dd9c77bcb842f4aa55ed2bd6334856, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

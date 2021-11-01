@@ -36,6 +36,7 @@ public class Player : Character
     public float dashDuration;
     public float trailTime;
     public bool isDashing;
+    public GameObject dashShield;
 
     public float magX;
     public float magY;
@@ -107,6 +108,11 @@ public class Player : Character
             HandleRotation();
             HandleMovement();
             HandleShooting();
+            dashShield.SetActive(false);
+        }
+        else
+        {
+            dashShield.SetActive(true);
         }
         HandleDashing();
         UpdateAnimation();
