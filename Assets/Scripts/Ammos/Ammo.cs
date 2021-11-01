@@ -103,11 +103,34 @@ public abstract class Ammo : PooledItem
 
     protected void SpawnHitParticle(float size)
     {
-        GameObject ammoParticle = Instantiate(hitParticlePrefab, ammoTip);
-        ammoParticle.transform.SetParent(null);
-        ammoParticle.transform.localScale = new Vector3(
-            size, size, size
-        );
+        //AmmoPool ammoPool = AmmoPool.current;
+        //ParticleHandler bulletHitParticle;
+        //bool instantiated;
+        //instantiated = ammoPool.bulletParticlePool.TryInstantiate(out bulletHitParticle, ammoTip.position, Quaternion.identity);
+        //if (instantiated)
+        //{
+        //    bulletHitParticle.transform.localScale = new Vector3(size, size, size);
+        //}
+
+        StartCoroutine(SpawnHit(size));
+    }
+
+    IEnumerator SpawnHit(float size)
+    {
+
+        AmmoPool ammoPool = AmmoPool.current;
+        ParticleHandler bulletHitParticle;
+        bool instantiated;
+        instantiated = ammoPool.bulletParticlePool.TryInstantiate(out bulletHitParticle, ammoTip.position, Quaternion.identity);
+        if (instantiated)
+        {
+            bulletHitParticle.transform.localScale = new Vector3(size, size, size);
+        }
+        yield return new WaitForSeconds(0.5f);
+        if (instantiated)
+        {
+            bulletHitParticle.ReturnToPool();
+        }
     }
 
     protected bool BounceOffAmmo()
@@ -167,6 +190,7 @@ public abstract class Ammo : PooledItem
         Debug.Log("explode");
         if (explodeRadius <= 0) return;
         Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        Debug.Log("created");
         AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
         if (owner.gameObject.layer == 11)
         {

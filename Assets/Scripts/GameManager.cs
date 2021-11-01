@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void UpdateBackgroundMusic()
+    {
+
+    }
+
     public bool GameTransitional()
     {
         return gameState == GameState.Shop || gameState == GameState.Transitional||gameState==GameState.Pause;

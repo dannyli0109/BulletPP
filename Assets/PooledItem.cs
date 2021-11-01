@@ -36,7 +36,7 @@ public class PooledItem : MonoBehaviour
 {
     public event System.Action<PooledItem> onDestroy;
 
-    protected void ReturnToPool()
+    public void ReturnToPool()
     {
         gameObject.SetActive(false);
         onDestroy?.Invoke(this);

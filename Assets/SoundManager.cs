@@ -12,7 +12,8 @@ public enum SoundType
     BlasterHit,
     RocketHit,
     LaserHit,
-    Reloading
+    Reloading,
+    Roll
 }
 
 public class SoundManager : MonoBehaviour
@@ -27,7 +28,7 @@ public class SoundManager : MonoBehaviour
     public Dictionary<SoundType, string> audioMap = new Dictionary<SoundType, string>();
 
     FMOD.Studio.EventInstance atmos;
-    FMOD.Studio.EventInstance levelMusic;
+    public FMOD.Studio.EventInstance levelMusic;
     List<FMOD.Studio.EventInstance> soundPlaying = new List<FMOD.Studio.EventInstance>();
 
     private void Awake()
@@ -45,6 +46,7 @@ public class SoundManager : MonoBehaviour
         audioMap.Add(SoundType.FootStep, "event:/player/player foot steps");
         audioMap.Add(SoundType.FootStepEnemy, "event:/enemy/enemey footsteps");
         audioMap.Add(SoundType.Reloading, "event:/player/reload");
+        audioMap.Add(SoundType.Roll, "event:/player/roll");
 
         atmos = CreateInstance(PathToGUID("event:/envioroment/atmos"));
         levelMusic = CreateInstance(PathToGUID("event:/music/level music"));
@@ -70,6 +72,9 @@ public class SoundManager : MonoBehaviour
         {
             levelMusic.setParameterByName("music level", 0.5f);
         }
+        
+        //if (player)
+        //levelMusic.setParameterByName("life", player)
     }
 
 

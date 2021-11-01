@@ -78,12 +78,15 @@ public class AugmentManager : MonoBehaviour
     //    }
     //}
 
-    public List<int> GetAugmentIdList()
+    public List<int> GetAugmentIdList(List<float> percents)
     {
         List<int> ids = new List<int>();
         for (int i = 0; i < augments.Count; i++)
         {
-            ids.Add(augments[i].id);
+            if (percents[augments[i].rarity] > 0)
+            {
+                ids.Add(augments[i].id);
+            }
         }
         return ids;
     }

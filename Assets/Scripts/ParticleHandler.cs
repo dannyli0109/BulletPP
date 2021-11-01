@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ParticleHandler : MonoBehaviour
+public class ParticleHandler : PooledItem
 {
     // Start is called before the first frame update
     VisualEffect vfx;
@@ -13,7 +13,8 @@ public class ParticleHandler : MonoBehaviour
     void Start()
     {
         //vfx = GetComponent<VisualEffect>();
-        Destroy(gameObject, delay);
+        //Destroy(gameObject, delay);
+        //StartCoroutine(DeleteParticle());
     }
 
     // Update is called once per frame
@@ -28,4 +29,10 @@ public class ParticleHandler : MonoBehaviour
         //    Destroy(gameObject);
         //}
     }
+
+    //IEnumerator DeleteParticle()
+    //{
+    //    yield return new WaitForSeconds(delay);
+    //    ReturnToPool();
+    //}
 }

@@ -10,6 +10,7 @@ public class AOEDamage : MonoBehaviour
     public float fadeInTime;
     public float fadeOutTime;
     public CircleMesh circle;
+    public GameObject particlePrefab;
     float time;
 
     public float impactForce;
@@ -51,9 +52,24 @@ public class AOEDamage : MonoBehaviour
 
     IEnumerator DamageSequence()
     {
+        Debug.Log("hit");
         circle.CreateCircleMesh(radius);
         Damage();
+        AmmoPool ammoPool = AmmoPool.current;
+
+        ExplosionParticle explosionParticle;
+        Vector3 particlePos = new Vector3(transform.position.x, 4, transform.position.z);
+        bool instantiated;
+        instantiated = ammoPool.explosionParticlePool.TryInstantiate(out explosionParticle, particlePos, Quaternion.identity);
+        if (instantiated)
+        {
+            explosionParticle.transform.localScale = new Vector3(radius / 2.0f, radius / 2.0f, radius / 2.0f);
+        }
         yield return new WaitForSeconds(fadeOutTime);
+        if (instantiated)
+        {
+            explosionParticle.ReturnToPool();
+        }
         Destroy(gameObject);
     }
 }

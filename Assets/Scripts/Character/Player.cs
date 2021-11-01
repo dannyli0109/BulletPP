@@ -36,6 +36,7 @@ public class Player : Character
     public float dashDuration;
     public float trailTime;
     public bool isDashing;
+    public GameObject dashShield;
 
     public float magX;
     public float magY;
@@ -92,12 +93,26 @@ public class Player : Character
         }
         if (GameManager.current.GameTransitional()) return;  
 
+        if (hp >= 6)
+        {
+            SoundManager.current.levelMusic.setParameterByName("life", 1.0f);
+        }
+        else
+        {
+            SoundManager.current.levelMusic.setParameterByName("life", hp / 6.0f);
+        }
+
         if (!isDashing)
         {
             HandleReload();
             HandleRotation();
             HandleMovement();
             HandleShooting();
+            dashShield.SetActive(false);
+        }
+        else
+        {
+            dashShield.SetActive(true);
         }
         HandleDashing();
         UpdateAnimation();
@@ -215,6 +230,7 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.Space) && currentTimeBetweenDashes <= 0 && movement.magnitude > 0.01)
         {
             animator.SetTrigger("Roll");
+            SoundManager.PlaySound(SoundType.Roll, transform.position, 1);
             isDashing = true;
             trailTime = 0;
             trailRenderer.emitting = true;
@@ -262,7 +278,7 @@ public class Player : Character
         {
             // Debug.Log("health");
             hp++;
-            other.gameObject.transform.parent.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
 
         }
     }

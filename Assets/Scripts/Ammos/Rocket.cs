@@ -72,9 +72,9 @@ public class Rocket : Ammo
     {
         if (this.gameObject == gameObject)
         {
-            SpawnHitParticle(owner.rocketStats.size.value);
+            //SpawnHitParticle(owner.rocketStats.size.value);
             ReturnToPool();
-            Explode();
+            //Explode();
         }
     }
 

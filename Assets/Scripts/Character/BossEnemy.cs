@@ -365,7 +365,7 @@ public class BossEnemy : SpellQueueEnemy
 
             //  ShootBullet(new Vector3(max.x-min.x, 2, min.y), new Vector3(0, 0, 1), 0, 0, projectileSpeed, Vector3.zero, 1, bulletStats.size.value);
             Debug.DrawLine(new Vector3(posX, 1.2f, posY), new Vector3(posX, bulletContainer.position.y, posY) + new Vector3(dirX[direction], 0, dirY[direction]) * 10, Color.cyan, 1.0f);
-           ShootBullet(new Vector3(posX, 1, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, bulletStats.damage.value, bulletStats.size.value);
+           ShootBullet(new Vector3(posX, 1, posY), new Vector3(dirX[direction], 0, dirY[direction]), 0, 0, projectileSpeed, Vector3.zero, bulletStats.damage.value, bulletStats.size.value, 6);
        
         }
     }
@@ -396,7 +396,7 @@ public class BossEnemy : SpellQueueEnemy
 
     public void updateBossHitbox()
     {
-        for (int i=0; i<5; i++)
+        for (int i=0; i < 5; i++)
         {
             if(i == savedBossPos)
             {
@@ -441,7 +441,7 @@ public class BossEnemy : SpellQueueEnemy
 
     public void Aiming()
     {
-        thisLineRenderer.useWorldSpace = true;
+        //thisLineRenderer.useWorldSpace = true;
         float laserLength = 100.0f;
         RaycastHit hitInfo;
         if (Physics.Raycast(bulletContainer.position, bulletContainer.forward, out hitInfo, laserLength, 1 << 10))
@@ -462,7 +462,7 @@ public class BossEnemy : SpellQueueEnemy
 
     public void NotAiming()
     {
-        thisLineRenderer.useWorldSpace = true;
+        //thisLineRenderer.useWorldSpace = true;
         //Vector3 lookDir = (bulletContainer.forward) * 12;
         thisLineRenderer.SetPosition(0, bulletContainer.position);
         thisLineRenderer.SetPosition(1, bulletContainer.position);

@@ -14,11 +14,11 @@ public class Shop : MonoBehaviour
 
     private int level = 0;
     public List<List<float>> percents = new List<List<float>>() {
-        new List<float>() { 0.7f, 0.3f, 0.0f, 0.0f, 0.0f },
-        new List<float>() { 0.5f, 0.3f, 0.1f, 0.05f, 0.05f },
-        new List<float>() { 0.4f, 0.3f, 0.2f, 0.1f, 0.0f },
-        new List<float>() { 0.2f, 0.3f, 0.3f, 0.2f, 0.0f },
-        new List<float>() { 0.15f, 0.2f, 0.25f, 0.3f, 0.1f}
+        new List<float>() { 1, 0, 0, 0, 0 },
+        new List<float>() { 0.5f, 0.5f, 0, 0, 0 },
+        new List<float>() { 0.33f, 0.33f, 0.33f, 0, 0 },
+        new List<float>() { 0.25f, 0.25f, 0.25f, 0.25f, 0 },
+        new List<float>() { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f }
     };
 
     bool hasBoughtAnAugment;
@@ -28,8 +28,8 @@ public class Shop : MonoBehaviour
     void Start()
     {
         AugmentManager augmentManager = AugmentManager.current;
-        augmentIds = augmentManager.GetAugmentIdList();
-        level = 1;
+        level = 0;
+        augmentIds = augmentManager.GetAugmentIdList(percents[level]);
         Refresh();
     }
 
@@ -39,7 +39,7 @@ public class Shop : MonoBehaviour
 
         for (int i = 0; i < augmentUIs.Count; i++)
         {
-            if (augmentIds.Count == 0) augmentIds = augmentManager.GetAugmentIdList();
+            if (augmentIds.Count == 0) augmentIds = augmentManager.GetAugmentIdList(percents[level]);
 
             int rarity = GetRandomRarity();
             List<List<int>> augmentRarities = augmentManager.GetRarityList(augmentIds);
@@ -125,13 +125,13 @@ public class Shop : MonoBehaviour
 
     int amountOfAugment(int input)
     {
-       //for(int i=0; i< player.inventory.augments.Count; i++)
-       // {
-       //     if (player.inventory.augments[i].id == input)
-       //     {
-       //         return player.inventory.augments[i].count;
-       //     }
-       // }
+        //for(int i=0; i< player.inventory.augments.Count; i++)
+        // {
+        //     if (player.inventory.augments[i].id == input)
+        //     {
+        //         return player.inventory.augments[i].count;
+        //     }
+        // }
         return -1;
     }
 
@@ -145,7 +145,7 @@ public class Shop : MonoBehaviour
                 Refresh();
             }
         }
-        
+
     }
 
     public void Continue()
@@ -156,6 +156,14 @@ public class Shop : MonoBehaviour
             GameManager.current.ChangeState(GameState.Casual);
             player.reloading = true;
             thisHUDManager.PopulateAugmentListUI(false);
+        }
+    }
+
+    public void IncreaseShopLevel()
+    {
+        if (level < 4)
+        {
+            level++;
         }
     }
 }
