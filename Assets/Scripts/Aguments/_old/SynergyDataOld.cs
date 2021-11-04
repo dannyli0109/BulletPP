@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 
 [CreateAssetMenu(fileName = "New Synergy")]
-public class SynergyData : ScriptableObject
+public class SynergyDataOld : ScriptableObject
 {
     public int id;
     public string title;
@@ -30,7 +30,6 @@ public class SynergyData : ScriptableObject
     void Reset()
     {
         //Output the message to the Console
-        id = Resources.LoadAll("Data/Synergies", typeof(SynergyData)).Length;
+        id = Resources.LoadAll("Data/Synergies", typeof(SynergyDataOld)).Length;
     }
-
 }
