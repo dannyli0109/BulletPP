@@ -7,6 +7,7 @@ public class ExplodingBulletData : AugmentData
 {
     public float explosiveRadius;
 
+
     public override Augment Create()
     {
         return new ExplodingBullet(this);

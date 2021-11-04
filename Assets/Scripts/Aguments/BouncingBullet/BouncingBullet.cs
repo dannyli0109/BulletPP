@@ -72,8 +72,10 @@ public class BouncingBullet : Augment
             if (ammoPool.bouncingBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime, numberOfBounces, false, false, 0, false, 0);
+  
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime, numberOfBounces, false, character.nextShotIsExploded, -1);
             }
         }
+        character.nextShotIsExploded = -1;
     }
 }

@@ -357,7 +357,7 @@ public class SpellQueueEnemy : Enemy
         bool instantiated = ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
         if (instantiated)
         {
-            bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, false, 0, false, 0) ;
+            bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, 2, 0, false, 0,  0) ;
         }
     }
 
@@ -368,7 +368,7 @@ public class SpellQueueEnemy : Enemy
         bool instantiated = ammoPool.enemyBulletPool.TryInstantiate(out bullet, position, Quaternion.identity);
         if (instantiated)
         {
-            bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, lifeTime, 0, false, false, 0, false, 0);
+            bullet.Init(this, forward, angle, Vector3.zero, speed, acceleration, damage, size, lifeTime, 0, false,  0, 0);
         }
     }
 

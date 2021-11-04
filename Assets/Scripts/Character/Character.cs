@@ -136,6 +136,10 @@ public abstract class Character : MonoBehaviour
     public LineRenderer thisLineRenderer;
     #endregion
 
+    #region AugmentDevices
+    public  float nextShotIsExploded;
+    #endregion
+
     public Inventory inventory;
     public int inventoryIndex;
     public List<Synergy> synergies = new List<Synergy>();

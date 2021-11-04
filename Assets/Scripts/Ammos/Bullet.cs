@@ -18,6 +18,8 @@ public class Bullet : Ammo
         if (bornTime >= lifeTime)
         {
             ReturnToPool();
+                Explode();
+           
         }
 
         if (timesBounced < bounces)
@@ -47,20 +49,14 @@ public class Bullet : Ammo
     private void OnTriggerEnter(Collider other)
     {
         if (GameManager.current.GameTransitional()) return;
-
+        Debug.Log("touching " + other);
         HandleAmmoHit(other);
-        EventManager.current.OnAmmoDestroy(gameObject);
-        //if (piercing && other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        //{
-        //    if (isADesk)
-        //    {
-        //        Destroy(gameObject);
-        //    }
-        //    else
-        //    {
-        //        EventManager.current.OnAmmoDestroy(gameObject);
-        //    }
-        //}
+        if (timesBounced >= bounces)
+        {
+            EventManager.current.OnAmmoDestroy(gameObject);
+
+        }
+
     }
 
     private void OnDestroy()

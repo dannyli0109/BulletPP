@@ -4781,7 +4781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782236076345867813, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -125
+      value: -175
       objectReference: {fileID: 0}
     - target: {fileID: 2429664365174783612, guid: 4e0fa1ff48c1c0546951f52d6f7ee64c, type: 3}
       propertyPath: m_IsActive
@@ -6228,6 +6228,14 @@ PrefabInstance:
       propertyPath: augments.Array.data[7]
       value: 
       objectReference: {fileID: 11400000, guid: f19bb2db39c74c34d9059f947362e7a3, type: 2}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380439006657279982, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
+      propertyPath: augments.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7321eb178e1325a429adeae9c65e3c94, type: 2}
     - target: {fileID: 6380439006657279983, guid: b644847a842bfd045aba2b2351d107d5, type: 3}
       propertyPath: m_Name
       value: AugmentManager

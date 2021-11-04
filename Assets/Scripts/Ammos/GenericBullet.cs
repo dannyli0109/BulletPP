@@ -21,7 +21,7 @@ public class GenericBullet : Ammo
         if (bornTime >= lifeTime)
         {
             ReturnToPool();
-            if (explode)
+            if (explodeRadius>0)
             {
                 Explode();
             }
@@ -38,7 +38,7 @@ public class GenericBullet : Ammo
     {
         if (GameManager.current.GetState() == GameState.Pause) return;
 
-        if (homing)
+        if (homingRadius>0)
         {
             Collider[] hitColliders = Physics.OverlapSphere(ammoTip.transform.position, homingRadius, 1 << 12);
             for (int i = 0; i < hitColliders.Length; i++)
@@ -70,7 +70,7 @@ public class GenericBullet : Ammo
         {
             SpawnHitParticle(owner.bulletStats.size.value);
             ReturnToPool();
-            if (explode)
+            if (explodeRadius>0)
             {
                 Explode();
             }

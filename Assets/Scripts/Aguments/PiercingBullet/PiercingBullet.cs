@@ -61,8 +61,6 @@ public class PiercingBullet : Augment
 
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "piercing" }, new List<float>() { amounts });
 
-
-
         AmmoPool ammoPool = AmmoPool.current;
         for (int i = 0; i < amounts; i++)
         {
@@ -70,8 +68,10 @@ public class PiercingBullet : Augment
             if (ammoPool.piercingAmmoPool.TryInstantiate(out piercingAmmo, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                piercingAmmo.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
+             
+                piercingAmmo.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), speed, new Vector3(0, 0, 0), damage, size, lifeTime, 0, false, character.nextShotIsExploded, -1);
             }
         }
+        character.nextShotIsExploded = -1;
     }
 }
