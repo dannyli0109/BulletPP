@@ -175,11 +175,36 @@ public class MapGeneration : MonoBehaviour
     #endregion
 
     #region healthPickup
+    [Header("Health Pickup")]
     public float chanceOfSpawnOutOfOneHundredHealthPickup;
     public float damagedChanceToSpawnHealthPickup; // * recently Taken Damage
 
    public GameObject healthPickUpObject;
 
+    #endregion
+
+    #region Highscore
+    [Header("Highscore")]
+
+    public int totalScore = 1;
+    public int numberOfRoomsBeaten;
+
+    public void ClearHighScore()
+    {
+        PlayerPrefs.SetInt("LastHighScore", 12);
+        PlayerPrefs.SetInt("HighScore", 7);
+        PlayerPrefs.SetInt("YourScore", 0);
+    }
+
+    public void SaveNewHighscore()
+    {
+        PlayerPrefs.SetInt("LastHighScore", PlayerPrefs.GetInt("HighScore"));
+        if (PlayerPrefs.GetInt("HighScore") < totalScore)
+        {
+            PlayerPrefs.SetInt("HighScore", totalScore);
+        }
+        PlayerPrefs.SetInt("YourScore", totalScore);
+    }
     #endregion
 
     public BTSManager thisBTSManager;
@@ -196,6 +221,8 @@ public class MapGeneration : MonoBehaviour
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         RefreshMiniMapUI();
         playerTarget.transform.position = startingPos;
+
+        ClearHighScore();
     }
 
     public void InitEvents()
@@ -218,11 +245,15 @@ public class MapGeneration : MonoBehaviour
 
         if (rooms[currentRoomInside].bossRoom&& EnemiesInEncounter==0)
         {
+            totalScore += (int)playerTarget.hp * 10;
+            SaveNewHighscore();
             thisBTSManager.LoadWinGameScene();
         }
 
         if (CheckIfMapCompleted())
         {
+            totalScore += (int)playerTarget.hp * 10;
+            SaveNewHighscore();
             thisBTSManager.LoadWinGameScene();
         }
 
@@ -731,6 +762,8 @@ public class MapGeneration : MonoBehaviour
             {
                 if (room.bossRoom)
                 {
+                        totalScore += (int)playerTarget.hp * 10;
+                        SaveNewHighscore();
                         thisBTSManager.LoadWinGameScene();          
                 }
                 else
@@ -787,7 +820,8 @@ public class MapGeneration : MonoBehaviour
         else
         {
             beginEnounter?.Invoke();
-
+            numberOfRoomsBeaten++;
+            totalScore += numberOfRoomsBeaten;
             currentWave = 0;
             EnemyWaves = new List<List<int>>();
             if (playerTarget.RecentlyTakenDamage > 0)
@@ -1052,6 +1086,7 @@ public class MapGeneration : MonoBehaviour
 
     public void ReceiveEnemyDeath(Vector3 pos)
     {
+        totalScore += 1;
         holdingLastEnemy = pos;
         EnemiesInEncounter--;
         Debug.Log("Enem left: "+EnemiesInEncounter);

@@ -47,7 +47,7 @@ public class PiercingAmmo : Ammo
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             //  Debug.Log("wall hit");
-            EventManager.current.OnAmmoDestroy(gameObject);
+            //EventManager.current.OnAmmoDestroy(gameObject);
         }
     }
 

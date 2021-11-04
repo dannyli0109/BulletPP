@@ -17,7 +17,7 @@ public class BTSManager : MonoBehaviour
     public GameObject pauseScreen;
     bool Paused;
 
-    GameState lastGameState;
+    GameState lastGameState; 
 
     void Start()
     {

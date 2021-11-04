@@ -2747,6 +2747,25 @@ MonoBehaviour:
       baseValue: 1
     heatSeeking:
       baseValue: 0
+  shrapnelStats:
+    damage:
+      baseValue: 0
+    speed:
+      baseValue: 0
+    size:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    travelTime:
+      baseValue: 0
+    fireRate:
+      baseValue: 0
+    amountOfBounces:
+      baseValue: 0
+    maxClip:
+      baseValue: 0
+    additionalAmmo:
+      baseValue: 0
   bouncingBladeStats:
     damage:
       baseValue: 0
@@ -2800,7 +2819,7 @@ MonoBehaviour:
   bouncingBladePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
   deskBulletPrefab: {fileID: 0}
-  aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
+  aoePrefab: {fileID: 6101272428832057770, guid: a1c280e04ddc73d4cb3ccb55409f0804, type: 3}
   bulletContainer: {fileID: 7872071981096972338}
   hp: 6
   gold: 0
@@ -2811,6 +2830,7 @@ MonoBehaviour:
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
   rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 0}
+  nextShotIsExploded: 0
   inventoryIndex: 0
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
@@ -2864,6 +2884,7 @@ MonoBehaviour:
   smoothingRange: 1
   finalDestination: {x: 0, y: 0, z: 0}
   EnemyAvoidanceAmount: 0.1
+  Stopped: 0
   coolDownTime: 0
   swarmSegmentDist: 4
   randomAdditionalSpeed: 3
