@@ -612,7 +612,7 @@ public class Player : Character
         //AugmentManager augmentManager = AugmentManager.current;
 
 
-        if (inventory.RemoveAt(index))
+        if (inventory.RemoveAt(index, this))
         {
             gold += 1;
             sellAugment?.Invoke();

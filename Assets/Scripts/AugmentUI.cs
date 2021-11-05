@@ -17,6 +17,9 @@ public class AugmentUI : MonoBehaviour
     public Shop shop;
     public HUDManager hudManager;
 
+    public List<Image> synergyIcons;
+    public Image separator;
+
     public GameEvent buyAugment;
     int id;
 
@@ -126,6 +129,25 @@ public class AugmentUI : MonoBehaviour
             outline.effectColor = augmentManager.augments[id].color;
             icon.sprite = augmentManager.augments[id].augmentIcon;
 
+            for (int i = 0; i < augmentManager.augments[id].synergies.Count; i++)
+            {
+                synergyIcons[i].gameObject.SetActive(true);
+                synergyIcons[i].sprite = augmentManager.augments[id].synergies[i].synergyIcon;
+            }
+
+            for (int i = augmentManager.augments[id].synergies.Count; i < synergyIcons.Count; i++)
+            {
+                synergyIcons[i].gameObject.SetActive(false);
+            }
+
+            if (augmentManager.augments[id].synergies.Count == 0)
+            {
+                separator.gameObject.SetActive(false);
+            }
+            else
+            {
+                separator.gameObject.SetActive(true);
+            }
         }
 
     }

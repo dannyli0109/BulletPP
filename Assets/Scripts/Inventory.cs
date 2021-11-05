@@ -61,10 +61,11 @@ public class Inventory
         return -1;
     }
 
-    public bool RemoveAt(int index)
+    public bool RemoveAt(int index, Character character)
     {
         if (index >= augments.Count) return false;
         augments.RemoveAt(index);
+        character.UpdateSynergies();
         return true;
     }
 }

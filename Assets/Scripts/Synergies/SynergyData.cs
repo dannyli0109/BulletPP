@@ -10,6 +10,7 @@ public abstract class SynergyData : ScriptableObject
     [TextArea(5, 10)]
     public List<string> descriptions;
     public Color color;
+    public Sprite synergyIcon;
 
     public abstract Synergy Create();
 
