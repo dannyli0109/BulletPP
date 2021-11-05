@@ -142,7 +142,7 @@ public class SpellQueueSwarm : SpellQueueEnemy
             if (coolDownTime <= 0)
             {
                 Debug.Log("bite");
-               // CreateAOE();
+                CreateAOE();
                 coolDownTime = 1.0f;
 
                 Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(0, 5), 0, UnityEngine.Random.Range(0, 5)));

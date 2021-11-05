@@ -5,6 +5,7 @@ public class Player : Character
     // TODO: this will need to be a singleton reference
     public BTSManager thisBTSManager;
     public CharacterController characterController;
+    public MapGeneration mapGenerationScript;
 
     public float RecentlyTakenDamage; // goes up when taken damage, goes down each turn
 
@@ -88,6 +89,7 @@ public class Player : Character
         {
             Debug.Log("Player Load lose");
             GameManager.current.ChangeStateImmdeiate(GameState.Transitional);
+            mapGenerationScript.SaveNewHighscore();
             thisBTSManager.LoadLoseGameScene();
 
         }
