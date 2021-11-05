@@ -97,7 +97,14 @@ public class MultiBullet : Augment
                 //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
 
                 //bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), stats.speed, new Vector3(0, 0, 0), stats.damage, stats.size, stats.lifeTime, 0, false, character.nextShotIsExploded, 30);
+                if (GetExplosiveRadius(character, index) > 0)
+                {
+                    bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), 30);
+                }
+                else
+                {
                 bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, 30);
+                }
 
             }
         }
