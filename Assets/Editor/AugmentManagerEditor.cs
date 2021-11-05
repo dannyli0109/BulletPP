@@ -122,7 +122,7 @@ public class AugmentDataEditor : Editor
 
 }
 
-[CustomEditor(typeof(SynergyData), true)]
+[CustomEditor(typeof(SynergyDataOld), true)]
 public class SynergyDataEditor : Editor
 {
 

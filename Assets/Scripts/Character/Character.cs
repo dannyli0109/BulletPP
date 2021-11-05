@@ -318,6 +318,34 @@ public abstract class Character : MonoBehaviour
         //return 2;
     }
 
+
+    public void AddSynergy(Synergy synergy)
+    {
+        for (int i = 0; i < synergies.Count; i++)
+        {
+            if (synergies[i].id == synergy.id)
+            {
+                synergies[i].count++;
+                return;
+            }
+        }
+        synergies.Add(synergy);
+    }
+
+    public void UpdateSynergies()
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            inventory[i].ResetTempStats();
+        }
+
+            for (int i = 0; i < synergies.Count; i++)
+            {
+                //if (inventory[i].synergies.)
+                synergies[i].Apply(this);
+            }
+    }
+
     public int GetAugmentLevel(int id)
     {
         int level = 0;

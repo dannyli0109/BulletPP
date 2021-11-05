@@ -16,7 +16,7 @@ public class SpellQueueSwarm : SpellQueueEnemy
 
     public override void Start()
     {
-        speed += UnityEngine.Random.RandomRange(0, randomAdditionalSpeed);
+        speed += UnityEngine.Random.Range(0, randomAdditionalSpeed);
         base.Start();
         Vector3 normalToNext = Vector3.Normalize(finalDestination - transform.position);
 
@@ -145,7 +145,7 @@ public class SpellQueueSwarm : SpellQueueEnemy
                 CreateAOE();
                 coolDownTime = 1.0f;
 
-                Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.RandomRange(0, 5), 0, UnityEngine.Random.RandomRange(0, 5)));
+                Vector3 normalAwayFromPlayer = Vector3.Normalize(new Vector3(UnityEngine.Random.Range(0, 5), 0, UnityEngine.Random.Range(0, 5)));
 
                 finalDestination = target.transform.position + normalAwayFromPlayer * desiredRange;
             }
@@ -187,7 +187,7 @@ public class SpellQueueSwarm : SpellQueueEnemy
         finalDestination = target.transform.position;
         Vector3 normalToNext = Vector3.Normalize(finalDestination - transform.position);
 
-        nextDestination = transform.position + normalToNext * swarmSegmentDist + new Vector3(UnityEngine.Random.RandomRange(-1, 1), 0, UnityEngine.Random.RandomRange(-1, 1));
+        nextDestination = transform.position + normalToNext * swarmSegmentDist + new Vector3(UnityEngine.Random.Range(-1, 1), 0, UnityEngine.Random.Range(-1, 1));
     //    Debug.DrawLine(transform.position, nextDestination, Color.cyan, 0.1f);
     }
 

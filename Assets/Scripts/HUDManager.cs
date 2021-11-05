@@ -277,19 +277,19 @@ public class HUDManager : MonoBehaviour
 
     public void PopulateSynergyListUI()
     {
-        foreach (Transform child in synergyListUIContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        //foreach (Transform child in synergyListUIContainer.transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
 
-        AugmentManager augmentManager = AugmentManager.current;
-        for (int i = 0; i < player.synergies.Count; i++)
-        {
-            GameObject synergyUI = Instantiate(synergyUIPrefab);
-            synergyUI.GetComponent<SynergyHUD>().Populate(player.synergies[i].id, player.synergies[i].breakPoint, player.synergies[i].count);
-            synergyUI.transform.SetParent(synergyListUIContainer.transform);
-            synergyUI.transform.localScale = new Vector3(1, 1, 1);
-        }
+        //AugmentManager augmentManager = AugmentManager.current;
+        //for (int i = 0; i < player.synergies.Count; i++)
+        //{
+        //    GameObject synergyUI = Instantiate(synergyUIPrefab);
+        //    synergyUI.GetComponent<SynergyHUD>().Populate(player.synergies[i].id, player.synergies[i].breakPoint, player.synergies[i].count);
+        //    synergyUI.transform.SetParent(synergyListUIContainer.transform);
+        //    synergyUI.transform.localScale = new Vector3(1, 1, 1);
+        //}
     }
 
 }

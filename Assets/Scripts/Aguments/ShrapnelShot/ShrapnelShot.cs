@@ -27,7 +27,15 @@ public class ShrapnelShot : Augment
                 holdingShrapnel++;
             }
         }
-        return holdingShrapnel + amountOfBullets;
+        //return holdingShrapnel + (int)stats.amountOfBullets;
+
+        int total = holdingShrapnel + (int)stats.amountOfBullets;
+        return (int)((total + (int)tempStats.amountOfBullets) * tempStatMultipliers.amountOfBullets);
+    }
+
+    public override float GetAngles(Character character, int index)
+    {
+        return (stats.angles + tempStats.angles) * tempStatMultipliers.angles;
     }
 
     public override Color GetColor(Character character, int index)
@@ -37,12 +45,32 @@ public class ShrapnelShot : Augment
 
     public override float GetDamage(Character character, int index)
     {
-        return damage;
+        return (stats.damage + tempStats.damage) * tempStatMultipliers.damage;
+    }
+
+    public override float GetExplosiveRadius(Character character, int index)
+    {
+        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
     }
 
     public override int GetId(Character character, int index)
     {
         return id;
+    }
+
+    public override float GetLifeTime(Character character, int index)
+    {
+        return (stats.lifeTime + tempStats.lifeTime) * tempStatMultipliers.lifeTime;
+    }
+
+    public override float GetSize(Character character, int index)
+    {
+        return (stats.size + tempStats.size) * tempStatMultipliers.size;
+    }
+
+    public override float GetSpeed(Character character, int index)
+    {
+        return (stats.speed + tempStats.speed) * tempStatMultipliers.speed;
     }
 
     public override void OnAttached(Character character, int index)
@@ -79,7 +107,7 @@ public class ShrapnelShot : Augment
         int amounts = GetAmounts(character, index);
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "blaster" }, new List<float>() { amounts });
 
-        float initialAngle = -angles / 2.0f;
+        float initialAngle = -stats.angles / 2.0f;
         float angleIncrements;
 
         if (amounts == 1)
@@ -89,7 +117,7 @@ public class ShrapnelShot : Augment
         }
         else
         {
-            angleIncrements = angles / (amounts - 1.0f);
+            angleIncrements = stats.angles / (amounts - 1.0f);
         }
 
 
@@ -102,7 +130,10 @@ public class ShrapnelShot : Augment
                 Vector3 forward = transform.forward;
 
                 // shrapnel.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
-                shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), speed, new Vector3(0, 0, 0), damage, size, lifeTime, 0, false, character.nextShotIsExploded, -1);
+                //shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), stats.speed, new Vector3(0, 0, 0), stats.damage, stats.size, stats.lifeTime, 0, false, character.nextShotIsExploded, -1);
+                shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, -1);
+
+
             }
         }
         character.nextShotIsExploded = -1;

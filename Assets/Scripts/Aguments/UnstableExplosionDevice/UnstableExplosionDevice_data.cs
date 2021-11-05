@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Augments/ExplodingBullet")]
+[CreateAssetMenu(fileName = "Augments/UnstableExplosionBullet")]
 public class UnstableExplosionDevice_data : AugmentData
 {
 
-    public float explosiveRadius;
+    //public float explosiveRadius;
 
     public float explosiveRadiusOfNextShot;
 

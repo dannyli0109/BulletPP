@@ -29,7 +29,7 @@ public class AugmentOld
     }
 }
 
-public class Synergy
+public class SynergyOld
 {
     public int id;
     public int count;

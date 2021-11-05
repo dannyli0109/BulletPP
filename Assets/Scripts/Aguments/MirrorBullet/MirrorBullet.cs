@@ -30,6 +30,18 @@ public class MirrorBullet : Augment
         }
     }
 
+    public override float GetAngles(Character character, int index)
+    {
+        if (index <= 0)
+        {
+            return (stats.angles + tempStats.angles) * tempStatMultipliers.angles;
+        }
+        else
+        {
+            return character.inventory[index - 1].GetAngles(character, index - 1);
+        }
+    }
+
     public override Color GetColor(Character character, int index)
     {
         if (index <= 0)
@@ -54,6 +66,11 @@ public class MirrorBullet : Augment
         }
     }
 
+    public override float GetExplosiveRadius(Character character, int index)
+    {
+        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+    }
+
     public override int GetId(Character character, int index)
     {
         if (index <= 0)
@@ -63,6 +80,42 @@ public class MirrorBullet : Augment
         else
         {
             return character.inventory[index - 1].GetId(character, index - 1);
+        }
+    }
+
+    public override float GetLifeTime(Character character, int index)
+    {
+        if (index <= 0)
+        {
+            return (stats.lifeTime + tempStats.lifeTime) * tempStatMultipliers.lifeTime;
+        }
+        else
+        {
+            return character.inventory[index - 1].GetLifeTime(character, index - 1);
+        }
+    }
+
+    public override float GetSize(Character character, int index)
+    {
+        if (index <= 0)
+        {
+            return (stats.size + tempStats.size) * tempStatMultipliers.size;
+        }
+        else
+        {
+            return character.inventory[index - 1].GetSize(character, index - 1);
+        }
+    }
+
+    public override float GetSpeed(Character character, int index)
+    {
+        if (index <= 0)
+        {
+            return (stats.speed + tempStats.speed) * tempStatMultipliers.speed;
+        }
+        else
+        {
+            return character.inventory[index - 1].GetSpeed(character, index - 1);
         }
     }
 
