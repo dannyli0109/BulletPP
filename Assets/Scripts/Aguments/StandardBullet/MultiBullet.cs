@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MultiBullet : Augment
 {
+
     public MultiBullet(MultiBulletData data) : base(data)
     {
 
@@ -67,7 +68,6 @@ public class MultiBullet : Augment
         
     }
 
-
     public override void Shoot(Character character, Transform transform, int index)
     {
         float initialAngle = -stats.angles / 2.0f;
@@ -82,6 +82,7 @@ public class MultiBullet : Augment
         }
         else
         {
+            initialAngle += stats.intialAngleOffset;
             angleIncrements = stats.angles / (amounts - 1.0f);
         }
 
