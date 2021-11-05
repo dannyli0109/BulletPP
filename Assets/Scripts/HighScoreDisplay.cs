@@ -43,6 +43,11 @@ public class HighScoreDisplay : MonoBehaviour
             holdingHighScore = PlayerPrefs.GetInt("HighScore");
             holdingAisBigger = false;
         }
+
+        if(PlayerPrefs.GetInt("HighScore")< holdingYourScore)
+        {
+            PlayerPrefs.SetInt("HighScore", holdingYourScore);
+        }
     }
 
     public void SaveNewHighscore()
@@ -108,8 +113,8 @@ public class HighScoreDisplay : MonoBehaviour
         {
             if (!holdingAisBigger)
             {
-
             folderB.transform.localScale = Vector3.MoveTowards(folderB.transform.localScale, new Vector3(1.5f, 1.5f, 1.5f), 3 * Time.deltaTime);
+
             }
         }
 
