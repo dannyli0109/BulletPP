@@ -60,7 +60,7 @@ public class Laser : Ammo
         bornTime += Time.deltaTime;
         if (bornTime >= lifeTime)
         {
-            currentLaserLength -= Time.deltaTime * lengthDecreaseSpeed;
+            //currentLaserLength -= Time.deltaTime * lengthDecreaseSpeed;
             currentLaserWidth -= Time.deltaTime * widthDecreaseSpeed;
             if (currentLaserLength <= 0)
             {

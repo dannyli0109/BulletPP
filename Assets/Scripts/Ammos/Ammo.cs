@@ -187,10 +187,10 @@ public abstract class Ammo : PooledItem
 
     protected void Explode()
     {
-        Debug.Log("explode");
+       // Debug.Log("explode");
         if (explodeRadius <= 0) return;
         Vector3 pos = new Vector3(transform.position.x, 0.01f, transform.position.z);
-        Debug.Log("created");
+       // Debug.Log("created");
         AOEDamage aoeDamage = Instantiate(aoePrefab, pos, Quaternion.identity);
         if (owner.gameObject.layer == 11)
         {

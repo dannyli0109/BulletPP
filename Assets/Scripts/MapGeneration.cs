@@ -199,10 +199,7 @@ public class MapGeneration : MonoBehaviour
     public void SaveNewHighscore()
     {
         PlayerPrefs.SetInt("LastHighScore", PlayerPrefs.GetInt("HighScore"));
-        if (PlayerPrefs.GetInt("HighScore") < totalScore)
-        {
-            PlayerPrefs.SetInt("HighScore", totalScore);
-        }
+     
         PlayerPrefs.SetInt("YourScore", totalScore);
     }
     #endregion
@@ -799,8 +796,12 @@ public class MapGeneration : MonoBehaviour
 
     public void StartEncounter(Room room)
     {
+        numberOfRoomsBeaten++;
+        totalScore += numberOfRoomsBeaten;
+
         if (room.bossRoom)
         {
+            totalScore += 20;
             beginEnounter?.Invoke();
 
             // lock doors
@@ -820,8 +821,7 @@ public class MapGeneration : MonoBehaviour
         else
         {
             beginEnounter?.Invoke();
-            numberOfRoomsBeaten++;
-            totalScore += numberOfRoomsBeaten;
+        
             currentWave = 0;
             EnemyWaves = new List<List<int>>();
             if (playerTarget.RecentlyTakenDamage > 0)

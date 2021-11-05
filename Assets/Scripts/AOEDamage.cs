@@ -27,6 +27,7 @@ public class AOEDamage : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.current.GameTransitional()) return;
         time += Time.deltaTime;
     }
 
@@ -52,7 +53,9 @@ public class AOEDamage : MonoBehaviour
 
     IEnumerator DamageSequence()
     {
-        Debug.Log("hit");
+
+
+        //Debug.Log("hit");
         circle.CreateCircleMesh(radius);
         Damage();
         AmmoPool ammoPool = AmmoPool.current;

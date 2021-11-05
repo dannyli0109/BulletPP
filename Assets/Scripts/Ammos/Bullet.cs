@@ -49,7 +49,7 @@ public class Bullet : Ammo
     private void OnTriggerEnter(Collider other)
     {
         if (GameManager.current.GameTransitional()) return;
-        Debug.Log("touching " + other);
+        //Debug.Log("touching " + other);
         HandleAmmoHit(other);
         if (timesBounced >= bounces)
         {

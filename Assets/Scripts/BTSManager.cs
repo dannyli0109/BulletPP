@@ -46,6 +46,13 @@ public class BTSManager : MonoBehaviour
         }
     }
 
+    public void Unpause()
+    {
+        Paused = false;
+        pauseScreen.SetActive(false);
+        GameManager.current.ChangeStateImmdeiate(lastGameState);
+    }
+
     public void LoadFirstRoomScene()
     {
         StartCoroutine(LoadLevel(firstRoomSceneIndex));

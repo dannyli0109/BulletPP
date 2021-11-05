@@ -35,6 +35,7 @@ public class Rocket : Ammo
 
       //  Debug.Log(currentSpeed);
     }
+
     private void FixedUpdate()
     {
         if (GameManager.current.GetState() == GameState.Pause) return;

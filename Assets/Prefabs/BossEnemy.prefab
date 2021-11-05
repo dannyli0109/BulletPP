@@ -1890,7 +1890,7 @@ MonoBehaviour:
     additionalAmmo:
       baseValue: 0
     maxLaserLength:
-      baseValue: 30
+      baseValue: 100
     maxLaserWidth:
       baseValue: 0.5
   animator: {fileID: 1109022956259654619}
@@ -1911,6 +1911,7 @@ MonoBehaviour:
   TransformBeingUsedBecauseFunctionsNeedATranform: {fileID: 0}
   rocketExitPoint: {fileID: 0}
   thisLineRenderer: {fileID: 1109022956268930727}
+  nextShotIsExploded: 0
   inventoryIndex: 0
   oldfinalDestination: {x: 0, y: 0, z: 0}
   oldnextDestination: {x: 0, y: 0, z: 0}
