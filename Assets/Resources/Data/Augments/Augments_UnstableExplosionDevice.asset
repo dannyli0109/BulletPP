@@ -14,18 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9
   index: 0
-  rarity: 0
+  rarity: 1
   augmentIcon: {fileID: 0}
+  synergies:
+  - {fileID: 11400000, guid: a1cc624e8ad70ad47a849fdcfe5087d9, type: 2}
   augmentName: Unstable Explosion Device
   description: 
   cost: 3
   color: {r: 0, g: 0.49172926, b: 1, a: 1}
-  damage: 3
-  speed: 21
-  size: 0.5
-  angles: 15
-  offset: 0
-  amountOfBullets: 1
-  lifeTime: 5
-  explosiveRadius: 0.75
+  stats:
+    damage: 3
+    speed: 21
+    size: 0.5
+    angles: 15
+    offset: 0
+    amountOfBullets: 1
+    lifeTime: 5
+    explosiveRadius: 0.75
   explosiveRadiusOfNextShot: 1.5

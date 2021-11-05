@@ -32,7 +32,33 @@ public class Inventory
         if (augments.Count >= capacity) return false;
         augments.Add(augment);
         augments[augments.Count - 1].OnAttached(character, augments.Count - 1);
+
+        
+        if (FindAugment(augment, augments.Count - 1) == -1)
+        {
+            for (int i = 0; i < augments[augments.Count - 1].synergies.Count; i++)
+            {
+                character.AddSynergy(augments[augments.Count - 1].synergies[i].Create());
+            }
+        }
+        character.UpdateSynergies();
+
+        //character.ApplyS
+        
+        // find if the player have that augment already
+        // if no, add the synergies to the player
+        // apply the new synergy
+
         return true;
+    }
+
+    public int FindAugment(Augment augment, int index)
+    {
+        for (int i = 0; i < augments.Count; i++)
+        {
+            if (augments[i].id == augment.id && i != index) return i;
+        }
+        return -1;
     }
 
     public bool RemoveAt(int index)

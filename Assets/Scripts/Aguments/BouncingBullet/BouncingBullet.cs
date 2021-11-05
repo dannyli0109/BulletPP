@@ -10,6 +10,10 @@ public class BouncingBullet : Augment
     {
         numberOfBounces = data.numberOfBounces;
     }
+    public override int GetId(Character character, int index)
+    {
+        return id;
+    }
 
     public override string description
     {
@@ -21,7 +25,12 @@ public class BouncingBullet : Augment
 
     public override int GetAmounts(Character character, int index)
     {
-        return amountOfBullets;
+        return (int)(((int)stats.amountOfBullets + (int)tempStats.amountOfBullets) * tempStatMultipliers.amountOfBullets);
+    }
+
+    public override float GetAngles(Character character, int index)
+    {
+        return (stats.angles + tempStats.angles) * tempStatMultipliers.angles;
     }
 
     public override Color GetColor(Character character, int index)
@@ -31,12 +40,28 @@ public class BouncingBullet : Augment
 
     public override float GetDamage(Character character, int index)
     {
-        return damage;
+        return (stats.damage + tempStats.damage) * tempStatMultipliers.damage;
     }
 
-    public override int GetId(Character character, int index)
+    public override float GetExplosiveRadius(Character character, int index)
     {
-        return id;
+        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+    }
+
+
+    public override float GetLifeTime(Character character, int index)
+    {
+        return (stats.lifeTime + tempStats.lifeTime) * tempStatMultipliers.lifeTime;
+    }
+
+    public override float GetSize(Character character, int index)
+    {
+        return (stats.size + tempStats.size) * tempStatMultipliers.size;
+    }
+
+    public override float GetSpeed(Character character, int index)
+    {
+        return (stats.speed + tempStats.speed) * tempStatMultipliers.speed;
     }
 
     public override void OnAttached(Character character, int index)
@@ -48,7 +73,7 @@ public class BouncingBullet : Augment
     {
         //SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
 
-        float initialAngle = -angles / 2.0f;
+        float initialAngle = -stats.angles / 2.0f;
         float angleIncrements;
         float amounts = GetAmounts(character, index);
 
@@ -59,7 +84,7 @@ public class BouncingBullet : Augment
         }
         else
         {
-            angleIncrements = angles / (amounts - 1.0f);
+            angleIncrements = stats.angles / (amounts - 1.0f);
         }
 
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "bounce" }, new List<float>() { amounts });
@@ -73,7 +98,7 @@ public class BouncingBullet : Augment
             {
                 Vector3 forward = transform.forward;
   
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime, numberOfBounces, false, character.nextShotIsExploded, -1);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), numberOfBounces, false, character.nextShotIsExploded, -1);
             }
         }
         character.nextShotIsExploded = -1;

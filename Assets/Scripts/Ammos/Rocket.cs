@@ -57,7 +57,9 @@ public class Rocket : Ammo
         }
         else
         {
-            transform.position += transform.forward * currentSpeed * Time.fixedDeltaTime;
+            velocity += acceleration * Time.fixedDeltaTime;
+            transform.forward = velocity.normalized;
+            transform.position += velocity * Time.fixedDeltaTime;
         }
     }
 

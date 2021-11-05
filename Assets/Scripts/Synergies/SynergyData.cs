@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class SynergyData : MonoBehaviour
+public abstract class SynergyData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int id;
+    public List<int> breakpoints;
+    [TextArea(5, 10)]
+    public List<string> descriptions;
+    public Color color;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract Synergy Create();
+
 }
