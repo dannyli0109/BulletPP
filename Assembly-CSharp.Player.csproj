@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\HighScoreDisplay.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\AmmoPool.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\RoomDoorCensor.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
     <Compile Include="Assets\Scripts\FlexibleGridLayout.cs" />
+    <Compile Include="Assets\Scripts\Synergies\ExplosiveSynergy.cs" />
     <Compile Include="Assets\Tooltip.cs" />
     <Compile Include="Assets\Scripts\Ammos\Bullet.cs" />
     <Compile Include="Assets\PooledItem.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TooltipSystem.cs" />
+    <Compile Include="Assets\Scripts\Synergies\Synergy.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Aguments\AugmentData.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="Assets\Scripts\Ammos\EnemyLaser.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\Synergies\ExplosiveSynergyData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\SellAugmentTrigger.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
@@ -234,10 +238,6 @@
     <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
     <Compile Include="Assets\Scripts\CSVParser\CSVTokenizer.cs" />
     <Compile Include="Assets\Scripts\AugmentHUD.cs" />
-    <Compile Include="Assets\Scripts\Synergies\Synergy.cs" />
-    <Compile Include="Assets\Scripts\Synergies\ExplosiveSynergy.cs" />
-    <Compile Include="Assets\Scripts\Synergies\ExplosiveSynergyData.cs" />
-    <Compile Include="Assets\Scripts\HighScoreDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll" />

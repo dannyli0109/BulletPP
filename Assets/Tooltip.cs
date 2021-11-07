@@ -15,13 +15,16 @@ public class Tooltip : MonoBehaviour
 
     public RectTransform rectTransform;
 
+    RectTransform targetRect;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void SetText(string content, string header = "")
+    public void SetText(RectTransform rect, string content, string header = "")
     {
+        targetRect = rect;
         if (string.IsNullOrEmpty(header))
         {
             headerField.gameObject.SetActive(false);
@@ -52,16 +55,24 @@ public class Tooltip : MonoBehaviour
 
         //    layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
         //}
-        RectTransform rt = gameObject.GetComponent<RectTransform>();
+        RectTransform rt = rectTransform;
         float width = rt.rect.width;
         float height = rt.rect.height;
 
-        Vector2 position = Input.mousePosition + new Vector3(0, height / 2 + 50, 0);
+        Vector2 position;
+        if (targetRect.transform.position.x > Screen.width / 2.0f)
+        {
+            position = targetRect.transform.position + new Vector3(-targetRect.rect.width / 2.0f - width / 2.0f, 0, 0);
+        }
+        else
+        {
+            position = targetRect.transform.position + new Vector3(targetRect.rect.width / 2.0f + width / 2.0f, 0, 0);
+        }
 
         //float pivotX = position.x / Screen.width;
         //float pivotY = position.y / Screen.height;
 
-        //rectTransform.pivot = new Vector2(position.x, position.y);
+        //rectTransform.pivot = new Vector2(0, 0.5f);
         transform.position = position;
     }
 }

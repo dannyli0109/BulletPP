@@ -56,6 +56,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         sellAugmentTrigger.disabled = false;
         tooltipTrigger.header = inventoryHUD.player.inventory[index].augmentName;
 
+        tooltipTrigger.rect = GetComponent<RectTransform>();
+
         string description = "<b>Selling Price: " + 1 + "</b>" + "\n";
         description += inventoryHUD.player.inventory[index].description;
         description += "\n<b>Right click to sell</b>";
@@ -74,6 +76,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         sellAugmentTrigger.disabled = true;
         tooltipTrigger.header = "";
         tooltipTrigger.content = "Empty slot";
+        tooltipTrigger.rect = GetComponent<RectTransform>();
+
     }
 
 
