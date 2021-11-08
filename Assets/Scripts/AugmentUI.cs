@@ -123,6 +123,7 @@ public class AugmentUI : MonoBehaviour
             title.text = augmentManager.augments[id].augmentName;
             tooltipTrigger.header = augmentManager.augments[id].augmentName;
             tooltipTrigger.content = augmentManager.augments[id].description;
+            tooltipTrigger.rect = GetComponent<RectTransform>();
             rarity.text = augmentManager.rarityTexts[augmentManager.augments[id].rarity];
             rarity.color = augmentManager.colors[augmentManager.augments[id].rarity];
             cost.text = "$ " + augmentManager.augments[id].cost;
@@ -131,8 +132,23 @@ public class AugmentUI : MonoBehaviour
 
             for (int i = 0; i < augmentManager.augments[id].synergies.Count; i++)
             {
+                SynergyData data = augmentManager.augments[id].synergies[i];
                 synergyIcons[i].gameObject.SetActive(true);
-                synergyIcons[i].sprite = augmentManager.augments[id].synergies[i].synergyIcon;
+                synergyIcons[i].sprite = data.synergyIcon;
+                TooltipTrigger synergyTrigger = synergyIcons[i].gameObject.GetComponent<TooltipTrigger>();
+                synergyTrigger.content = "";
+                for (int j = 0; j < data.breakpoints.Count; j++)
+                {
+                    synergyTrigger.content += data.synergyName + " " + data.breakpoints[j] + "\n";
+                    synergyTrigger.content += data.descriptions[j];
+                    if (j != data.breakpoints.Count - 1)
+                    {
+                        synergyTrigger.content += "\n";
+                    }
+                    synergyTrigger.header = data.synergyName;
+                    synergyTrigger.rect = GetComponent<RectTransform>();
+
+                }
             }
 
             for (int i = augmentManager.augments[id].synergies.Count; i < synergyIcons.Count; i++)

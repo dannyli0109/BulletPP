@@ -8,10 +8,11 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     public string content;
     public string header;
+    public RectTransform rect;
    
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.Show(content, header);
+        TooltipSystem.Show(rect, content, header);
     }
 
     public void OnPointerExit(PointerEventData eventData)

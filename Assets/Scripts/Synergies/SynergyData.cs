@@ -6,6 +6,7 @@ using System;
 public abstract class SynergyData : ScriptableObject
 {
     public int id;
+    public string synergyName;
     public List<int> breakpoints;
     [TextArea(5, 10)]
     public List<string> descriptions;
