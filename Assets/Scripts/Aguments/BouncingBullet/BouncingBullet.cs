@@ -6,6 +6,7 @@ public class BouncingBullet : Augment
 {
     public int numberOfBounces;
 
+
     public BouncingBullet(BouncingBulletData data) : base(data)
     {
         numberOfBounces = data.numberOfBounces;
@@ -98,9 +99,10 @@ public class BouncingBullet : Augment
             {
                 Vector3 forward = transform.forward;
   
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), numberOfBounces, false, character.nextShotIsExploded, -1);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), numberOfBounces, false, character.nextShotIsExploded, character.nextShotIsHoming);
             }
         }
         character.nextShotIsExploded = -1;
+        character.nextShotIsHoming = 0;
     }
 }

@@ -138,6 +138,7 @@ public abstract class Character : MonoBehaviour
 
     #region AugmentDevices
     public  float nextShotIsExploded;
+    public float nextShotIsHoming;
     #endregion
 
     public Inventory inventory;

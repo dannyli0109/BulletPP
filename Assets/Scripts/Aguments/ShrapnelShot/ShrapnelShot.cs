@@ -131,11 +131,12 @@ public class ShrapnelShot : Augment
 
                 // shrapnel.Init(character, forward, initialAngle + angleIncrements * i, speed, damage, size, lifeTime);
                 //shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), stats.speed, new Vector3(0, 0, 0), stats.damage, stats.size, stats.lifeTime, 0, false, character.nextShotIsExploded, -1);
-                shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, -1);
+                shrapnel.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, character.nextShotIsHoming);
 
 
             }
         }
         character.nextShotIsExploded = -1;
+        character.nextShotIsHoming = -1;
     }
 }

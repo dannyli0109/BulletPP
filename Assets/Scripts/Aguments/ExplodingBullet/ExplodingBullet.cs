@@ -95,8 +95,9 @@ public class ExplodingBullet : Augment
             if (ammoPool.rocketPool.TryInstantiate(out rocket, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                rocket.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false,  GetExplosiveRadius(character, index), -1);
+                rocket.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false,  GetExplosiveRadius(character, index), character.nextShotIsHoming);
             }
         }
+        character.nextShotIsHoming = 0;
     }
 }
