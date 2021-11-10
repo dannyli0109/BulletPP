@@ -37,7 +37,7 @@ public class PiercingAmmo : Ammo
                 {
                     continue;
                 }
-
+                transform.rotation = Quaternion.LookRotation(direction);
                 direction.Normalize();
                 Vector3 desireVelocity = direction * speed;
                 // homing factor

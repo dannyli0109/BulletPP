@@ -36,12 +36,17 @@ public class HighScoreDisplay : MonoBehaviour
         if (PlayerPrefs.GetInt("YourScore") == PlayerPrefs.GetInt("HighScore"))
         {
             holdingHighScore = PlayerPrefs.GetInt("LastHighScore");
-            holdingAisBigger = true;
+          
         }
         else
         {
             holdingHighScore = PlayerPrefs.GetInt("HighScore");
             holdingAisBigger = false;
+        }
+
+        if (holdingYourScore > holdingHighScore)
+        {
+            holdingAisBigger = true;
         }
 
         if(PlayerPrefs.GetInt("HighScore")< holdingYourScore)
@@ -87,7 +92,6 @@ public class HighScoreDisplay : MonoBehaviour
         {
             if (holdingAisBigger)
             {
-
                 folderA.transform.localScale = Vector3.MoveTowards(folderA.transform.localScale, new Vector3(1.5f, 1.5f, 1.5f),3* Time.deltaTime);
             }
         }
@@ -113,12 +117,9 @@ public class HighScoreDisplay : MonoBehaviour
         {
             if (!holdingAisBigger)
             {
-            folderB.transform.localScale = Vector3.MoveTowards(folderB.transform.localScale, new Vector3(1.5f, 1.5f, 1.5f), 3 * Time.deltaTime);
-
+                folderB.transform.localScale = Vector3.MoveTowards(folderB.transform.localScale, new Vector3(1.5f, 1.5f, 1.5f), 3 * Time.deltaTime);
             }
         }
-
-
         currentTimerA += Time.deltaTime;
         currentTimerB += Time.deltaTime;
     }

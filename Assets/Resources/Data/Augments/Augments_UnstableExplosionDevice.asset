@@ -19,7 +19,7 @@ MonoBehaviour:
   synergies:
   - {fileID: 11400000, guid: a1cc624e8ad70ad47a849fdcfe5087d9, type: 2}
   augmentName: Unstable Explosive Device
-  description: Shoot a rocket which made your next shot explode on contact.
+  description: Your next shot explodes on contact.
   cost: 3
   color: {r: 0, g: 0.49172926, b: 1, a: 1}
   stats:
@@ -28,6 +28,7 @@ MonoBehaviour:
     size: 0.5
     angles: 15
     offset: 0
+    intialAngleOffset: 0
     amountOfBullets: 1
     lifeTime: 5
     explosiveRadius: 0.75
