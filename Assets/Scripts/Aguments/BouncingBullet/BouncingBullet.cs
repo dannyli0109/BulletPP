@@ -44,9 +44,23 @@ public class BouncingBullet : Augment
         return (stats.damage + tempStats.damage) * tempStatMultipliers.damage;
     }
 
+
     public override float GetExplosiveRadius(Character character, int index)
     {
-        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        if (stats.explosiveRadius + tempStats.explosiveRadius > 0)
+        {
+            return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        }
+        else if (character.nextShotIsExploded > 0) return character.nextShotIsExploded * tempStatMultipliers.explosiveRadius;
+        else return 0;
+    }
+
+    public override float GetHomingRadius(Character character, int index)
+    {
+        if (stats.homingRadius > 0) return stats.homingRadius * tempStatMultipliers.homingRadius;
+        else if (tempStats.homingRadius > 0) return tempStats.homingRadius * tempStatMultipliers.homingRadius;
+        else if (character.nextShotIsHoming > 0) return character.nextShotIsHoming * tempStatMultipliers.homingRadius;
+        else return 0;
     }
 
 
@@ -74,7 +88,8 @@ public class BouncingBullet : Augment
     {
         //SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1);
 
-        float initialAngle = -stats.angles / 2.0f;
+        float angles = GetAngles(character, index);
+        float initialAngle = -angles / 2.0f;
         float angleIncrements;
         float amounts = GetAmounts(character, index);
 
@@ -85,7 +100,7 @@ public class BouncingBullet : Augment
         }
         else
         {
-            angleIncrements = stats.angles / (amounts - 1.0f);
+            angleIncrements = GetAngles(character, index) / (amounts - 1.0f);
         }
 
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "bounce" }, new List<float>() { amounts });
@@ -93,16 +108,16 @@ public class BouncingBullet : Augment
         AmmoPool ammoPool = AmmoPool.current;
         for (int i = 0; i < amounts; i++)
         {
-            Bullet bullet;
+            GenericBullet bullet;
 
             if (ammoPool.bouncingBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-  
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), numberOfBounces, false, character.nextShotIsExploded, character.nextShotIsHoming);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), numberOfBounces, false, GetExplosiveRadius(character, index), GetHomingRadius(character, index));
             }
         }
         character.nextShotIsExploded = -1;
         character.nextShotIsHoming = 0;
     }
+
 }

@@ -90,12 +90,48 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   fromFreshReload: 0
   aoePrefab: {fileID: 872178610100557008, guid: 7da2be8c5c33c9b4b9fd0de252a5aca5, type: 3}
-  magX: 0
-  magY: 0
-  shakeTime: 0
+  magX: 10
+  magY: 10
+  shakeTime: 0.5
   curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3.9387321
+      outSlope: -3.9387321
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.13379142
+      value: 0.47303146
+      inSlope: -2.5082796
+      outSlope: -2.5082796
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5046695
+      value: 0.07328904
+      inSlope: -0.60762894
+      outSlope: -0.60762894
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0009766
+      value: 0.0050811768
+      inSlope: -0.13743076
+      outSlope: -0.13743076
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

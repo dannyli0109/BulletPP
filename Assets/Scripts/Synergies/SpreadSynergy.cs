@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class ExplosiveSynergy : Synergy
+public class SpreadSynergy : Synergy
 {
-    public ExplosiveSynergy(SynergyData data) : base(data)
+    public SpreadSynergy(SynergyData data) : base(data)
     {
         onApply = new List<Action<Character>>();
         onApply.Add((Character character) =>
@@ -14,10 +14,9 @@ public class ExplosiveSynergy : Synergy
             {
                 for (int j = 0; j < character.inventory[i].synergies.Count; j++)
                 {
-                    if (character.inventory[i].synergies[j].id == id)
+                    if (character.inventory[i].GetAmounts(character, i) > 1)
                     {
-                        character.inventory[i].tempStatMultipliers.explosiveRadius += 0.5f;
-                        character.inventory[i].tempStatMultipliers.damage += 0.5f;
+                        character.inventory[i].tempStatMultipliers.damage += 1f;
                     }
                 }
             }
@@ -29,10 +28,9 @@ public class ExplosiveSynergy : Synergy
             {
                 for (int j = 0; j < character.inventory[i].synergies.Count; j++)
                 {
-                    if (character.inventory[i].synergies[j].id == id)
+                    if (character.inventory[i].GetAmounts(character, i) > 1)
                     {
-                        character.inventory[i].tempStatMultipliers.explosiveRadius += 0.5f;
-                        character.inventory[i].tempStatMultipliers.damage += 0.5f;
+                        character.inventory[i].tempStatMultipliers.damage += 2f;
                     }
                 }
             }
@@ -49,5 +47,4 @@ public class ExplosiveSynergy : Synergy
 
         });
     }
-
 }

@@ -7,36 +7,28 @@ public class AmmoPool : MonoBehaviour
     public static AmmoPool current;
 
 
-    public Bullet bulletPrefab;
-    public Pool<Bullet> bulletPool;
+    public GenericBullet bulletPrefab;
+    public Pool<GenericBullet> bulletPool;
     public int bulletCount;
 
-    public Bullet bouncingBulletPrefab;
-    public Pool<Bullet> bouncingBulletPool;
+    public GenericBullet bouncingBulletPrefab;
+    public Pool<GenericBullet> bouncingBulletPool;
     public int bouncingBulletCount;
 
-    public PiercingAmmo piercingAmmoPrefab;
-    public Pool<PiercingAmmo> piercingAmmoPool;
+    public GenericBullet piercingAmmoPrefab;
+    public Pool<GenericBullet> piercingAmmoPool;
     public int piercingAmmoCount;
 
-    public Shrapnel shrapnelAmmoPrefab;
-    public Pool<Shrapnel> shrapnelAmmoPool;
+    public GenericBullet shrapnelAmmoPrefab;
+    public Pool<GenericBullet> shrapnelAmmoPool;
     public int shrapnelAmmoCount;
 
-    public GenericBullet multiBulletPrefab;
-    public Pool<GenericBullet> multiBulletPool;
-    public int multiBulletCount;
-
-    public Grenade grenadePrefab;
-    public Pool<Grenade> grenadePool;
-    public int grenadeCount;
-
-    public Rocket rocketPrefab;
-    public Pool<Rocket> rocketPool;
+    public GenericBullet rocketPrefab;
+    public Pool<GenericBullet> rocketPool;
     public int rocketCount;
 
-    public Bullet enemyBulletPrefab;
-    public Pool<Bullet> enemyBulletPool;
+    public GenericBullet enemyBulletPrefab;
+    public Pool<GenericBullet> enemyBulletPool;
     public int enemyBulletCount;
 
     public ExplosionParticle explosionParticlePrefab;
@@ -51,29 +43,23 @@ public class AmmoPool : MonoBehaviour
     {
         current = this;
 
-        bulletPool = new Pool<Bullet>(bulletPrefab, bulletCount);
-        foreach (Bullet bullet in bulletPool.available) bullet.gameObject.transform.SetParent(transform);
+        bulletPool = new Pool<GenericBullet>(bulletPrefab, bulletCount);
+        foreach (GenericBullet bullet in bulletPool.available) bullet.gameObject.transform.SetParent(transform);
 
-        bouncingBulletPool = new Pool<Bullet>(bouncingBulletPrefab, bouncingBulletCount);
-        foreach (Bullet bouncingBullet in bouncingBulletPool.available) bouncingBullet.gameObject.transform.SetParent(transform);
+        bouncingBulletPool = new Pool<GenericBullet>(bouncingBulletPrefab, bouncingBulletCount);
+        foreach (GenericBullet bouncingBullet in bouncingBulletPool.available) bouncingBullet.gameObject.transform.SetParent(transform);
 
-        piercingAmmoPool = new Pool<PiercingAmmo>(piercingAmmoPrefab, piercingAmmoCount);
-        foreach (PiercingAmmo piercingAmmo in piercingAmmoPool.available) piercingAmmo.gameObject.transform.SetParent(transform);
+        piercingAmmoPool = new Pool<GenericBullet>(piercingAmmoPrefab, piercingAmmoCount);
+        foreach (GenericBullet piercingAmmo in piercingAmmoPool.available) piercingAmmo.gameObject.transform.SetParent(transform);
 
-        shrapnelAmmoPool = new Pool<Shrapnel>(shrapnelAmmoPrefab, shrapnelAmmoCount);
-        foreach (Shrapnel shrapnelAmmo in shrapnelAmmoPool.available) shrapnelAmmo.gameObject.transform.SetParent(transform);
+        shrapnelAmmoPool = new Pool<GenericBullet>(shrapnelAmmoPrefab, shrapnelAmmoCount);
+        foreach (GenericBullet shrapnelAmmo in shrapnelAmmoPool.available) shrapnelAmmo.gameObject.transform.SetParent(transform);
 
-        multiBulletPool = new Pool<GenericBullet>(multiBulletPrefab, multiBulletCount);
-        foreach (GenericBullet multiBullet in multiBulletPool.available) multiBullet.gameObject.transform.SetParent(transform);
+        rocketPool = new Pool<GenericBullet>(rocketPrefab, rocketCount);
+        foreach (GenericBullet rocket in rocketPool.available) rocket.gameObject.transform.SetParent(transform);
 
-        grenadePool = new Pool<Grenade>(grenadePrefab, grenadeCount);
-        foreach (Grenade grenade in grenadePool.available) grenade.gameObject.transform.SetParent(transform);
-
-        rocketPool = new Pool<Rocket>(rocketPrefab, rocketCount);
-        foreach (Rocket rocket in rocketPool.available) rocket.gameObject.transform.SetParent(transform);
-
-        enemyBulletPool = new Pool<Bullet>(enemyBulletPrefab, enemyBulletCount);
-        foreach (Bullet enemyBullet in enemyBulletPool.available) enemyBullet.gameObject.transform.SetParent(transform);
+        enemyBulletPool = new Pool<GenericBullet>(enemyBulletPrefab, enemyBulletCount);
+        foreach (GenericBullet enemyBullet in enemyBulletPool.available) enemyBullet.gameObject.transform.SetParent(transform);
 
         explosionParticlePool = new Pool<ExplosionParticle>(explosionParticlePrefab, explosionParticleCount);
         foreach (ExplosionParticle explosionParticle in explosionParticlePool.available) explosionParticle.gameObject.transform.SetParent(transform);

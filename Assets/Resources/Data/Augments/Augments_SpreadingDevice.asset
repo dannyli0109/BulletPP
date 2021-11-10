@@ -16,7 +16,8 @@ MonoBehaviour:
   index: 0
   rarity: 2
   augmentIcon: {fileID: 21300000, guid: cd0bd7a98f20739499812060cf3dc777, type: 3}
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 9bd0b7ea74edb56499fc2ff885f127d7, type: 2}
   augmentName: Spreading Device
   description: 'When obtained: Increase a random ammo amount by2.
 
@@ -30,7 +31,10 @@ MonoBehaviour:
     size: 2
     angles: 30
     offset: 0
+    intialAngleOffset: 0
     amountOfBullets: 1
     lifeTime: 2
+    explosiveRadius: 0
+    homingRadius: 0
   bulletIncrement: 2
   bulletIncrementTimes: 1

@@ -77,11 +77,14 @@ public abstract class Augment
 
     public abstract float GetExplosiveRadius(Character character, int index);
 
-    public void ResetTempStats()
+    public abstract float GetHomingRadius(Character character, int index);
+
+    public void ResetTempStats(Character character)
     {
         tempStats = new AugmentStats(0);
         tempStatMultipliers = new AugmentStats(1);
     }
+
 
     public abstract Color GetColor(Character character, int index);
 

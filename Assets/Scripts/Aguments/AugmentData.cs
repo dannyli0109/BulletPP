@@ -13,10 +13,11 @@ public struct AugmentStats
         size = initValue;
         angles = initValue;
         offset = initValue;
-      intialAngleOffset = initValue;
+        intialAngleOffset = initValue;
         amountOfBullets = initValue;
         lifeTime = initValue;
         explosiveRadius = initValue;
+        homingRadius = initValue;
     }
 
     public float damage;
@@ -28,6 +29,7 @@ public struct AugmentStats
     public float amountOfBullets;
     public float lifeTime;
     public float explosiveRadius;
+    public float homingRadius;
 }
 
 

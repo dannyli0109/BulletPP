@@ -68,7 +68,26 @@ public class MirrorBullet : Augment
 
     public override float GetExplosiveRadius(Character character, int index)
     {
-        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        if (index <= 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return character.inventory[index - 1].GetExplosiveRadius(character, index - 1);
+        }
+    }
+
+    public override float GetHomingRadius(Character character, int index)
+    {
+        if (index <= 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return character.inventory[index - 1].GetHomingRadius(character, index - 1);
+        }
     }
 
     public override int GetId(Character character, int index)

@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class GenericBullet : Ammo
 {
     private float lastTriggered;
+    private GameObject currentTarget;
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
@@ -38,30 +39,44 @@ public class GenericBullet : Ammo
     {
         if (GameManager.current.GetState() == GameState.Pause) return;
 
-        if (homingRadius>0)
+        if (homingRadius > 0)
         {
             Collider[] hitColliders = Physics.OverlapSphere(ammoTip.transform.position, homingRadius, 1 << 12);
+            int minIndex = -1;
+            float minDistance = float.MaxValue;
+            float minRadius = 3;
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 GameObject target = hitColliders[i].gameObject;
                 Vector3 direction = target.transform.position - ammoTip.transform.position;
-                RaycastHit hit;
-                Physics.Raycast(ammoTip.transform.position, transform.forward, out hit);
-                if (hit.collider.gameObject.layer == 10 && hit.distance < 5)
-                {
-                    continue;
-                }
+                direction = new Vector3(direction.x, 0, direction.z);
 
-                direction.Normalize();
-                Vector3 desireVelocity = direction * speed;
+                float distanceSquared = direction.sqrMagnitude;
+                if (minDistance > distanceSquared && distanceSquared > minRadius * minRadius && target != currentTarget)
+                {
+                    minIndex = i;
+                    minDistance = distanceSquared;
+                }
+            }
+            if (minIndex >= 0)
+            {
+                GameObject seekTarget = hitColliders[minIndex].gameObject;
+                Vector3 seekDirection = seekTarget.transform.position - ammoTip.transform.position;
+                seekDirection = new Vector3(seekDirection.x, 0, seekDirection.z);
+                seekDirection.Normalize();
+                Vector3 desireVelocity = seekDirection * speed;
                 // homing factor
                 acceleration = (desireVelocity - velocity) * 3;
-                break;
+            }
+            else
+            {
+                acceleration = new Vector3(0, 0, 0);
             }
         }
         velocity += acceleration * Time.fixedDeltaTime;
         transform.forward = velocity.normalized;
         transform.position += velocity * Time.fixedDeltaTime;
+
     }
 
     private void OnBulletDestroy(GameObject gameObject)
@@ -81,17 +96,15 @@ public class GenericBullet : Ammo
     {
         if (GameManager.current.GameTransitional()) return;
 
+        currentTarget = other.gameObject;
+
         if (lastTriggered > 0.1f)
         {
             HandleAmmoHit(other);
             lastTriggered = 0;
         }
 
-        if (pierce && other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        {
-            EventManager.current.OnAmmoDestroy(gameObject);
-        }
-        else if (pierce)
+        if (pierce)
         {
             SpawnHitParticle(owner.bulletStats.size.value);
         }

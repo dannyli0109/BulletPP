@@ -333,18 +333,26 @@ public abstract class Character : MonoBehaviour
         synergies.Add(synergy);
     }
 
-    public void UpdateSynergies()
+    public void ApplySynergy()
     {
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            inventory[i].ResetTempStats();
-        }
 
-            for (int i = 0; i < synergies.Count; i++)
+        for (int i = 0; i < synergies.Count; i++)
+        {
+            //if (inventory[i].synergies.)
+            synergies[i].Apply(this);
+        }
+    }
+
+    public void UpdateSynergy()
+    {
+        for (int i = 0; i < synergies.Count; i++)
+        {
+            if (synergies[i].breakPoint > -1)
             {
-                //if (inventory[i].synergies.)
-                synergies[i].Apply(this);
+
+                synergies[i].Update(this);
             }
+        }
     }
 
     public int GetAugmentLevel(int id)

@@ -43,7 +43,20 @@ public class SharpeningStone : Augment
 
     public override float GetExplosiveRadius(Character character, int index)
     {
-        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        if (stats.explosiveRadius + tempStats.explosiveRadius > 0)
+        {
+            return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        }
+        else if (character.nextShotIsExploded > 0) return character.nextShotIsExploded * tempStatMultipliers.explosiveRadius;
+        else return 0;
+    }
+
+    public override float GetHomingRadius(Character character, int index)
+    {
+        if (stats.homingRadius > 0) return stats.homingRadius * tempStatMultipliers.homingRadius;
+        else if (tempStats.homingRadius > 0) return tempStats.homingRadius * tempStatMultipliers.homingRadius;
+        else if (character.nextShotIsHoming > 0) return character.nextShotIsHoming * tempStatMultipliers.homingRadius;
+        else return 0;
     }
 
     public override int GetId(Character character, int index)
@@ -88,7 +101,8 @@ public class SharpeningStone : Augment
 
     public override void Shoot(Character character, Transform transform, int index)
     {
-        float initialAngle = -stats.angles / 2.0f;
+        float angles = GetAngles(character, index);
+        float initialAngle = -angles / 2.0f;
         float angleIncrements;
         float amounts = GetAmounts(character, index);
 
@@ -99,7 +113,7 @@ public class SharpeningStone : Augment
         }
         else
         {
-            angleIncrements = stats.angles / (amounts - 1.0f);
+            angleIncrements = angles / (amounts - 1.0f);
         }
 
         SoundManager.PlaySound(SoundType.Gunshot, transform.position, 1, new List<string>() { "blaster" }, new List<float>() { amounts });
@@ -110,10 +124,10 @@ public class SharpeningStone : Augment
         for (int i = 0; i < amounts; i++)
         {
             GenericBullet bullet;
-            if (ammoPool.multiBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
+            if (ammoPool.shrapnelAmmoPool.TryInstantiate(out bullet, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                bullet.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, character.nextShotIsHoming);
+                bullet.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), GetHomingRadius(character, index));
 
             }
         }

@@ -10,7 +10,8 @@ public abstract class Synergy
     [TextArea(5, 10)]
     public List<string> descriptions;
     public Color color;
-    public List<Action<Character>> actions;
+    public List<Action<Character>> onApply;
+    public List<Action<Character>> onUpdate;
     public int count;
 
     public int breakPoint
@@ -39,7 +40,16 @@ public abstract class Synergy
         int value = breakPoint;
         if (value > -1)
         {
-            actions[value](character);
+            onApply[value](character);
+        }
+    }
+
+    public void Update(Character character)
+    {
+        int value = breakPoint;
+        if (value > -1)
+        {
+            onUpdate[value](character);
         }
     }
 }

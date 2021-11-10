@@ -41,7 +41,12 @@ public class Inventory
                 character.AddSynergy(augments[augments.Count - 1].synergies[i].Create());
             }
         }
-        character.UpdateSynergies();
+
+        for (int i = 0; i < augments.Count; i++)
+        {
+            augments[i].ResetTempStats(character);
+        }
+        character.ApplySynergy();
 
         //character.ApplyS
         
@@ -50,6 +55,18 @@ public class Inventory
         // apply the new synergy
 
         return true;
+    }
+
+    public void ResetUpdate(Character character)
+    {
+        LineRenderer lineRenderer = character.GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
+    }
+
+
+    public void OnUpdate(Character character)
+    {
+        character.UpdateSynergy();
     }
 
     public int FindAugment(Augment augment, int index)
@@ -64,8 +81,42 @@ public class Inventory
     public bool RemoveAt(int index, Character character)
     {
         if (index >= augments.Count) return false;
+
+        // update synergy count here;
+
+        RemoveAugmentSynergies(index, character);
+
         augments.RemoveAt(index);
-        character.UpdateSynergies();
+        for (int i = 0; i < augments.Count; i++)
+        {
+            augments[i].ResetTempStats(character);
+        }
+        character.ApplySynergy();
         return true;
+    }
+
+    public void RemoveAugmentSynergies(int index, Character character)
+    {
+        for (int i = 0; i < augments[index].synergies.Count; i++)
+        {
+            int synergyId = augments[index].synergies[i].id;
+            for (int j = 0; j < character.synergies.Count; j++)
+            {
+                if (character.synergies[j].id == synergyId)
+                {
+                    character.synergies[j].count--;
+                }
+            }
+
+        }
+
+        for (int i = 0; i < character.synergies.Count; i++)
+        {
+            if (character.synergies[i].count <= 0)
+            {
+                character.synergies.RemoveAt(i);
+                i--;
+            }
+        }
     }
 }

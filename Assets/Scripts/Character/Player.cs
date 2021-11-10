@@ -104,6 +104,7 @@ public class Player : Character
             SoundManager.current.levelMusic.setParameterByName("life", hp / 6.0f);
         }
 
+
         if (!isDashing)
         {
             HandleReload();
@@ -116,6 +117,8 @@ public class Player : Character
         {
             dashShield.SetActive(true);
         }
+        inventory.ResetUpdate(this);
+        inventory.OnUpdate(this);
         HandleDashing();
         UpdateAnimation();
 
@@ -245,7 +248,7 @@ public class Player : Character
             angle = transform.localRotation.eulerAngles.y;
             // characterController.Move(new Vector3(lastMovementDirection.x * stats.dashAmount.value, 0, lastMovementDirection.y * stats.dashAmount.value));
             rocketExitPoint.position = transform.position;
-            ResolveDashEffects();
+            //ResolveDashEffects();
         }
 
         //animator.SetBool("Roll", isDashing);
@@ -305,32 +308,32 @@ public class Player : Character
         return null;
     }
 
-    void Shoot(int type, float angle)
-    {
-        switch (type)
-        {
-            case 0:
-                ShootBullet(angle);
-                break;
-            case 1:
-                ShootGrenade(angle);
-                break;
-            case 2:
-                ShootLaser(angle);
-                break;
-            case 3:
-                ShootRocket(angle);
-                break;
-            case 4:
-                ShootLaser(angle);
-                break;
-            case 5:
-                ShootBouncingBlade(angle);
-                break;
-            default:
-                break;
-        }
-    }
+    //void Shoot(int type, float angle)
+    //{
+    //    switch (type)
+    //    {
+    //        case 0:
+    //            ShootBullet(angle);
+    //            break;
+    //        case 1:
+    //            ShootGrenade(angle);
+    //            break;
+    //        case 2:
+    //            ShootLaser(angle);
+    //            break;
+    //        case 3:
+    //            ShootRocket(angle);
+    //            break;
+    //        case 4:
+    //            ShootLaser(angle);
+    //            break;
+    //        case 5:
+    //            ShootBouncingBlade(angle);
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 
     bool ShootBullet(float angle)
     {
@@ -385,16 +388,15 @@ public class Player : Character
     {
         if (currentRocketClip > 0)
         {
-            Rocket rocket;
+            GenericBullet rocket;
             if (ammoPool.rocketPool.TryInstantiate(out rocket, bulletContainer.position, bulletContainer.rotation))
             {
-                Ammo ammoComponent = rocket.GetComponent<Ammo>();
                 Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value, 2);
+                rocket.Init(this, forward, angle, rocketStats.speed.value, stats.damageMultiplier.value * rocketStats.damage.value, rocketStats.size.value, 2);
                 currentRocketClip--;
                 if (freshReload)
                 {
-                    ammoComponent.fromFreshReload = true;
+                    rocket.fromFreshReload = true;
                 }
                 return true;
             }
@@ -402,26 +404,26 @@ public class Player : Character
         return false;
     }
 
-    bool ShootGrenade(float angle)
-    {
-        if (currentGrenadeClip > 0)
-        {
-            Grenade grenade;
-            if (ammoPool.grenadePool.TryInstantiate(out grenade, bulletContainer.position, bulletContainer.rotation))
-            {
-                Ammo ammoComponent = grenade.GetComponent<Ammo>();
-                Vector3 forward = bulletContainer.forward;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value, 2);
-                currentGrenadeClip--;
-                if (freshReload)
-                {
-                    ammoComponent.fromFreshReload = true;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
+    //bool ShootGrenade(float angle)
+    //{
+    //    if (currentGrenadeClip > 0)
+    //    {
+    //        Grenade grenade;
+    //        if (ammoPool.grenadePool.TryInstantiate(out grenade, bulletContainer.position, bulletContainer.rotation))
+    //        {
+    //            Ammo ammoComponent = grenade.GetComponent<Ammo>();
+    //            Vector3 forward = bulletContainer.forward;
+    //            ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value, 2);
+    //            currentGrenadeClip--;
+    //            if (freshReload)
+    //            {
+    //                ammoComponent.fromFreshReload = true;
+    //            }
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
     bool ShootLaser(float angle)
     {
@@ -462,16 +464,16 @@ public class Player : Character
         return false;
     }
 
-    bool ShootAmmos(float angle)
-    {
-        bool shot = false;
-        if (ShootBullet(UnityEngine.Random.Range(-angle, angle))) shot = true;
-        if (ShootGrenade(UnityEngine.Random.Range(-angle, angle))) shot = true;
-        if (ShootRocket(UnityEngine.Random.Range(-angle, angle))) shot = true;
-        if (ShootLaser(UnityEngine.Random.Range(-angle, angle))) shot = true;
-        if (ShootBouncingBlade(UnityEngine.Random.Range(-angle, angle))) shot = true;
-        return shot;
-    }
+    //bool ShootAmmos(float angle)
+    //{
+    //    bool shot = false;
+    //    if (ShootBullet(UnityEngine.Random.Range(-angle, angle))) shot = true;
+    //    if (ShootGrenade(UnityEngine.Random.Range(-angle, angle))) shot = true;
+    //    if (ShootRocket(UnityEngine.Random.Range(-angle, angle))) shot = true;
+    //    if (ShootLaser(UnityEngine.Random.Range(-angle, angle))) shot = true;
+    //    if (ShootBouncingBlade(UnityEngine.Random.Range(-angle, angle))) shot = true;
+    //    return shot;
+    //}
 
     void HandleReload()
     {
@@ -543,29 +545,29 @@ public class Player : Character
         animator.SetFloat("y", movemntRotated.y);
     }
 
-    void ResolveDashEffects()
-    {
-        if (stats.reloadOnDash.value > 0)
-        {
-            PartialReload();
-        }
+    //void ResolveDashEffects()
+    //{
+    //    if (stats.reloadOnDash.value > 0)
+    //    {
+    //        PartialReload();
+    //    }
 
-        if (stats.shootRocketOnDash.value > 0)
-        {
-            Rocket rocket;
-            if (ammoPool.rocketPool.TryInstantiate(out rocket, rocketExitPoint.position, rocketExitPoint.rotation))
-            {
-                Ammo ammoComponent = rocket.GetComponent<Ammo>();
-                Vector3 forward = lastMovementDirection;
-                ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value, 2);
-            }
-        }
+    //    if (stats.shootRocketOnDash.value > 0)
+    //    {
+    //        Rocket rocket;
+    //        if (ammoPool.rocketPool.TryInstantiate(out rocket, rocketExitPoint.position, rocketExitPoint.rotation))
+    //        {
+    //            Ammo ammoComponent = rocket.GetComponent<Ammo>();
+    //            Vector3 forward = lastMovementDirection;
+    //            ammoComponent.Init(this, forward, angle, bulletStats.speed.value, stats.damageMultiplier.value * bulletStats.damage.value, bulletStats.size.value, 2);
+    //        }
+    //    }
 
-        if (stats.personalSpace.value > 1)
-        {
-            CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
-        }
-    }
+    //    if (stats.personalSpace.value > 1)
+    //    {
+    //        CreatePlayerAOE(new Vector2(transform.position.x, transform.position.z));
+    //    }
+    //}
 
     void MoveCharacter()
     {

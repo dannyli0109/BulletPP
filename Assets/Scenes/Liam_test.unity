@@ -927,6 +927,30 @@ PrefabInstance:
       propertyPath: bulletParticleCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: -7235951037633610423, guid: 5a013fe726515984193a7b943f834c75, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: bouncingBulletPrefab
+      value: 
+      objectReference: {fileID: 3920542588785246298, guid: 0c28379537797de45aa9a539710b7e86, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: piercingAmmoPrefab
+      value: 
+      objectReference: {fileID: 6431269872248623740, guid: 953e56dd9e22bfe42b369a2de2a3a850, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: shrapnelAmmoPrefab
+      value: 
+      objectReference: {fileID: -49402797620802963, guid: f12048e668dcffc4aa188d9c0342e8d0, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: rocketPrefab
+      value: 
+      objectReference: {fileID: 1744530064102215046, guid: 6f4c4fd3fdf25f14198b7dd5c695bde9, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: enemyBulletPrefab
+      value: 
+      objectReference: {fileID: 2583197940214297748, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
 --- !u!114 &265243478 stripped

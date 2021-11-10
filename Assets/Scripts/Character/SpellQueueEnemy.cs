@@ -352,7 +352,7 @@ public class SpellQueueEnemy : Enemy
 
     void ShootBullet(Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size)
     {
-        Bullet bullet;
+        GenericBullet bullet;
         AmmoPool ammoPool = AmmoPool.current;
         bool instantiated = ammoPool.enemyBulletPool.TryInstantiate(out bullet, bulletContainer.position, bulletContainer.rotation);
         if (instantiated)
@@ -363,7 +363,7 @@ public class SpellQueueEnemy : Enemy
 
     public void ShootBullet(Vector3 position, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, float lifeTime)
     {
-        Bullet bullet;
+        GenericBullet bullet;
         AmmoPool ammoPool = AmmoPool.current;
         bool instantiated = ammoPool.enemyBulletPool.TryInstantiate(out bullet, position, Quaternion.identity);
         if (instantiated)

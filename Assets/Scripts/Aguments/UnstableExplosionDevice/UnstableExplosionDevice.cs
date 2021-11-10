@@ -43,7 +43,20 @@ public class UnstableExplosionDevice: Augment
 
     public override float GetExplosiveRadius(Character character, int index)
     {
-        return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        if (stats.explosiveRadius + tempStats.explosiveRadius > 0)
+        {
+            return (stats.explosiveRadius + tempStats.explosiveRadius) * tempStatMultipliers.explosiveRadius;
+        }
+        else if (character.nextShotIsExploded > 0) return character.nextShotIsExploded * tempStatMultipliers.explosiveRadius;
+        else return 0;
+    }
+
+    public override float GetHomingRadius(Character character, int index)
+    {
+        if (stats.homingRadius > 0) return stats.homingRadius * tempStatMultipliers.homingRadius;
+        else if (tempStats.homingRadius > 0) return tempStats.homingRadius * tempStatMultipliers.homingRadius;
+        else if (character.nextShotIsHoming > 0) return character.nextShotIsHoming * tempStatMultipliers.homingRadius;
+        else return 0;
     }
 
     public override int GetId(Character character, int index)
@@ -95,11 +108,11 @@ public class UnstableExplosionDevice: Augment
         AmmoPool ammoPool = AmmoPool.current;
         for (int i = 0; i < amounts; i++)
         {
-            Rocket rocket;
+            GenericBullet rocket;
             if (ammoPool.rocketPool.TryInstantiate(out rocket, transform.position, transform.rotation))
             {
                 Vector3 forward = transform.forward;
-                rocket.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), character.nextShotIsHoming);
+                rocket.Init(character, forward, initialAngle + angleIncrements * i, GetSpeed(character, index), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), GetHomingRadius(character, index));
             }
         }
         character.nextShotIsHoming = -1;
