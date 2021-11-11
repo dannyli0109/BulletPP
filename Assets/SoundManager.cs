@@ -44,6 +44,8 @@ public class SoundManager : MonoBehaviour
         switch (sceneIndex)
         {
             case 0:
+            case 2:
+            case 3:
                 {
                     levelMusic = CreateInstance(PathToGUID("event:/music/title screen music"));
                     //levelMusic.set3DAttributes(attributes)
