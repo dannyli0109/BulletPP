@@ -19,7 +19,7 @@ MonoBehaviour:
   synergies:
   - {fileID: 11400000, guid: a1cc624e8ad70ad47a849fdcfe5087d9, type: 2}
   augmentName: Explosive Bullet
-  description: Shoot 1 bullet that deals 6 damage on hit to a area
+  description: Explodes on hit.
   cost: 3
   color: {r: 0, g: 0.3471055, b: 1, a: 1}
   stats:
@@ -28,7 +28,9 @@ MonoBehaviour:
     size: 2
     angles: 30
     offset: 0
+    intialAngleOffset: 0
     amountOfBullets: 1
     lifeTime: 2
-    explosiveRadius: 5
-  explosiveRadius: 5
+    explosiveRadius: 3
+    homingRadius: 0
+  explosiveRadius: 3

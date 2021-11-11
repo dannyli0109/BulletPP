@@ -61,12 +61,12 @@ public class AOEDamage : MonoBehaviour
         AmmoPool ammoPool = AmmoPool.current;
 
         ExplosionParticle explosionParticle;
-        Vector3 particlePos = new Vector3(transform.position.x, 4, transform.position.z);
+        Vector3 particlePos = new Vector3(transform.position.x, 0, transform.position.z);
         bool instantiated;
         instantiated = ammoPool.explosionParticlePool.TryInstantiate(out explosionParticle, particlePos, Quaternion.identity);
         if (instantiated)
         {
-            explosionParticle.transform.localScale = new Vector3(radius / 2.0f, radius / 2.0f, radius / 2.0f);
+            explosionParticle.transform.localScale = new Vector3(radius / 4.0f, radius / 4.0f, radius / 4.0f);
         }
         yield return new WaitForSeconds(fadeOutTime);
         if (instantiated)

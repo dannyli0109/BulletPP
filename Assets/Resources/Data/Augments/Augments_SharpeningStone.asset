@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09222e5118a28b42bebd3eb7c803ba1, type: 3}
   m_Name: Augments_SharpeningStone
   m_EditorClassIdentifier: 
-  id: 7
+  id: 6
   index: 0
   rarity: 1
   augmentIcon: {fileID: 21300000, guid: e9211ab3c60c53f4097a4ae369355f03, type: 3}
   synergies: []
   augmentName: Sharpening Stone
-  description: 'When obtained: Increase 2 random ammo damage by 2.
-
-    Shoot 1 bullet
-    that deals 1 damage'
+  description: 'When obtained: Increase 2 random ammo damage by 2.'
   cost: 3
   color: {r: 1, g: 0.5411765, b: 0, a: 1}
   stats:
@@ -30,7 +27,10 @@ MonoBehaviour:
     size: 2
     angles: 30
     offset: 0
+    intialAngleOffset: 0
     amountOfBullets: 1
     lifeTime: 2
+    explosiveRadius: 0
+    homingRadius: 0
   damageIncrement: 2
   damageIncrementTimes: 2
