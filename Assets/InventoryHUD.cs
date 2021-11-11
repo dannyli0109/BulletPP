@@ -7,6 +7,8 @@ public class InventoryHUD : MonoBehaviour
     public static InventoryHUD current;
     public Player player;
     public List<InventorySlot> inventorySlots;
+    public GameObject synergyTitle;
+    public List<SynergySlot> synergies;
 
     // Start is called before the first frame update
 
@@ -36,6 +38,26 @@ public class InventoryHUD : MonoBehaviour
         for (int i = player.inventory.Count; i < player.inventory.capacity; i++)
         {
             inventorySlots[i].PopulateEmpty(i);
+        }
+
+        if (player.synergies.Count == 0)
+        {
+            synergyTitle.SetActive(false);
+        }
+        else
+        {
+            synergyTitle.SetActive(true);
+        }
+
+        for (int i = 0; i < player.synergies.Count; i++)
+        {
+            synergies[i].gameObject.SetActive(true);
+            synergies[i].Populate(i);
+        }
+
+        for (int i = player.synergies.Count; i < synergies.Count; i++)
+        {
+            synergies[i].gameObject.SetActive(false);
         }
     }
 

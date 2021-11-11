@@ -33,14 +33,14 @@ public class Inventory
         augments.Add(augment);
         augments[augments.Count - 1].OnAttached(character, augments.Count - 1);
 
-        
-        if (FindAugment(augment, augments.Count - 1) == -1)
+        for (int i = 0; i < augments[augments.Count - 1].synergies.Count; i++)
         {
-            for (int i = 0; i < augments[augments.Count - 1].synergies.Count; i++)
-            {
-                character.AddSynergy(augments[augments.Count - 1].synergies[i].Create());
-            }
+            character.AddSynergy(augments[augments.Count - 1].synergies[i].Create());
         }
+        
+        //if (FindAugment(augment, augments.Count - 1) == -1)
+        //{
+        //}
 
         for (int i = 0; i < augments.Count; i++)
         {

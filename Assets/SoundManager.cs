@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static FMODUnity.RuntimeManager;
 using FMODUnity;
+using UnityEngine.SceneManagement;
 public enum SoundType
 {
     FootStep,
@@ -38,24 +39,43 @@ public class SoundManager : MonoBehaviour
         //audioMap.Add(SoundType.FootStep, Resources.Load<AudioClip>("Sounds/FootStep"));
         //audioMap.Add(SoundType.Gunshot, Resources.Load<AudioClip>("Sounds/Gunshot"));
 
-        audioMap.Add(SoundType.GunshotEnemy, "event:/enemy/enemy fire");
-        audioMap.Add(SoundType.Gunshot, "event:/player/weapons");
-        audioMap.Add(SoundType.BlasterHit, "event:/enemy/blaster hit");
-        audioMap.Add(SoundType.RocketHit, "event:/enemy/rocket hit");
-        audioMap.Add(SoundType.LaserHit, "event:/enemy/laser hit");
-        audioMap.Add(SoundType.FootStep, "event:/player/player foot steps");
-        audioMap.Add(SoundType.FootStepEnemy, "event:/enemy/enemey footsteps");
-        audioMap.Add(SoundType.Reloading, "event:/player/reload");
-        audioMap.Add(SoundType.Roll, "event:/player/roll");
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        atmos = CreateInstance(PathToGUID("event:/envioroment/atmos"));
-        levelMusic = CreateInstance(PathToGUID("event:/music/level music"));
+        switch (sceneIndex)
+        {
+            case 0:
+                {
+                    levelMusic = CreateInstance(PathToGUID("event:/music/title screen music"));
+                    //levelMusic.set3DAttributes(attributes)
+                    levelMusic.setVolume(volume);
+                    levelMusic.start();
+                    break;
+                }
+            case 1:
+                {
+                    audioMap.Add(SoundType.GunshotEnemy, "event:/enemy/enemy fire");
+                    audioMap.Add(SoundType.Gunshot, "event:/player/weapons");
+                    audioMap.Add(SoundType.BlasterHit, "event:/enemy/blaster hit");
+                    audioMap.Add(SoundType.RocketHit, "event:/enemy/rocket hit");
+                    audioMap.Add(SoundType.LaserHit, "event:/enemy/laser hit");
+                    audioMap.Add(SoundType.FootStep, "event:/player/player foot steps");
+                    audioMap.Add(SoundType.FootStepEnemy, "event:/enemy/enemey footsteps");
+                    audioMap.Add(SoundType.Reloading, "event:/player/reload");
+                    audioMap.Add(SoundType.Roll, "event:/player/roll");
 
-        atmos.setVolume(volume);
-        atmos.start();
+                    atmos = CreateInstance(PathToGUID("event:/envioroment/atmos"));
+                    levelMusic = CreateInstance(PathToGUID("event:/music/level music"));
 
-        levelMusic.setVolume(volume);
-        levelMusic.start();
+                    atmos.setVolume(volume);
+                    atmos.start();
+
+                    levelMusic.setVolume(volume);
+                    levelMusic.start();
+                    break;
+                }
+            default:
+                break;
+        }
     }
 
     private void Update()

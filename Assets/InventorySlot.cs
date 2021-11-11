@@ -26,6 +26,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public Outline imageOutline;
     public Animator damageTextAnimator;
     public Animator amountTextAnimator;
+    public List<Image> synergyIcons;
     Vector2 anchorPosition;
     // Start is called before the first frame update
     void Start()
@@ -64,6 +65,31 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
         tooltipTrigger.content = description;
         imageOutline.effectColor = inventoryHUD.player.inventory[index].GetColor(inventoryHUD.player, index);
+
+        for (int i = 0; i < inventoryHUD.player.inventory[index].synergies.Count; i++)
+        {
+            SynergyData data = inventoryHUD.player.inventory[index].synergies[i];
+            synergyIcons[i].gameObject.SetActive(true);
+            synergyIcons[i].sprite = data.synergyIcon;
+            TooltipTrigger synergyTrigger = synergyIcons[i].gameObject.GetComponent<TooltipTrigger>();
+            synergyTrigger.content = "";
+            for (int j = 0; j < data.breakpoints.Count; j++)
+            {
+                synergyTrigger.content += data.synergyName + " " + data.breakpoints[j] + "\n";
+                synergyTrigger.content += data.descriptions[j];
+                if (j != data.breakpoints.Count - 1)
+                {
+                    synergyTrigger.content += "\n";
+                }
+                synergyTrigger.header = data.synergyName;
+                synergyTrigger.rect = GetComponent<RectTransform>();
+            }
+        }
+
+        for (int i = inventoryHUD.player.inventory[index].synergies.Count; i < synergyIcons.Count; i++)
+        {
+            synergyIcons[i].gameObject.SetActive(false);
+        }
     }
 
 
@@ -77,6 +103,11 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         tooltipTrigger.header = "";
         tooltipTrigger.content = "Empty slot";
         tooltipTrigger.rect = GetComponent<RectTransform>();
+
+        for (int i = 0; i < synergyIcons.Count; i++)
+        {
+            synergyIcons[i].gameObject.SetActive(false);
+        }
 
     }
 
