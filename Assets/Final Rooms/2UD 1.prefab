@@ -27504,7 +27504,7 @@ ReflectionProbe:
   serializedVersion: 2
   m_Type: 0
   m_Mode: 1
-  m_RefreshMode: 0
+  m_RefreshMode: 1
   m_TimeSlicingMode: 0
   m_Resolution: 2048
   m_UpdateFrequency: 0
@@ -27514,7 +27514,7 @@ ReflectionProbe:
   m_FarClip: 1000
   m_ShadowDistance: 100
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -30471,6 +30471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CeilingFlatLight_Lit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4713571160164415229, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
 --- !u!4 &2953527297310892975 stripped
@@ -30532,6 +30536,10 @@ PrefabInstance:
     - target: {fileID: 4418443934843399470, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
       propertyPath: m_Name
       value: CeilingFlatLight_Lit (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713571160164415229, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
@@ -31835,6 +31843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CeilingFlatLight_Lit (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4713571160164415229, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
 --- !u!4 &6203544714412938428 stripped
@@ -31897,6 +31909,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CeilingFlatLight_Lit (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4713571160164415229, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
 --- !u!4 &4817578543078371030 stripped
@@ -31958,6 +31974,10 @@ PrefabInstance:
     - target: {fileID: 4418443934843399470, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
       propertyPath: m_Name
       value: CeilingFlatLight_Lit (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713571160164415229, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 808c1f2ccbf907f47ab5691bc5adf7e1, type: 3}
