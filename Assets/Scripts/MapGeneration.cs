@@ -124,14 +124,34 @@ public class MapGeneration : MonoBehaviour
     #endregion
 
     #region BigMap
+    public GameObject bigMapFolder;
+
     public Vector2 bigMapStartingPos;
     public Vector2 bigMapRoomMultiplier;
 
     public GameObject[] bigMapRooms;
+    public GameObject[] bigMapInBetweenRooms;
+
+    public void GrabBigMapGameobjects()
+    {
+        for (int i=0; i< bigMapRooms.Length; i++)
+        {
+            bigMapRooms[i] = bigMapFolder.transform.GetChild(0).transform.GetChild(i).gameObject;
+               
+        }
+
+        for (int i = 0; i < bigMapInBetweenRooms.Length; i++)
+        {
+            bigMapInBetweenRooms[i] = bigMapFolder.transform.GetChild(1).transform.GetChild(i).gameObject;
+
+        }
+    }
 
     public void RefreshBigMapUI(bool On)
     {
         bigMapStartingPos = bigMapRooms[0].transform.position;
+
+        int holdingInbetweenHolding = 0;
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -139,7 +159,7 @@ public class MapGeneration : MonoBehaviour
             bigMapRooms[i].transform.position = bigMapStartingPos + (rooms[i].offsetPos * bigMapRoomMultiplier);
             if (currentRoomInside == i)
             {
-                bigMapRooms[i].GetComponent<Image>().color = CurrentMiniMapRoomColour- new Color(0,0,0,0.25f);
+                bigMapRooms[i].GetComponent<Image>().color = CurrentMiniMapRoomColour - new Color(0, 0, 0, 0.25f);
             }
             else if (rooms[i].bossRoom)
             {
@@ -155,7 +175,22 @@ public class MapGeneration : MonoBehaviour
             }
 
 
+            if (rooms[i].upperRoomRef > 0)
+            {
+                bigMapInBetweenRooms[holdingInbetweenHolding].SetActive(On);
+                bigMapInBetweenRooms[holdingInbetweenHolding].transform.position = bigMapStartingPos + (rooms[i].offsetPos * bigMapRoomMultiplier) + new Vector2(0, 30) ;
+                holdingInbetweenHolding++;
+            }
+
+            if (rooms[i].rightRoomRef > 0)
+            {
+                bigMapInBetweenRooms[holdingInbetweenHolding].SetActive(On);
+                bigMapInBetweenRooms[holdingInbetweenHolding].transform.position = bigMapStartingPos+ (rooms[i].offsetPos * bigMapRoomMultiplier) + new Vector2(30, 0);
+                holdingInbetweenHolding++;
+            }
         }
+
+
 
     }
     
@@ -218,7 +253,7 @@ public class MapGeneration : MonoBehaviour
         //[] lights = (Light[])GameObject.FindObjectsOfType(typeof(Light
         RefreshMiniMapUI();
         playerTarget.transform.position = startingPos;
-
+        GrabBigMapGameobjects();
         ClearHighScore();
     }
 
