@@ -17,6 +17,7 @@ public class AugmentManager : MonoBehaviour
 {
     public static AugmentManager current;
     public List<AugmentData> augments;
+    public List<SynergyData> synergies;
 
     //public List<AugmentData> augmentDatas;
     //public List<SynergyData> synergyDatas;
