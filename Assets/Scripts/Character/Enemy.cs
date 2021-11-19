@@ -347,8 +347,9 @@ public class Enemy : Character
         base.OnDestroy();
     }
 
-    public virtual void Init(Player target, Transform cam, AmmoPool ammoPool,float healthPercentageIncrease, float SpeedPercentageIncrease)
+    public virtual void Init(float health, Player target, Transform cam, AmmoPool ammoPool,float healthPercentageIncrease, float SpeedPercentageIncrease)
     {
+        stats.maxHp.baseValue = health;
         this.target = target;
         transform.GetChild(0).gameObject.GetComponent<Billboard>().cam = cam;
     }

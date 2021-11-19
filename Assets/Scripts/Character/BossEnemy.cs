@@ -58,9 +58,9 @@ public class BossEnemy : SpellQueueEnemy
         bossHitBox.transform.position = bossCoverObjects[0].transform.position;
     }
 
-    public override void Init(Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
+    public override void Init(float health, Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
     {
-        base.Init(target, cam, ammoPool,healthPercentageIncrease, SpeedPercentageIncrease);
+        base.Init(health, target, cam, ammoPool,healthPercentageIncrease, SpeedPercentageIncrease);
         EventManager.current.enemyDeath += ReceiveEnemyDeath;
         InitSpellQueue();
 

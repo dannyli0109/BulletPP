@@ -17,6 +17,11 @@ public class ParticleHandler : PooledItem
         //StartCoroutine(DeleteParticle());
     }
 
+    public void Init()
+    {
+        StartCoroutine(DeleteParticle());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -30,9 +35,9 @@ public class ParticleHandler : PooledItem
         //}
     }
 
-    //IEnumerator DeleteParticle()
-    //{
-    //    yield return new WaitForSeconds(delay);
-    //    ReturnToPool();
-    //}
+    IEnumerator DeleteParticle()
+    {
+        yield return new WaitForSeconds(delay);
+        ReturnToPool();
+    }
 }

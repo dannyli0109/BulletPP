@@ -951,6 +951,14 @@ PrefabInstance:
       propertyPath: enemyBulletPrefab
       value: 
       objectReference: {fileID: 2583197940214297748, guid: e655349e43503aa4d89d16b794d9b4e7, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: landmineBulletPrefab
+      value: 
+      objectReference: {fileID: -7235951037633610423, guid: 836641c0687ce0a4baa6226a702e7e0b, type: 3}
+    - target: {fileID: 7919236840416579615, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
+      propertyPath: landmineBulletCount
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caae1e1c6d6b00845b9d6b9c045c10cc, type: 3}
 --- !u!114 &265243478 stripped
@@ -5785,18 +5793,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: downLeftRightRoom.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upDownLeftRoom.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: leftRightRoom.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: upRightRoom.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoom.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoom.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoom.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoom.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
@@ -6175,6 +6199,38 @@ PrefabInstance:
       propertyPath: allDoorRoom.Array.data[0]
       value: 
       objectReference: {fileID: 1392935130469118769, guid: 745ba71707937e34f9162e1261501cda, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: allDoorRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 2127361013889182940, guid: 3dc6838b1dd0a8a40aa6696c784493ca, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 2095312105599051044, guid: 0dc0b17898311b04bbe54f6d99c06fd5, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownLeftRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 5560832119901850196, guid: c73d607c9a4fd4f459cb976680b8ff56, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 6502267494423289912, guid: c4ed89e1142668d43ab2513a3c6fdf8a, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: leftRightRoom.Array.data[2]
+      value: 
+      objectReference: {fileID: 8273652646533474389, guid: 1aeb653b479785c4b90e232f4c81ab81, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upDownRoom.Array.data[2]
+      value: 
+      objectReference: {fileID: 424639093043376126, guid: e6de24ec38dae94428307d0ea1469cfb, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: downLeftRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 2565268534021248401, guid: dc885e2bbfb5e4745b5c4563c04af789, type: 3}
+    - target: {fileID: 7128933462229582446, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
+      propertyPath: upLeftRightRoom.Array.data[1]
+      value: 
+      objectReference: {fileID: 2241857611132890338, guid: 0b819083c96c359469104452fb6dd39e, type: 3}
     - target: {fileID: 7128933462229582447, guid: 73f0416c1a2b9854881ab723b0aae6e1, type: 3}
       propertyPath: m_Name
       value: MAP MAKER (1)

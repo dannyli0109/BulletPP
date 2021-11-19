@@ -246,6 +246,8 @@ public class MapGeneration : MonoBehaviour
 
     public AmmoPool ammoPool;
 
+    float enemyDifficulty = 1;
+
     void Start()
     {
         InitEvents();
@@ -630,7 +632,7 @@ public class MapGeneration : MonoBehaviour
             Vector3 holdingPosition = new Vector3(holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleEnemySpawnPoints[holdingSpawnInt].position.z);
 
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool, UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
+            holdingGameObject.GetComponent<Enemy>().Init(10 * (int)totalRoomDiffculty, playerTarget, camTarget, ammoPool, UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
         }
@@ -639,7 +641,7 @@ public class MapGeneration : MonoBehaviour
     public void SpawnSwarms(Vector3 setPos, int swarmIndex)
     {
             GameObject holdingGameObject = Instantiate(swarmEnemiesType[swarmIndex], setPos, enemiesTypes[0].transform.rotation);
-            holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool, UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
+            holdingGameObject.GetComponent<Enemy>().Init(10 * enemyDifficulty, playerTarget, camTarget, ammoPool, UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
             EnemiesInEncounter++;
             // holdingPossibleEnemySpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -653,7 +655,7 @@ public class MapGeneration : MonoBehaviour
         Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
         //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
+        holdingGameObject.GetComponent<Enemy>().Init(20 * enemyDifficulty, playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
         EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -667,7 +669,7 @@ public class MapGeneration : MonoBehaviour
         //Vector3 holdingPosition = new Vector3(holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.x, yEnemyHeight, holdingPossibleSniperSpawnPoints[holdingSpawnInt].position.z);
         //holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
         GameObject holdingGameObject = Instantiate(sniperTypes[sniperIndex], setPos, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
+        holdingGameObject.GetComponent<Enemy>().Init(20 * enemyDifficulty, playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f, 0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
         EnemiesInEncounter++;
         //  holdingPossibleSniperSpawnPoints.RemoveAt(holdingSpawnInt);
     }
@@ -686,7 +688,7 @@ public class MapGeneration : MonoBehaviour
         }
 
         GameObject holdingGameObject = Instantiate(enemiesTypes[enemyIndex], holdingPosition, enemiesTypes[0].transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f,0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
+        holdingGameObject.GetComponent<Enemy>().Init(30 * enemyDifficulty, playerTarget, camTarget, ammoPool,UnityEngine.Random.Range(0.0f,0.4f), UnityEngine.Random.Range(0.0f, 0.4f));
         EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
     }
@@ -703,7 +705,7 @@ public class MapGeneration : MonoBehaviour
       //  Debug.Log("Boss pos "+ holdingPossibleEnemySpawnPoints[0]);
 
         GameObject holdingGameObject = Instantiate(bossEnemy, holdingPosition, bossEnemy.transform.rotation);
-        holdingGameObject.GetComponent<Enemy>().Init(playerTarget, camTarget, ammoPool,0,0);
+        holdingGameObject.GetComponent<Enemy>().Init(240, playerTarget, camTarget, ammoPool,0,0);
         EnemiesInEncounter++;
         holdingGameObject.GetComponent<Enemy>().mapGenerationScript = this;
         //bossEnemy
@@ -819,6 +821,7 @@ public class MapGeneration : MonoBehaviour
                         if (currentRoomInside != 0 && GameManager.current.GetState() != GameState.Casual)
                         {
                             finishEnounter?.Invoke();
+                            enemyDifficulty += 0.2f;
                             GameManager.current.ChangeState(GameState.Shop);
                             GameManager.current.shop.Refresh();
                         }

@@ -31,6 +31,10 @@ public class AmmoPool : MonoBehaviour
     public Pool<GenericBullet> enemyBulletPool;
     public int enemyBulletCount;
 
+    public GenericBullet landmineBulletPrefab;
+    public Pool<GenericBullet> landmineBulletPool;
+    public int landmineBulletCount;
+
     public ExplosionParticle explosionParticlePrefab;
     public Pool<ExplosionParticle> explosionParticlePool;
     public int explosionParticleCount;
@@ -60,6 +64,9 @@ public class AmmoPool : MonoBehaviour
 
         enemyBulletPool = new Pool<GenericBullet>(enemyBulletPrefab, enemyBulletCount);
         foreach (GenericBullet enemyBullet in enemyBulletPool.available) enemyBullet.gameObject.transform.SetParent(transform);
+
+        landmineBulletPool = new Pool<GenericBullet>(landmineBulletPrefab, landmineBulletCount);
+        foreach (GenericBullet landmine in landmineBulletPool.available) landmine.gameObject.transform.SetParent(transform);
 
         explosionParticlePool = new Pool<ExplosionParticle>(explosionParticlePrefab, explosionParticleCount);
         foreach (ExplosionParticle explosionParticle in explosionParticlePool.available) explosionParticle.gameObject.transform.SetParent(transform);

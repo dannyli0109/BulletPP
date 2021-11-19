@@ -21,6 +21,8 @@ public abstract class Ammo : PooledItem
     public bool overTimeDamage;
 
     public bool facingOtherWay;
+    protected GameObject currentTarget;
+
 
     #region stats
     public int timesBounced = 0;
@@ -103,16 +105,17 @@ public abstract class Ammo : PooledItem
 
     protected void SpawnHitParticle(float size)
     {
-        //AmmoPool ammoPool = AmmoPool.current;
-        //ParticleHandler bulletHitParticle;
-        //bool instantiated;
-        //instantiated = ammoPool.bulletParticlePool.TryInstantiate(out bulletHitParticle, ammoTip.position, Quaternion.identity);
-        //if (instantiated)
-        //{
-        //    bulletHitParticle.transform.localScale = new Vector3(size, size, size);
-        //}
+        AmmoPool ammoPool = AmmoPool.current;
+        ParticleHandler bulletHitParticle;
+        bool instantiated;
+        instantiated = ammoPool.bulletParticlePool.TryInstantiate(out bulletHitParticle, ammoTip.position, Quaternion.identity);
+        if (instantiated)
+        {
+            bulletHitParticle.transform.localScale = new Vector3(size, size, size);
+            bulletHitParticle.Init();
+        }
 
-        StartCoroutine(SpawnHit(size));
+        //StartCoroutine(SpawnHit(size));
     }
 
     IEnumerator SpawnHit(float size)
@@ -138,13 +141,17 @@ public abstract class Ammo : PooledItem
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, size, (1 << 10)|(1<<12)))
         {
+            if (hit.collider.gameObject.layer == 12)
+            {
+                currentTarget = null;
+            }
+            SpawnHitParticle(size);
             if (pierce )
             {
                 //&& hit.collider.gameObject.layer == 12
                 return false;
             }
             HandleAmmoHit(hit.collider);
-            SpawnHitParticle(owner.grenadeStats.size.value);
             Vector3 normal = new Vector3(hit.normal.x, 0, hit.normal.z);
             Vector3 reflectionDir = Vector3.Reflect(gameObject.transform.forward, normal);
             gameObject.transform.forward = reflectionDir;
@@ -180,6 +187,7 @@ public abstract class Ammo : PooledItem
             else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 EventManager.current.OnAmmoHit(this, other.gameObject, holdingForce);
+                currentTarget = null;
             }
 
         }

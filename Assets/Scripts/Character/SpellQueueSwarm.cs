@@ -24,9 +24,9 @@ public class SpellQueueSwarm : SpellQueueEnemy
         coolDownTime = 2;
     }
 
-    public override void Init(Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
+    public override void Init(float health, Player target, Transform cam, AmmoPool ammoPool, float healthPercentageIncrease, float SpeedPercentageIncrease)
     {
-        base.Init(target, cam, ammoPool, healthPercentageIncrease, SpeedPercentageIncrease);
+        base.Init(health, target, cam, ammoPool, healthPercentageIncrease, SpeedPercentageIncrease);
 
         InitSpellQueue();
 

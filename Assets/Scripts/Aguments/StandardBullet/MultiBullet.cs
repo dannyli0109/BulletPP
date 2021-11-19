@@ -103,37 +103,32 @@ public class MultiBullet : Augment
         for (int i = 0; i < amounts; i++)
         {
             GenericBullet bullet;
-            if (ammoPool.bulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
+            if (id == 10)
             {
-                GenericBullet bulletComponent = bullet.GetComponent<GenericBullet>();
-                Vector3 forward = transform.forward;
-                //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
+                if (ammoPool.landmineBulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
+                {
+                    GenericBullet bulletComponent = bullet.GetComponent<GenericBullet>();
+                    Vector3 forward = transform.forward;
+                    //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
 
 
-                bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), GetHomingRadius(character, index));
+                    bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), GetHomingRadius(character, index));
 
-                //if (GetExplosiveRadius(character, index) > 0)
-                //{
-                //    if (stats.homingRadius > 0)
-                //    {
-                //    }
-                //    else
-                //    {
-                //        bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), character.nextShotIsHoming);
-                //    }
-                //}
-                //else
-                //{
-                //    if (stats.homingRadius > 0)
-                //    {
-                //        bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, stats.homingRadius);
-                //    }
-                //    else
-                //    {
-                //        bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, character.nextShotIsExploded, character.nextShotIsHoming);
-                //    }
-                //}
+                }
+            }
+            else
+            {
 
+                if (ammoPool.bulletPool.TryInstantiate(out bullet, transform.position, transform.rotation))
+                {
+                    GenericBullet bulletComponent = bullet.GetComponent<GenericBullet>();
+                    Vector3 forward = transform.forward;
+                    //public virtual void Init(Character owner, Vector3 forward, float angle, float offset, float speed, Vector3 acceleration, float damage, float size, int bounces)
+
+
+                    bulletComponent.Init(character, forward, initialAngle + angleIncrements * i, new Vector3(0, 0, 0), GetSpeed(character, index), new Vector3(0, 0, 0), GetDamage(character, index), GetSize(character, index), GetLifeTime(character, index), 0, false, GetExplosiveRadius(character, index), GetHomingRadius(character, index));
+
+                }
             }
         }
         character.nextShotIsExploded = -1;

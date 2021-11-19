@@ -6,7 +6,6 @@ using UnityEngine.VFX;
 public class GenericBullet : Ammo
 {
     private float lastTriggered;
-    private GameObject currentTarget;
     void Start()
     {
         EventManager.current.onAmmoDestroy += OnBulletDestroy;
@@ -21,11 +20,7 @@ public class GenericBullet : Ammo
         lastTriggered += Time.deltaTime;
         if (bornTime >= lifeTime)
         {
-            ReturnToPool();
-            if (explodeRadius>0)
-            {
-                Explode();
-            }
+            OnBulletDestroy(gameObject);
         }
 
         if (timesBounced < bounces)
@@ -39,7 +34,7 @@ public class GenericBullet : Ammo
     {
         if (GameManager.current.GetState() == GameState.Pause) return;
 
-        if (homingRadius > 0)
+        if (homingRadius > 0 && currentTarget == null)
         {
             Collider[] hitColliders = Physics.OverlapSphere(ammoTip.transform.position, homingRadius, 1 << 12);
             int minIndex = -1;
@@ -52,7 +47,7 @@ public class GenericBullet : Ammo
                 direction = new Vector3(direction.x, 0, direction.z);
 
                 float distanceSquared = direction.sqrMagnitude;
-                if (minDistance > distanceSquared && distanceSquared > minRadius * minRadius && target != currentTarget)
+                if (minDistance > distanceSquared && distanceSquared > minRadius * minRadius)
                 {
                     minIndex = i;
                     minDistance = distanceSquared;
@@ -83,7 +78,7 @@ public class GenericBullet : Ammo
     {
         if (this.gameObject == gameObject)
         {
-            SpawnHitParticle(owner.bulletStats.size.value);
+            SpawnHitParticle(size);
             ReturnToPool();
             if (explodeRadius>0)
             {
@@ -96,7 +91,6 @@ public class GenericBullet : Ammo
     {
         if (GameManager.current.GameTransitional()) return;
 
-        currentTarget = other.gameObject;
 
         if (lastTriggered > 0.1f)
         {
@@ -106,7 +100,7 @@ public class GenericBullet : Ammo
 
         if (pierce)
         {
-            SpawnHitParticle(owner.bulletStats.size.value);
+            SpawnHitParticle(size);
         }
         else
         {
